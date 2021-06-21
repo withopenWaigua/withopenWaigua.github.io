@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>C++vector</title>
+    <url>/20297.html</url>
+    <content><![CDATA[<h2 id="vector类简介"><a href="#vector类简介" class="headerlink" title="vector类简介"></a>vector类简介</h2><p>标准库</p>
+<p>代表集合和动态数组的概念</p>
+<p>我们可以把若干对象放在里面（类型单一，第一个是什么，这个数组就是什么类型的）</p>
+<p>vector能把其他对象装进来，也被称为容器</p>
+<p>要include进来</p>
+<p>使用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe; <span class="comment">//表示vjihe的vector类型保存的数据是int型</span></span><br></pre></td></tr></table></figure>
+
+<p><int>： 模板，vector本身就是类模板，<int>实际上就是类模板的实例化； 实例化int类型的vector模板</p>
+<p>可以把vector<XXX> 当成一种类型  在&lt;&gt;内部放上类型信息</p>
+<p>类似vector<int> 才是一个完整的类型</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe;</span><br><span class="line">vector&lt;student&gt; studlist;</span><br><span class="line">vector&lt;vector&lt;string&gt;&gt; strchuang;  <span class="comment">//可以该集合里面的每个元素都是vector&lt;string&gt;对象；集合套集合</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>*&gt; vjihe2;</span><br><span class="line"><span class="comment">//vector&lt;int&amp;&gt; vjihe3; 不行，引用不是对象，而是个引用</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="定义和初始化vector"><a href="#定义和初始化vector" class="headerlink" title="定义和初始化vector"></a>定义和初始化vector</h2><ol>
+<li>空的vector对象，定义一个string类型的空的vector对象（容器），目前这个mystr里面不包含任何元素</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr;</span><br></pre></td></tr></table></figure>
+
+<p>插入内容：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasd&quot;</span>);</span><br><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasdsd&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>用元素拷贝的初始化方式</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">mystr2</span><span class="params">(mystr)</span></span>;  <span class="comment">//元素的值拷贝出来了一份，互不影响</span></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">vector&lt;string&gt; mystr2 = mystr;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>通过列表初始化给值</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr3 = &#123; <span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>创建指定数量的元素。有元素数量概念的时候一般用圆括号</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;  <span class="title">jihe23</span><span class="params">(<span class="number">15</span>, <span class="number">999</span>)</span></span>;  <span class="comment">//创建15个int元素，每个元素都是999</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">jihe4</span><span class="params">(<span class="number">4</span>, <span class="string">&quot;hello&quot;</span>)</span></span>; <span class="comment">//创建4个string类型的元素，每个元素的值都是hello</span></span><br><span class="line"><span class="comment">//int不给值就会每个元素都是0</span></span><br><span class="line"><span class="comment">//string不给值每个值都是“”</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li><p>多种初始化方式  </p>
+<p>（）一般表示元素数量，{}一般表示元素内容的概念，但不绝对。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">jihe77</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//创建10个为0的vector数组</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; jihe88&#123;<span class="number">20</span>&#125;;<span class="comment">//表示一个元素，该元素为10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>特殊（但不建议这么使用）：</p>
+<ul>
+<li>类型与{}内的内容吻合就会正常初始化列表</li>
+<li>不吻合就会把{}内的数字当作创建几个元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; ju&#123; <span class="number">10</span> &#125;;</span><br><span class="line"><span class="comment">// 系统发现10和类型不匹配，所以把10当成元素数量，每个元素都是&quot;&quot;vector&lt;string&gt; ff&#123; 10,&quot;hello&quot; &#125;; //10个元素，每个元素都是hello、</span></span><br><span class="line"><span class="comment">//vector&lt;int&gt; ju&#123; &quot;hello&quot; &#125;; </span></span><br><span class="line"><span class="comment">//但这种无法解释，直接就会报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vector对象上的操作"><a href="#vector对象上的操作" class="headerlink" title="vector对象上的操作"></a>vector对象上的操作</h2><p>最常用的是不知道vector对象里面需要放多少元素，需要动态增加和减少。</p>
+<ol>
+<li><p>判断是否为空：.empty()</p>
+</li>
+<li><p>用于向vector增加一个元素：.push_back()</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; ivec;ivec.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>用于查询元素个数：.size()</li>
+</ol>
+<ol start="4">
+<li>clear：用于清空全部元素</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ivec.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li>v[n]：访问第n个元素，范围是0-v.size()-1</li>
+</ol>
+<ol start="6">
+<li>=：赋值运算符，会把原来的清空</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; sss;</span><br><span class="line">sss.<span class="built_in">push_back</span>(<span class="number">2</span>);sss = ivec; <span class="comment">//原来的2没了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="7">
+<li>==以及!=用与判断相等或者不相等，完全相等：元素个数相同,且对应位置的元素值必须也要相等</li>
+</ol>
+<ol start="8">
+<li>范围for的应用</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">    vecitem *= <span class="number">2</span>;	</span><br><span class="line">    cout &lt;&lt; vecitem &lt;&lt; endl;C</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;<span class="keyword">for</span> (<span class="keyword">auto</span> vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">	vecvalue.<span class="built_in">push_back</span>(<span class="number">33</span>); </span><br><span class="line"> &#125;<span class="comment">//导致输出彻底乱套，范围for是用来遍历这个vector的,第一次遍历会记录这个容器的末尾值，当你插入或删除容器内的元素，会导致末位置发生改变，从而使编译器输出发生问题	vecitem *= 2;	cout &lt;&lt; vecitem &lt;&lt; endl;	</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>打印结果乱套了:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></p>
+<p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+</search>
