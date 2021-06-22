@@ -3,7 +3,8 @@
   <entry>
     <title>C++vector</title>
     <url>/20297.html</url>
-    <content><![CDATA[<h2 id="vector类简介"><a href="#vector类简介" class="headerlink" title="vector类简介"></a>vector类简介</h2><p>标准库</p>
+    <content><![CDATA[<p><span id="yellow-block">C++</span> <span id="green-block">基础语法</span><span id="gray-block">vector</span></p>
+<h2 id="vector类简介"><a href="#vector类简介" class="headerlink" title="vector类简介"></a>vector类简介</h2><p>标准库</p>
 <p>代表集合和动态数组的概念</p>
 <p>我们可以把若干对象放在里面（类型单一，第一个是什么，这个数组就是什么类型的）</p>
 <p>vector能把其他对象装进来，也被称为容器</p>

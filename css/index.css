@@ -178,6 +178,53 @@ template {
 [hidden] {
   display: none
 }
+
+
+/*颜色块-黄*/
+span#yellow-block {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 90%;
+    font-weight: normal;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.1rem;
+    background-color: #FFD700;
+}
+
+/*颜色块-绿色*/
+span#green-block {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 90%;
+    font-weight: normal;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.1rem;
+    background-color: #5cb85c;
+}
+
+/*颜色块-灰色*/
+span#gray-block {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 90%;
+    font-weight: normal;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.1rem;
+    background-color: #4f4f4f;
+}
+
 .limit-one-line,
 #article-container .flink .flink-list > .flink-list-item a .flink-item-name,
 #article-container .flink .flink-list > .flink-list-item a .flink-item-desc,
@@ -1302,8 +1349,8 @@ canvas:not(#ribbon-canvas),
   --global-font-size: 14px;
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: #a4d8fa;
-  --hr-before-color: #80c8f8;
+  --hr-border: #8080ff;
+  --hr-before-color: #4d4dff;
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-result-title: #4c4948;
@@ -1316,7 +1363,7 @@ canvas:not(#ribbon-canvas),
   --tab-button-active-bg: #fff;
   --card-bg: #fff;
   --sidebar-bg: #f6f8fa;
-  --btn-hover-color: #ff7242;
+  --btn-hover-color: #f00;
   --btn-color: #fff;
   --btn-bg: #49b1f5;
   --text-bg-hover: #49b1f5;
@@ -1439,7 +1486,7 @@ table td {
   vertical-align: middle;
 }
 *::selection {
-  background: #00c4b6;
+  background: #008000;
   color: #f7f7f7;
 }
 button {
@@ -1666,7 +1713,7 @@ figure.highlight pre .javascript .function {
 blockquote {
   margin: 0 0 1rem;
   padding: 0.1rem 0.8rem;
-  border-left: 0.2rem solid #49b1f5;
+  border-left: 0.2rem solid #e58a8a;
   background-color: var(--blockquote-bg);
   color: var(--blockquote-color);
 }
@@ -1947,7 +1994,7 @@ blockquote footer cite:before {
   font-size: 1.72em;
 }
 .article-sort-title:hover:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 .article-sort-title:before {
   position: absolute;
@@ -1999,7 +2046,7 @@ blockquote footer cite:before {
   transition: all 0.2s ease-in-out;
 }
 .article-sort-item:hover:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 .article-sort-item:before {
   position: absolute;
@@ -2029,7 +2076,7 @@ blockquote footer cite:before {
   border-color: #49b1f5;
 }
 .article-sort-item.year:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 .article-sort-item-time {
   color: #858585;
@@ -2153,7 +2200,7 @@ blockquote footer cite:before {
   content: '';
 }
 #page .category-lists ul li:hover:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 .layout {
   display: -webkit-box;
@@ -3251,7 +3298,6 @@ blockquote footer cite:before {
 }
 #footer {
   position: relative;
-  background: #49b1f5;
   background-attachment: local;
   background-position: bottom;
   -webkit-background-size: cover;
@@ -3838,7 +3884,7 @@ _:future,
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #49b1f5;
+  color: #99a9bf;
 }
 #article-container a:hover {
   text-decoration: underline;
@@ -4059,7 +4105,7 @@ _:future,
   padding: 0.2em 0.2em 0.2em 1.4em;
 }
 #article-container ul > li:not(.tab):hover:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 #article-container ul > li:not(.tab):before {
   top: 0.78em;
@@ -5910,7 +5956,7 @@ blockquote.pullquote.right {
   line-height: 1.7;
 }
 #local-search .search-dialog .local-search__hit-item:hover:before {
-  border-color: #ff7242;
+  border-color: #f00;
 }
 #local-search .search-dialog .local-search__hit-item:before {
   position: absolute;
