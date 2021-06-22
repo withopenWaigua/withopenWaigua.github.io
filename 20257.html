@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C++的结构、权限修饰、类简介 | Alogomachine‘s BLOG</title><meta name="keywords" content="C++,基础内容学习"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++基础语法结构体、权限修饰符、类简介、类的组织 结构体结构体是自定义的数据类型     名称 值 类型    ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } **studnet ***       名称 值 类型    ◢ &amp;tmpstu 0x00cff920 {number&#x3D;10001 nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的结构、权限修饰、类简介">
+<meta property="og:url" content="http://example.com/20257.html">
+<meta property="og:site_name" content="Alogomachine‘s BLOG">
+<meta property="og:description" content="C++基础语法结构体、权限修饰符、类简介、类的组织 结构体结构体是自定义的数据类型     名称 值 类型    ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } **studnet ***       名称 值 类型    ◢ &amp;tmpstu 0x00cff920 {number&#x3D;10001 nam">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/c783e703af1932b6ac6eb48760a145a2f2e39b38.jpg">
+<meta property="article:published_time" content="2021-06-20T18:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-22T18:23:08.578Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="基础内容学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/c783e703af1932b6ac6eb48760a145a2f2e39b38.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://example.com/20257"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++的结构、权限修饰、类简介',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-23 02:23:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/c783e703af1932b6ac6eb48760a145a2f2e39b38.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine‘s BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++的结构、权限修饰、类简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-20T18:00:00.000Z" title="发表于 2021-06-21 02:00:00">2021-06-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-06-22T18:23:08.578Z" title="更新于 2021-06-23 02:23:08">2021-06-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/%E8%AF%AD%E6%B3%95/">语法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++的结构、权限修饰、类简介"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p><strong>结构体是自定义的数据类型</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>&amp;student1</strong></td>
+<td><strong>0x0100faf0 {number=10001 name=0x0100faf4 “zhangsan” }</strong></td>
+<td>**studnet ***</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>&amp;tmpstu</strong></td>
+<td><strong>0x00cff920 {number=10001 name=0x00cff924 “zhangsan” }</strong></td>
+<td>**studnet ***</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(studnet tmpstu)</span></span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(studnet &amp;tmpstu)</span> </span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(studnet* ptmpstu)</span> </span>&#123;</span><br><span class="line">    ptmpstu-&gt;number = <span class="number">6000</span>; <span class="comment">//不能用.了，指针改变成员变量需要用-&gt;指向成员变量</span></span><br><span class="line">    <span class="built_in">strcpy_s</span>(ptmpstu-&gt;name, <span class="built_in"><span class="keyword">sizeof</span></span>(ptmpstu-&gt;name), <span class="string">&quot;you&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">    studnet student1; <span class="comment">//定义结构变量</span></span><br><span class="line">    student1.number = <span class="number">10001</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(student1.name, <span class="built_in"><span class="keyword">sizeof</span></span>(student1.name), <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func</span>(student1);<span class="comment">//值没有被函数改变 ，效率低，实参传递给形参的时候发生了一个内存内容的拷贝，内存地址结构体和外面的实参不同</span></span><br><span class="line">    <span class="built_in">func2</span>(student1);<span class="comment">//值改变了，效率高，因为使用了引用，结构体内的形参的内存地址和外面的实参地址一样</span></span><br><span class="line">    <span class="built_in">func3</span>(&amp;student1);<span class="comment">//值改变了， -&gt;指向运算符</span></span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>C++与C中的结构区别：</strong></p>
+<ul>
+<li><p><strong>C++中的结构除了具备C中结构的所有功能外。还增加许多扩展功能，最突出的功能之一是：不仅仅有成员变量，还可以在其中定义成员函数(方法) 调用：student.func1()</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;  <span class="comment">//扩充的功能</span></span><br><span class="line">        number++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>C++里面叫做类</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a><strong>权限修饰符</strong></h2><ul>
+<li><p><strong>分为public(公有)和private(私有)以及protected(保护)</strong></p>
+</li>
+<li><p><strong>public:公有的意思，用这个修饰结构/类中的成员变量/成员函数，就可以被外部访问。一般需要被外界访问的东西我们就定义为public。好像该类的外部接口</strong></p>
+<ul>
+<li>```C++<br>struct studnet{<pre><code>//成员变量
+</code></pre>
+public:  //结构体默认都为public，所以加不加都行<pre><code>int number;  // 外部不可以访问，离什么近就是什么类型
+char name[100];
+void func() &#123;
+    number++;  //里面的才可以访问
+    return;
+&#125;
+</code></pre>
+};<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">- **private：私有的意思，用这个修饰符 修饰结构/类中的成员变量/成员函数/只有被内部定义的成员函数才能使用。**</span><br><span class="line"></span><br><span class="line">  - ```C++</span><br><span class="line">    struct studnet&#123;</span><br><span class="line">        //成员变量</span><br><span class="line">    private:</span><br><span class="line">        int number;  // 外部不可以访问，离什么近就是什么类型</span><br><span class="line">        char name[100];</span><br><span class="line">        void func() &#123;</span><br><span class="line">            number++;  //里面的才可以访问</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="类简介"><a href="#类简介" class="headerlink" title="类简介"></a><strong>类简介</strong></h2><p><strong>类也是用户自定义的数据类型</strong></p>
+<ul>
+<li><strong>不管C还是C++，结构都用struct定义</strong></li>
+<li><strong>而为了理解可以把C语言中结构当成C++中类；但这个话并不全面</strong></li>
+</ul>
+<p><strong>结构和类的区别</strong></p>
+<ul>
+<li><strong>类这个东西只有C++才有，C没有</strong></li>
+<li><strong>结构用struct定义，类用class定义</strong></li>
+<li><strong>在C中我们定义一个属于该结构的变量，我们叫做结构变量。</strong></li>
+<li><strong>在C++中我们定义一个属于该类的变量，我们叫做对象。</strong></li>
+<li><strong>但结构变量也好，对象也好，他们都是一块能够存储数据并且具有某种类型的内存空间。</strong></li>
+</ul>
+<p><strong>他们极为类似，区别主要有两点:</strong></p>
+<ol>
+<li><strong>C++结构内部的成员变量以及成员函数，默认都为public</strong><ul>
+<li><strong>C++类内部的成员变量以及成员函数，默认访问级别都是private</strong></li>
+</ul>
+</li>
+<li><strong>C++结构体继承默认都是public，但类的继承默认都是private</strong></li>
+</ol>
+<p><strong>额外说明：</strong></p>
+<ol>
+<li><strong>标准C++库里面包含了大量丰富的类和函数。例如string</strong></li>
+<li><strong>一般C++都是使用类而不是结构体</strong></li>
+</ol>
+<h2 id="类的组织"><a href="#类的组织" class="headerlink" title="类的组织"></a><strong>类的组织</strong></h2><p><strong>书写规范</strong></p>
+<ol>
+<li><strong>类的定义(定义变量，以及函数声明)一般放在.h头文件中（头文件名可以和类名相同）</strong></li>
+<li><strong>类实现的代码可以放在一个CPP源文件里面（可以以类名定义）,文件一定要添加到项目中来；</strong></li>
+<li><strong>在主函数中要使用这个类就得include头文件</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//放于student.h里</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">studnet</span> &#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>; <span class="comment">//函数的声明</span></span><br><span class="line">&#125;;  <span class="comment">//写在头文件中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//放于student.cppl里</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">studnet::func</span><span class="params">()</span> </span>&#123;<span class="comment">//函数的实现</span></span><br><span class="line">    number++;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/20257.html">http://example.com/20257.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Alogomachine‘s BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E5%AD%A6%E4%B9%A0/">基础内容学习</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/c783e703af1932b6ac6eb48760a145a2f2e39b38.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/20289.html"><img class="prev-cover" src="https://cdn.shibe.online/shibes/d28467088a79d36cf3c0ac1994078fdd524a0c2d.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++的函数新特性、内联函数、const详解</div></div></a></div><div class="next-post pull-right"><a href="/20221.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/704e73340bf0bbf309e8f4231afae1b96aeee9ee.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++的范围for语句、动态内存分配、nullptr</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/20297.html" title="C++vector"><img class="cover" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/20210613232505_4c5ce.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++vector</div></div></a></div><div><a href="/20298.html" title="C++的string类型简介"><img class="cover" src="https://cdn.shibe.online/shibes/0c7d6c54ad2de6b06f7d9e140ec4463128487d8b.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++的string类型简介</div></div></a></div><div><a href="/20230.html" title="C++的auto、头文件防卫、引用、常量"><img class="cover" src="https://cdn.shibe.online/shibes/e23970ef635cf366665cb867351b120174a350ae.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++的auto、头文件防卫、引用、常量</div></div></a></div><div><a href="/20289.html" title="C++的函数新特性、内联函数、const详解"><img class="cover" src="https://cdn.shibe.online/shibes/d28467088a79d36cf3c0ac1994078fdd524a0c2d.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++的函数新特性、内联函数、const详解</div></div></a></div><div><a href="/20243.html" title="C++的迭代器简介、容器的迭代器、迭代器各类操作"><img class="cover" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/20210601174405_806c9.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++的迭代器简介、容器的迭代器、迭代器各类操作</div></div></a></div><div><a href="/20221.html" title="C++的范围for语句、动态内存分配、nullptr"><img class="cover" src="https://cdn.shibe.online/shibes/704e73340bf0bbf309e8f4231afae1b96aeee9ee.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-21</div><div class="title">C++的范围for语句、动态内存分配、nullptr</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">建模、C++、机器学习算法,只要你能说出来的，我都不会</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">权限修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">类简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E7%BB%84%E7%BB%87"><span class="toc-number">4.</span> <span class="toc-text">类的组织</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20297.html" title="C++vector">C++vector</a><time datetime="2021-06-20T21:00:00.000Z" title="发表于 2021-06-21 05:00:00">2021-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20298.html" title="C++的string类型简介">C++的string类型简介</a><time datetime="2021-06-20T20:00:00.000Z" title="发表于 2021-06-21 04:00:00">2021-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20289.html" title="C++的函数新特性、内联函数、const详解">C++的函数新特性、内联函数、const详解</a><time datetime="2021-06-20T19:00:00.000Z" title="发表于 2021-06-21 03:00:00">2021-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20257.html" title="C++的结构、权限修饰、类简介">C++的结构、权限修饰、类简介</a><time datetime="2021-06-20T18:00:00.000Z" title="发表于 2021-06-21 02:00:00">2021-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20221.html" title="C++的范围for语句、动态内存分配、nullptr">C++的范围for语句、动态内存分配、nullptr</a><time datetime="2021-06-20T17:00:00.000Z" title="发表于 2021-06-21 01:00:00">2021-06-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>

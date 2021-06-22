@@ -131,7 +131,7 @@
   </entry>
   <entry>
     <title>C++的string类型简介</title>
-    <url>/undefined.html</url>
+    <url>/20298.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">string类型简介</span></strong></p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p><strong>C的类型:int 、float、char</strong></p>
 <p><strong>C++标准库定义的类型：string</strong></p>
@@ -226,7 +226,7 @@
   </entry>
   <entry>
     <title>C++的auto、头文件防卫、引用、常量</title>
-    <url>/undefined.html</url>
+    <url>/20230.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
 <p><strong>局部变量及初始化</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//i的作用域仅仅在for语句内    </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以写作</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i&#123; <span class="number">0</span> &#125;; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//i=0  == i&#123;0&#125; == i=&#123;0&#125; 数组同理</span></span><br></pre></td></tr></table></figure>
@@ -306,7 +306,7 @@
   </entry>
   <entry>
     <title>C++的函数新特性、内联函数、const详解</title>
-    <url>/undefined.html</url>
+    <url>/20289.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">函数回顾和后置返回类型、内联函数、函数杂合用法总结、const char * 组合、形参带const</span></strong></p>
 <h2 id="函数回顾和后置返回类型"><a href="#函数回顾和后置返回类型" class="headerlink" title="函数回顾和后置返回类型"></a><strong>函数回顾和后置返回类型</strong></h2><p><strong>函数定义中，形参如果在函数体内用不到的话，则可以不给形参变量名字，只给其类型</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span>)</span> </span>&#123; <span class="comment">//不需要所以可以不给变量名</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span>)</span></span>; <span class="comment">//函数声明同理</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//但最好还是都带上</span></span><br></pre></td></tr></table></figure>
@@ -475,7 +475,7 @@
   </entry>
   <entry>
     <title>C++的结构、权限修饰、类简介</title>
-    <url>/undefined.html</url>
+    <url>/20257.html</url>
     <content><![CDATA[<p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
 <h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p><strong>结构体是自定义的数据类型</strong></p>
 <table>
@@ -593,7 +593,7 @@ void func() &#123;
   </entry>
   <entry>
     <title>C++的迭代器简介、容器的迭代器、迭代器各类操作</title>
-    <url>/undefined.html</url>
+    <url>/20243.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">迭代器简介、容器的迭代器、迭代器各类操作</span></strong></p>
 <h2 id="迭代器简介"><a href="#迭代器简介" class="headerlink" title="迭代器简介"></a><strong>迭代器简介</strong></h2><p><strong>迭代器就是一种变量容器内元素的数据类型，这种数据类型有点像指着，我们理解为迭代器就是用来指向容器中某个元素。</strong></p>
 <p><strong>string\vector,有[]，但很少用[]，一般使用迭代器，有些不能使用[]，但迭代器是都有的，比较通用</strong></p>
@@ -740,7 +740,7 @@ void func() &#123;
   </entry>
   <entry>
     <title>C++的范围for语句、动态内存分配、nullptr</title>
-    <url>/undefined.html</url>
+    <url>/20221.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">C++的范围for语句、动态内存分配、nullptr </span></strong></p>
 <h2 id="范围for语句"><a href="#范围for语句" class="headerlink" title="范围for语句"></a><strong>范围for语句</strong></h2><p><strong>F9加断点，F10往下一格</strong></p>
 <p><strong>用于遍历一个序列</strong></p>
