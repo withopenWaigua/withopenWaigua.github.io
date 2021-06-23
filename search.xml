@@ -1088,7 +1088,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a><strong>构造函数</strong></h2><p><strong>构造函数的目的就是初始化类对象的函数（自动调用）</strong></p>
 <ul>
 <li><strong>在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数”</strong></li>
-<li><strong>有了构造函数就不怕类忘记初始化，导致成员变量有不确定的值</strong></li>
+<li><strong>有了构造函数就不怕对象忘记初始化，导致成员变量有不确定的值</strong></li>
 </ul>
 <p><strong>构造函数的写法：</strong></p>
 <p><strong>h中写：</strong></p>
@@ -1115,7 +1115,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 </ul>
 </li>
 <li><strong>在构造函数中有多个参数，我们创建对象的时候也要带上这些参数</strong></li>
-<li><strong>所以对象初始化都需要带上全部参数</strong></li>
+<li><strong>对象初始化需要带上构造函数声明上的全部参数</strong></li>
 </ol>
 <h2 id="多个构造函数"><a href="#多个构造函数" class="headerlink" title="多个构造函数"></a><strong>多个构造函数</strong></h2><p><strong>一个类中可以有个构造函数，但不同的构造函数总要有不同的东西（形参个数/形参类型）</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime = <span class="built_in">Time</span>(<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line"><span class="function">Time <span class="title">mtytime2</span><span class="params">(<span class="number">12</span>, <span class="number">13</span>, <span class="number">52</span>)</span></span>;</span><br><span class="line">Time mytime3 = Time&#123; <span class="number">12</span>,<span class="number">14</span>,<span class="number">52</span> &#125;;</span><br><span class="line">Time mytime4 = &#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br><span class="line">Time mytime5&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;  <span class="comment">//调用了有三个参数的构造函数</span></span><br><span class="line">Time mytime7&#123;&#125;; <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line"></span><br><span class="line">Time myTime20;  <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line">Time myTime22 = myTime20;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line"><span class="function">Time <span class="title">myTime23</span><span class="params">(myTime20)</span></span>;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime24&#123;myTime20&#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime25 = &#123; myTime20 &#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br></pre></td></tr></table></figure>
@@ -1187,7 +1187,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>C++</category>
