@@ -1,135 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++vector</title>
-    <url>/20297.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">vector</span></strong></p>
-<h2 id="vector类简介"><a href="#vector类简介" class="headerlink" title="vector类简介"></a><strong>vector类简介</strong></h2><p><strong>标准库</strong></p>
-<p><strong>代表集合和动态数组的概念</strong></p>
-<p><strong>我们可以把若干对象放在里面（类型单一，第一个是什么，这个数组就是什么类型的）</strong></p>
-<p><strong>vector能把其他对象装进来，也被称为容器</strong></p>
-<p><strong>要include进来</strong></p>
-<p><strong>使用：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe; <span class="comment">//表示vjihe的vector类型保存的数据是int型</span></span><br></pre></td></tr></table></figure>
-
-<p><strong><int>： 模板，vector本身就是类模板，<int>实际上就是类模板的实例化； 实例化int类型的vector模板</strong></p>
-<p><strong>可以把vector<XXX> 当成一种类型  在&lt;&gt;内部放上类型信息</strong></p>
-<p><strong>类似vector<int> 才是一个完整的类型</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe;</span><br><span class="line">vector&lt;student&gt; studlist;</span><br><span class="line">vector&lt;vector&lt;string&gt;&gt; strchuang;  <span class="comment">//可以该集合里面的每个元素都是vector&lt;string&gt;对象；集合套集合</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>*&gt; vjihe2;</span><br><span class="line"><span class="comment">//vector&lt;int&amp;&gt; vjihe3; 不行，引用不是对象，而是个引用</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="定义和初始化vector"><a href="#定义和初始化vector" class="headerlink" title="定义和初始化vector"></a><strong>定义和初始化vector</strong></h2><ol>
-<li><strong>空的vector对象，定义一个string类型的空的vector对象（容器），目前这个mystr里面不包含任何元素</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr;</span><br></pre></td></tr></table></figure>
-
-<p><strong>插入内容：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasd&quot;</span>);</span><br><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasdsd&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li><strong>用元素拷贝的初始化方式</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">mystr2</span><span class="params">(mystr)</span></span>;  <span class="comment">//元素的值拷贝出来了一份，互不影响</span></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">vector&lt;string&gt; mystr2 = mystr;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="3">
-<li><strong>通过列表初始化给值</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr3 = &#123; <span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="4">
-<li><strong>创建指定数量的元素。有元素数量概念的时候一般用圆括号</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;  <span class="title">jihe23</span><span class="params">(<span class="number">15</span>, <span class="number">999</span>)</span></span>;  <span class="comment">//创建15个int元素，每个元素都是999</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">jihe4</span><span class="params">(<span class="number">4</span>, <span class="string">&quot;hello&quot;</span>)</span></span>; <span class="comment">//创建4个string类型的元素，每个元素的值都是hello</span></span><br><span class="line"><span class="comment">//int不给值就会每个元素都是0</span></span><br><span class="line"><span class="comment">//string不给值每个值都是“”</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="5">
-<li><p><strong>多种初始化方式</strong>  </p>
-<p><strong>（）一般表示元素数量，{}一般表示元素内容的概念，但不绝对。</strong></p>
-</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">jihe77</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//创建10个为0的vector数组</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; jihe88&#123;<span class="number">20</span>&#125;;<span class="comment">//表示一个元素，该元素为10</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>特殊（但不建议这么使用）：</strong></p>
-<ul>
-<li><strong>类型与{}内的内容吻合就会正常初始化列表</strong></li>
-<li><strong>不吻合就会把{}内的数字当作创建几个元素</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; ju&#123; <span class="number">10</span> &#125;;</span><br><span class="line"><span class="comment">// 系统发现10和类型不匹配，所以把10当成元素数量，每个元素都是&quot;&quot;vector&lt;string&gt; ff&#123; 10,&quot;hello&quot; &#125;; //10个元素，每个元素都是hello、</span></span><br><span class="line"><span class="comment">//vector&lt;int&gt; ju&#123; &quot;hello&quot; &#125;; </span></span><br><span class="line"><span class="comment">//但这种无法解释，直接就会报错</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="vector对象上的操作"><a href="#vector对象上的操作" class="headerlink" title="vector对象上的操作"></a><strong>vector对象上的操作</strong></h2><p><strong>最常用的是不知道vector对象里面需要放多少元素，需要动态增加和减少。</strong></p>
-<ol>
-<li><p><strong>判断是否为空：.empty()</strong></p>
-</li>
-<li><p><strong>用于向vector增加一个元素：.push_back()</strong></p>
-</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; ivec;ivec.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="3">
-<li><strong>用于查询元素个数：.size()</strong></li>
-</ol>
-<ol start="4">
-<li><strong>clear：用于清空全部元素</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ivec.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="5">
-<li><strong>v[n]：访问第n个元素，范围是0-v.size()-1</strong></li>
-</ol>
-<ol start="6">
-<li><strong>=：赋值运算符，会把原来的清空</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; sss;</span><br><span class="line">sss.<span class="built_in">push_back</span>(<span class="number">2</span>);sss = ivec; <span class="comment">//原来的2没了</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="7">
-<li><strong>==以及!=用与判断相等或者不相等，完全相等：元素个数相同,且对应位置的元素值必须也要相等</strong></li>
-</ol>
-<ol start="8">
-<li><strong>范围for的应用</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">    vecitem *= <span class="number">2</span>;	</span><br><span class="line">    cout &lt;&lt; vecitem &lt;&lt; endl;C</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>问题：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;<span class="keyword">for</span> (<span class="keyword">auto</span> vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">	vecvalue.<span class="built_in">push_back</span>(<span class="number">33</span>); </span><br><span class="line"> &#125;<span class="comment">//导致输出彻底乱套，范围for是用来遍历这个vector的,第一次遍历会记录这个容器的末尾值，当你插入或删除容器内的元素，会导致末位置发生改变，从而使编译器输出发生问题	vecitem *= 2;	cout &lt;&lt; vecitem &lt;&lt; endl;	</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>打印结果乱套了:</strong></p>
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></strong></p>
-<p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语法</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>基础内容学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++的string类型简介</title>
     <url>/20298.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">string类型简介</span></strong></p>
@@ -214,86 +85,6 @@
 <p>​    <strong>可以把string看成一个字符数列</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s4 = <span class="string">&quot;i love china&quot;</span>;<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : s4) &#123;    <span class="comment">//x = toupper(x);  可以把小写字符转换成大写字符    cout &lt;&lt; x &lt;&lt; endl; 	&#125;</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语法</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>基础内容学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++的auto、头文件防卫、引用、常量</title>
-    <url>/20230.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
-<p><strong>局部变量及初始化</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//i的作用域仅仅在for语句内    </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以写作</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i&#123; <span class="number">0</span> &#125;; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//i=0  == i&#123;0&#125; == i=&#123;0&#125; 数组同理</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int abcde &#123;3.5f&#125;; //失败， 从“float”转换到“int”需要收缩转换，系统执行了一个从浮点到整数的转换</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a><strong>auto</strong></h2><p><strong>auto变量的自动类型推断</strong></p>
-<p><strong>auto可以在声明变量的时候根据变量的初始值类型自动为此变量选择匹配的类型；（声明的时候要赋初值）</strong></p>
-<p><strong>auto自动类型推断发生在编译期间，所以使用auto不会造成程序执行效率降低</strong></p>
-<h2 id="头文件防卫式声明"><a href="#头文件防卫式声明" class="headerlink" title="头文件防卫式声明"></a><strong>头文件防卫式声明</strong></h2><p><strong>容易重定义，多次定义一个变量，引用别人的头文件，全局变量重定义</strong></p>
-<p><strong>#ifdef ,ifndef 条件编译</strong></p>
-<p><strong>#ifndef 标识符  当标志符没有定义过（没有用#define定义），则对程序段进行编译</strong></p>
-<p>​    <strong>//程序段</strong></p>
-<p><strong>#endif</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HEAD1__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HEAD1__   <span class="comment">//没有定义head1就定义head1</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写头文件程序代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !__HEAD1__</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a><strong>引用</strong></h2><p><strong>引用理解成，为变量起了另外一个名字，一般用符合&amp;表示，起完别名后和变量本身看成同一个变量；</strong></p>
-<ul>
-<li><strong>定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</strong></li>
-<li><strong>定义引用的时候必须初始化</strong></li>
-<li><strong>引用，&amp;的符号在=的左边</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = value; <span class="comment">//value的别名,不是求地址运算符，只是起标识作用</span></span><br><span class="line"><span class="comment">//定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</span></span><br><span class="line"><span class="comment">//定义引用的时候必须初始化</span></span><br><span class="line">cout &lt;&lt; refval &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"><span class="comment">//int&amp; refval13 = 10; 错误，引用必须绑定到变量上去，不能绑定到常量上去</span></span><br><span class="line"><span class="comment">//float &amp;refval23 = value; 错误，引用类型必须要相同</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>要和取地址区别开来。</strong></p>
-<ul>
-<li><strong>&amp;在=的右边</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;a; <span class="comment">//取地址</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong>实例：</strong></p>
-<p><strong>可以改变函数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>&amp; ta, <span class="keyword">int</span>&amp; tb)</span> <span class="comment">//注意形参是引用类型</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ta = <span class="number">4</span>;</span><br><span class="line">    tb = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">13</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">14</span>;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印13</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印14</span></span><br><span class="line">    <span class="built_in">func</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印4</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a><strong>常量</strong></h2><p><strong>常量就是不变的量</strong></p>
-<h3 id="const-常量关键字，表示不变的意思"><a href="#const-常量关键字，表示不变的意思" class="headerlink" title="const 常量关键字，表示不变的意思"></a><strong>const 常量关键字，表示不变的意思</strong></h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> var = <span class="number">7</span>;  <span class="comment">//一种承诺，表示这个变量的值我不会去改变（命名常量）</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>实际上const可以改，但一般不要去改</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;var2 = (<span class="keyword">int</span> &amp;)var;  <span class="comment">//强原来的const变量转成引用</span></span><br><span class="line">var2 = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>vs查地址  shift + F9</strong> </p>
-<p><strong>搜索的名字求地址要加&amp;  ，求值就直接写变量名</strong></p>
-<h3 id="constexpr-关键字"><a href="#constexpr-关键字" class="headerlink" title="constexpr 关键字"></a><strong>constexpr 关键字</strong></h3><p><strong>C++11才引入的，它也是个常量的概念，在编译的时候求值，可以提升性能</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> abc)</span> </span>&#123;  <span class="comment">//这个函数里面必须要有初值，参数，或者在函数体内写 int ab=10;这种</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> var2 = <span class="built_in">func2</span>(<span class="number">11</span>); <span class="comment">//不报错，因为系统认为这是常量函数，返回一个常量</span></span><br><span class="line"><span class="comment">//int b=11；</span></span><br><span class="line"><span class="comment">//constexpr int var2 = b;  //报错，因为系统不认为b是常量，它可以改，是变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>常量const/constexpr 必须包含参量</strong></p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -474,6 +265,135 @@
       </tags>
   </entry>
   <entry>
+    <title>C++vector</title>
+    <url>/20297.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">vector</span></strong></p>
+<h2 id="vector类简介"><a href="#vector类简介" class="headerlink" title="vector类简介"></a><strong>vector类简介</strong></h2><p><strong>标准库</strong></p>
+<p><strong>代表集合和动态数组的概念</strong></p>
+<p><strong>我们可以把若干对象放在里面（类型单一，第一个是什么，这个数组就是什么类型的）</strong></p>
+<p><strong>vector能把其他对象装进来，也被称为容器</strong></p>
+<p><strong>要include进来</strong></p>
+<p><strong>使用：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe; <span class="comment">//表示vjihe的vector类型保存的数据是int型</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><int>： 模板，vector本身就是类模板，<int>实际上就是类模板的实例化； 实例化int类型的vector模板</strong></p>
+<p><strong>可以把vector<XXX> 当成一种类型  在&lt;&gt;内部放上类型信息</strong></p>
+<p><strong>类似vector<int> 才是一个完整的类型</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe;</span><br><span class="line">vector&lt;student&gt; studlist;</span><br><span class="line">vector&lt;vector&lt;string&gt;&gt; strchuang;  <span class="comment">//可以该集合里面的每个元素都是vector&lt;string&gt;对象；集合套集合</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>*&gt; vjihe2;</span><br><span class="line"><span class="comment">//vector&lt;int&amp;&gt; vjihe3; 不行，引用不是对象，而是个引用</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="定义和初始化vector"><a href="#定义和初始化vector" class="headerlink" title="定义和初始化vector"></a><strong>定义和初始化vector</strong></h2><ol>
+<li><strong>空的vector对象，定义一个string类型的空的vector对象（容器），目前这个mystr里面不包含任何元素</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr;</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入内容：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasd&quot;</span>);</span><br><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasdsd&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><strong>用元素拷贝的初始化方式</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">mystr2</span><span class="params">(mystr)</span></span>;  <span class="comment">//元素的值拷贝出来了一份，互不影响</span></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">vector&lt;string&gt; mystr2 = mystr;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>通过列表初始化给值</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; mystr3 = &#123; <span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li><strong>创建指定数量的元素。有元素数量概念的时候一般用圆括号</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;  <span class="title">jihe23</span><span class="params">(<span class="number">15</span>, <span class="number">999</span>)</span></span>;  <span class="comment">//创建15个int元素，每个元素都是999</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">jihe4</span><span class="params">(<span class="number">4</span>, <span class="string">&quot;hello&quot;</span>)</span></span>; <span class="comment">//创建4个string类型的元素，每个元素的值都是hello</span></span><br><span class="line"><span class="comment">//int不给值就会每个元素都是0</span></span><br><span class="line"><span class="comment">//string不给值每个值都是“”</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li><p><strong>多种初始化方式</strong>  </p>
+<p><strong>（）一般表示元素数量，{}一般表示元素内容的概念，但不绝对。</strong></p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">jihe77</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//创建10个为0的vector数组</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; jihe88&#123;<span class="number">20</span>&#125;;<span class="comment">//表示一个元素，该元素为10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>特殊（但不建议这么使用）：</strong></p>
+<ul>
+<li><strong>类型与{}内的内容吻合就会正常初始化列表</strong></li>
+<li><strong>不吻合就会把{}内的数字当作创建几个元素</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;string&gt; ju&#123; <span class="number">10</span> &#125;;</span><br><span class="line"><span class="comment">// 系统发现10和类型不匹配，所以把10当成元素数量，每个元素都是&quot;&quot;vector&lt;string&gt; ff&#123; 10,&quot;hello&quot; &#125;; //10个元素，每个元素都是hello、</span></span><br><span class="line"><span class="comment">//vector&lt;int&gt; ju&#123; &quot;hello&quot; &#125;; </span></span><br><span class="line"><span class="comment">//但这种无法解释，直接就会报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vector对象上的操作"><a href="#vector对象上的操作" class="headerlink" title="vector对象上的操作"></a><strong>vector对象上的操作</strong></h2><p><strong>最常用的是不知道vector对象里面需要放多少元素，需要动态增加和减少。</strong></p>
+<ol>
+<li><p><strong>判断是否为空：.empty()</strong></p>
+</li>
+<li><p><strong>用于向vector增加一个元素：.push_back()</strong></p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; ivec;ivec.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li><strong>用于查询元素个数：.size()</strong></li>
+</ol>
+<ol start="4">
+<li><strong>clear：用于清空全部元素</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ivec.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li><strong>v[n]：访问第n个元素，范围是0-v.size()-1</strong></li>
+</ol>
+<ol start="6">
+<li><strong>=：赋值运算符，会把原来的清空</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; sss;</span><br><span class="line">sss.<span class="built_in">push_back</span>(<span class="number">2</span>);sss = ivec; <span class="comment">//原来的2没了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="7">
+<li><strong>==以及!=用与判断相等或者不相等，完全相等：元素个数相同,且对应位置的元素值必须也要相等</strong></li>
+</ol>
+<ol start="8">
+<li><strong>范围for的应用</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">    vecitem *= <span class="number">2</span>;	</span><br><span class="line">    cout &lt;&lt; vecitem &lt;&lt; endl;C</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>问题：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;<span class="keyword">for</span> (<span class="keyword">auto</span> vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">	vecvalue.<span class="built_in">push_back</span>(<span class="number">33</span>); </span><br><span class="line"> &#125;<span class="comment">//导致输出彻底乱套，范围for是用来遍历这个vector的,第一次遍历会记录这个容器的末尾值，当你插入或删除容器内的元素，会导致末位置发生改变，从而使编译器输出发生问题	vecitem *= 2;	cout &lt;&lt; vecitem &lt;&lt; endl;	</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>打印结果乱套了:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></strong></p>
+<p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++的结构、权限修饰、类简介</title>
     <url>/20257.html</url>
     <content><![CDATA[<p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
@@ -581,6 +501,189 @@ void func() &#123;
 
 
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的auto、头文件防卫、引用、常量</title>
+    <url>/20230.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
+<p><strong>局部变量及初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//i的作用域仅仅在for语句内    </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以写作</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i&#123; <span class="number">0</span> &#125;; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//i=0  == i&#123;0&#125; == i=&#123;0&#125; 数组同理</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//int abcde &#123;3.5f&#125;; //失败， 从“float”转换到“int”需要收缩转换，系统执行了一个从浮点到整数的转换</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a><strong>auto</strong></h2><p><strong>auto变量的自动类型推断</strong></p>
+<p><strong>auto可以在声明变量的时候根据变量的初始值类型自动为此变量选择匹配的类型；（声明的时候要赋初值）</strong></p>
+<p><strong>auto自动类型推断发生在编译期间，所以使用auto不会造成程序执行效率降低</strong></p>
+<h2 id="头文件防卫式声明"><a href="#头文件防卫式声明" class="headerlink" title="头文件防卫式声明"></a><strong>头文件防卫式声明</strong></h2><p><strong>容易重定义，多次定义一个变量，引用别人的头文件，全局变量重定义</strong></p>
+<p><strong>#ifdef ,ifndef 条件编译</strong></p>
+<p><strong>#ifndef 标识符  当标志符没有定义过（没有用#define定义），则对程序段进行编译</strong></p>
+<p>​    <strong>//程序段</strong></p>
+<p><strong>#endif</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HEAD1__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HEAD1__   <span class="comment">//没有定义head1就定义head1</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写头文件程序代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !__HEAD1__</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a><strong>引用</strong></h2><p><strong>引用理解成，为变量起了另外一个名字，一般用符合&amp;表示，起完别名后和变量本身看成同一个变量；</strong></p>
+<ul>
+<li><strong>定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</strong></li>
+<li><strong>定义引用的时候必须初始化</strong></li>
+<li><strong>引用，&amp;的符号在=的左边</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = value; <span class="comment">//value的别名,不是求地址运算符，只是起标识作用</span></span><br><span class="line"><span class="comment">//定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</span></span><br><span class="line"><span class="comment">//定义引用的时候必须初始化</span></span><br><span class="line">cout &lt;&lt; refval &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"><span class="comment">//int&amp; refval13 = 10; 错误，引用必须绑定到变量上去，不能绑定到常量上去</span></span><br><span class="line"><span class="comment">//float &amp;refval23 = value; 错误，引用类型必须要相同</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>要和取地址区别开来。</strong></p>
+<ul>
+<li><strong>&amp;在=的右边</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;a; <span class="comment">//取地址</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>实例：</strong></p>
+<p><strong>可以改变函数值</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>&amp; ta, <span class="keyword">int</span>&amp; tb)</span> <span class="comment">//注意形参是引用类型</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ta = <span class="number">4</span>;</span><br><span class="line">    tb = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">13</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">14</span>;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印13</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印14</span></span><br><span class="line">    <span class="built_in">func</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印4</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a><strong>常量</strong></h2><p><strong>常量就是不变的量</strong></p>
+<h3 id="const-常量关键字，表示不变的意思"><a href="#const-常量关键字，表示不变的意思" class="headerlink" title="const 常量关键字，表示不变的意思"></a><strong>const 常量关键字，表示不变的意思</strong></h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> var = <span class="number">7</span>;  <span class="comment">//一种承诺，表示这个变量的值我不会去改变（命名常量）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>实际上const可以改，但一般不要去改</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;var2 = (<span class="keyword">int</span> &amp;)var;  <span class="comment">//强原来的const变量转成引用</span></span><br><span class="line">var2 = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>vs查地址  shift + F9</strong> </p>
+<p><strong>搜索的名字求地址要加&amp;  ，求值就直接写变量名</strong></p>
+<h3 id="constexpr-关键字"><a href="#constexpr-关键字" class="headerlink" title="constexpr 关键字"></a><strong>constexpr 关键字</strong></h3><p><strong>C++11才引入的，它也是个常量的概念，在编译的时候求值，可以提升性能</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> abc)</span> </span>&#123;  <span class="comment">//这个函数里面必须要有初值，参数，或者在函数体内写 int ab=10;这种</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> var2 = <span class="built_in">func2</span>(<span class="number">11</span>); <span class="comment">//不报错，因为系统认为这是常量函数，返回一个常量</span></span><br><span class="line"><span class="comment">//int b=11；</span></span><br><span class="line"><span class="comment">//constexpr int var2 = b;  //报错，因为系统不认为b是常量，它可以改，是变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>常量const/constexpr 必须包含参量</strong></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的范围for语句、动态内存分配、nullptr</title>
+    <url>/20221.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">C++的范围for语句、动态内存分配、nullptr </span></strong></p>
+<h2 id="范围for语句"><a href="#范围for语句" class="headerlink" title="范围for语句"></a><strong>范围for语句</strong></h2><p><strong>F9加断点，F10往下一格</strong></p>
+<p><strong>用于遍历一个序列</strong></p>
+<p><strong>方式一：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> v[]&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">18</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> x: v) <span class="comment">//遍历数组中每个元素，依次放入x中并打印x值，</span></span><br><span class="line">&#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//多了个拷贝的过程</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方式二：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> y : &#123; <span class="number">11</span>,<span class="number">34</span>,<span class="number">15</span>,<span class="number">134</span>,<span class="number">1232</span> &#125;) &#123;</span><br><span class="line">	cout &lt;&lt; y &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式三:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; x : v) &#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//直接用引用，省了拷贝的过程，提高了效率</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a><strong>动态内存分配</strong></h2><p><strong>C中供程序使用的存储空间，有程序区，静态存储区，动态存储区。</strong></p>
+<p><strong>C++我们把内存进一步详细分为：</strong></p>
+<ol>
+<li><strong>栈：函数内的局部变量都会放在这里，由编译器自动分配和释放</strong></li>
+<li><strong>堆：程序员用，malloc/new分配，用free/delete来释放。忘记释放后，系统会回收</strong></li>
+<li><strong>全局/静态存储区：放全局变量和静态变量static。程序结束时系统释放</strong></li>
+<li><strong>常量存储区：“i love china”</strong></li>
+<li><strong>程序代码区</strong></li>
+</ol>
+<p><strong>堆和栈不同的用途和区别：</strong></p>
+<ol>
+<li><strong>栈的空间是有限的。例int a =4； 自动给你4个字节的空间，分配速度快，程序员也控制不了</strong></li>
+<li><strong>堆:只要不超出你实际拥有的物理内存，也在操作系统允许你能够分配的最大内存大小之内都可以分配给你</strong></li>
+<li><strong>堆的分配速度比栈慢，你可以随时使用malloc/new来分配，free/delete来释放，非常灵活。</strong></li>
+</ol>
+<ul>
+<li><p><strong>在c语言一般用malloc和free从堆中分配和释放内存使用，malloc和free 是函数带（）</strong></p>
+<ul>
+<li><p><strong>malloc（memory allocation）：动态内存分配</strong></p>
+</li>
+<li><p>```c++<br>void <em>malloc(int NumBytes);<br>//bymbytes:要分配的字节数 （void</em>可以被强制转换成任何指针）<br>//分配成功则返回指向被分配内存的指针，分配失败则返回NULL</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ```c++</span><br><span class="line">  int *p = NULL; //c语言写法，等价于数字0</span><br><span class="line">  p = (int *)malloc(sizeof(int));// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span><br><span class="line">  if (p != NULL) &#123;</span><br><span class="line">  	*p = 5; //指针加*=取值，把值变成5</span><br><span class="line">  	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">  	free(p); //必须要释放掉</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>*<em>void <em>malloc(int NumBytes);</em></em> </p>
+<ul>
+<li><p><strong>bymbytes:要分配的字节数 （void*可以被强制转换成任何指针），所以malloc前面要强转成你想要的</strong></p>
+</li>
+<li><p><strong>分配成功则返回指向被分配内存的指针，分配失败则返回NULL</strong></p>
+</li>
+<li><p><strong>当不需要使用这块内存的时候，你应该使用free()函数来将内存释放掉，供其他地方使用</strong></p>
+</li>
+</ul>
+</li>
+<li><p><em><em>void free(void</em> FirstByte); （free一个malloc指针）</em>*</p>
+<ul>
+<li><strong>将之前用malloc分配的内存空间还给程序（操作系统），也就是说释放了这块内存，这样这块内存就被系统回收</strong></li>
+<li><strong>并在需要的时候将系统分配出去再给其他地方使用</strong></li>
+</ul>
+<p><strong>字符串的malloc/free</strong></p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">char</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="built_in">strcpy_s</span>(p,<span class="number">100</span>, <span class="string">&quot;hello world!&quot;</span>); <span class="comment">//更安全的字符串拷贝函数，防止内存溢出崩溃 ,第二个参数填最多多少个字节，溢出了就会有提醒</span></span><br><span class="line">	cout &lt;&lt; p &lt;&lt; endl; <span class="comment">//字符串指针=字符串的值</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>好好解读以下程序:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) *<span class="number">100</span>); <span class="comment">//分配可以存下放的下100个整数的内存空间</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>;  <span class="comment">//等价与 *（q++） --&gt; *q= 1  q++（跳了4个内存地址，因为为整型指针）</span></span><br><span class="line">	*q++ = <span class="number">5</span>;</span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;  <span class="comment">//p指针没动，还在第一个，但q指针改变了它指向的值</span></span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl; <span class="comment">//q指针在p指针移动前改变了p指针指向的后一个值</span></span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>在C++一般使用new和delete来分配和释放内存，它们不是函数,是运算符(标识符)。C++中就用new/delete中分配和释放内存，不再使用malloc和free来分配和释放内存</strong></p>
+</li>
+</ul>
+<p><strong>new/delete 和malloc，free干了一样的事情，就是分配和释放内存。同时new，delete还干了更多的事情。</strong></p>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li><p><strong>指针类型名 = new 类型标识符;</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="keyword">int</span>;  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	*myint = <span class="number">8</span>;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl;</span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>指针类型名 = new 类型标识符(初始值) ;   //注意这里是使用圆括号括起来，表示初始值</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">18</span>);  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl; <span class="comment">//打印18</span></span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>指针类型名 = new 类型标识符[内存单元个数]  //注意使用[]来代表单元个数</strong></p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>; <span class="comment">//给数组[0]赋值</span></span><br><span class="line">	*q++ = <span class="number">5</span>; <span class="comment">//给数组[1]赋值</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl;  <span class="comment">//p+1 指针+1 =跳了4个字节内存地址</span></span><br><span class="line">	<span class="keyword">delete</span>[] p; <span class="comment">//释放int p的数组空间</span></span><br><span class="line">				<span class="comment">//new时候我们用[]，那么delete就必须使用[]，[]不用写数组大小</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li><strong>配对使用，有malloc成功就必须要有free，有free成功，就必须要有delete</strong></li>
+<li><strong>free/delete 不能重复调用</strong></li>
+</ul>
+<h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a><strong>nullptr</strong></h2><p><strong>代表的是空指针</strong></p>
+<p><strong>nullptr能够避免在整数和指针之间发生混淆</strong></p>
+<p><strong>typeid().name() 可以查看类型</strong></p>
+<p><strong>NULL和nullptr 满足 NULL == nullptr</strong></p>
+<p><strong>但实际上是不同的类型</strong></p>
+<p><strong>结论：对于指针的初始化，和以往用到的和指针有关NULL的场合，能用nullptr的都用nullptr取代NULL</strong></p>
+<p><strong>nullptr认为是真的指针类型</strong></p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -728,109 +831,6 @@ void func() &#123;
 
 
 <hr>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语法</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>基础内容学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++的范围for语句、动态内存分配、nullptr</title>
-    <url>/20221.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">C++的范围for语句、动态内存分配、nullptr </span></strong></p>
-<h2 id="范围for语句"><a href="#范围for语句" class="headerlink" title="范围for语句"></a><strong>范围for语句</strong></h2><p><strong>F9加断点，F10往下一格</strong></p>
-<p><strong>用于遍历一个序列</strong></p>
-<p><strong>方式一：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> v[]&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">18</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> x: v) <span class="comment">//遍历数组中每个元素，依次放入x中并打印x值，</span></span><br><span class="line">&#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//多了个拷贝的过程</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>方式二：</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> y : &#123; <span class="number">11</span>,<span class="number">34</span>,<span class="number">15</span>,<span class="number">134</span>,<span class="number">1232</span> &#125;) &#123;</span><br><span class="line">	cout &lt;&lt; y &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>方式三:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; x : v) &#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//直接用引用，省了拷贝的过程，提高了效率</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a><strong>动态内存分配</strong></h2><p><strong>C中供程序使用的存储空间，有程序区，静态存储区，动态存储区。</strong></p>
-<p><strong>C++我们把内存进一步详细分为：</strong></p>
-<ol>
-<li><strong>栈：函数内的局部变量都会放在这里，由编译器自动分配和释放</strong></li>
-<li><strong>堆：程序员用，malloc/new分配，用free/delete来释放。忘记释放后，系统会回收</strong></li>
-<li><strong>全局/静态存储区：放全局变量和静态变量static。程序结束时系统释放</strong></li>
-<li><strong>常量存储区：“i love china”</strong></li>
-<li><strong>程序代码区</strong></li>
-</ol>
-<p><strong>堆和栈不同的用途和区别：</strong></p>
-<ol>
-<li><strong>栈的空间是有限的。例int a =4； 自动给你4个字节的空间，分配速度快，程序员也控制不了</strong></li>
-<li><strong>堆:只要不超出你实际拥有的物理内存，也在操作系统允许你能够分配的最大内存大小之内都可以分配给你</strong></li>
-<li><strong>堆的分配速度比栈慢，你可以随时使用malloc/new来分配，free/delete来释放，非常灵活。</strong></li>
-</ol>
-<ul>
-<li><p><strong>在c语言一般用malloc和free从堆中分配和释放内存使用，malloc和free 是函数带（）</strong></p>
-<ul>
-<li><p><strong>malloc（memory allocation）：动态内存分配</strong></p>
-</li>
-<li><p>```c++<br>void <em>malloc(int NumBytes);<br>//bymbytes:要分配的字节数 （void</em>可以被强制转换成任何指针）<br>//分配成功则返回指向被分配内存的指针，分配失败则返回NULL</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ```c++</span><br><span class="line">  int *p = NULL; //c语言写法，等价于数字0</span><br><span class="line">  p = (int *)malloc(sizeof(int));// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span><br><span class="line">  if (p != NULL) &#123;</span><br><span class="line">  	*p = 5; //指针加*=取值，把值变成5</span><br><span class="line">  	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">  	free(p); //必须要释放掉</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>*<em>void <em>malloc(int NumBytes);</em></em> </p>
-<ul>
-<li><p><strong>bymbytes:要分配的字节数 （void*可以被强制转换成任何指针），所以malloc前面要强转成你想要的</strong></p>
-</li>
-<li><p><strong>分配成功则返回指向被分配内存的指针，分配失败则返回NULL</strong></p>
-</li>
-<li><p><strong>当不需要使用这块内存的时候，你应该使用free()函数来将内存释放掉，供其他地方使用</strong></p>
-</li>
-</ul>
-</li>
-<li><p><em><em>void free(void</em> FirstByte); （free一个malloc指针）</em>*</p>
-<ul>
-<li><strong>将之前用malloc分配的内存空间还给程序（操作系统），也就是说释放了这块内存，这样这块内存就被系统回收</strong></li>
-<li><strong>并在需要的时候将系统分配出去再给其他地方使用</strong></li>
-</ul>
-<p><strong>字符串的malloc/free</strong></p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">char</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="built_in">strcpy_s</span>(p,<span class="number">100</span>, <span class="string">&quot;hello world!&quot;</span>); <span class="comment">//更安全的字符串拷贝函数，防止内存溢出崩溃 ,第二个参数填最多多少个字节，溢出了就会有提醒</span></span><br><span class="line">	cout &lt;&lt; p &lt;&lt; endl; <span class="comment">//字符串指针=字符串的值</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>好好解读以下程序:</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) *<span class="number">100</span>); <span class="comment">//分配可以存下放的下100个整数的内存空间</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>;  <span class="comment">//等价与 *（q++） --&gt; *q= 1  q++（跳了4个内存地址，因为为整型指针）</span></span><br><span class="line">	*q++ = <span class="number">5</span>;</span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;  <span class="comment">//p指针没动，还在第一个，但q指针改变了它指向的值</span></span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl; <span class="comment">//q指针在p指针移动前改变了p指针指向的后一个值</span></span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>在C++一般使用new和delete来分配和释放内存，它们不是函数,是运算符(标识符)。C++中就用new/delete中分配和释放内存，不再使用malloc和free来分配和释放内存</strong></p>
-</li>
-</ul>
-<p><strong>new/delete 和malloc，free干了一样的事情，就是分配和释放内存。同时new，delete还干了更多的事情。</strong></p>
-<p><strong>使用方法：</strong></p>
-<ol>
-<li><p><strong>指针类型名 = new 类型标识符;</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="keyword">int</span>;  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	*myint = <span class="number">8</span>;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl;</span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>指针类型名 = new 类型标识符(初始值) ;   //注意这里是使用圆括号括起来，表示初始值</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">18</span>);  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl; <span class="comment">//打印18</span></span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>指针类型名 = new 类型标识符[内存单元个数]  //注意使用[]来代表单元个数</strong></p>
-</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>; <span class="comment">//给数组[0]赋值</span></span><br><span class="line">	*q++ = <span class="number">5</span>; <span class="comment">//给数组[1]赋值</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl;  <span class="comment">//p+1 指针+1 =跳了4个字节内存地址</span></span><br><span class="line">	<span class="keyword">delete</span>[] p; <span class="comment">//释放int p的数组空间</span></span><br><span class="line">				<span class="comment">//new时候我们用[]，那么delete就必须使用[]，[]不用写数组大小</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<ul>
-<li><strong>配对使用，有malloc成功就必须要有free，有free成功，就必须要有delete</strong></li>
-<li><strong>free/delete 不能重复调用</strong></li>
-</ul>
-<h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a><strong>nullptr</strong></h2><p><strong>代表的是空指针</strong></p>
-<p><strong>nullptr能够避免在整数和指针之间发生混淆</strong></p>
-<p><strong>typeid().name() 可以查看类型</strong></p>
-<p><strong>NULL和nullptr 满足 NULL == nullptr</strong></p>
-<p><strong>但实际上是不同的类型</strong></p>
-<p><strong>结论：对于指针的初始化，和以往用到的和指针有关NULL的场合，能用nullptr的都用nullptr取代NULL</strong></p>
-<p><strong>nullptr认为是真的指针类型</strong></p>
 ]]></content>
       <categories>
         <category>C++</category>
