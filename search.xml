@@ -85,7 +85,23 @@
 <p>​    <strong>可以把string看成一个字符数列</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">string s4 = <span class="string">&quot;i love china&quot;</span>;<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : s4) &#123;    <span class="comment">//x = toupper(x);  可以把小写字符转换成大写字符    cout &lt;&lt; x &lt;&lt; endl; 	&#125;</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;]]></content>
       <categories>
         <category>C++</category>
         <category>语法</category>
@@ -254,7 +270,25 @@
 </ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dasd</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">dasd</span>(<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
 
-]]></content>
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;]]></content>
       <categories>
         <category>C++</category>
         <category>语法</category>
@@ -383,21 +417,23 @@
 <p><strong>打印结果乱套了:</strong></p>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></strong></p>
 <p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
-<div id="wpac-comment"></div>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
 <script type="text/javascript">
 wpac_init = window.wpac_init || [];
-wpac_init.push({widget: 'Comment', id: 31073});
+wpac_init.push({widget: 'Rating', id: 31073});
 (function() {
     if ('WIDGETPACK_LOADED' in window) return;
     WIDGETPACK_LOADED = true;
     var mc = document.createElement('script');
     mc.type = 'text/javascript';
     mc.async = true;
-    mc.src = 'https://embed.widgetpack.com/widget.js';
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
 })();
 </script>
-<a href="https://widgetpack.com" class="wpac-cr">Comments System WIDGET PACK</a>]]></content>
+</center>;]]></content>
       <categories>
         <category>C++</category>
         <category>语法</category>
@@ -477,6 +513,23 @@ wpac_init.push({widget: 'Comment', id: 31073});
 
 
 <p><strong>常量const/constexpr 必须包含参量</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;
 ]]></content>
       <categories>
         <category>C++</category>
@@ -604,6 +657,24 @@ wpac_init.push({widget: 'Comment', id: 31073});
 
 
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;
+
 ]]></content>
       <categories>
         <category>C++</category>
@@ -751,6 +822,29 @@ wpac_init.push({widget: 'Comment', id: 31073});
 
 
 <hr>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>C++</category>
@@ -854,7 +948,23 @@ wpac_init.push({widget: 'Comment', id: 31073});
 <p><strong>但实际上是不同的类型</strong></p>
 <p><strong>结论：对于指针的初始化，和以往用到的和指针有关NULL的场合，能用nullptr的都用nullptr取代NULL</strong></p>
 <p><strong>nullptr认为是真的指针类型</strong></p>
-]]></content>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>;]]></content>
       <categories>
         <category>C++</category>
         <category>语法</category>
