@@ -1081,7 +1081,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
   <entry>
     <title>C++的结构函数详解、explict、初始化列表</title>
     <url>/20276.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构函数详解、explict、初始化列表/span&gt;</strong></p>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构函数详解、explict、初始化列表</span></strong></p>
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a><strong>构造函数</strong></h2><p><strong>构造函数的目的就是初始化类对象的函数（自动调用）</strong></p>
 <ul>
 <li><strong>在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数”</strong></li>
