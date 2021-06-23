@@ -975,4 +975,223 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>基础内容学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++的成员函数、对象拷贝、私有对象</title>
+    <url>/20244.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">成员函数、对象拷贝、私有对象</span></strong></p>
+<h2 id="一、类是我们自己定义的数据类型"><a href="#一、类是我们自己定义的数据类型" class="headerlink" title="一、类是我们自己定义的数据类型"></a><strong>一、类是我们自己定义的数据类型</strong></h2><p><strong>设计类时候要考虑：</strong></p>
+<ol>
+<li><strong>站在设计和实现者的角度考虑问题</strong></li>
+<li><strong>站在使用者的角度来考虑</strong></li>
+<li><strong>父类、子类</strong></li>
+</ol>
+<h2 id="二、类基础"><a href="#二、类基础" class="headerlink" title="二、类基础"></a><strong>二、类基础</strong></h2><ol>
+<li><strong>一个类就是一个用户自己定义的数据类型，我们可以把类想象成一个命名空间，包着一堆东西（成员函数、成员变量）</strong></li>
+<li><strong>一个类的构成:成员变量，成员函数（ 许多特殊的函数）</strong></li>
+<li><strong>我们访问类成员时候，如果是类的对象，我们就使用对象名.成员名来访问成员</strong></li>
+<li><strong>如果是使用这个对象的指针，我们就使用 指针名-&gt;成员名 来访问成员</strong></li>
+<li><strong>public成员提供类的接口，暴露给外界调用。private成员提供各种实现类功能的细节方法，但不暴露给使用者，外界无法使用这些接口</strong></li>
+<li><strong>struct 是成员默认为public的clas；struct A{….};</strong></li>
+<li><strong>class的成员默认是private；class A{….};</strong></li>
+<li><strong>struct和class基本可以作为等价</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    student someone;</span><br><span class="line">    someone.num = <span class="number">100</span>;</span><br><span class="line">    student* pstu = &amp;someone;</span><br><span class="line">    pstu-&gt;num = <span class="number">106</span>;</span><br><span class="line">    cout &lt;&lt; someone.num &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、成员函数"><a href="#三、成员函数" class="headerlink" title="三、成员函数"></a><strong>三、成员函数</strong></h2><p><strong>定义一个时钟类，且初始化时间</strong></p>
+<h3 id="传统C语言写法"><a href="#传统C语言写法" class="headerlink" title="传统C语言写法"></a><strong>传统C语言写法</strong></h3><p><strong>初始化是通过外面构造一个函数来让他初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(Time&amp; stmptime, <span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;  <span class="comment">//初始化的函数</span></span><br><span class="line">    stmptime.Hour = tmphour;</span><br><span class="line">    stmptime.Minute = tmpmin;</span><br><span class="line">    stmptime.Second = tmpsec;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    <span class="built_in">initTime</span>(mytime, <span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>);</span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;  <span class="comment">//打印11</span></span><br><span class="line">    cout &lt;&lt; mytime.Minute &lt;&lt; endl; <span class="comment">//打印14</span></span><br><span class="line">    cout &lt;&lt; mytime.Second &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="C-写法"><a href="#C-写法" class="headerlink" title="C++写法"></a><strong>C++写法</strong></h3><p><strong>是这个道理但不规范的写法：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;</span><br><span class="line">        Hour = tmphour;  <span class="comment">//可以直接调用本类里面的成员变量</span></span><br><span class="line">        Minute = tmpmin;</span><br><span class="line">        Second = tmpsec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    mytime.<span class="built_in">initTime</span>(<span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>); <span class="comment">//直接利用类里面的成员函数进行初始化</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>标准规范的写法:</strong></p>
+<p><strong>在Time.h中写:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __MYTIME__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __MYTIME__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒  //成员变量</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span>; <span class="comment">//成员函数的定义</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>在cpp实现文件中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//成员函数initTime的实现，::是作用域运算符，表示init这个函数属于Time类，声明只属于Time类</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Time.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;  </span><br><span class="line">    Hour = tmphour;  <span class="comment">//我们在成员函数中，可以直接使用之前在类定义的成员变量名</span></span><br><span class="line">    Minute = tmpmin;  <span class="comment">//不同类的Minute值不会冲突，成员变量的值不是唯一的，不同的类成员不同</span></span><br><span class="line">    Second = tmpsec;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp的使用文件：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//另一个文件的cpp使用</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Time.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    mytime.<span class="built_in">initTime</span>(<span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>);</span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mytime.Minute &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mytime.Second &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>PS:类的重复定义（也可以理解为声明）是可以的，但全局变量不能多次定义（在头文件中被cpp中#include）</strong></p>
+<p><strong>类的init：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime2 = mytime; <span class="comment">//四种类初始化的方式，属于拷贝，地址都不一样</span></span><br><span class="line">Time mytime3&#123; mytime &#125;;  <span class="comment">//把mytime的成员变量都赋值过去了</span></span><br><span class="line"><span class="function">Time <span class="title">mytime4</span><span class="params">(mytime)</span></span>;  <span class="comment">//每个成员变量都是逐个拷贝</span></span><br><span class="line">Time mytime5 = &#123; mytime &#125;;</span><br><span class="line">mytime5.Hour = <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>如果不使用初始化的函数，它的值就会不确定</strong></li>
+</ul>
+<h2 id="五、私有成员"><a href="#五、私有成员" class="headerlink" title="五、私有成员"></a><strong>五、私有成员</strong></h2><ul>
+<li><p><strong>私有成员、函数可以在类内被其他函数调用，但不能被外界初始化类后调用;</strong></p>
+</li>
+<li><p><strong>私有成员、函数就是专门为其他函数的实现服务的，而不是直接作用于外界。</strong></p>
+</li>
+<li><p><strong>变量/函数往上找，先找到什么就是什么类型的变量/函数</strong></p>
+</li>
+</ul>
+<p><strong>class默认为私有</strong></p>
+<p><strong>h中：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __MYTIME__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __MYTIME__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> Millisecond; <span class="comment">//毫秒，无法在别的cpp中给它赋值使用</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initMillTime</span><span class="params">(<span class="keyword">int</span> mls)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp定义中：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;</span><br><span class="line">    Hour = tmphour;  <span class="comment">//我们在成员函数中，可以直接使用之前在类定义的成员变量名</span></span><br><span class="line">    Minute = tmpmin;  <span class="comment">//不同类的Minute值不会冲突，成员变量的值不是唯一的，不同的类成员不同</span></span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initMillTime</span><span class="params">(<span class="keyword">int</span> mls)</span> </span>&#123;  <span class="comment">//不能被用户调用，但可以被定义</span></span><br><span class="line">    Millisecond = mls;  <span class="comment">//成员函数可以访问成员变量，不管成员变量是否是私有</span></span><br><span class="line">                        <span class="comment">//公有肯定可以，私有就是只给类内的成员函数服务的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp使用：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">   <span class="comment">// mytime.initMillTime(0); 非法，不能被外界调用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的结构函数详解、explict、初始化列表</title>
+    <url>/20276.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构函数详解、explict、初始化列表/span&gt;</strong></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a><strong>构造函数</strong></h2><p><strong>构造函数的目的就是初始化类对象的函数（自动调用）</strong></p>
+<ul>
+<li><strong>在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数”</strong></li>
+<li><strong>有了构造函数就不怕类忘记初始化，导致成员变量有不确定的值</strong></li>
+</ul>
+<p><strong>构造函数的写法：</strong></p>
+<p><strong>h中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec); <span class="comment">//构造函数声明</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp实现中写定义：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> h</span></span><br><span class="line"></span><br><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec) &#123; <span class="comment">//构造函数不能有返回值</span></span><br><span class="line">    Hour = tmphour;  </span><br><span class="line">    Minute = tmpmin;  </span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>); <span class="comment">//私有函数的调用，OK的</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp使用中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> h</span></span><br><span class="line"><span class="comment">//5中初始化的方式，构造函数包含几个形参就需要带进去几个参数</span></span><br><span class="line">Time mytime = <span class="built_in">Time</span>(<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>); </span><br><span class="line"><span class="function">Time <span class="title">mtytime2</span><span class="params">(<span class="number">12</span>, <span class="number">13</span>, <span class="number">52</span>)</span></span>; </span><br><span class="line">Time mytime3 = Time&#123; <span class="number">12</span>,<span class="number">14</span>,<span class="number">52</span> &#125;;</span><br><span class="line">Time mytime4 = &#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br><span class="line">Time mytime5&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>特点:</strong></p>
+<ol>
+<li><strong>构造函数不能有返回值（连void都不写）</strong></li>
+<li><strong>不可以手动调用构造函数，否则就会出错</strong></li>
+<li><strong>声明的类型应该是public，因为我们创建一个对象需要系统帮我们调用构造函数，这说明他需要是一个public函数来给系统调用</strong><ul>
+<li><strong>因为类缺少的成员是私有成员，所以我们必须说明构造函数是一个public函数，否则是无法直接创建该类的对象</strong></li>
+</ul>
+</li>
+<li><strong>在构造函数中有多个参数，我们创建对象的时候也要带上这些参数</strong></li>
+<li><strong>所以对象初始化都需要带上全部参数</strong></li>
+</ol>
+<h2 id="多个构造函数"><a href="#多个构造函数" class="headerlink" title="多个构造函数"></a><strong>多个构造函数</strong></h2><p><strong>一个类中可以有个构造函数，但不同的构造函数总要有不同的东西（形参个数/形参类型）</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime = <span class="built_in">Time</span>(<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line"><span class="function">Time <span class="title">mtytime2</span><span class="params">(<span class="number">12</span>, <span class="number">13</span>, <span class="number">52</span>)</span></span>;</span><br><span class="line">Time mytime3 = Time&#123; <span class="number">12</span>,<span class="number">14</span>,<span class="number">52</span> &#125;;</span><br><span class="line">Time mytime4 = &#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br><span class="line">Time mytime5&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;  <span class="comment">//调用了有三个参数的构造函数</span></span><br><span class="line">Time mytime7&#123;&#125;; <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line"></span><br><span class="line">Time myTime20;  <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line">Time myTime22 = myTime20;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line"><span class="function">Time <span class="title">myTime23</span><span class="params">(myTime20)</span></span>;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime24&#123;myTime20&#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime25 = &#123; myTime20 &#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="函数默认参数"><a href="#函数默认参数" class="headerlink" title="函数默认参数"></a><strong>函数默认参数</strong></h2><ol>
+<li><strong>函数的默认参数只能放到声明中,不能放在实现里面。（如果有没声明的函数则可以放在里面）</strong><ul>
+<li><strong>函数默认参数有声明必须放到声明里面</strong></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec = <span class="number">12</span>;); <span class="comment">//函数声明h</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><strong>在具有多个函数默认参数的时候，有默认参数值的参数后面的参数都必须带有参数</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin = <span class="number">12</span>, <span class="keyword">int</span> tmpsec;); <span class="comment">//函数声明h 错误</span></span><br><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin = <span class="number">12</span>, <span class="keyword">int</span> tmpsec= <span class="number">12</span>;); <span class="comment">//函数声明h 正确</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>有三个参数的构造函数带一个默认参数，如果有带两个参数的构造函数，当你赋2个值的时候就会报错，系统不知道调用哪一个。</strong></li>
+</ul>
+<h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a><strong>隐式转换</strong></h2><p><strong>系统会能够把把比如int类型转换成其他类型，比如说上面定义的Time类都行</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Time的构造函数带一个参数</span></span><br><span class="line">Time mytime = <span class="number">16</span>； <span class="comment">//int转Time类 == Time mytime = Time(16) </span></span><br><span class="line">Time mytime = &#123;<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>&#125;;  <span class="comment">//可以，相当于上面的Time mytime = 15</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>禁止隐式类型转换:</strong></p>
+<ul>
+<li><strong>我们不需要隐式转换的时候，使用explict在函数声明前面加就行</strong></li>
+<li><strong>对于单参数的构造函数，我们一般都需要在函数声明之前加explict。</strong></li>
+</ul>
+<h2 id="构造函数初始化列表"><a href="#构造函数初始化列表" class="headerlink" title="构造函数初始化列表"></a><strong>构造函数初始化列表</strong></h2><p><strong>构造函数初始化列表，在大括号里面之前成员变量已经就初始化了</strong></p>
+<ul>
+<li><strong>注意写法：:成员变量(形参),成员变量(形参)</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpmin,<span class="keyword">int</span> tmpsec) <span class="comment">//构造函数不能有返回值，void也不行</span></span><br><span class="line">    :<span class="built_in">Hour</span>(tmphour),<span class="built_in">Minute</span>(tmpmin),<span class="built_in">Second</span>(tmpsec),<span class="built_in">initMillTime</span>(<span class="number">0</span>)  <span class="comment">//注意写法：:成员变量(形参)</span></span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了1的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提倡：</strong></p>
+<ol>
+<li><strong>显得专业，高大上</strong></li>
+<li><strong>效率上更高</strong></li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>构造函数初始化列表不能把其他成员变量放入形参的位置，因为成员变量的初始化顺序是由类里面声明的顺序从上往下的，所以这样赋值的化很可能会出现问题。</strong></li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
 </search>
