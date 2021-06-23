@@ -249,7 +249,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>;
-
 ]]></content>
       <categories>
         <category>C++</category>
@@ -448,6 +447,150 @@ wpac_init.push({widget: 'Rating', id: 31073});
       </tags>
   </entry>
   <entry>
+    <title>C++的结构、权限修饰、类简介</title>
+    <url>/20257.html</url>
+    <content><![CDATA[<p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p><strong>结构体是自定义的数据类型</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>&amp;student1</strong></td>
+<td><strong>0x0100faf0 {number=10001 name=0x0100faf4 “zhangsan” }</strong></td>
+<td>**studnet ***</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>&amp;tmpstu</strong></td>
+<td><strong>0x00cff920 {number=10001 name=0x00cff924 “zhangsan” }</strong></td>
+<td>**studnet ***</td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(studnet tmpstu)</span></span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(studnet &amp;tmpstu)</span> </span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(studnet* ptmpstu)</span> </span>&#123;</span><br><span class="line">    ptmpstu-&gt;number = <span class="number">6000</span>; <span class="comment">//不能用.了，指针改变成员变量需要用-&gt;指向成员变量</span></span><br><span class="line">    <span class="built_in">strcpy_s</span>(ptmpstu-&gt;name, <span class="built_in"><span class="keyword">sizeof</span></span>(ptmpstu-&gt;name), <span class="string">&quot;you&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">    studnet student1; <span class="comment">//定义结构变量</span></span><br><span class="line">    student1.number = <span class="number">10001</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(student1.name, <span class="built_in"><span class="keyword">sizeof</span></span>(student1.name), <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func</span>(student1);<span class="comment">//值没有被函数改变 ，效率低，实参传递给形参的时候发生了一个内存内容的拷贝，内存地址结构体和外面的实参不同</span></span><br><span class="line">    <span class="built_in">func2</span>(student1);<span class="comment">//值改变了，效率高，因为使用了引用，结构体内的形参的内存地址和外面的实参地址一样</span></span><br><span class="line">    <span class="built_in">func3</span>(&amp;student1);<span class="comment">//值改变了， -&gt;指向运算符</span></span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>C++与C中的结构区别：</strong></p>
+<ul>
+<li><p><strong>C++中的结构除了具备C中结构的所有功能外。还增加许多扩展功能，最突出的功能之一是：不仅仅有成员变量，还可以在其中定义成员函数(方法) 调用：student.func1()</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;  <span class="comment">//扩充的功能</span></span><br><span class="line">        number++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>C++里面叫做类</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a><strong>权限修饰符</strong></h2><ul>
+<li><strong>分为public(公有)和private(私有)以及protected(保护)</strong></li>
+<li><strong>public:公有的意思，用这个修饰结构/类中的成员变量/成员函数，就可以被外部访问。一般需要被外界访问的东西我们就定义为public。好像该类的外部接口</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="comment">//结构体默认都为public，所以加不加都行</span></span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<ul>
+<li><strong>private：私有的意思，用这个修饰符 修饰结构/类中的成员变量/成员函数/只有被内部定义的成员函数才能使用。</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="类简介"><a href="#类简介" class="headerlink" title="类简介"></a><strong>类简介</strong></h2><p><strong>类也是用户自定义的数据类型</strong></p>
+<ul>
+<li><strong>不管C还是C++，结构都用struct定义</strong></li>
+<li><strong>而为了理解可以把C语言中结构当成C++中类；但这个话并不全面</strong></li>
+</ul>
+<p><strong>结构和类的区别</strong></p>
+<ul>
+<li><strong>类这个东西只有C++才有，C没有</strong></li>
+<li><strong>结构用struct定义，类用class定义</strong></li>
+<li><strong>在C中我们定义一个属于该结构的变量，我们叫做结构变量。</strong></li>
+<li><strong>在C++中我们定义一个属于该类的变量，我们叫做对象。</strong></li>
+<li><strong>但结构变量也好，对象也好，他们都是一块能够存储数据并且具有某种类型的内存空间。</strong></li>
+</ul>
+<p><strong>他们极为类似，区别主要有两点:</strong></p>
+<ol>
+<li><strong>C++结构内部的成员变量以及成员函数，默认都为public</strong><ul>
+<li><strong>C++类内部的成员变量以及成员函数，默认访问级别都是private</strong></li>
+</ul>
+</li>
+<li><strong>C++结构体继承默认都是public，但类的继承默认都是private</strong></li>
+</ol>
+<p><strong>额外说明：</strong></p>
+<ol>
+<li><strong>标准C++库里面包含了大量丰富的类和函数。例如string</strong></li>
+<li><strong>一般C++都是使用类而不是结构体</strong></li>
+</ol>
+<h2 id="类的组织"><a href="#类的组织" class="headerlink" title="类的组织"></a><strong>类的组织</strong></h2><p><strong>书写规范</strong></p>
+<ol>
+<li><strong>类的定义(定义变量，以及函数声明)一般放在.h头文件中（头文件名可以和类名相同）</strong></li>
+<li><strong>类实现的代码可以放在一个CPP源文件里面（可以以类名定义）,文件一定要添加到项目中来；</strong></li>
+<li><strong>在主函数中要使用这个类就得include头文件</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//放于student.h里</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">studnet</span> &#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>; <span class="comment">//函数的声明</span></span><br><span class="line">&#125;;  <span class="comment">//写在头文件中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//放于student.cppl里</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">studnet::func</span><span class="params">()</span> </span>&#123;<span class="comment">//函数的实现</span></span><br><span class="line">    number++;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++的auto、头文件防卫、引用、常量</title>
     <url>/20230.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
@@ -579,12 +722,15 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <ul>
 <li><p><strong>在c语言一般用malloc和free从堆中分配和释放内存使用，malloc和free 是函数带（）</strong></p>
 <ul>
-<li><p><strong>malloc（memory allocation）：动态内存分配</strong></p>
-</li>
-<li><p>```c++<br>void <em>malloc(int NumBytes);<br>//bymbytes:要分配的字节数 （void</em>可以被强制转换成任何指针）<br>//分配成功则返回指向被分配内存的指针，分配失败则返回NULL</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ```c++</span><br><span class="line">  int *p = NULL; //c语言写法，等价于数字0</span><br><span class="line">  p = (int *)malloc(sizeof(int));// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span><br><span class="line">  if (p != NULL) &#123;</span><br><span class="line">  	*p = 5; //指针加*=取值，把值变成5</span><br><span class="line">  	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">  	free(p); //必须要释放掉</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>*<em>void <em>malloc(int NumBytes);</em></em> </p>
-<ul>
+<li><strong>malloc（memory allocation）：动态内存分配</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">int</span> NumBytes)</span></span>; </span><br><span class="line"><span class="comment">//bymbytes:要分配的字节数 （void*可以被强制转换成任何指针）</span></span><br><span class="line"><span class="comment">//分配成功则返回指向被分配内存的指针，分配失败则返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	*p = <span class="number">5</span>; <span class="comment">//指针加*=取值，把值变成5</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">free</span>(p); <span class="comment">//必须要释放掉</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="void-malloc-int-NumBytes"><a href="#void-malloc-int-NumBytes" class="headerlink" title="void *malloc(int NumBytes);"></a>void *malloc(int NumBytes);</h4><ul>
 <li><p><strong>bymbytes:要分配的字节数 （void*可以被强制转换成任何指针），所以malloc前面要强转成你想要的</strong></p>
 </li>
 <li><p><strong>分配成功则返回指向被分配内存的指针，分配失败则返回NULL</strong></p>
@@ -592,15 +738,11 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <li><p><strong>当不需要使用这块内存的时候，你应该使用free()函数来将内存释放掉，供其他地方使用</strong></p>
 </li>
 </ul>
-</li>
-<li><p><em><em>void free(void</em> FirstByte); （free一个malloc指针）</em>*</p>
-<ul>
+<h4 id="void-free-void-FirstByte-（free一个malloc指针"><a href="#void-free-void-FirstByte-（free一个malloc指针" class="headerlink" title="void free(void* FirstByte); （free一个malloc指针)"></a>void free(void* FirstByte); （free一个malloc指针)</h4><ul>
 <li><strong>将之前用malloc分配的内存空间还给程序（操作系统），也就是说释放了这块内存，这样这块内存就被系统回收</strong></li>
 <li><strong>并在需要的时候将系统分配出去再给其他地方使用</strong></li>
 </ul>
 <p><strong>字符串的malloc/free</strong></p>
-</li>
-</ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">char</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="built_in">strcpy_s</span>(p,<span class="number">100</span>, <span class="string">&quot;hello world!&quot;</span>); <span class="comment">//更安全的字符串拷贝函数，防止内存溢出崩溃 ,第二个参数填最多多少个字节，溢出了就会有提醒</span></span><br><span class="line">	cout &lt;&lt; p &lt;&lt; endl; <span class="comment">//字符串指针=字符串的值</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -822,151 +964,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
 
 
-
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>语法</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>基础内容学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++的结构、权限修饰、类简介</title>
-    <url>/20257.html</url>
-    <content><![CDATA[<p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
-<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p><strong>结构体是自定义的数据类型</strong></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>名称</strong></th>
-<th><strong>值</strong></th>
-<th><strong>类型</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>◢</strong></td>
-<td><strong>&amp;student1</strong></td>
-<td><strong>0x0100faf0 {number=10001 name=0x0100faf4 “zhangsan” }</strong></td>
-<td>**studnet ***</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>名称</strong></th>
-<th><strong>值</strong></th>
-<th><strong>类型</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>◢</strong></td>
-<td><strong>&amp;tmpstu</strong></td>
-<td><strong>0x00cff920 {number=10001 name=0x00cff924 “zhangsan” }</strong></td>
-<td>**studnet ***</td>
-</tr>
-</tbody></table>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(studnet tmpstu)</span></span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(studnet &amp;tmpstu)</span> </span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(studnet* ptmpstu)</span> </span>&#123;</span><br><span class="line">    ptmpstu-&gt;number = <span class="number">6000</span>; <span class="comment">//不能用.了，指针改变成员变量需要用-&gt;指向成员变量</span></span><br><span class="line">    <span class="built_in">strcpy_s</span>(ptmpstu-&gt;name, <span class="built_in"><span class="keyword">sizeof</span></span>(ptmpstu-&gt;name), <span class="string">&quot;you&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">    studnet student1; <span class="comment">//定义结构变量</span></span><br><span class="line">    student1.number = <span class="number">10001</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(student1.name, <span class="built_in"><span class="keyword">sizeof</span></span>(student1.name), <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func</span>(student1);<span class="comment">//值没有被函数改变 ，效率低，实参传递给形参的时候发生了一个内存内容的拷贝，内存地址结构体和外面的实参不同</span></span><br><span class="line">    <span class="built_in">func2</span>(student1);<span class="comment">//值改变了，效率高，因为使用了引用，结构体内的形参的内存地址和外面的实参地址一样</span></span><br><span class="line">    <span class="built_in">func3</span>(&amp;student1);<span class="comment">//值改变了， -&gt;指向运算符</span></span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>C++与C中的结构区别：</strong></p>
-<ul>
-<li><p><strong>C++中的结构除了具备C中结构的所有功能外。还增加许多扩展功能，最突出的功能之一是：不仅仅有成员变量，还可以在其中定义成员函数(方法) 调用：student.func1()</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct studnet&#123;</span><br><span class="line">    //成员变量</span><br><span class="line">    int number;</span><br><span class="line">    char name[100];</span><br><span class="line">    void func() &#123;  //扩充的功能</span><br><span class="line">        number++;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>C++里面叫做类</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a><strong>权限修饰符</strong></h2><ul>
-<li><strong>分为public(公有)和private(私有)以及protected(保护)</strong></li>
-<li><strong>public:公有的意思，用这个修饰结构/类中的成员变量/成员函数，就可以被外部访问。一般需要被外界访问的东西我们就定义为public。好像该类的外部接口</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="comment">//结构体默认都为public，所以加不加都行</span></span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<ul>
-<li><strong>private：私有的意思，用这个修饰符 修饰结构/类中的成员变量/成员函数/只有被内部定义的成员函数才能使用。</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-<h2 id="类简介"><a href="#类简介" class="headerlink" title="类简介"></a><strong>类简介</strong></h2><p><strong>类也是用户自定义的数据类型</strong></p>
-<ul>
-<li><strong>不管C还是C++，结构都用struct定义</strong></li>
-<li><strong>而为了理解可以把C语言中结构当成C++中类；但这个话并不全面</strong></li>
-</ul>
-<p><strong>结构和类的区别</strong></p>
-<ul>
-<li><strong>类这个东西只有C++才有，C没有</strong></li>
-<li><strong>结构用struct定义，类用class定义</strong></li>
-<li><strong>在C中我们定义一个属于该结构的变量，我们叫做结构变量。</strong></li>
-<li><strong>在C++中我们定义一个属于该类的变量，我们叫做对象。</strong></li>
-<li><strong>但结构变量也好，对象也好，他们都是一块能够存储数据并且具有某种类型的内存空间。</strong></li>
-</ul>
-<p><strong>他们极为类似，区别主要有两点:</strong></p>
-<ol>
-<li><strong>C++结构内部的成员变量以及成员函数，默认都为public</strong><ul>
-<li><strong>C++类内部的成员变量以及成员函数，默认访问级别都是private</strong></li>
-</ul>
-</li>
-<li><strong>C++结构体继承默认都是public，但类的继承默认都是private</strong></li>
-</ol>
-<p><strong>额外说明：</strong></p>
-<ol>
-<li><strong>标准C++库里面包含了大量丰富的类和函数。例如string</strong></li>
-<li><strong>一般C++都是使用类而不是结构体</strong></li>
-</ol>
-<h2 id="类的组织"><a href="#类的组织" class="headerlink" title="类的组织"></a><strong>类的组织</strong></h2><p><strong>书写规范</strong></p>
-<ol>
-<li><strong>类的定义(定义变量，以及函数声明)一般放在.h头文件中（头文件名可以和类名相同）</strong></li>
-<li><strong>类实现的代码可以放在一个CPP源文件里面（可以以类名定义）,文件一定要添加到项目中来；</strong></li>
-<li><strong>在主函数中要使用这个类就得include头文件</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//放于student.h里</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">studnet</span> &#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>; <span class="comment">//函数的声明</span></span><br><span class="line">&#125;;  <span class="comment">//写在头文件中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//放于student.cppl里</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">studnet::func</span><span class="params">()</span> </span>&#123;<span class="comment">//函数的实现</span></span><br><span class="line">    number++;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
-<center>
-<a href="" class="wpac-cr">顺便评个分吧！👇</a>
-<div id="wpac-rating"></div>
-<script type="text/javascript">
-wpac_init = window.wpac_init || [];
-wpac_init.push({widget: 'Rating', id: 31073});
-(function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-})();
-</script>
-</center>
 
 ]]></content>
       <categories>
