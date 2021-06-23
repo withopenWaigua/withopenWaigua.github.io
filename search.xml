@@ -383,7 +383,21 @@
 <p><strong>打印结果乱套了:</strong></p>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></strong></p>
 <p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
-]]></content>
+<div id="wpac-comment"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Comment', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+<a href="https://widgetpack.com" class="wpac-cr">Comments System WIDGET PACK</a>]]></content>
       <categories>
         <category>C++</category>
         <category>语法</category>
