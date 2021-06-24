@@ -1384,7 +1384,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
   <entry>
     <title>C++的友元函数、友元类、友元成员函数</title>
     <url>/22825.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">友元函数、友元类、友元成员函数<br>tags:<br></span></strong></p>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">友元函数、友元类、友元成员函数<br></span></strong></p>
 <ol>
 <li><h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><p>一、友元函数,这是个函数</p>
 <ul>
@@ -1754,7 +1754,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
   </entry>
   <entry>
     <title>C++的派生类、调用顺序、访问等级与函数遮蔽</title>
-    <url>/22425.html</url>
+    <url>/22525.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">派生类、调用顺序、访问等级与函数遮蔽<br></span></strong></p>
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
 <li><p>继承这种概念是我们面向对象程序设计的核心思想之一；</p>
