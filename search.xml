@@ -1197,4 +1197,188 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>基础内容学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++的inline、const、mutable、this、static</title>
+    <url>/22425.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">inline、const、mutable、this、static</span></strong></p>
+<h2 id="inline"><a href="#inline" class="headerlink" title="inline"></a><strong>inline</strong></h2><ul>
+<li><strong>在类定义中实现成员函数inline：类内的成员函数其实也叫类内的成员函数定义</strong></li>
+<li><strong>这种直接在类的定义中实现的成员的函数，会被当作inline内联函数处理</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span> </span>&#123;</span><br><span class="line">        Hour += tmphour;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="成员函数末尾加const"><a href="#成员函数末尾加const" class="headerlink" title="成员函数末尾加const"></a><strong>成员函数末尾加const</strong></h2><p><strong>const:常量，在成员函数后面加入一个cosnt。不但要在成员函数声明中增加const，也要在成员函数定义中加入const。</strong></p>
+<p><strong>作用：告诉系统，这个成员函数不会修改该对象里任何成员变量的值等等。也就是说，这个成员函数不会修改Time的任何状态；</strong></p>
+<ul>
+<li><strong>屁股后面加入一个const后缀，也称“常量成员函数”</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">sdsfg.<span class="built_in">initMillTime</span>(); <span class="comment">//错误，initMillTime()不是const成员函数，initMillTime()只能被非const对象调用。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>写常量成员函数的方法：</strong></p>
+<p><strong>h中声明:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addhour</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp中实现：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::addhour</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    Minute = <span class="number">2</span>; <span class="comment">//错误，不能修改</span></span><br><span class="line">    .......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp中使用</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">Time fdf;</span><br><span class="line">fdf.<span class="built_in">addhour</span>(); <span class="comment">//可以</span></span><br><span class="line">sdsf.<span class="built_in">addhour</span>(); <span class="comment">//可以</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>const成员函数，不管是不是const对象，都可以调用const成员函数。</strong></p>
+</li>
+<li><p><strong>而非const成员函数，是不能被const对象调用，只能被非const对象调用</strong></p>
+</li>
+</ul>
+<p><strong>const不能放在普通函数后面。</strong></p>
+<ul>
+<li><strong>因为const代表成员函数不会改变对象的值</strong></li>
+<li><strong>而普通函数没有对象，成员函数的概念</strong></li>
+<li><strong>即一定要用在在类中声明时后面加const，并且在定义时成员函数后面加const</strong></li>
+</ul>
+<h2 id="mutable"><a href="#mutable" class="headerlink" title="mutable"></a><strong>mutable</strong></h2><ul>
+<li><p><strong>不稳定，容易改变的意思</strong></p>
+</li>
+<li><p><strong>用于解决const对象仍然能够改变某些一定要改变值</strong></p>
+</li>
+<li><p><strong>用mutable修饰一个成员变量，一个成员变量一旦被mutable修饰了就表示这个成员变量永远处于可被修改的状态，即便是在const修饰的成员函数.。</strong></p>
+</li>
+</ul>
+<h2 id="返回自身对象的引用this"><a href="#返回自身对象的引用this" class="headerlink" title="返回自身对象的引用this"></a><strong>返回自身对象的引用this</strong></h2><p><strong>h中声明:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Time&amp; <span class="title">add_hour</span><span class="params">(<span class="keyword">int</span> tmp)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp实现：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Time&amp; <span class="title">Time::add_hour</span><span class="params">(<span class="keyword">int</span> tmp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">    Hour += tmp;  <span class="comment">//和下面一个意思</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;Hour = <span class="number">3</span>; <span class="comment">//this其实就是这个对象的指针</span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//把对象自己引用返回了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp使用:</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">	Time mytime;</span><br><span class="line">	mytime.<span class="built_in">add_hour</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>把对象自己返回回去了</strong></p>
+<p><strong>mytime地址：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>&amp;mytime</strong></td>
+<td><strong>0x00bbf74c {Hour=12 Minute=13 Second=59 …}</strong></td>
+<td>**Time ***</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>名称</strong></th>
+<th><strong>值</strong></th>
+<th><strong>类型</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>◢</strong></td>
+<td><strong>this</strong></td>
+<td><strong>0x00bbf74c {Hour=12 Minute=13 Second=59 …}</strong></td>
+<td>**Time ***</td>
+</tr>
+</tbody></table>
+<p><strong>表示this就是指向该对象的指针</strong></p>
+<p>*<strong>this就代表 mytime；</strong></p>
+<p><strong>调用成员函数的时候，编译器负责把这个对象的地址(&amp;mytime)传递给这个成员函数中一个隐藏的this形参</strong></p>
+<p><strong>在系统看来，任何对类成员的直接访问都是被看作通过this来做隐式调用的</strong></p>
+<ul>
+<li><strong>this指针只能在成员函数中使用，全局函数、静态函数都不能使用this指针</strong></li>
+<li><strong>在普通函数中，this是一个指向非const对象的const指针</strong></li>
+<li><strong>伪代码:(Time * const this),不能改变指针指向</strong></li>
+<li><strong>在const成员函数中，this指针一个指向const对象的const指针（const Time * const this），就是什么都不能改</strong></li>
+</ul>
+<p><strong>如果形参和成员变量名重合，可以用this-&gt;成员变量名 来与形参名区别开来</strong></p>
+<p><strong>但一般我们不在函数中写this</strong></p>
+<ul>
+<li>*<em>除了定义Time&amp; sss；Time&amp; sss函数return <em>this ，这种情况</em></em></li>
+</ul>
+<h2 id="statci成员"><a href="#statci成员" class="headerlink" title="statci成员"></a><strong>statci成员</strong></h2><p><strong>普通函数使用：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">6</span>; <span class="comment">//局部静态，可以多次使用，下面的修改，下次再使用不会重新刷新</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> b =<span class="number">5</span>；   <span class="comment">//全局也是在静态存储区</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>全局的static只能在这个cpp文件整个使用，但是其他的cpp文件不能够调用(而单纯的全局变量是可以的)</strong></p>
+<p><strong>注意static：</strong></p>
+<ol>
+<li><strong>在这个函数内（全局就是在这整个cpp中），多次调用不会初始化</strong></li>
+<li><strong>但出了这个函数（全局出了这个cpp中），是不能够使用的</strong></li>
+</ol>
+<p><strong>有属于整个类的成员变量，这种成员变量就叫做static成员变量。</strong></p>
+<p><strong>特点：不属于某个对象，属于整个类，我们一旦在某个对象中修改了这个成员变量的值，在其他对象中是能够直接看到修改的结果的</strong></p>
+<p><strong>这种成员变量只有一个副本，对于这种成员变量的引用，我们用的是类名::成员变量名</strong></p>
+<p><strong>成员函数前面也可以加static构成静态成员函数。属于整个类的成员函数。调用时 :类名::成员函数名(…..){一般只能调用static对象}</strong></p>
+<p><strong>定义静态成员变量的方法：</strong></p>
+<p><strong>我们一般会在某一个cpp源文件中的开头来定义这个静态成员变量。这样能够保证在调用任何函数之前，这个静态成员变量就已经被初始了</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> Time::mystatic = <span class="number">15</span>;  <span class="comment">//不给初值的话默认给0，定义的时候不需要使用static，</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>只能在一个cpp里面定义初始化</strong></li>
+</ul>
+<p><strong>mystatic不属于任何对象，这个成员变量影响全部的对象，是独立但跟关联的成员变量</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime;</span><br><span class="line">Time mystime2;</span><br><span class="line">cout &lt;&lt; Time::mystatic &lt;&lt; endl;   <span class="comment">//15</span></span><br><span class="line">mytime.mystatic = <span class="number">13</span>;</span><br><span class="line">cout &lt;&lt; mytime.mystatic &lt;&lt; endl; <span class="comment">//13</span></span><br><span class="line">cout &lt;&lt; Time::mystatic &lt;&lt; endl;  <span class="comment">//13</span></span><br><span class="line">mytime2.mystatic = <span class="number">80</span>;</span><br><span class="line">cout &lt;&lt; mytime.mystatic &lt;&lt; endl;  <span class="comment">//80</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>写静态成员函数，它也是跨对象的</strong></p>
+<p><strong>静态必须使用类名::定义，不管是变量/函数</strong></p>
+<p><strong>使用的时候三种都表示一个意思：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">mstastatic</span>(<span class="number">14</span>);</span><br><span class="line">mytime.<span class="built_in">mstastatic</span>(<span class="number">13</span>);</span><br><span class="line">mytime2.<span class="built_in">mstastatic</span>(<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>但静态函数不能改非静态变量</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::mstastatic</span><span class="params">(<span class="keyword">int</span> tevalue)</span> </span>&#123;</span><br><span class="line">	Minute = <span class="number">134</span>; <span class="comment">//不可以，它必须跟某个对象绑定</span></span><br><span class="line">	mystatic=<span class="number">233</span>; <span class="comment">//可以，它只跟类绑定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
 </search>
