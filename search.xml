@@ -1381,4 +1381,727 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>基础内容学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++的友元函数、友元类、友元成员函数</title>
+    <url>/22825.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">友元函数、友元类、友元成员函数<br>tags:<br></span></strong></p>
+<ol>
+<li><h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><p>一、友元函数,这是个函数</p>
+<ul>
+<li>public，protected，private只允许本类的访问</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void func(const Men&amp; tep) &#123;</span><br><span class="line">    tep.funcmy();  //funcmy()是men类的私有函数，所以调用失败了</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>但只要让函数func成为类Men的友元函数，那么func这个函数就能访问Men类中的所有成员</li>
+</ul>
+<p>写法:</p>
+<p>在类内声明里面不管什么地方写：</p>
+<p>friend+函数声明</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> Men&amp; tep)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>友元函数必须不能在类里面，比如说可以在main函数外定义。</p>
+</li>
+<li><p>友元函数不属于类的成员，所以友元函数声明不受限制</p>
+</li>
+</ul>
+<p>总结：友元函数func是个函数，通过在别的类里面用friend+函数声明，成为这个类的友元函数，拥有这个类全部的访问权</p>
+<h2 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h2><ul>
+<li>友元类是个类</li>
+<li>可以把其他的类定义成友元类。如果你是我的友元类，那么你就可以在你的成员函数中访问我的私有成员，包括public、private、protected</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callss</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当我们修改A，让类B成为A的友元类：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span> <span class="comment">//虽然先定义的是A，但并没有报错</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callCAF</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">    b.<span class="built_in">ccallCAF</span>(<span class="number">3</span>, a); <span class="comment">//行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li><p>每个类都负责控制自己的友元函数或者友元类：</p>
+</li>
+<li><p>友元关系不能被继承、</p>
+</li>
+<li><p>友元关系都是单项的，a是b的友元，不表示b是a的友元</p>
+</li>
+<li><p>友元没有传递性，比如类a是类b的友元，类b是类c的友元，并不表示类c是类a的友元</p>
+</li>
+<li><p>写友元成员函数，必须注意代码组织结构，因为里面有声明以及定义</p>
+</li>
+</ul>
+<p>写法:</p>
+<p>在A类声明中：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class C; //类声明，要用到这里面的成员函数就不行;错误。</span><br><span class="line">#include &quot;C.h&quot; //确保编译器确定类C里面有callCAF的函数</span><br><span class="line">class A&#123;</span><br><span class="line">friend void C::callCAF(int x; A&amp; A); //该函数时友元成员函数的声明</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>在类里面构造别人类的友元函数这个函数必须是public属性，私有的不行</li>
+</ul>
+<ul>
+<li><p>优点：允许在特定情况下某些非成员函数访问类中的protected和private成员，从而提出友元函数，是protect，private成员更灵活</p>
+</li>
+<li><p>缺点：破坏了类的封装性质，降低了类的可靠性以及维护性；</p>
+</li>
+</ul>
+</li>
+</ol>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的拷贝构造函数</title>
+    <url>/22025.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">拷贝构造函数</span></strong></p>
+<h2 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h2><ul>
+<li>默认情况下，类对象拷贝是每个成员变量逐个拷贝</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime; <span class="comment">//无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象</span></span><br><span class="line"><span class="function">Time <span class="title">mytime3</span><span class="params">(mytime)</span></span>; <span class="comment">//都是拷贝</span></span><br><span class="line">Time mytime4 = &#123; mytime &#125;;</span><br><span class="line">Time mytime6 = mytime;</span><br></pre></td></tr></table></figure>
+
+<p>346都是拷贝出来的，mytime每个值都被拷贝一份给346</p>
+<ul>
+<li>如果一个类的构造函数的第一个参数是所属的类类型的引用。如果还有其他的额外参数，那么这些额外的参数都有默认的值，这个构造函数就叫做拷贝构造函数</li>
+<li>函数默认参数必须放在函数声明中，除非该函数没有函数声明</li>
+</ul>
+<p>拷贝构造函数的作用：</p>
+<ul>
+<li>会在一定的时机，会被系统自动调用</li>
+</ul>
+<p>写法：</p>
+<p>h中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">const</span> Time&amp; tmptime,<span class="keyword">int</span> b =<span class="number">4</span>); <span class="comment">//第一个参数是所属类的引用，如果给其他参数必须给初始值</span></span><br><span class="line"><span class="comment">//Time(Time&amp; tmptime, int a = 4,int b =3); //错误，只能有一个拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>cpp中写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">const</span> Time&amp; tmpvel, <span class="keyword">int</span> b)&#123; <span class="comment">//一般拷贝构造函数都用const Time&amp; vel</span></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime; <span class="comment">//无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象</span></span><br><span class="line"><span class="function">Time <span class="title">mytime3</span><span class="params">(mytime)</span></span>; <span class="comment">//都是拷贝   &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime4 = &#123; mytime &#125;;<span class="comment">//都是拷贝  &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime6 = mytime;<span class="comment">//都是拷贝  &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime7;</span><br><span class="line">mytime7 = mytime <span class="comment">//不是采用拷贝构造函数了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意：</p>
+<ol>
+<li>建议拷贝构造函数第一个参数总是带着const</li>
+<li>拷贝构造函数一般不要声明成explicit</li>
+<li>成员变量逐个拷贝，但他会在我们自己定义的拷贝构造函数的存在而丢失了作用，我们自己构造的拷贝构造函数使系统给你构造的合成拷贝构造函数失效了</li>
+<li>如果是编译器给我们构造的合成拷贝构造函数，这个合成拷贝构造函数会帮我们把对象的成员变量逐个复制到另外一个对象的成员变量中</li>
+<li>每个成员类型决定它如何拷贝，比如说成员变量是整型，就直接拷贝过来</li>
+<li>如果成员变量是类类型的话，那么就会调用这个类的拷贝构造函数来拷贝</li>
+<li>如果你自己定义了拷贝构造函数，那么就取代了系统合成的拷贝构造函数，这个时候你就必须自己在拷贝构造函数里面给成员变量赋值，以免系统自动随意给你值</li>
+</ol>
+<p>还有一些会发生拷贝函数调用的情况:</p>
+<ol>
+<li>将一个对象作为实参传递给一个非引用类型的形参  func(mytime);</li>
+<li>从一个函数中返回一个对象的时候；</li>
+</ol>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的基类指针、虚和纯虚函数、多态性、虚析构函数</title>
+    <url>/22625.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">基类指针、虚和纯虚函数、多态性、虚析构函数<br></span></strong></p>
+<h2 id="基类、派生类指针"><a href="#基类、派生类指针" class="headerlink" title="基类、派生类指针"></a>基类、派生类指针</h2><h3 id="派生类指针"><a href="#派生类指针" class="headerlink" title="派生类指针"></a>派生类指针</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Human;  <span class="comment">//基类指针</span></span><br><span class="line">Men* pmen = <span class="keyword">new</span>  Men; <span class="comment">//派生类指针</span></span><br><span class="line"><span class="comment">//新玩法：父类指针可以new一个子类对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="基类指针"><a href="#基类指针" class="headerlink" title="基类指针"></a>基类指针</h3><ul>
+<li>父类指针不能调动子类函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">funchuman</span>();  <span class="comment">//可以</span></span><br><span class="line"><span class="comment">//phuman-&gt;funmen(); </span></span><br><span class="line"><span class="comment">//虽然你new的是子类对象，但你是父类指针，无法调用子类函数</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>(); <span class="comment">//调用的是父类的eat函数，而不是men的eat函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>需要一个解决方法使我们只定义一个对象指针，就能调用父类以及各个子类的同名函数</p>
+<p>解决办法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line">phuman-&gt;eat;<span class="comment">//调用的是父类的eat函数，无法使用子类的eat函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>如果我们想通过一个父类指针调用父类、子类中的同名同参数的函数的话，对这个函数也是有要求:<ul>
+<li>在父类中，eat函数声明之前必须要加virtual声明eat()函数成虚函数</li>
+</ul>
+</li>
+</ul>
+<p>父类中操作：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;人类吃各种粮食&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>一旦某个函数(在基类)声明成虚函数，那么子类的同名函数都是属于virtual</li>
+</ul>
+<p>改造后：</p>
+<p>h中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPP使用中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是men子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Women;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是women子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Human;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的Human类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>父类的同名函数不是虚函数的时候，new出来的指针不管是那个子类，都是只能调用父类的函数</li>
+<li>当父类的同名函数是虚函数的时候，new子类出来的指针，虽然是父类指针，但调动的可以是子类函数，主要是看它new谁</li>
+</ul>
+<h3 id="override关键字"><a href="#override关键字" class="headerlink" title="override关键字"></a>override关键字</h3><ul>
+<li>为了避免你在子类中写错虚函数，在C++11中可以在函数声明中增加一个override关键字<ul>
+<li>这个关键字 用在“子类”中</li>
+</ul>
+</li>
+<li>override关键字可以用来说明派生类中的虚函数，你用了这个关键字之后，编译器就会认为你这个eat覆盖了父类中的同名同参的函数，那么编译器就会在父类中找到同名同参的虚函数，如果没找到，编译就会报错。这样，如果你没写好虚函数，那么可以帮你纠错。</li>
+<li>一般override在子类声明里面写</li>
+</ul>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><ul>
+<li><p>final与override相反</p>
+</li>
+<li><p>final也是虚函数专用，但是用在父类中，如果我们在父类的函数声明中加入final，那么任何尝试覆盖父类函数的行为都会报错，拒绝给你访问</p>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>调用虚函数执行的是“动态绑定”。动态表示的是我们程序运行的时候才知道我们使用了那个子类或是父类的eat()函数</li>
+<li>动态的绑定的是是Men还是，Women取决于new的是Men还是Women；</li>
+<li>动态绑定:运行的时候才知道运行的是那个eat函数。</li>
+</ul>
+<p>不用虚函数的话，生成那个对象，调用的eat肯定是属于它自己类的函数，不可能是其他子类或者父类的函数。</p>
+<ul>
+<li>这样就体现不出来了</li>
+</ul>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><ul>
+<li>多态性：知识针对虚函数来说可以理解</li>
+</ul>
+<p>多态性的体现：</p>
+<ul>
+<li>体现具有继承关系的父类和子类之间，子类重新定义(重写)父类的成员函数eat()，同时父类把这个eat()函数声明成了virtual虚函数</li>
+<li>通过父类指针，只有运行到了程序运行时期，找到了绑定到父类指针上的对象，这个对象他有可能是某个子类对象，也可能是父类对象</li>
+<li>然后系统内部实际上要查一个虚函数表，找到eat函数的入口地址，从而调用父类或子类的eat函数，这就是运行时期的多态性</li>
+</ul>
+<h2 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h2><ul>
+<li>纯虚函数 是在基类中声明的虚函数，但是他在基类中没有定义，但是要求任何派生类都要定义该虚函数的实现方法</li>
+</ul>
+<p>基类中实现纯虚函数的方法:</p>
+<ul>
+<li>在基类的虚函数，它没有定义，但让他在声明中等于0</li>
+</ul>
+<p>humanh中:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span> </span>= <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>cpp使用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human human;  <span class="comment">//报错</span></span><br><span class="line">Human* phuman = <span class="keyword">new</span> Men;  <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>一旦一个类中有纯虚函数，那么你就不能生成这个类的对象了(父类指针也不行);</li>
+<li>那么这个类就成为了抽象类了</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><ul>
+<li><p>一旦有纯虚函数，那么这个类就变成抽象类</p>
+</li>
+<li><p>一旦基类中的虚函数没有定义，而是直接让他等于0，那么这个类就成为了抽象类</p>
+</li>
+</ul>
+<p>作用：</p>
+<ul>
+<li>主要用来统一管理子类对象</li>
+</ul>
+<p>记住两点：</p>
+<ol>
+<li>函数虚函数的类 叫抽象类，不能用来定义该类对象，主要用来做基类来生成子类用的</li>
+<li>子类必须实现该基类中定义的纯虚函数;</li>
+</ol>
+<p>纯虚函数不实现该基类的虚函数是不能给你生成的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Human* phuman = new Men;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>想让这个实现的办法：</p>
+<ul>
+<li>子类实现该虚函数</li>
+</ul>
+<p>h中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或cpp定义里实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>纯虚函数不能new自己这个父类</li>
+</ul>
+<h2 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h2><ul>
+<li>基类的虚构函数一般写出虚函数(虚析构函数)</li>
+</ul>
+<p>普通的虚构函数的问题：</p>
+<ul>
+<li>父类指针只执行了自己的父类析构函数</li>
+<li>没调用子类的析构函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line"><span class="keyword">delete</span> phuman;  <span class="comment">//没有执行子类的析构函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>结论：用基类指针new子类对象的时候，在delete的时候系统不会调用派生类的析构函数，这就会发生问题</p>
+<p>解决方法:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">virtual</span> ~<span class="built_in">Human</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在public继承中，基类对派生类及其对象的操作，只能影响到那些从基类继承下来的成员</p>
+<ul>
+<li>如果想要用基类对非继承成员进行操作，则要把这个基类的函数定义为虚函数，析构函数也如此</li>
+<li>另外就是基类中的析构函数的虚属性也会被继承给子类，这样的话子类中的析构函数也就自然而然成为了虚函数，虽然名字和基类的析构函数不同</li>
+<li>delete phuman的时候肯定是要调用父类的析构函数，但在父类中想要调用子类的Men的析构函数，那么Human这个类中的析构函数就要声明为virtual，也就是说C++中为了获得运行时候的多态行为，所调用的成员函数必须是virtual；</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>如果一个类想要做积累，我们务必要把这个基类的析构函数写成virtual析构函数</li>
+<li>只要基类的析构函数是虚函数，就能够保证我们delete基类指针时候能运行正确的析构函数版本</li>
+<li>普通类我们可以不写析构函数，但如果是基类，就必须写一个析构函数，并且还是虚析构函数</li>
+<li>虚函数会增加内存开销，类里面定义虚函数，编译器就会给这个类增加虚函数表，在这个表存虚函数的指针</li>
+</ol>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的派生类、调用顺序、访问等级与函数遮蔽</title>
+    <url>/22425.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">派生类、调用顺序、访问等级与函数遮蔽<br></span></strong></p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li><p>继承这种概念是我们面向对象程序设计的核心思想之一；</p>
+</li>
+<li><p>继承：</p>
+<ol>
+<li>我们首先要定义一个父类。父类中定义一些公用的成员变量，成员函数。</li>
+<li>然后我们可以通过继承父类来构建新的类：子类。写代码的时候，我们只需要写子类相关的一些内容即可；</li>
+</ol>
+</li>
+<li><p>子类一般比父类更加强大</p>
+</li>
+<li><p>继承可以继承多个父类</p>
+</li>
+</ul>
+<h3 id="基类和派生类"><a href="#基类和派生类" class="headerlink" title="基类和派生类"></a>基类和派生类</h3><p>F10往下走:不进入函数   F11：往下走(进入函数)</p>
+<p>类之间有一种层次关系，有父亲类、孩子类</p>
+<ul>
+<li>车这个类，当成父类(也叫基类，超类)，派生出卡车、轿车，他们属于孩子类（子类/派生类）</li>
+<li>有父亲类和孩子类，构成了层次的关系</li>
+</ul>
+<p>继承的语法:</p>
+<p>h中:</p>
+<ul>
+<li>class 子类名：继承方式 父类名{ };</li>
+</ul>
+<p>….</p>
+<p>继承图：</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/u=3651103621,3426519438&fm=26&fmt=auto&gp=0.webp"></p>
+<h2 id="调用顺序"><a href="#调用顺序" class="headerlink" title="调用顺序"></a>调用顺序</h2><p>继承的时候构造函数的执行顺序是</p>
+<ol>
+<li>父类的构造函数</li>
+<li>子类的构造函数</li>
+</ol>
+<h2 id="public、protected、private"><a href="#public、protected、private" class="headerlink" title="public、protected、private"></a>public、protected、private</h2><p>三种访问权限：</p>
+<p>public：任意实体所访问</p>
+<p>protected：只允许本类和子类的成员函数访问</p>
+<p>private：只允许本类的成员函数访问</p>
+<h2 id="同名函数遮蔽"><a href="#同名函数遮蔽" class="headerlink" title="同名函数遮蔽"></a>同名函数遮蔽</h2><p>子类中如果有同名函数，那么父类中不管有几个同名函数，那么子类的对象都无法访问父类的了，子类把父类中的同名函数取代了</p>
+<p>办法：</p>
+<ol>
+<li>在子类的成员函数中，用父类::父类的成员函数强行使用(在子类的同名函数中使用)</li>
+<li>使用using关键字<ul>
+<li>using：让父类同名函数在子类中可见</li>
+<li>通过using这个关键字，让父类的同名函数中可见就是直接让它在子类重载</li>
+</ul>
+</li>
+</ol>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的类内初始化、默认构造函数、=default</title>
+    <url>/22517.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">类内初始化、默认构造函数、=default</span></strong></p>
+<h2 id="类相关非成员函数"><a href="#类相关非成员函数" class="headerlink" title="类相关非成员函数"></a>类相关非成员函数</h2><p>有点关系，但关系不大，可以放在类外作为普通函数</p>
+<p>实现：</p>
+<p>h内填：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span>&#123;</span></span><br><span class="line">......</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类外</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time&amp; mytime)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>cpp实现内填:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time &amp;mytime)</span> </span>&#123;  <span class="comment">//用了类的引用，注意不能填Time::</span></span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>cpp使用:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Time <span class="title">mytime</span><span class="params">(<span class="number">13</span>, <span class="number">14</span>, <span class="number">145</span>)</span></span>;</span><br><span class="line">    <span class="built_in">WriteTime</span>(mytime); <span class="comment">//普通函数直接写，不需要使用调用符号.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="类内初始化"><a href="#类内初始化" class="headerlink" title="类内初始化"></a>类内初始化</h3><ul>
+<li>在C++11内我们可以为类内的成员变量提供一个初始值，那么我们在创建对象的时候，这个初始化值就用来初始化该成员变量。</li>
+</ul>
+<p>类内初始化就是直接在h声明的时候直接给值：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Second = <span class="number">4</span>; <span class="comment">//秒</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>构造函数也可以初始化，它会把类内初始化给覆盖。</p>
+<p>但我们一般也使用构造函数进行初始化。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">Hour</span>(<span class="number">12</span>),<span class="built_in">Minute</span>(<span class="number">13</span>)....&#123;</span><br><span class="line">  .....  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="const成员变量的初始化"><a href="#const成员变量的初始化" class="headerlink" title="const成员变量的初始化"></a>const成员变量的初始化</h3><p>const必须给初值</p>
+<ol>
+<li><p>方法1：</p>
+<p>h内：</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel =<span class="number">80</span> ; <span class="comment">//可以</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>方法2：</p>
+<p>h内不给初值：</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel;</span><br></pre></td></tr></table></figure>
+
+<p>cpp实现内：</p>
+<ul>
+<li>每个构造函数都得赋初值，可以用:vale() 赋值</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">testcvel</span>(<span class="number">34</span>)&#123;  <span class="comment">//给值后才真正具有const作用，之前只是声明并未实现const</span></span><br><span class="line">    Hour = <span class="number">12</span>;</span><br><span class="line">    Minute = <span class="number">13</span>;</span><br><span class="line">    Second = <span class="number">59</span>;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了2的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec) :<span class="built_in">testcvel</span>(<span class="number">23</span>)&#123; </span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpmin;</span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;调用了1的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">     <span class="comment">//私有函数的调用，OK的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>const成员变量的初始化，在构造函数的初始化列表中进行，不可以通过赋值语句进行初始化</li>
+</ul>
+<h2 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h2><p>没有参数的构造函数就叫做默认构造函数</p>
+<ul>
+<li>如果没有写构造函数，那么这个类会通过特殊的构造函数来进行初始化，这个特殊的构造函数就叫做“默认构造函数”，也就是无参数的构造函数（它的值会随机）</li>
+<li>原来，在我们类定义中，如果没有构造函数的情况下，编译器会为我们隐式自定义一个默认的构造函数（无参）。称为“合成的默认构造函数”</li>
+</ul>
+<p>“合成的默认函数”：没有给值的会随机给乱值，给值的直接赋值，但它的作用很小</p>
+<ul>
+<li>如果你自己定义了构造函数（不管带几个参数），系统就不会构造合成的默认构造函数了，你初始化使用的时候不带参数就会报错（除非你定义的就是无参数的构造函数）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>() &#123;&#125;; <span class="comment">//在h加入&#123;&#125;可以让编译器自动生成函数体，就不需要在cpp实现里面再写函数实现了Time(int)&#123;&#125;;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="default，-delete；"><a href="#default，-delete；" class="headerlink" title="=default，=delete；"></a>=default，=delete；</h2><ul>
+<li><p>C++11标准引用的</p>
+<p>在h头文件中我们直接写：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">default</span>; <span class="comment">//编译器为这种=default的函数自动生成函数体</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编译器自动帮我们生成函数体</li>
+</ul>
+<p>错误:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span>) =<span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li> 带了参数就不是可默认的特殊函数。</li>
+</ul>
+<ul>
+<li><p>普通函数不能写=default</p>
+</li>
+<li><p>特殊的构造函数才能使用=default</p>
+</li>
+<li><p>带参数的构造函数(普通)不能使用default</p>
+</li>
+</ul>
+<p>当然也可以</p>
+<p>在h中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>();</span><br></pre></td></tr></table></figure>
+
+<p>在cpp中：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() = <span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>在h内：</p>
+<ul>
+<li>=default  可以等价于{}</li>
+<li>让系统帮我们写构造函数的函数体</li>
+</ul>
+<ul>
+<li>=delete（让程序员显式的禁用构造函数）</li>
+</ul>
+<p>h：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">delete</span>; <span class="comment">//禁止系统给你生成不带参数的默认构造函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>若cpp：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time mytime; <span class="comment">//就会报错，因为你不让系统给你生成不带参数的默认构造函数，你不带参数，无对应的构造函数就不能生成对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++的重载运算符与拷贝运算符、析构函数</title>
+    <url>/22225.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">重载运算符与拷贝运算符、析构函数<br>tags:</span></strong></p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="重载运算符"><a href="#重载运算符" class="headerlink" title="重载运算符"></a>重载运算符</h3><p>运算符：=、++、–、==…..</p>
+<p> 两个对象真的不能够进行==比较吗?</p>
+<ul>
+<li>是可以的，我们需要重载”==”运算符</li>
+<li>说白了就是我们要写一个成员函数，这个成员函数名“operator==”,这个成员函数体里面，我们要写一些比较逻辑</li>
+</ul>
+<p>伪代码: </p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(mytime.Hour = mytime2.Hour)&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>重载运算符本质上是一个函数。整个函数的正式名字 ：operator关键字 接 运算符</li>
+<li>既然重载运算符本身也是一个函数，那么会有返回类型和参数列表</li>
+<li>有些运算符，如果我们不字节写，该运算符的重载，系统会自动给我们生成一个。比如赋值运算符</li>
+</ul>
+<h3 id="拷贝赋值运算符"><a href="#拷贝赋值运算符" class="headerlink" title="拷贝赋值运算符"></a>拷贝赋值运算符</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time myTime6;</span><br><span class="line">myTime6 = myTime; </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>=：赋值运算符，这个myTime6 = myTime; 既没调用构造函数，也没调用拷贝构造函数</li>
+<li>我们自己不重载运算符，编译器也会帮我们自己生成一个赋值运算符</li>
+<li>一般就是将非static成员赋值给赋值运算符左侧的对象对应的成员变量之中去</li>
+<li>如果你这个成员是个类的话，还可能调用这个类的拷贝赋值运算符</li>
+</ul>
+<ul>
+<li>为了精准控制Time类的赋值动作，我们往往会重载赋值运算符</li>
+</ul>
+<p>写法:</p>
+<p>h中写：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time&amp; <span class="keyword">operator</span> = (<span class="keyword">const</span> Time&amp;);  <span class="comment">//他是个函数</span></span><br></pre></td></tr></table></figure>
+
+<p>cpp实现写：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time&amp; Time::<span class="keyword">operator</span> = (<span class="keyword">const</span> Time&amp;) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了赋值运算符重载&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//time&amp; 返回return *this； 	`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>析构函数就是和构造函数相反的</p>
+<p>对象在销毁的时候，会自动调用析构函数</p>
+<ul>
+<li>如果我们自己不写析构函数的时候，编译器也会生成一个默认的习惯函数。默认析构函数的函数体为{}，表示默认的析构函数没干什么有意义的事情</li>
+<li>构造函数相当于new，那么析构函数可以当作delete</li>
+<li>析构函数也是类的成员函数，名字是：~类名   构成，没有返回值，无参，不能被重载，一个给定的类，只能有一个析构函数</li>
+</ul>
+<p>函数重载：</p>
+<ul>
+<li>就是系统允许函数名字相同，但是这些同名函数的参数个数或类型不同，</li>
+<li>系统根据参数的类型或长度不同，区别出你想要那个函数。</li>
+</ul>
+<p>h内：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">~<span class="built_in">Time</span>();  <span class="comment">//和拷贝构造函数一样只能有一个</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>cpp实现内：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>()&#123;.....&#125;  <span class="comment">//不能有返回值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>析构函数做了的事情：</p>
+<ol>
+<li><p>先执行函数体函数的函数体</p>
+</li>
+<li><p>再把这个类的对象进行销毁</p>
+<ul>
+<li>成员变量初始化和销毁的时机：</li>
+</ul>
+<ol>
+<li>先定义的先初始化</li>
+<li>先定义的后销毁</li>
+</ol>
+</li>
+</ol>
+<h2 id="用new生成对象"><a href="#用new生成对象" class="headerlink" title="用new生成对象"></a>用new生成对象</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Time* pmytime5 = <span class="keyword">new</span> Time;</span><br><span class="line">Time* pmytime6 = <span class="keyword">new</span> <span class="built_in">Time</span>();</span><br><span class="line"><span class="keyword">delete</span> pmytime5;</span><br><span class="line"><span class="keyword">delete</span> pmytime6;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>自己new在堆里面的，必须自己delete，否则就会造成释放</p>
+<p>你什么时候你new，系统立马调用类的构造函数</p>
+<p>你什么时候delete掉，系统就会立马调用类的析构函数</p>
+<p>一定要new和delete同时使用，防止内存泄漏过多</p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>基础内容学习</tag>
+      </tags>
+  </entry>
 </search>
