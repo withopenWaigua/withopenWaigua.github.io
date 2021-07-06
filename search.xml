@@ -1390,7 +1390,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <ul>
 <li>public，protected，private只允许本类的访问</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void func(const Men&amp; tep) &#123;</span><br><span class="line">    tep.funcmy();  //funcmy()是men类的私有函数，所以调用失败了</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> Men&amp; tep)</span> </span>&#123;</span><br><span class="line">    tep.<span class="built_in">funcmy</span>();  <span class="comment">//funcmy()是men类的私有函数，所以调用失败了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1438,7 +1438,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 </ul>
 <p>写法:</p>
 <p>在A类声明中：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class C; //类声明，要用到这里面的成员函数就不行;错误。</span><br><span class="line">#include &quot;C.h&quot; //确保编译器确定类C里面有callCAF的函数</span><br><span class="line">class A&#123;</span><br><span class="line">friend void C::callCAF(int x; A&amp; A); //该函数时友元成员函数的声明</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>;</span> <span class="comment">//类声明，要用到这里面的成员函数就不行;错误。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;C.h&quot;</span> <span class="comment">//确保编译器确定类C里面有callCAF的函数</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">C::callCAF</span><span class="params">(<span class="keyword">int</span> x; A&amp; A)</span></span>; <span class="comment">//该函数时友元成员函数的声明</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
