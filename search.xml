@@ -2150,12 +2150,12 @@ dtype: int64
 <p>结果：</p>
 <pre><code>0     11    342    22dtype: int32
 </code></pre>
-<h3 id="1-4-通过字典创建"><a href="#1-4-通过字典创建" class="headerlink" title="1.4 通过字典创建"></a>1.4 通过字典创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.Series(a,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])s2</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-通过字典创建"><a href="#1-4-通过字典创建" class="headerlink" title="1.4 通过字典创建"></a>1.4 通过字典创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.Series(a,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>a     1b    34c    22dtype: int32
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;名字&quot;</span>:<span class="string">&quot;马克&quot;</span>,<span class="string">&quot;年龄&quot;</span>:<span class="string">&quot;12&quot;</span>,<span class="string">&quot;父母&quot;</span>:np.nan&#125;s3 = pd.Series(d)s3  <span class="comment"># 字典生成的Seires是无序的</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;名字&quot;</span>:<span class="string">&quot;马克&quot;</span>,<span class="string">&quot;年龄&quot;</span>:<span class="string">&quot;12&quot;</span>,<span class="string">&quot;父母&quot;</span>:np.nan&#125;</span><br><span class="line">s3 = pd.Series(d)s3  <span class="comment"># 字典生成的Seires是无序的</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>名字     马克年龄     12父母    NaNdtype: object
@@ -2260,7 +2260,7 @@ dtype: int64
 <p>结果：</p>
 <pre><code>年龄    False名字    False父母     Truedtype: bool
 </code></pre>
-<h2 id="DataFrame-–表格型数据结构"><a href="#DataFrame-–表格型数据结构" class="headerlink" title="DataFrame –表格型数据结构"></a>DataFrame –表格型数据结构</h2><h3 id="1-创建方式"><a href="#1-创建方式" class="headerlink" title="1.创建方式"></a>1.创建方式</h3><h3 id="字典类型"><a href="#字典类型" class="headerlink" title="字典类型"></a>字典类型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data =&#123;    <span class="string">&#x27;a&#x27;</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],    <span class="string">&#x27;b&#x27;</span> : (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>),    <span class="string">&#x27;c&#x27;</span> : np.arange(<span class="number">7</span>,<span class="number">10</span>)&#125;df = pd.DataFrame(data)df  <span class="comment">#用列</span></span><br></pre></td></tr></table></figure>
+<h2 id="DataFrame-–表格型数据结构"><a href="#DataFrame-–表格型数据结构" class="headerlink" title="DataFrame –表格型数据结构"></a>DataFrame –表格型数据结构</h2><h3 id="1-创建方式"><a href="#1-创建方式" class="headerlink" title="1.创建方式"></a>1.创建方式</h3><h3 id="字典类型"><a href="#字典类型" class="headerlink" title="字典类型"></a>字典类型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data =&#123;<span class="string">&#x27;a&#x27;</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">&#x27;b&#x27;</span> : (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>),<span class="string">&#x27;c&#x27;</span> : np.arange(<span class="number">7</span>,<span class="number">10</span>)&#125;df = pd.DataFrame(data)df  <span class="comment">#用列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2358,7 +2358,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.series组成字典构造</span></span><br><span class="line">dataframedf2 = pd.DataFrame(&#123;    <span class="string">&#x27;a&#x27;</span>:pd.Series(np.arange(<span class="number">3</span>)),    <span class="string">&#x27;b&#x27;</span>: pd.Series(np.arange(<span class="number">3</span>,<span class="number">5</span>))&#125;)df2  </span><br><span class="line"><span class="comment">#理解为多个Series组成DataFrame的每一列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.series组成字典构造</span></span><br><span class="line">dataframedf2 = pd.DataFrame(&#123; <span class="string">&#x27;a&#x27;</span>:pd.Series(np.arange(<span class="number">3</span>)),<span class="string">&#x27;b&#x27;</span>: pd.Series(np.arange(<span class="number">3</span>,<span class="number">5</span>))&#125;)</span><br><span class="line">df2  </span><br><span class="line"><span class="comment">#理解为多个Series组成DataFrame的每一列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2391,7 +2391,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 3.嵌套的字典组成字典构造</span></span><br><span class="line">DataFrame data1 =&#123;    <span class="string">&#x27;a&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">5.6</span>&#125;,    <span class="string">&#x27;b&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">1.6</span>&#125;,    <span class="string">&#x27;c&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.2</span>&#125;&#125;df3 = pd.DataFrame(data1)df3  <span class="comment">#先列后行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 3.嵌套的字典组成字典构造</span></span><br><span class="line">DataFrame data1 =&#123;<span class="string">&#x27;a&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">5.6</span>&#125;,<span class="string">&#x27;b&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">1.6</span>&#125;,<span class="string">&#x27;c&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.2</span>&#125;&#125;df3 = pd.DataFrame(data1)</span><br><span class="line">df3  <span class="comment">#先列后行</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2429,12 +2429,12 @@ dtype: int64
 <p>结果：</p>
 <pre><code>apple     3.6banana    5.6Name: a, dtype: float64
 </code></pre>
-<h3 id="1-2-列表类"><a href="#1-2-列表类" class="headerlink" title="1.2 列表类"></a>1.2 列表类</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)arr</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-列表类"><a href="#1-2-列表类" class="headerlink" title="1.2 列表类"></a>1.2 列表类</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>array([[ 0,  1,  2,  3],       [ 4,  5,  6,  7],       [ 8,  9, 10, 11]])
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.DataFrame(arr,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])df4</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.DataFrame(arr,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line">df4</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2520,7 +2520,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.字典使用构成列表构造</span></span><br><span class="line">dataframel1=[&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">2.3</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">1</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>&#125;]df5 = pd.DataFrame(l1)df5</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.字典使用构成列表构造</span></span><br><span class="line">dataframel1=[&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">2.3</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">1</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>&#125;]</span><br><span class="line">df5 = pd.DataFrame(l1)df5</span><br></pre></td></tr></table></figure>
 
 <table border="1" class="dataframe">
   <thead>
@@ -2554,7 +2554,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l2 = [pd.Series(np.arange(<span class="number">3</span>)),pd.Series(np.arange(<span class="number">5</span>))]df6 = pd.DataFrame(l2)df6</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l2 = [pd.Series(np.arange(<span class="number">3</span>)),pd.Series(np.arange(<span class="number">5</span>))]</span><br><span class="line">df6 = pd.DataFrame(l2)df6</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2638,7 +2638,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.index.name =<span class="string">&#x27;次数&#x27;</span>df3.columns.name =<span class="string">&#x27;次数&#x27;</span>  <span class="comment">#不代表某一列，只是代表意思df3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.index.name =<span class="string">&#x27;次数&#x27;</span></span><br><span class="line">df3.columns.name =<span class="string">&#x27;次数&#x27;</span>  <span class="comment">#不代表某一列，只是代表意思df3</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2697,7 +2697,7 @@ dtype: int64
 <p>结果：</p>
 <pre><code>apple     3.4banana    2.3Name: 0, dtype: float64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5[<span class="string">&#x27;apple&#x27;</span>] = 89df5</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5[<span class="string">&#x27;apple&#x27;</span>] = <span class="number">89</span></span><br><span class="line">df5</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2816,7 +2816,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.loc[<span class="string">&#x27;d&#x27;</span>] =10df5   <span class="comment">#增加d列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.loc[<span class="string">&#x27;d&#x27;</span>] =<span class="number">10</span></span><br><span class="line">df5   <span class="comment">#增加d列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
@@ -2861,7 +2861,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.append([<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">3</span>])df5 <span class="comment">#增加没用</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.append([<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">df5 <span class="comment">#增加没用</span></span><br></pre></td></tr></table></figure>
 
 <pre><code>D:\an\lib\site-packages\pandas\core\indexes\api.py:107: RuntimeWarning: &#39;&lt;&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;, sort order is undefined for incomparable objects  result = result.union(other)
 </code></pre>
@@ -2911,7 +2911,7 @@ dtype: int64
 
 <pre><code>  File &quot;&lt;ipython-input-80-58044b003f0c&gt;&quot;, line 1    df5.append(&#39;e&#39;:[0,9,3,3,],ignore_index=True) #错误的                  ^SyntaxError: invalid syntax
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.DataFrame()data</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.DataFrame()</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.append([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])<span class="comment">#慎用，需要设置前面的列</span></span><br></pre></td></tr></table></figure>
