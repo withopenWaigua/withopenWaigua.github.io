@@ -2104,4 +2104,1176 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>基础内容学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pandas入门</title>
+    <url>/21423.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">pandas</span><span id="green-block">基础语法</span><span id="gray-block">入门</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<h1 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h1><h2 id="1-创建Series对象"><a href="#1-创建Series对象" class="headerlink" title="1.创建Series对象"></a>1.创建Series对象</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">34</span>,<span class="number">22</span>])</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([ 1, 34, 22])
+</code></pre>
+<h3 id="1-1通过列表进行创建"><a href="#1-1通过列表进行创建" class="headerlink" title="1.1通过列表进行创建"></a>1.1通过列表进行创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.Series([<span class="number">23</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">45</span>,<span class="number">5</span>])</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0    23
+1     2
+2     1
+3    45
+4     5
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>pandas.core.series.Series
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 整型的索引序列索引</span></span><br><span class="line">s.index <span class="comment">#有点像字典</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>RangeIndex(start=0, stop=5, step=1)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.values  <span class="comment">#转换成数组对象，因为是基于numpy上创建的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([23,  2,  1, 45,  5], dtype=int64)
+</code></pre>
+<h3 id="1-2通过元组创建"><a href="#1-2通过元组创建" class="headerlink" title="1.2通过元组创建"></a>1.2通过元组创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series((<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)) s1</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0    11    32    4dtype: int64
+</code></pre>
+<h3 id="1-3通过数组对象"><a href="#1-3通过数组对象" class="headerlink" title="1.3通过数组对象"></a>1.3通过数组对象</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.Series(a) <span class="comment">#只有数组对象变成Series才变成int32，其他都是int64s2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0     11    342    22dtype: int32
+</code></pre>
+<h3 id="1-4-通过字典创建"><a href="#1-4-通过字典创建" class="headerlink" title="1.4 通过字典创建"></a>1.4 通过字典创建</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = pd.Series(a,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a     1b    34c    22dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">&quot;名字&quot;</span>:<span class="string">&quot;马克&quot;</span>,<span class="string">&quot;年龄&quot;</span>:<span class="string">&quot;12&quot;</span>,<span class="string">&quot;父母&quot;</span>:np.nan&#125;s3 = pd.Series(d)s3  <span class="comment"># 字典生成的Seires是无序的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>名字     马克年龄     12父母    NaNdtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3 = pd .Series(d,index=[<span class="string">&quot;年龄&quot;</span>,<span class="string">&quot;名字&quot;</span>,<span class="string">&quot;父母&quot;</span>])  <span class="comment"># 固定index顺序，无内容就会用NaN代替s3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄     12名字     马克父母    NaNdtype: object
+</code></pre>
+<h2 id="2-简单的使用"><a href="#2-简单的使用" class="headerlink" title="2.简单的使用"></a>2.简单的使用</h2><h3 id="2-1-索引"><a href="#2-1-索引" class="headerlink" title="2.1 索引"></a>2.1 索引</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3.index</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>Index([&#39;年龄&#39;, &#39;名字&#39;, &#39;父母&#39;], dtype=&#39;object&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄     12名字     马克父母    NaNdtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3[<span class="number">0</span>]  <span class="comment">#索引就是下标，支持负号索引</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&#39;12&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.标签名索引s3[&#x27;年龄&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&#39;12&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3[[<span class="number">1</span>,<span class="number">2</span>]]  <span class="comment">#选取的是第二行和第三行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>名字     马克父母    NaNdtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下标切片s3[0:2]  #末尾取不到</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄    12名字    马克dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#标签切片，可以取到末尾s3[&quot;年龄&quot;:&#x27;父母&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄     12名字     马克父母    NaNdtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 布尔索引s2 &gt;2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a    Falseb     Truec     Truedtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2[s2&gt;<span class="number">2</span>]  </span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>b    34c    22dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 数组广播s2+3  #索引与数据对应关系不会受运算结果影响</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a     4b    37c    25dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.name =<span class="string">&#x27;人数&#x27;</span> <span class="comment">#给这个Series加说明s2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.index.name =<span class="string">&#x27;班级&#x27;</span> <span class="comment">#给这个Series的索引加说明】</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>班级a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.T <span class="comment">#无法使用转置，因为一维数组无法进行行列互换</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>班级a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<h2 id="2-简单函数"><a href="#2-简单函数" class="headerlink" title="2.简单函数"></a>2.简单函数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>班级a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.head() <span class="comment">#不加就默认前5行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>班级a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.tail() <span class="comment">#不加就默认后5行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>班级a     1b    34c    22Name: 人数, dtype: int32
+</code></pre>
+<h3 id="1-检测缺少值"><a href="#1-检测缺少值" class="headerlink" title="1.检测缺少值"></a>1.检测缺少值</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3.isnull() <span class="comment"># 找缺失值</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄    False名字    False父母     Truedtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3.notnull() <span class="comment"># 找不缺失值</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄     True名字     True父母    Falsedtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">~s3.notnull()  <span class="comment">#取反也能用</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>年龄    False名字    False父母     Truedtype: bool
+</code></pre>
+<h2 id="DataFrame-–表格型数据结构"><a href="#DataFrame-–表格型数据结构" class="headerlink" title="DataFrame –表格型数据结构"></a>DataFrame –表格型数据结构</h2><h3 id="1-创建方式"><a href="#1-创建方式" class="headerlink" title="1.创建方式"></a>1.创建方式</h3><h3 id="字典类型"><a href="#字典类型" class="headerlink" title="字典类型"></a>字典类型</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data =&#123;    <span class="string">&#x27;a&#x27;</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],    <span class="string">&#x27;b&#x27;</span> : (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>),    <span class="string">&#x27;c&#x27;</span> : np.arange(<span class="number">7</span>,<span class="number">10</span>)&#125;df = pd.DataFrame(data)df  <span class="comment">#用列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>4</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>6</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>(df)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>pandas.core.frame.DataFrame
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#index 属性 行索引df.index</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>RangeIndex(start=0, stop=3, step=1)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.columns</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>Index([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], dtype=&#39;object&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.values</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([[1, 4, 7],       [2, 5, 8],       [3, 6, 9]], dtype=int64)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.DataFrame(data,index=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],columns=[<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;a&#x27;</span>])  <span class="comment">#只能重命名行，改列名只能改变顺序，不能重命名</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>b</th>
+      <th>c</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>4</td>
+      <td>7</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>5</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>6</td>
+      <td>9</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.series组成字典构造dataframedf2 = pd.DataFrame(&#123;    &#x27;a&#x27;:pd.Series(np.arange(3)),    &#x27;b&#x27;: pd.Series(np.arange(3,5))&#125;)df2  #理解为多个Series组成DataFrame的每一列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 3.嵌套的字典组成字典构造</span></span><br><span class="line">DataFrame data1 =&#123;    <span class="string">&#x27;a&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">5.6</span>&#125;,    <span class="string">&#x27;b&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.6</span>,<span class="string">&quot;banana&quot;</span>:<span class="number">1.6</span>&#125;,    <span class="string">&#x27;c&#x27;</span>:&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2.2</span>&#125;&#125;df3 = pd.DataFrame(data1)df3  <span class="comment">#先列后行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>apple</th>
+      <td>3.6</td>
+      <td>2.6</td>
+      <td>2.2</td>
+    </tr>
+    <tr>
+      <th>banana</th>
+      <td>5.6</td>
+      <td>1.6</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3[<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>apple     3.6banana    5.6Name: a, dtype: float64
+</code></pre>
+<h3 id="1-2-列表类"><a href="#1-2-列表类" class="headerlink" title="1.2 列表类"></a>1.2 列表类</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)arr</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([[ 0,  1,  2,  3],       [ 4,  5,  6,  7],       [ 8,  9, 10, 11]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.DataFrame(arr,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])df4</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.DataFrame(arr,index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])<span class="comment">#不能增加列了，因为数组已经固定形状了df4</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.字典使用构成列表构造</span></span><br><span class="line">dataframel1=[&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">2.3</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;banana&#x27;</span>:<span class="number">1</span>&#125;,&#123;<span class="string">&#x27;apple&#x27;</span>:<span class="number">3.4</span>&#125;]df5 = pd.DataFrame(l1)df5</span><br></pre></td></tr></table></figure>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.4</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.4</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l2 = [pd.Series(np.arange(<span class="number">3</span>)),pd.Series(np.arange(<span class="number">5</span>))]df6 = pd.DataFrame(l2)df6</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df6.T  <span class="comment">#表能行列互换，而Series不行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.index.name =<span class="string">&#x27;次数&#x27;</span>df3.columns.name =<span class="string">&#x27;次数&#x27;</span>  <span class="comment">#不代表某一列，只是代表意思df3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>次数</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+    <tr>
+      <th>次数</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>apple</th>
+      <td>3.6</td>
+      <td>2.6</td>
+      <td>2.2</td>
+    </tr>
+    <tr>
+      <th>banana</th>
+      <td>5.6</td>
+      <td>1.6</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0    11    22    3Name: a, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3[<span class="string">&#x27;a&#x27;</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>3.6
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.loc[<span class="number">0</span>] <span class="comment">#使用的是括号，loc标签索引,是先行后列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>apple     3.4banana    2.3Name: 0, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.iloc[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>apple     3.4banana    2.3Name: 0, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5[<span class="string">&#x27;apple&#x27;</span>] = 89df5</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>89</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>89</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>89</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5[<span class="string">&#x27;apple&#x27;</span>] = [<span class="number">32</span>,<span class="number">4</span>,<span class="number">1</span>]  <span class="comment">#用这种方式改比较好df5</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df6 =df5[<span class="string">&#x27;apple&#x27;</span>][<span class="number">0</span>] =<span class="number">2</span> <span class="comment">#对原数组没有改变，所以有警告df6结果：</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\ipykernel_launcher.py:1: SettingWithCopyWarning: A value is trying to be set on a copy of a slice from a DataFrameSee the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+
+
+
+
+
+2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#增</span></span><br><span class="line">df5[<span class="string">&#x27;a&#x27;</span>] =<span class="number">9</span> <span class="comment">#增加a列df5</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>2.3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.loc[<span class="string">&#x27;d&#x27;</span>] =10df5   <span class="comment">#增加d列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>2.3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>10</td>
+      <td>10.0</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.append([<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">3</span>])df5 <span class="comment">#增加没用</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\pandas\core\indexes\api.py:107: RuntimeWarning: &#39;&lt;&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;, sort order is undefined for incomparable objects  result = result.union(other)
+</code></pre>
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>2.3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1.0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>NaN</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>10</td>
+      <td>10.0</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df5.append(<span class="string">&#x27;e&#x27;</span>:[<span class="number">0</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">3</span>,],ignore_index=<span class="literal">True</span>) <span class="comment">#错误的df5 #增加没用  </span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>  File &quot;&lt;ipython-input-80-58044b003f0c&gt;&quot;, line 1    df5.append(&#39;e&#39;:[0,9,3,3,],ignore_index=True) #错误的                  ^SyntaxError: invalid syntax
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.DataFrame()data</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.append([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])<span class="comment">#慎用，需要设置前面的列</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.append([<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> df3[<span class="string">&#x27;a&#x27;</span>]  <span class="comment">#删除某列df3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>次数</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+    <tr>
+      <th>次数</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>apple</th>
+      <td>2.6</td>
+      <td>2.2</td>
+    </tr>
+    <tr>
+      <th>banana</th>
+      <td>1.6</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.drop(<span class="string">&#x27;b&#x27;</span>,axis=<span class="number">1</span>,inplace=<span class="literal">True</span>) <span class="comment">#axis代表轴，1为列，0为行 inplace默认为farse 不修改原数组，需要变量去接受</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.loc[<span class="string">&#x27;banana&#x27;</span>:<span class="string">&#x27;apple&#x27;</span>:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>次数</th>
+      <th>c</th>
+    </tr>
+    <tr>
+      <th>次数</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>banana</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>apple</th>
+      <td>2.2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#iloc 必须下标  loc必须为行名</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4.append(df5)</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\pandas\core\indexes\range.py:465: RuntimeWarning: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;str&#39;, sort order is undefined for incomparable objects  return self._int64index.union(other)
+</code></pre>
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>11.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2.3</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.concat([df4,df5])</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\pandas\core\indexes\range.py:465: RuntimeWarning: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;str&#39;, sort order is undefined for incomparable objects
+  return self._int64index.union(other)
+</code></pre>
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>apple</th>
+      <th>banana</th>
+      <th>a</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>11.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>2.3</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
 </search>
