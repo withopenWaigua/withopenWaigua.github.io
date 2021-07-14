@@ -2190,17 +2190,17 @@ dtype: int64
 <p>结果：</p>
 <pre><code>名字     马克父母    NaNdtype: object
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下标切片s3[0:2]  #末尾取不到</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下标切片</span></span><br><span class="line">s3[<span class="number">0</span>:<span class="number">2</span>]  <span class="comment">#末尾取不到</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>年龄    12名字    马克dtype: object
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#标签切片，可以取到末尾s3[&quot;年龄&quot;:&#x27;父母&#x27;]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#标签切片，可以取到末尾</span></span><br><span class="line">s3[<span class="string">&quot;年龄&quot;</span>:<span class="string">&#x27;父母&#x27;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>年龄     12名字     马克父母    NaNdtype: object
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 布尔索引s2 &gt;2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 布尔索引</span></span><br><span class="line">s2 &gt;<span class="number">2</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>a    Falseb     Truec     Truedtype: bool
@@ -2210,7 +2210,7 @@ dtype: int64
 <p>结果：</p>
 <pre><code>b    34c    22dtype: int32
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 数组广播s2+3  #索引与数据对应关系不会受运算结果影响</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 数组广播</span></span><br><span class="line">s2+<span class="number">3</span>  <span class="comment">#索引与数据对应关系不会受运算结果影响</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <pre><code>a     4b    37c    25dtype: int32
@@ -2358,7 +2358,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.series组成字典构造dataframedf2 = pd.DataFrame(&#123;    &#x27;a&#x27;:pd.Series(np.arange(3)),    &#x27;b&#x27;: pd.Series(np.arange(3,5))&#125;)df2  #理解为多个Series组成DataFrame的每一列</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.series组成字典构造</span></span><br><span class="line">dataframedf2 = pd.DataFrame(&#123;    <span class="string">&#x27;a&#x27;</span>:pd.Series(np.arange(<span class="number">3</span>)),    <span class="string">&#x27;b&#x27;</span>: pd.Series(np.arange(<span class="number">3</span>,<span class="number">5</span>))&#125;)df2  </span><br><span class="line"><span class="comment">#理解为多个Series组成DataFrame的每一列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
 <table border="1" class="dataframe">
