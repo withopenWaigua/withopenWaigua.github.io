@@ -2107,7 +2107,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
   <entry>
     <title>pandas入门</title>
     <url>/21423.html</url>
-    <content><![CDATA[<p><strong><span id="yellow-block">pandas</span><span id="green-block">基础语法</span><span id="gray-block">入门</span></strong></p>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
 
 <h1 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h1><h2 id="1-创建Series对象"><a href="#1-创建Series对象" class="headerlink" title="1.创建Series对象"></a>1.创建Series对象</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">34</span>,<span class="number">22</span>])</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
