@@ -3831,11 +3831,10 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
-        <category>语法</category>
+        <category>Pandas</category>
       </categories>
       <tags>
         <tag>数据分析</tag>
@@ -4657,7 +4656,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 ]]></content>
       <categories>
         <category>数据分析</category>
-        <category>语法</category>
+        <category>Pandas</category>
       </categories>
       <tags>
         <tag>数据分析</tag>
@@ -5869,11 +5868,10 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
-        <category>语法</category>
+        <category>Pandas</category>
       </categories>
       <tags>
         <tag>数据分析</tag>
