@@ -3916,7 +3916,13 @@ dtype: int64
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =9s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4f    9dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+f    9
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(&#123;<span class="string">&quot;g&quot;</span> : <span class="number">999</span>&#125;)</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
