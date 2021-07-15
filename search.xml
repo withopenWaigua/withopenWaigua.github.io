@@ -4061,7 +4061,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列pd1.insert(1,&#x27;E&#x27;,0)  #第一个参数插入的索引，第二个是列名，第三个是值pd1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列</span></span><br><span class="line">pd1.insert(<span class="number">1</span>,<span class="string">&#x27;E&#x27;</span>,<span class="number">0</span>)  <span class="comment">#第一个参数插入的索引，第二个是列名，第三个是值pd1</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4112,7 +4112,7 @@ dtype: int64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行pd1.loc[&#x27;d&#x27;] = [2,3,2,4,1,2]  #数的个数必须对应pd1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行</span></span><br><span class="line">pd1.loc[<span class="string">&#x27;d&#x27;</span>] = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>]  <span class="comment">#数的个数必须对应pd1</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4377,7 +4377,7 @@ dtype: int64
 <p>结果:</p>
 <pre><code>0
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>a    0b    3c    6d    2Name: A, dtype: int64
