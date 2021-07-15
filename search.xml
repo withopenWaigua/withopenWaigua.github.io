@@ -3319,12 +3319,26 @@ dtype: float64
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.add(s2)</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0.0b    NaNc    3.0d    NaNe    NaNf    NaNg    NaNdtype: float64
+<pre><code>a    0.0
+b    NaN
+c    3.0
+d    NaN
+e    NaN
+f    NaN
+g    NaN
+dtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.add(s2,fill_value=<span class="number">0</span>)  <span class="comment">#把默认的nan改为0</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0.0b    1.0c    3.0d    3.0e    2.0f    3.0g    4.0dtype: float64
+<pre><code>a    0.0
+b    1.0
+c    3.0
+d    3.0
+e    2.0
+f    3.0
+g    4.0
+dtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.DataFrame</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABC&#x27;</span>))</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;f&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABD&#x27;</span>))</span><br></pre></td></tr></table></figure>
 
@@ -3373,7 +3387,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -3407,7 +3420,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -3469,7 +3481,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.add(df2,fill_value=<span class="number">0</span>) <span class="comment">#把nan改为0，但如果两个表都为nan那么结果就只能为nan</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -3526,7 +3537,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>/df1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -3566,7 +3576,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -3616,7 +3625,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.div(<span class="number">1</span>)  <span class="comment">#表示df1除以1</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -3656,7 +3664,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -3705,16 +3712,22 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3 = df1.iloc[<span class="number">0</span>]s3</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3 = df1.iloc[<span class="number">0</span>]</span><br><span class="line">s3</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>A    0B    1C    2Name: a, dtype: int32
+<pre><code>A    0
+B    1
+C    2
+Name: a, dtype: int32
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s4 = df1[<span class="string">&#x27;A&#x27;</span>]s4</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s4 = df1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">s4</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    3c    6d    9Name: A, dtype: int32
+<pre><code>a    0
+b    3
+c    6
+d    9
+Name: A, dtype: int32
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 - s3  <span class="comment">#数组的广播，表示DataFrame的每一行都减去Series</span></span><br></pre></td></tr></table></figure>
 
@@ -3755,7 +3768,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -3802,10 +3814,6 @@ dtype: float64
 </table>
 
 
-
-
-
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -3823,6 +3831,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
+
 ]]></content>
       <categories>
         <category>数据分析</category>
@@ -3899,31 +3908,56 @@ dtype: int64
 
 
 
-
 <h1 id="索引基本操作"><a href="#索引基本操作" class="headerlink" title="索引基本操作"></a>索引基本操作</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加s[&#x27;f&#x27;] =9s</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =<span class="number">9</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4f    9dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+f    9
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(&#123;<span class="string">&quot;g&quot;</span> : <span class="number">999</span>&#125;)</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>g    999dtype: int64
+<pre><code>g    999
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.append(s1)</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a      0b      1c      2d      3e      4f      9g    999dtype: int64
+<pre><code>a      0
+b      1
+c      2
+d      3
+e      4
+f      9
+g    999
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s + s1  <span class="comment">#不能组合起来</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a   NaNb   NaNc   NaNd   NaNe   NaNf   NaNg   NaNdtype: float64
+<pre><code>a   NaN
+b   NaN
+c   NaN
+d   NaN
+e   NaN
+f   NaN
+g   NaN
+dtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -3958,7 +3992,6 @@ dtype: int64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -4001,7 +4034,6 @@ dtype: int64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -4051,8 +4083,7 @@ dtype: int64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列pd1.insert(1,&#x27;E&#x27;,0)  #第一个参数插入的索引，第二个是列名，第三个是值pd1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列</span></span><br><span class="line">pd1.insert(<span class="number">1</span>,<span class="string">&#x27;E&#x27;</span>,<span class="number">0</span>)  <span class="comment">#第一个参数插入的索引，第二个是列名，第三个是值</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4102,8 +4133,7 @@ dtype: int64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行pd1.loc[&#x27;d&#x27;] = [2,3,2,4,1,2]  #数的个数必须对应pd1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行</span></span><br><span class="line">pd1.loc[<span class="string">&#x27;d&#x27;</span>] = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>]  <span class="comment">#数的个数必须对应</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4160,8 +4190,7 @@ dtype: int64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.append(&#123;<span class="string">&#x27;A&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;E&#x27;</span>:<span class="number">2</span>&#125;,ignore_index=<span class="literal">True</span>) <span class="comment">#原本的就没了，重新重排成1-npd2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.append(&#123;<span class="string">&#x27;A&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;E&#x27;</span>:<span class="number">2</span>&#125;,ignore_index=<span class="literal">True</span>) <span class="comment">#原本的就没了，重新重排成1-n</span></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4228,8 +4257,7 @@ dtype: int64
 
 
 
-
-<h2 id="2删除"><a href="#2删除" class="headerlink" title="2删除"></a>2删除</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> s[<span class="string">&#x27;f&#x27;</span>] <span class="comment">#只能删一次</span></span><br></pre></td></tr></table></figure>
+<h2 id="2删除"><a href="#2删除" class="headerlink" title="2删除"></a>2删除</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> s[<span class="string">&#x27;f&#x27;</span>] <span class="comment">#只能删一次</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -4282,7 +4310,6 @@ dtype: int64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>) <span class="comment">#列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -4322,7 +4349,6 @@ dtype: int64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],axis=<span class="number">0</span>) <span class="comment">#行</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -4357,21 +4383,29 @@ dtype: int64
 
 
 
-
 <h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s[<span class="string">&#x27;a&#x27;</span>] </span><br><span class="line">s.a</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>0
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    3c    6d    2Name: A, dtype: int64
+<pre><code>a    0
+b    3
+c    6
+d    2
+Name: A, dtype: int64
 </code></pre>
 <h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.A = <span class="number">99</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -4421,18 +4455,29 @@ dtype: int64
 
 
 
-
 <h2 id="重新索引"><a href="#重新索引" class="headerlink" title="重新索引"></a>重新索引</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.reindex([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])  <span class="comment">#重新排列索引顺序，没出现的索引默认赋值为nans2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.reindex([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])  <span class="comment">#重新排列索引顺序，没出现的索引默认赋值为nan</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0.0c    2.0b    1.0d    3.0e    4.0f    NaNg    NaNdtype: float64
+<pre><code>a    0.0
+c    2.0
+b    1.0
+d    3.0
+e    4.0
+f    NaN
+g    NaN
+dtype: float64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.reindex([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])  <span class="comment">#排行pd2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.reindex([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])  <span class="comment">#排行</span></span><br><span class="line"></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4481,8 +4526,7 @@ dtype: int64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd3 = pd1.reindex(columns=[<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])pd3 = pd1.reindex([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>)  <span class="comment">#排列pd3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd3 = pd1.reindex(columns=[<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])</span><br><span class="line">pd3 = pd1.reindex([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>)  <span class="comment">#排列</span></span><br><span class="line">pd3</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4530,8 +4574,7 @@ dtype: int64
 
 
 
-
-<h2 id="重命名rename"><a href="#重命名rename" class="headerlink" title="重命名rename"></a>重命名rename</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(columns=&#123;<span class="string">&#x27;A&#x27;</span>:<span class="string">&#x27;A1&#x27;</span>,<span class="string">&#x27;B&#x27;</span>:<span class="string">&#x27;B1&#x27;</span>,<span class="string">&#x27;C&#x27;</span>:<span class="string">&#x27;C1&#x27;</span>,<span class="string">&#x27;E&#x27;</span>:<span class="string">&#x27;D1&#x27;</span>&#125;) <span class="comment">#改列名 用字典修改，区分大小写pd4</span></span><br></pre></td></tr></table></figure>
+<h2 id="重命名rename"><a href="#重命名rename" class="headerlink" title="重命名rename"></a>重命名rename</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(columns=&#123;<span class="string">&#x27;A&#x27;</span>:<span class="string">&#x27;A1&#x27;</span>,<span class="string">&#x27;B&#x27;</span>:<span class="string">&#x27;B1&#x27;</span>,<span class="string">&#x27;C&#x27;</span>:<span class="string">&#x27;C1&#x27;</span>,<span class="string">&#x27;E&#x27;</span>:<span class="string">&#x27;D1&#x27;</span>&#125;) <span class="comment">#改列名 用字典修改，区分大小写</span></span><br><span class="line">pd4</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4580,8 +4623,7 @@ dtype: int64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;a1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;d&#x27;</span>:<span class="string">&#x27;d1&#x27;</span>&#125;,axis=<span class="number">0</span>) <span class="comment">#改行名pd4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;a1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;d&#x27;</span>:<span class="string">&#x27;d1&#x27;</span>&#125;,axis=<span class="number">0</span>) <span class="comment">#改行名</span></span><br><span class="line">pd4</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4627,7 +4669,6 @@ dtype: int64
 </table>
 
 
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -4645,6 +4686,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
+
 ]]></content>
       <categories>
         <category>数据分析</category>
@@ -4717,7 +4759,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.<span class="built_in">abs</span>(df)</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -4769,7 +4810,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -4850,18 +4890,26 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()df.apply(f)  <span class="comment">#默认是行方向上的</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()</span><br><span class="line">df.apply(f)  <span class="comment">#默认是行方向上的</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>0    1.1816251    1.5019032    0.9279683    0.199530dtype: float64
+<pre><code>0    1.181625
+1    1.501903
+2    0.927968
+3    0.199530
+dtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.apply(f,axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>0    0.7682211    1.5019032    1.1816253    0.1424824    0.927968dtype: float64
+<pre><code>0    0.768221
+1    1.501903
+2    1.181625
+3    0.142482
+4    0.927968
+dtype: float64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f2 = <span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f&#x27;</span>%xdf.applymap(f2) <span class="comment">#将函数应用到每个数据上，写出def也可以</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f2 = <span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f&#x27;</span>%x</span><br><span class="line">df.applymap(f2) <span class="comment">#将函数应用到每个数据上，写出def也可以</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4916,26 +4964,41 @@ dtype: float64
 
 
 
-
 <h1 id="3-排序"><a href="#3-排序" class="headerlink" title="3.排序"></a>3.排序</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(np.arange(<span class="number">4</span>),index = <span class="built_in">list</span>(<span class="string">&#x27;dbca&#x27;</span>))</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>d    0b    1c    2a    3dtype: int32
+<pre><code>d    0
+b    1
+c    2
+a    3
+dtype: int32
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_index()  <span class="comment"># 默认升序</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    3b    1c    2d    0dtype: int32
+<pre><code>a    3
+b    1
+c    2
+d    0
+dtype: int32
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_index(ascending=<span class="literal">False</span>)  <span class="comment">#不识别汉字</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>d    0c    2b    1a    3dtype: int32
+<pre><code>d    0
+c    2
+b    1
+a    3
+dtype: int32
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_values()</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>d    0b    1c    2a    3dtype: int32
+<pre><code>d    0
+b    1
+c    2
+a    3
+dtype: int32
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index=<span class="built_in">list</span>(<span class="string">&#x27;bdca&#x27;</span>),columns = <span class="built_in">list</span>(<span class="string">&#x27;BCA&#x27;</span>))</span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -4976,7 +5039,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5026,8 +5088,7 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;C&#x27;</span>] = 0pd1.loc[<span class="string">&#x27;d&#x27;</span>] =0pd1</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;C&#x27;</span>] = <span class="number">0</span></span><br><span class="line">pd1.loc[<span class="string">&#x27;d&#x27;</span>] =<span class="number">0</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
 <table border="1" class="dataframe">
   <thead>
@@ -5065,7 +5126,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5115,7 +5175,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd.DataFrame(&#123;<span class="string">&#x27;a&#x27;</span>:[<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">0</span>],<span class="string">&#x27;b&#x27;</span>:[<span class="number">1</span>,-<span class="number">1</span>,<span class="number">4</span>,<span class="number">8</span>],<span class="string">&#x27;c&#x27;</span>:[<span class="number">0</span>,<span class="number">6</span>,-<span class="number">3</span>,<span class="number">2</span>]&#125;)</span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -5160,8 +5219,7 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by=<span class="string">&#x27;b&#x27;</span>) <span class="comment">#指定某一列进行排序pd2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by=<span class="string">&#x27;b&#x27;</span>) <span class="comment">#指定某一列进行排序</span></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
 
 <p>结果:    </p>
 <table border="1" class="dataframe">
@@ -5200,7 +5258,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5248,8 +5305,7 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by = <span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by = <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -5292,13 +5348,19 @@ dtype: float64
 
 
 
-
 <h1 id="4-唯一值和成员属性"><a href="#4-唯一值和成员属性" class="headerlink" title="4.唯一值和成员属性"></a>4.唯一值和成员属性</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series([<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">6</span>],index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    2a    6c    8c    9c    8c    3c    6dtype: int64
+<pre><code>a    2
+a    6
+c    8
+c    9
+c    8
+c    3
+c    6
+dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = s1.unique()arr</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = s1.unique()</span><br><span class="line">arr</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>array([2, 6, 8, 9, 3], dtype=int64)
@@ -5311,22 +5373,42 @@ dtype: float64
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="string">&#x27;a&#x27;</span>][<span class="number">0</span>:<span class="number">1</span>] <span class="comment">#需要用切片</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    2dtype: int64
+<pre><code>a    2
+dtype: int64
 </code></pre>
 <h2 id="数据个数统计"><a href="#数据个数统计" class="headerlink" title="数据个数统计"></a>数据个数统计</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.value_counts() <span class="comment">#数据统计</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>6    28    23    12    19    1dtype: int64
+<pre><code>6    2
+8    2
+3    1
+2    1
+9    1
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.isin([<span class="number">8</span>]) <span class="comment">#检测这个值在不在</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    Falsea    Falsec     Truec    Falsec     Truec    Falsec    Falsedtype: bool
+<pre><code>a    False
+a    False
+c     True
+c    False
+c     True
+c    False
+c    False
+dtype: bool
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.isin([<span class="number">8</span>,<span class="number">2</span>]) <span class="comment">#检测这两个值在不在</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a     Truea    Falsec     Truec    Falsec     Truec    Falsec    Falsedtype: bool
+<pre><code>a     True
+a    False
+c     True
+c    False
+c     True
+c    False
+c    False
+dtype: bool
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.DataFrame(&#123;<span class="string">&#x27;a&#x27;</span>:[<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">0</span>],<span class="string">&#x27;b&#x27;</span>:[<span class="number">1</span>,-<span class="number">1</span>,<span class="number">4</span>,<span class="number">8</span>],<span class="string">&#x27;c&#x27;</span>:[<span class="number">0</span>,<span class="number">6</span>,-<span class="number">3</span>,<span class="number">2</span>]&#125;)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
 
@@ -5367,7 +5449,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5417,13 +5498,16 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.a.value_counts()  <span class="comment">#a这列数据统计</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>7    13    19    10    1Name: a, dtype: int64
+<pre><code>7    1
+3    1
+9    1
+0    1
+Name: a, dtype: int64
 </code></pre>
-<h1 id="5-处理缺失值"><a href="#5-处理缺失值" class="headerlink" title="5.处理缺失值"></a>5.处理缺失值</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3 = pd.DataFrame([np.random.randn(<span class="number">3</span>), [<span class="number">1.</span>, <span class="number">2.</span>, np.nan],[np.nan, <span class="number">4.</span>, np.nan], [<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>]])</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+<h1 id="5-处理缺失值"><a href="#5-处理缺失值" class="headerlink" title="5.处理缺失值"></a>5.处理缺失值</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3 = pd.DataFrame([np.random.randn(<span class="number">3</span>), [<span class="number">1.</span>, <span class="number">2.</span>, np.nan],</span><br><span class="line">                    [np.nan, <span class="number">4.</span>, np.nan], [<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>]])</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -5462,7 +5546,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5512,11 +5595,13 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.isnull().<span class="built_in">sum</span>() <span class="comment">#加上sum统计缺失值，0列有1个</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>0    11    02    2dtype: int64
+<pre><code>0    1
+1    0
+2    2
+dtype: int64
 </code></pre>
 <h2 id="处理缺失值"><a href="#处理缺失值" class="headerlink" title="处理缺失值"></a>处理缺失值</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1.删除</span></span><br><span class="line">df3.dropna()<span class="comment">#去掉缺失值，哪一行有就删哪一行</span></span><br></pre></td></tr></table></figure>
 
@@ -5545,7 +5630,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5585,8 +5669,7 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.dropna(how=<span class="string">&#x27;all&#x27;</span>) <span class="comment">#要全部为nan才删除 默认为any</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.dropna(how=<span class="string">&#x27;all&#x27;</span>) <span class="comment">#要全部为nan才删除 默认为any</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -5625,7 +5708,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5674,8 +5756,7 @@ dtype: float64
 
 
 
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#填充平均值df3[2][0] = 9df3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#填充平均值</span></span><br><span class="line">df3[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -5714,7 +5795,6 @@ dtype: float64
     </tr>
   </tbody>
 </table>
-
 
 
 
@@ -5764,7 +5844,6 @@ dtype: float64
 
 
 
-
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.fillna(method=<span class="string">&#x27;bfill&#x27;</span>) <span class="comment">#根据下面的数据填充到上面来</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -5806,13 +5885,6 @@ dtype: float64
 </table>
 
 
-
-
-
-
-
-
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -5830,6 +5902,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
+
 ]]></content>
       <categories>
         <category>数据分析</category>
