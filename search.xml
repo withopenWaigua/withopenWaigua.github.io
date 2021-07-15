@@ -3913,7 +3913,7 @@ dtype: int64
 <p>结果:</p>
 <pre><code>a    0b    1c    2d    3e    4dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加s[&#x27;f&#x27;] =9s</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =9s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>a    0b    1c    2d    3e    4f    9dtype: int64
