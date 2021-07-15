@@ -4375,7 +4375,12 @@ dtype: int64
 <h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s[<span class="string">&#x27;a&#x27;</span>] </span><br><span class="line">s.a</span><br></pre></td></tr></table></figure>
 
