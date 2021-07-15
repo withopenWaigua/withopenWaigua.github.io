@@ -3276,4 +3276,2568 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>Pandas</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Pandas对齐运算</title>
+    <url>/21549.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+<h1 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(np.arange(<span class="number">4</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">s2 = pd.Series(np.arange(<span class="number">5</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0
+b    1
+c    2
+d    3
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0
+c    1
+e    2
+f    3
+g    4
+dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 + s2 <span class="comment">#任何数据加上nan都变成nan</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0.0
+b    NaN
+c    3.0
+d    NaN
+e    NaN
+f    NaN
+g    NaN
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.add(s2)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0.0b    NaNc    3.0d    NaNe    NaNf    NaNg    NaNdtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.add(s2,fill_value=<span class="number">0</span>)  <span class="comment">#把默认的nan改为0</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0.0b    1.0c    3.0d    3.0e    2.0f    3.0g    4.0dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.DataFrame</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABC&#x27;</span>))</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;f&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABD&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>f</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 + df2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>12.0</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>f</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.add(df2,fill_value=<span class="number">0</span>) <span class="comment">#把nan改为0，但如果两个表都为nan那么结果就只能为nan</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>12.0</td>
+      <td>14.0</td>
+      <td>11.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>f</th>
+      <td>6.0</td>
+      <td>7.0</td>
+      <td>NaN</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>/df1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>inf</td>
+      <td>1.000000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.333333</td>
+      <td>0.250000</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>0.166667</td>
+      <td>0.142857</td>
+      <td>0.125000</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0.111111</td>
+      <td>0.100000</td>
+      <td>0.090909</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.rdiv(<span class="number">1</span>)  <span class="comment">#1是分子 df1是分母  r表示反方向</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>inf</td>
+      <td>1.000000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0.333333</td>
+      <td>0.250000</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>0.166667</td>
+      <td>0.142857</td>
+      <td>0.125000</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0.111111</td>
+      <td>0.100000</td>
+      <td>0.090909</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.div(<span class="number">1</span>)  <span class="comment">#表示df1除以1</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h1 id="混合运算符"><a href="#混合运算符" class="headerlink" title="混合运算符"></a>混合运算符</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s3 = df1.iloc[<span class="number">0</span>]s3</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>A    0B    1C    2Name: a, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s4 = df1[<span class="string">&#x27;A&#x27;</span>]s4</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    3c    6d    9Name: A, dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 - s3  <span class="comment">#数组的广播，表示DataFrame的每一行都减去Series</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1.sub(s4,axis=<span class="number">0</span>)  <span class="comment">#改为从左往右减</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas索引操作</title>
+    <url>/21554.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.Series(<span class="built_in">range</span>(<span class="number">5</span>),index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>])</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">type</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>pandas.core.series.Series
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s.index[<span class="number">0</span>] =<span class="string">&#x27;A&#x27;</span> <span class="comment">#报错，不可修改</span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>TypeError: Index does not support mutable operations
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1 = pd.DataFrame(np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],columns = [<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(pd1.index))</span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.indexes.base.Index&#39;&gt;
+</code></pre>
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h1 id="索引基本操作"><a href="#索引基本操作" class="headerlink" title="索引基本操作"></a>索引基本操作</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加s[&#x27;f&#x27;] =9s</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    1c    2d    3e    4f    9dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(&#123;<span class="string">&quot;g&quot;</span> : <span class="number">999</span>&#125;)</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>g    999dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.append(s1)</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a      0b      1c      2d      3e      4f      9g    999dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s + s1  <span class="comment">#不能组合起来</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a   NaNb   NaNc   NaNd   NaNe   NaNf   NaNg   NaNdtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&quot;D&quot;</span>] = <span class="number">999</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>999</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>999</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>999</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="number">2</span>] = [<span class="number">9</span>,<span class="number">11</span> ,<span class="number">12</span>]</span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>999</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>999</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>999</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列pd1.insert(1,&#x27;E&#x27;,0)  #第一个参数插入的索引，第二个是列名，第三个是值pd1</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>999</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+      <td>999</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+      <td>999</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行pd1.loc[&#x27;d&#x27;] = [2,3,2,4,1,2]  #数的个数必须对应pd1</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>999</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+      <td>999</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+      <td>999</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.append(&#123;<span class="string">&#x27;A&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;E&#x27;</span>:<span class="number">2</span>&#125;,ignore_index=<span class="literal">True</span>) <span class="comment">#原本的就没了，重新重排成1-npd2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>999.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>999.0</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>999.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10.0</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2 id="2删除"><a href="#2删除" class="headerlink" title="2删除"></a>2删除</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> s[<span class="string">&#x27;f&#x27;</span>] <span class="comment">#只能删一次</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> (pd1[<span class="string">&#x27;D&#x27;</span>],pd1[<span class="number">2</span>])</span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>2</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>) <span class="comment">#列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],axis=<span class="number">0</span>) <span class="comment">#行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s[<span class="string">&#x27;a&#x27;</span>] </span><br><span class="line">s.a</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    3c    6d    2Name: A, dtype: int64
+</code></pre>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.A = <span class="number">99</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>99</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>99</td>
+      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>99</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2 id="重新索引"><a href="#重新索引" class="headerlink" title="重新索引"></a>重新索引</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.reindex([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])  <span class="comment">#重新排列索引顺序，没出现的索引默认赋值为nans2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    0.0c    2.0b    1.0d    3.0e    4.0f    NaNg    NaNdtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.reindex([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])  <span class="comment">#排行pd2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>E</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>b</th>
+      <td>99</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>99</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>99</td>
+      <td>0</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>99</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd3 = pd1.reindex(columns=[<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])pd3 = pd1.reindex([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>)  <span class="comment">#排列pd3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>E</th>
+      <th>B</th>
+      <th>A</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>99</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>4</td>
+      <td>99</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>0</td>
+      <td>7</td>
+      <td>99</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>3</td>
+      <td>2</td>
+      <td>99</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2 id="重命名rename"><a href="#重命名rename" class="headerlink" title="重命名rename"></a>重命名rename</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(columns=&#123;<span class="string">&#x27;A&#x27;</span>:<span class="string">&#x27;A1&#x27;</span>,<span class="string">&#x27;B&#x27;</span>:<span class="string">&#x27;B1&#x27;</span>,<span class="string">&#x27;C&#x27;</span>:<span class="string">&#x27;C1&#x27;</span>,<span class="string">&#x27;E&#x27;</span>:<span class="string">&#x27;D1&#x27;</span>&#125;) <span class="comment">#改列名 用字典修改，区分大小写pd4</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D1</th>
+      <th>B1</th>
+      <th>A1</th>
+      <th>C1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>1</td>
+      <td>99</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>4</td>
+      <td>99</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>0</td>
+      <td>7</td>
+      <td>99</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>3</td>
+      <td>2</td>
+      <td>99</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;a1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;d&#x27;</span>:<span class="string">&#x27;d1&#x27;</span>&#125;,axis=<span class="number">0</span>) <span class="comment">#改行名pd4</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>E</th>
+      <th>B</th>
+      <th>A</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>99</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b1</th>
+      <td>0</td>
+      <td>4</td>
+      <td>99</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c1</th>
+      <td>0</td>
+      <td>7</td>
+      <td>99</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>d1</th>
+      <td>3</td>
+      <td>2</td>
+      <td>99</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas函数应用</title>
+    <url>/21551.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-可以直接使用numpy的函数"><a href="#1-可以直接使用numpy的函数" class="headerlink" title="1.可以直接使用numpy的函数"></a>1.可以直接使用numpy的函数</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">5</span>,<span class="number">4</span>))</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.768221</td>
+      <td>-0.182766</td>
+      <td>-1.159739</td>
+      <td>0.199530</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.287240</td>
+      <td>1.501903</td>
+      <td>-2.696326</td>
+      <td>-0.179408</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.181625</td>
+      <td>-0.813152</td>
+      <td>0.173545</td>
+      <td>-0.767402</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.000738</td>
+      <td>-0.116408</td>
+      <td>-0.774351</td>
+      <td>0.142482</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.686464</td>
+      <td>-0.160113</td>
+      <td>0.927968</td>
+      <td>0.106557</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.<span class="built_in">abs</span>(df)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.768221</td>
+      <td>0.182766</td>
+      <td>1.159739</td>
+      <td>0.199530</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.287240</td>
+      <td>1.501903</td>
+      <td>2.696326</td>
+      <td>0.179408</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.181625</td>
+      <td>0.813152</td>
+      <td>0.173545</td>
+      <td>0.767402</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000738</td>
+      <td>0.116408</td>
+      <td>0.774351</td>
+      <td>0.142482</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.686464</td>
+      <td>0.160113</td>
+      <td>0.927968</td>
+      <td>0.106557</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.<span class="built_in">max</span>(df) <span class="comment">#求每一列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0    1.181625
+1    1.501903
+2    0.927968
+3    0.199530
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.<span class="built_in">max</span>(df,axis=<span class="number">1</span>) <span class="comment"># 求每一行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0    0.768221
+1    1.501903
+2    1.181625
+3    0.142482
+4    0.927968
+dtype: float64
+</code></pre>
+<h1 id="2-apply-和applymap"><a href="#2-apply-和applymap" class="headerlink" title="2. apply 和applymap"></a>2. apply 和applymap</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.768221</td>
+      <td>-0.182766</td>
+      <td>-1.159739</td>
+      <td>0.199530</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.287240</td>
+      <td>1.501903</td>
+      <td>-2.696326</td>
+      <td>-0.179408</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.181625</td>
+      <td>-0.813152</td>
+      <td>0.173545</td>
+      <td>-0.767402</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.000738</td>
+      <td>-0.116408</td>
+      <td>-0.774351</td>
+      <td>0.142482</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.686464</td>
+      <td>-0.160113</td>
+      <td>0.927968</td>
+      <td>0.106557</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x:x.<span class="built_in">max</span>()df.apply(f)  <span class="comment">#默认是行方向上的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0    1.1816251    1.5019032    0.9279683    0.199530dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.apply(f,axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0    0.7682211    1.5019032    1.1816253    0.1424824    0.927968dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f2 = <span class="keyword">lambda</span> x:<span class="string">&#x27;%.2f&#x27;</span>%xdf.applymap(f2) <span class="comment">#将函数应用到每个数据上，写出def也可以</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.77</td>
+      <td>-0.18</td>
+      <td>-1.16</td>
+      <td>0.20</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.29</td>
+      <td>1.50</td>
+      <td>-2.70</td>
+      <td>-0.18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.18</td>
+      <td>-0.81</td>
+      <td>0.17</td>
+      <td>-0.77</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.00</td>
+      <td>-0.12</td>
+      <td>-0.77</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.69</td>
+      <td>-0.16</td>
+      <td>0.93</td>
+      <td>0.11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h1 id="3-排序"><a href="#3-排序" class="headerlink" title="3.排序"></a>3.排序</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(np.arange(<span class="number">4</span>),index = <span class="built_in">list</span>(<span class="string">&#x27;dbca&#x27;</span>))</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>d    0b    1c    2a    3dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_index()  <span class="comment"># 默认升序</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    3b    1c    2d    0dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_index(ascending=<span class="literal">False</span>)  <span class="comment">#不识别汉字</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>d    0c    2b    1a    3dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.sort_values()</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>d    0b    1c    2a    3dtype: int32
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index=<span class="built_in">list</span>(<span class="string">&#x27;bdca&#x27;</span>),columns = <span class="built_in">list</span>(<span class="string">&#x27;BCA&#x27;</span>))</span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.sort_index(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>b</th>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>5</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>8</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>11</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;C&#x27;</span>] = 0pd1.loc[<span class="string">&#x27;d&#x27;</span>] =0pd1</span><br></pre></td></tr></table></figure>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>0</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>9</td>
+      <td>0</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.sort_values(by=[<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>]) <span class="comment">#B相同的时候看A，再看C，多重标准</span></span><br></pre></td></tr></table></figure>
+
+<p> 结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>d</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>6</td>
+      <td>0</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>9</td>
+      <td>0</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd.DataFrame(&#123;<span class="string">&#x27;a&#x27;</span>:[<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">0</span>],<span class="string">&#x27;b&#x27;</span>:[<span class="number">1</span>,-<span class="number">1</span>,<span class="number">4</span>,<span class="number">8</span>],<span class="string">&#x27;c&#x27;</span>:[<span class="number">0</span>,<span class="number">6</span>,-<span class="number">3</span>,<span class="number">2</span>]&#125;)</span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>-1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>4</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by=<span class="string">&#x27;b&#x27;</span>) <span class="comment">#指定某一列进行排序pd2</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:    </p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>-1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>4</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2[<span class="string">&#x27;a&#x27;</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>-1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>4</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2.sort_values(by = <span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>-1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>4</td>
+      <td>-3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h1 id="4-唯一值和成员属性"><a href="#4-唯一值和成员属性" class="headerlink" title="4.唯一值和成员属性"></a>4.唯一值和成员属性</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series([<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">6</span>],index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    2a    6c    8c    9c    8c    3c    6dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = s1.unique()arr</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>array([2, 6, 8, 9, 3], dtype=int64)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.index.is_unique</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>False
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="string">&#x27;a&#x27;</span>][<span class="number">0</span>:<span class="number">1</span>] <span class="comment">#需要用切片</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    2dtype: int64
+</code></pre>
+<h2 id="数据个数统计"><a href="#数据个数统计" class="headerlink" title="数据个数统计"></a>数据个数统计</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.value_counts() <span class="comment">#数据统计</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>6    28    23    12    19    1dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.isin([<span class="number">8</span>]) <span class="comment">#检测这个值在不在</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a    Falsea    Falsec     Truec    Falsec     Truec    Falsec    Falsedtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.isin([<span class="number">8</span>,<span class="number">2</span>]) <span class="comment">#检测这两个值在不在</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>a     Truea    Falsec     Truec    Falsec     Truec    Falsec    Falsedtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.DataFrame(&#123;<span class="string">&#x27;a&#x27;</span>:[<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">0</span>],<span class="string">&#x27;b&#x27;</span>:[<span class="number">1</span>,-<span class="number">1</span>,<span class="number">4</span>,<span class="number">8</span>],<span class="string">&#x27;c&#x27;</span>:[<span class="number">0</span>,<span class="number">6</span>,-<span class="number">3</span>,<span class="number">2</span>]&#125;)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>-1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>4</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.isin([<span class="number">2</span>,<span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.a.value_counts()  <span class="comment">#a这列数据统计</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>7    13    19    10    1Name: a, dtype: int64
+</code></pre>
+<h1 id="5-处理缺失值"><a href="#5-处理缺失值" class="headerlink" title="5.处理缺失值"></a>5.处理缺失值</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3 = pd.DataFrame([np.random.randn(<span class="number">3</span>), [<span class="number">1.</span>, <span class="number">2.</span>, np.nan],[np.nan, <span class="number">4.</span>, np.nan], [<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>]])</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>-1.566819</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>4.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.isnull() <span class="comment">#很难检测</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.isnull().<span class="built_in">sum</span>() <span class="comment">#加上sum统计缺失值，0列有1个</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>0    11    02    2dtype: int64
+</code></pre>
+<h2 id="处理缺失值"><a href="#处理缺失值" class="headerlink" title="处理缺失值"></a>处理缺失值</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1.删除</span></span><br><span class="line">df3.dropna()<span class="comment">#去掉缺失值，哪一行有就删哪一行</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>-1.566819</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.dropna(axis=<span class="number">1</span>) <span class="comment">#那一列有缺失值就删那一列</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.41316</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.00000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.00000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.00000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.dropna(how=<span class="string">&#x27;all&#x27;</span>) <span class="comment">#要全部为nan才删除 默认为any</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>-1.566819</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>4.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2 id="2-填充缺失值"><a href="#2-填充缺失值" class="headerlink" title="2.填充缺失值"></a>2.填充缺失值</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.fillna(<span class="number">0</span>) <span class="comment">#把nan的值填充为0，但有时候求了平均那些就不合理了</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>-1.566819</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000000</td>
+      <td>4.00000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#填充平均值df3[2][0] = 9df3</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>4.00000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.fillna(method=<span class="string">&#x27;ffill&#x27;</span>) <span class="comment">#根据上面的数据填充到下面来</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.000000</td>
+      <td>4.00000</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.fillna(method=<span class="string">&#x27;bfill&#x27;</span>) <span class="comment">#根据下面的数据填充到上面来</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.498577</td>
+      <td>-0.41316</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.000000</td>
+      <td>4.00000</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.000000</td>
+      <td>2.00000</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>语法</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
 </search>
