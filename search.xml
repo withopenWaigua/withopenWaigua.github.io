@@ -3908,56 +3908,31 @@ dtype: int64
 
 
 
+
 <h1 id="索引基本操作"><a href="#索引基本操作" class="headerlink" title="索引基本操作"></a>索引基本操作</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0
-b    1
-c    2
-d    3
-e    4
-dtype: int64
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =<span class="number">9</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加s[&#x27;f&#x27;] =9s</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0
-b    1
-c    2
-d    3
-e    4
-f    9
-dtype: int64
+<pre><code>a    0b    1c    2d    3e    4f    9dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(&#123;<span class="string">&quot;g&quot;</span> : <span class="number">999</span>&#125;)</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>g    999
-dtype: int64
+<pre><code>g    999dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.append(s1)</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a      0
-b      1
-c      2
-d      3
-e      4
-f      9
-g    999
-dtype: int64
+<pre><code>a      0b      1c      2d      3e      4f      9g    999dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s + s1  <span class="comment">#不能组合起来</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a   NaN
-b   NaN
-c   NaN
-d   NaN
-e   NaN
-f   NaN
-g   NaN
-dtype: float64
+<pre><code>a   NaNb   NaNc   NaNd   NaNe   NaNf   NaNg   NaNdtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -3992,6 +3967,7 @@ dtype: float64
     </tr>
   </tbody>
 </table>
+
 
 
 
@@ -4034,6 +4010,7 @@ dtype: float64
     </tr>
   </tbody>
 </table>
+
 
 
 
@@ -4083,7 +4060,8 @@ dtype: float64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列</span></span><br><span class="line">pd1.insert(<span class="number">1</span>,<span class="string">&#x27;E&#x27;</span>,<span class="number">0</span>)  <span class="comment">#第一个参数插入的索引，第二个是列名，第三个是值</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入列pd1.insert(1,&#x27;E&#x27;,0)  #第一个参数插入的索引，第二个是列名，第三个是值pd1</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4133,7 +4111,8 @@ dtype: float64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行</span></span><br><span class="line">pd1.loc[<span class="string">&#x27;d&#x27;</span>] = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>]  <span class="comment">#数的个数必须对应</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#插入行pd1.loc[&#x27;d&#x27;] = [2,3,2,4,1,2]  #数的个数必须对应pd1</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4190,7 +4169,8 @@ dtype: float64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.append(&#123;<span class="string">&#x27;A&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;E&#x27;</span>:<span class="number">2</span>&#125;,ignore_index=<span class="literal">True</span>) <span class="comment">#原本的就没了，重新重排成1-n</span></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.append(&#123;<span class="string">&#x27;A&#x27;</span>:<span class="number">10</span>,<span class="string">&#x27;E&#x27;</span>:<span class="number">2</span>&#125;,ignore_index=<span class="literal">True</span>) <span class="comment">#原本的就没了，重新重排成1-npd2</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4257,7 +4237,8 @@ dtype: float64
 
 
 
-<h2 id="2删除"><a href="#2删除" class="headerlink" title="2删除"></a>2删除</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> s[<span class="string">&#x27;f&#x27;</span>] <span class="comment">#只能删一次</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2删除"><a href="#2删除" class="headerlink" title="2删除"></a>2删除</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">del</span> s[<span class="string">&#x27;f&#x27;</span>] <span class="comment">#只能删一次</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -4310,6 +4291,7 @@ dtype: float64
 
 
 
+
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>) <span class="comment">#列</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -4349,6 +4331,7 @@ dtype: float64
 
 
 
+
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.drop([<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],axis=<span class="number">0</span>) <span class="comment">#行</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -4383,29 +4366,21 @@ dtype: float64
 
 
 
+
 <h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0
-b    1
-c    2
-d    3
-e    4
-dtype: int64
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s[<span class="string">&#x27;a&#x27;</span>] </span><br><span class="line">s.a</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>0
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1[<span class="string">&#x27;A&#x27;</span>]pd1.A  <span class="comment">#查完后就可以修改了</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0
-b    3
-c    6
-d    2
-Name: A, dtype: int64
+<pre><code>a    0b    3c    6d    2Name: A, dtype: int64
 </code></pre>
 <h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1.A = <span class="number">99</span></span><br><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -4455,29 +4430,18 @@ Name: A, dtype: int64
 
 
 
+
 <h2 id="重新索引"><a href="#重新索引" class="headerlink" title="重新索引"></a>重新索引</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0
-b    1
-c    2
-d    3
-e    4
-dtype: int64
+<pre><code>a    0b    1c    2d    3e    4dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.reindex([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])  <span class="comment">#重新排列索引顺序，没出现的索引默认赋值为nan</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.reindex([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])  <span class="comment">#重新排列索引顺序，没出现的索引默认赋值为nans2</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0.0
-c    2.0
-b    1.0
-d    3.0
-e    4.0
-f    NaN
-g    NaN
-dtype: float64
+<pre><code>a    0.0c    2.0b    1.0d    3.0e    4.0f    NaNg    NaNdtype: float64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.reindex([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])  <span class="comment">#排行</span></span><br><span class="line"></span><br><span class="line">pd2</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd2 = pd1.reindex([<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])  <span class="comment">#排行pd2</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4526,7 +4490,8 @@ dtype: float64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd3 = pd1.reindex(columns=[<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])</span><br><span class="line">pd3 = pd1.reindex([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>)  <span class="comment">#排列</span></span><br><span class="line">pd3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd3 = pd1.reindex(columns=[<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>])pd3 = pd1.reindex([<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>],axis=<span class="number">1</span>)  <span class="comment">#排列pd3</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4574,7 +4539,8 @@ dtype: float64
 
 
 
-<h2 id="重命名rename"><a href="#重命名rename" class="headerlink" title="重命名rename"></a>重命名rename</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(columns=&#123;<span class="string">&#x27;A&#x27;</span>:<span class="string">&#x27;A1&#x27;</span>,<span class="string">&#x27;B&#x27;</span>:<span class="string">&#x27;B1&#x27;</span>,<span class="string">&#x27;C&#x27;</span>:<span class="string">&#x27;C1&#x27;</span>,<span class="string">&#x27;E&#x27;</span>:<span class="string">&#x27;D1&#x27;</span>&#125;) <span class="comment">#改列名 用字典修改，区分大小写</span></span><br><span class="line">pd4</span><br></pre></td></tr></table></figure>
+
+<h2 id="重命名rename"><a href="#重命名rename" class="headerlink" title="重命名rename"></a>重命名rename</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(columns=&#123;<span class="string">&#x27;A&#x27;</span>:<span class="string">&#x27;A1&#x27;</span>,<span class="string">&#x27;B&#x27;</span>:<span class="string">&#x27;B1&#x27;</span>,<span class="string">&#x27;C&#x27;</span>:<span class="string">&#x27;C1&#x27;</span>,<span class="string">&#x27;E&#x27;</span>:<span class="string">&#x27;D1&#x27;</span>&#125;) <span class="comment">#改列名 用字典修改，区分大小写pd4</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4623,7 +4589,8 @@ dtype: float64
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;a1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;d&#x27;</span>:<span class="string">&#x27;d1&#x27;</span>&#125;,axis=<span class="number">0</span>) <span class="comment">#改行名</span></span><br><span class="line">pd4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd4 = pd3.rename(&#123;<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;a1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;c&#x27;</span>:<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;d&#x27;</span>:<span class="string">&#x27;d1&#x27;</span>&#125;,axis=<span class="number">0</span>) <span class="comment">#改行名pd4</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <table border="1" class="dataframe">
@@ -4669,6 +4636,7 @@ dtype: float64
 </table>
 
 
+
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -4686,7 +4654,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
