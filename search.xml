@@ -6811,50 +6811,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#index_col = 某一列名称  指定这一列作为行索引对象</span></span><br><span class="line"><span class="comment"># index_col  指定某列作为行索引对象</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;数据\ex2.csv&#x27;</span>,names=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;Message&#x27;</span>],index_col=<span class="string">&#x27;Message&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-      <th>D</th>
-    </tr>
-    <tr>
-      <th>Message</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>hello</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>world</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>python</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 
 
 
