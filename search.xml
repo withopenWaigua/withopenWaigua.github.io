@@ -5903,7 +5903,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
       </tags>
   </entry>
   <entry>
-    <title>Pandas函数应用</title>
+    <title>Pandas统计计算和描述</title>
     <url>/21636.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
@@ -6278,7 +6278,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
@@ -6290,7 +6289,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
       </tags>
   </entry>
   <entry>
-    <title>Pandas函数应用</title>
+    <title>Pandas层级索引</title>
     <url>/21635.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
@@ -6648,7 +6647,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
@@ -6660,7 +6658,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
       </tags>
   </entry>
   <entry>
-    <title>Pandas函数应用</title>
+    <title>数据的存储和读取</title>
     <url>/21637.html</url>
     <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
@@ -7635,7 +7633,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
-
 ]]></content>
       <categories>
         <category>数据分析</category>
