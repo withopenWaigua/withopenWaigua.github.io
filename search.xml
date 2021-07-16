@@ -6860,67 +6860,8 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df2 = pd.read_csv(<span class="string">&#x27;数据/csv_mindex.csv&#x27;</span>,index_col=[<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>],engine=<span class="string">&#x27;python&#x27;</span>) <span class="comment">#同时指定多列作为行索引</span></span><br><span class="line">df2  </span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>value1</th>
-      <th>value2</th>
-    </tr>
-    <tr>
-      <th>key1</th>
-      <th>key2</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="4" valign="top">one</th>
-      <th>a</th>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>5</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th rowspan="4" valign="top">two</th>
-      <th>a</th>
-      <td>9</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>b</th>
-      <td>11</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>c</th>
-      <td>13</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>d</th>
-      <td>15</td>
-      <td>16</td>
-    </tr>
-  </tbody>
-</table>
+
+
 </div>
 
 
@@ -6935,48 +6876,10 @@ Name: a, dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#保存数据到csv文件</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-      <th>D</th>
-    </tr>
-    <tr>
-      <th>Message</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>hello</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>world</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>python</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-    </tr>
-  </tbody>
-</table>
+
+
+
+
 
 
 
