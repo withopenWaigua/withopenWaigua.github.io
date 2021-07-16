@@ -7786,23 +7786,6 @@ Name: a, dtype: int64
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#保存:</span></span><br><span class="line">df5.to_sql(<span class="string">&#x27;frame999&#x27;</span>,engine,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
-<center>
-<a href="" class="wpac-cr">顺便评个分吧！👇</a>
-<div id="wpac-rating"></div>
-<script type="text/javascript">
-wpac_init = window.wpac_init || [];
-wpac_init.push({widget: 'Rating', id: 31073});
-(function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-})();
-</script>
-</center>
 ]]></content>
       <categories>
         <category>数据分析</category>
