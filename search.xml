@@ -6986,45 +6986,10 @@ Name: a, dtype: int64
 
 <h2 id="1-2Excel文件"><a href="#1-2Excel文件" class="headerlink" title="1.2Excel文件"></a>1.2Excel文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.read_excel(<span class="string">&#x27;数据\ex1.xlsx&#x27;</span>)  <span class="comment">#b不用加解释器</span></span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-      <th>c</th>
-      <th>d</th>
-      <th>message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>4</td>
-      <td>hello</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>6</td>
-      <td>7</td>
-      <td>8</td>
-      <td>world</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>python</td>
-    </tr>
-  </tbody>
-</table>
+
+
+
+
 
 
 
@@ -7037,43 +7002,10 @@ Name: a, dtype: int64
 
 <h2 id="1-3TXT文本类型"><a href="#1-3TXT文本类型" class="headerlink" title="1.3TXT文本类型"></a>1.3TXT文本类型</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.read_table(<span class="string">&#x27;数据\ex3.txt&#x27;</span>,sep=<span class="string">&#x27;\s+&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">df4</span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>aaa</th>
-      <td>-0.264438</td>
-      <td>-1.026059</td>
-      <td>-0.619500</td>
-    </tr>
-    <tr>
-      <th>bbb</th>
-      <td>0.927272</td>
-      <td>0.302904</td>
-      <td>-0.032399</td>
-    </tr>
-    <tr>
-      <th>ccc</th>
-      <td>-0.264273</td>
-      <td>-0.386314</td>
-      <td>-0.217601</td>
-    </tr>
-    <tr>
-      <th>ddd</th>
-      <td>-0.871858</td>
-      <td>-0.348382</td>
-      <td>1.100491</td>
-    </tr>
-  </tbody>
-</table>
+
+
+
+
 
 
 
@@ -7106,7 +7038,14 @@ Name: a, dtype: int64
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.read_html(<span class="string">&#x27;https://s.askci.com/stock/a/&#x27;</span>)[<span class="number">3</span>]  <span class="comment">#只要网站上有table数据，不需要requests就能全部读取出来,可以使用[]来选表</span></span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
+
+
+
+
+
+
+
+
 <h1 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化数据连接</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://root:@localhost:3306/db2&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询语句</span></span><br><span class="line">sql = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">select * from class;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">df = pd.read_sql(sql,engine)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
 
 
