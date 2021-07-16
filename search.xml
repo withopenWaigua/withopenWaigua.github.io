@@ -3911,9 +3911,14 @@ dtype: int64
 <h1 id="索引基本操作"><a href="#索引基本操作" class="headerlink" title="索引基本操作"></a>索引基本操作</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a    0b    1c    2d    3e    4dtype: int64
+<pre><code>a    0
+b    1
+c    2
+d    3
+e    4
+dtype: int64
 </code></pre>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =9s</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## 1.增加</span></span><br><span class="line">s[<span class="string">&#x27;f&#x27;</span>] =<span class="number">9</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
 <pre><code>a    0
@@ -3927,7 +3932,8 @@ dtype: int64
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(&#123;<span class="string">&quot;g&quot;</span> : <span class="number">999</span>&#125;)</span><br><span class="line">s1</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>g    999dtype: int64
+<pre><code>g    999
+dtype: int64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s.append(s1)</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
 
@@ -3937,7 +3943,14 @@ dtype: int64
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s + s1  <span class="comment">#不能组合起来</span></span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
-<pre><code>a   NaNb   NaNc   NaNd   NaNe   NaNf   NaNg   NaNdtype: float64
+<pre><code>a   NaN
+b   NaN
+c   NaN
+d   NaN
+e   NaN
+f   NaN
+g   NaN
+dtype: float64
 </code></pre>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd1</span><br></pre></td></tr></table></figure>
 
@@ -5879,6 +5892,1750 @@ wpac_init.push({widget: 'Rating', id: 31073});
 })();
 </script>
 </center>
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas函数应用</title>
+    <url>/21636.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df=pd.DataFrame([[<span class="number">1.4</span>,np.nan],[<span class="number">7.1</span>,-<span class="number">4.5</span>],</span><br><span class="line">                [np.nan,np.nan],[<span class="number">0.75</span>,-<span class="number">1.3</span>]],</span><br><span class="line">                index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],</span><br><span class="line">                columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.40</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>7.10</td>
+      <td>-4.5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0.75</td>
+      <td>-1.3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>a    1.40
+b    2.60
+c    0.00
+d   -0.55
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.idxmax()  <span class="comment">#找最大的行</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>one    b
+two    d
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.cumsum()  <span class="comment">#往下聚合，斐波那契数列，自动忽略缺失值，只对DataFrame对象有用</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.40</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>8.50</td>
+      <td>-4.5</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>9.25</td>
+      <td>-5.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()  <span class="comment">#进行详细的统计</span></span><br><span class="line"><span class="comment">#1. 缺失值情况</span></span><br><span class="line"><span class="comment">#2. 平均值</span></span><br><span class="line"><span class="comment">#3. 最大值和最小值  异常值</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.083333</td>
+      <td>-2.900000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3.493685</td>
+      <td>2.262742</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.750000</td>
+      <td>-4.500000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.075000</td>
+      <td>-3.700000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.400000</td>
+      <td>-2.900000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4.250000</td>
+      <td>-2.100000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.100000</td>
+      <td>-1.300000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.info()  <span class="comment">#表的信息</span></span><br><span class="line"><span class="comment">#1. 缺失值情况</span></span><br><span class="line"><span class="comment">#2. 平均值</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 4 entries, a to d
+Data columns (total 2 columns):
+one    3 non-null float64
+two    2 non-null float64
+dtypes: float64(2)
+memory usage: 256.0+ bytes
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df[<span class="string">&#x27;three&#x27;</span>] = [<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>]</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+      <th>three</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.40</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>7.10</td>
+      <td>-4.5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>0.75</td>
+      <td>-1.3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.describe()  <span class="comment">#因为是字符串类型无法进行加减，眼见不一定为实，所以需要使用info找类型</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.083333</td>
+      <td>-2.900000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3.493685</td>
+      <td>2.262742</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.750000</td>
+      <td>-4.500000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.075000</td>
+      <td>-3.700000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.400000</td>
+      <td>-2.900000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4.250000</td>
+      <td>-2.100000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.100000</td>
+      <td>-1.300000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas函数应用</title>
+    <url>/21635.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = pd.Series(np.random.randn(<span class="number">12</span>),index=[[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]])</span><br><span class="line">s1  <span class="comment">#层级索引，索引对象有两层</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.values</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([ 1.07856561,  0.44885274, -1.24475853,  1.35527405,  0.9851262 ,
+       -1.79409542, -0.32332902, -1.0093075 , -0.14117406, -0.25820478,
+        0.79421376,  1.11484842])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.index</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>MultiIndex(levels=[[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], [0, 1, 2]],
+           labels=[[0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2]])
+</code></pre>
+<h1 id="层级索引"><a href="#层级索引" class="headerlink" title="层级索引"></a>层级索引</h1><ul>
+<li>数据重塑</li>
+<li>分组操作</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>1.3552740496781421
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="string">&#x27;b&#x27;</span>] <span class="comment">#先外层选取</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0    1.355274
+1    0.985126
+2   -1.794095
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="string">&#x27;b&#x27;</span>][<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0.9851261951239859
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;c&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1[:,<span class="number">0</span>] <span class="comment">#选全部0的数据，先外层筛选，再内层筛选</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.loc[:,[<span class="number">0</span>,<span class="number">1</span>]]  <span class="comment"># 选每个的前2个</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a  0    1.078566
+   1    0.448853
+b  0    1.355274
+   1    0.985126
+c  0   -0.323329
+   1   -1.009308
+d  0   -0.258205
+   1    0.794214
+dtype: float64
+</code></pre>
+<h1 id="swaplevel"><a href="#swaplevel" class="headerlink" title="swaplevel"></a>swaplevel</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1  </span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 =s1.swaplevel()  <span class="comment">#交换内外两层索引</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.loc[[<span class="number">0</span>,<span class="number">1</span>]] <span class="comment">#,代表这两个都，:代表到</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+0  b    1.355274
+1  b    0.985126
+0  c   -0.323329
+1  c   -1.009308
+0  d   -0.258205
+1  d    0.794214
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.unstack()  <span class="comment">#将层级索引的Series转换成DataFrame对象</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.078566</td>
+      <td>0.448853</td>
+      <td>-1.244759</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>1.355274</td>
+      <td>0.985126</td>
+      <td>-1.794095</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>-0.323329</td>
+      <td>-1.009308</td>
+      <td>-0.141174</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>-0.258205</td>
+      <td>0.794214</td>
+      <td>1.114848</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.unstack().T.stack()  <span class="comment">#把dataframe对象转换成series</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+   b    1.355274
+   c   -0.323329
+   d   -0.258205
+1  a    0.448853
+   b    0.985126
+   c   -1.009308
+   d    0.794214
+2  a   -1.244759
+   b   -1.794095
+   c   -0.141174
+   d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2.loc[[<span class="number">0</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+0  b    1.355274
+1  b    0.985126
+0  c   -0.323329
+1  c   -1.009308
+0  d   -0.258205
+1  d    0.794214
+dtype: float64
+</code></pre>
+<h1 id="sortlevel"><a href="#sortlevel" class="headerlink" title="sortlevel"></a>sortlevel</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df1 = s2.unstack()</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.078566</td>
+      <td>1.355274</td>
+      <td>-0.323329</td>
+      <td>-0.258205</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.448853</td>
+      <td>0.985126</td>
+      <td>-1.009308</td>
+      <td>0.794214</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.244759</td>
+      <td>-1.794095</td>
+      <td>-0.141174</td>
+      <td>1.114848</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1.swaplevel()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s2 = s1.swaplevel().sortlevel() <span class="comment">#先排外层再排内层</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0  a    1.078566
+   b    1.355274
+   c   -0.323329
+   d   -0.258205
+1  a    0.448853
+   b    0.985126
+   c   -1.009308
+   d    0.794214
+2  a   -1.244759
+   b   -1.794095
+   c   -0.141174
+   d    1.114848
+dtype: float64
+</code></pre>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pandas函数应用</title>
+    <url>/21637.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-文本格式文件"><a href="#1-文本格式文件" class="headerlink" title="1.文本格式文件"></a>1.文本格式文件</h1><h2 id="1-1csv文件"><a href="#1-1csv文件" class="headerlink" title="1.1csv文件"></a>1.1csv文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;数据\ex1.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)  <span class="comment">#记得配置python指定解释器</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>hello</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>world</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+      <td>python</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;数据\ex1.csv&#x27;</span>,header=<span class="literal">None</span>, engine=<span class="string">&#x27;python&#x27;</span>)  <span class="comment">#记得配置python指定解释器 ,sep指定分隔符,header默认指定第一行作为列名称</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+      <td>d</td>
+      <td>message</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>hello</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>world</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+      <td>python</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 指定列名称</span></span><br><span class="line">df3 = pd.read_csv(<span class="string">&#x27;数据\ex2.csv&#x27;</span>,names=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;Message&#x27;</span>],engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>hello</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>world</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+      <td>python</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#index_col = 某一列名称  指定这一列作为行索引对象</span></span><br><span class="line"><span class="comment"># index_col  指定某列作为行索引对象</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;数据\ex2.csv&#x27;</span>,names=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;Message&#x27;</span>],index_col=<span class="string">&#x27;Message&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+    <tr>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>hello</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>world</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>python</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df2 = pd.read_csv(<span class="string">&#x27;数据/csv_mindex.csv&#x27;</span>,index_col=[<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>],engine=<span class="string">&#x27;python&#x27;</span>) <span class="comment">#同时指定多列作为行索引</span></span><br><span class="line">df2  </span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>value1</th>
+      <th>value2</th>
+    </tr>
+    <tr>
+      <th>key1</th>
+      <th>key2</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">one</th>
+      <th>a</th>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">two</th>
+      <th>a</th>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>11</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>13</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>15</td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df2.loc[<span class="string">&#x27;one&#x27;</span>].loc[<span class="string">&#x27;a&#x27;</span>]  <span class="comment">#DataFrame先列后行  用高级索引操作区去处理它</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>value1    1
+value2    2
+Name: a, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#保存数据到csv文件</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+    <tr>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>hello</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>world</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>python</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df.to_csv(<span class="string">&#x27;out.csv&#x27;</span>,index=<span class="literal">False</span>) <span class="comment">#行索引也在里面，所以需要把index改为False不保存行索引，列名称是header也可以改False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2Excel文件"><a href="#1-2Excel文件" class="headerlink" title="1.2Excel文件"></a>1.2Excel文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.read_excel(<span class="string">&#x27;数据\ex1.xlsx&#x27;</span>)  <span class="comment">#b不用加解释器</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>hello</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>world</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+      <td>python</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3 = pd.read_excel(<span class="string">&#x27;数据\ex1.xlsx&#x27;</span>,sheet_name=<span class="number">1</span>)  <span class="comment">#sheet_name改成第二个表</span></span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df3.to_excel(<span class="string">&#x27;ex2.xlsx&#x27;</span>,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3TXT文本类型"><a href="#1-3TXT文本类型" class="headerlink" title="1.3TXT文本类型"></a>1.3TXT文本类型</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4 = pd.read_table(<span class="string">&#x27;数据\ex3.txt&#x27;</span>,sep=<span class="string">&#x27;\s+&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">df4</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>aaa</th>
+      <td>-0.264438</td>
+      <td>-1.026059</td>
+      <td>-0.619500</td>
+    </tr>
+    <tr>
+      <th>bbb</th>
+      <td>0.927272</td>
+      <td>0.302904</td>
+      <td>-0.032399</td>
+    </tr>
+    <tr>
+      <th>ccc</th>
+      <td>-0.264273</td>
+      <td>-0.386314</td>
+      <td>-0.217601</td>
+    </tr>
+    <tr>
+      <th>ddd</th>
+      <td>-0.871858</td>
+      <td>-0.348382</td>
+      <td>1.100491</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df4.to_csv(<span class="string">&#x27;out.txt&#x27;</span>) <span class="comment">#用csv保存txt方法</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-4特大文件读取"><a href="#1-4特大文件读取" class="headerlink" title="1.4特大文件读取"></a>1.4特大文件读取</h2><p>常用编码格式</p>
+<ul>
+<li>gbk</li>
+<li>utf-8</li>
+<li>gb2312</li>
+<li>gb18030</li>
+<li>utf-8-sig</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">agg1 = pd.read_csv(<span class="string">&#x27;数据/agg_match_stats_0.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>,chunksize=<span class="number">5</span>)  <span class="comment"># chunksize=5设置数据块大小，防死机</span></span><br><span class="line">agg1.get_chunk() <span class="comment">#显示代码块</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>game_size</th>
+      <th>match_id</th>
+      <th>match_mode</th>
+      <th>party_size</th>
+      <th>player_assists</th>
+      <th>player_dbno</th>
+      <th>player_dist_ride</th>
+      <th>player_dist_walk</th>
+      <th>player_dmg</th>
+      <th>player_kills</th>
+      <th>player_name</th>
+      <th>player_survive_time</th>
+      <th>team_id</th>
+      <th>team_placement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017-11-26T20:59:40+0000</td>
+      <td>37</td>
+      <td>2U4GBNA0YmnNZYkzjkfgN4ev-hXSrak_BSey_YEG6kIuDG...</td>
+      <td>tpp</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2870.72400</td>
+      <td>1784.847780</td>
+      <td>117</td>
+      <td>1</td>
+      <td>SnuffIes</td>
+      <td>1106.320</td>
+      <td>4</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017-11-26T20:59:40+0000</td>
+      <td>37</td>
+      <td>2U4GBNA0YmnNZYkzjkfgN4ev-hXSrak_BSey_YEG6kIuDG...</td>
+      <td>tpp</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2938.40723</td>
+      <td>1756.079710</td>
+      <td>127</td>
+      <td>1</td>
+      <td>Ozon3r</td>
+      <td>1106.315</td>
+      <td>4</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017-11-26T20:59:40+0000</td>
+      <td>37</td>
+      <td>2U4GBNA0YmnNZYkzjkfgN4ev-hXSrak_BSey_YEG6kIuDG...</td>
+      <td>tpp</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.00000</td>
+      <td>224.157562</td>
+      <td>67</td>
+      <td>0</td>
+      <td>bovize</td>
+      <td>235.558</td>
+      <td>5</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017-11-26T20:59:40+0000</td>
+      <td>37</td>
+      <td>2U4GBNA0YmnNZYkzjkfgN4ev-hXSrak_BSey_YEG6kIuDG...</td>
+      <td>tpp</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.00000</td>
+      <td>92.935150</td>
+      <td>0</td>
+      <td>0</td>
+      <td>sbahn87</td>
+      <td>197.553</td>
+      <td>5</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017-11-26T20:59:40+0000</td>
+      <td>37</td>
+      <td>2U4GBNA0YmnNZYkzjkfgN4ev-hXSrak_BSey_YEG6kIuDG...</td>
+      <td>tpp</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2619.07739</td>
+      <td>2510.447000</td>
+      <td>175</td>
+      <td>2</td>
+      <td>GeminiZZZ</td>
+      <td>1537.495</td>
+      <td>14</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h2 id="其他数据来源格式"><a href="#其他数据来源格式" class="headerlink" title="其他数据来源格式"></a>其他数据来源格式</h2><ul>
+<li>json</li>
+<li>HDF5</li>
+<li>web API</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.read_html(<span class="string">&#x27;https://s.askci.com/stock/a/&#x27;</span>)[<span class="number">3</span>]  <span class="comment">#只要网站上有table数据，不需要requests就能全部读取出来,可以使用[]来选表</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>序号</th>
+      <th>股票代码</th>
+      <th>股票简称</th>
+      <th>公司名称</th>
+      <th>省份</th>
+      <th>城市</th>
+      <th>主营业务收入(202103)</th>
+      <th>净利润(202103)</th>
+      <th>员工人数</th>
+      <th>上市日期</th>
+      <th>招股书</th>
+      <th>公司财报</th>
+      <th>行业分类</th>
+      <th>产品类型</th>
+      <th>主营业务</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>平安银行</td>
+      <td>平安银行股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>--</td>
+      <td>101.32亿</td>
+      <td>36115</td>
+      <td>1991-04-03</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>银行</td>
+      <td>商业银行业务</td>
+      <td>经有关监管机构批准的各项商业银行业务</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2</td>
+      <td>万科A</td>
+      <td>万科企业股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>622.64亿</td>
+      <td>25.07亿</td>
+      <td>140565</td>
+      <td>1991-01-29</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>房地产开发</td>
+      <td>房地产、物业管理、投资咨询</td>
+      <td>房地产开发和物业服务。</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>4</td>
+      <td>国华网安</td>
+      <td>深圳国华网安科技股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>3653.12万</td>
+      <td>429.93万</td>
+      <td>264</td>
+      <td>1991-01-14</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>生物医药</td>
+      <td>移动应用安全服务、移动互联网游戏</td>
+      <td>移动应用安全服务业务。</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>5</td>
+      <td>ST星源</td>
+      <td>深圳世纪星源股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>4816.16万</td>
+      <td>831.65万</td>
+      <td>629</td>
+      <td>1990-12-10</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>环保工程、物业管理</td>
+      <td>酒店经营、物业管理、环保业务</td>
+      <td>绿色低碳城市社区建设相关的服务业务</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>6</td>
+      <td>深振业A</td>
+      <td>深圳市振业(集团)股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>9.18亿</td>
+      <td>2.84亿</td>
+      <td>397</td>
+      <td>1992-04-27</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>房地产开发</td>
+      <td>房地产</td>
+      <td>从事房地产开发与销售。</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>*ST全新</td>
+      <td>深圳市全新好股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>1315.51万</td>
+      <td>-132.39万</td>
+      <td>76</td>
+      <td>1992-04-13</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>物业经营</td>
+      <td>物业管理及停车费、房屋租赁、一次性口罩、纳米胶囊、杀菌纸巾</td>
+      <td>物业管理和房屋租赁业等</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>8</td>
+      <td>神州高铁</td>
+      <td>神州高铁技术股份有限公司</td>
+      <td>北京</td>
+      <td>北京市</td>
+      <td>1.49亿</td>
+      <td>-8726.28万</td>
+      <td>2394</td>
+      <td>1992-05-07</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>轨道交通设备</td>
+      <td>轨道交通</td>
+      <td>专业致力于提供轨道交通运营检修装备与数据、线路运营、维保服务。</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>9</td>
+      <td>中国宝安</td>
+      <td>中国宝安集团股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>37.15亿</td>
+      <td>3.54亿</td>
+      <td>13345</td>
+      <td>1991-06-25</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>综合</td>
+      <td>高新技术产业、生物医药、房地产</td>
+      <td>新能源、新材料及其它高新技术产业、生物医药业、房地产业以及其他行业</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>10</td>
+      <td>美丽生态</td>
+      <td>深圳美丽生态股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>2.28亿</td>
+      <td>777.80万</td>
+      <td>278</td>
+      <td>1995-10-27</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>园林工程</td>
+      <td>燃气销售服务、园林建设、园林设计、苗木销售</td>
+      <td>从事苗木种植、园林绿化工程施工和养护为一体的综合性园林服务。</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>11</td>
+      <td>深物业A</td>
+      <td>深圳市物业发展(集团)股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>8.91亿</td>
+      <td>2.07亿</td>
+      <td>8035</td>
+      <td>1992-03-30</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>房地产开发</td>
+      <td>产城空间开发、物业管理服务、产业生态运营、餐饮业务、工程监理业务</td>
+      <td>从事房地产开发经营，兼营物业管理、房屋租赁、出租车客运、餐饮服务等。</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>12</td>
+      <td>南玻A</td>
+      <td>中国南玻集团股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>30.07亿</td>
+      <td>5.78亿</td>
+      <td>10558</td>
+      <td>1992-02-28</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>玻璃</td>
+      <td>玻璃业务、电子玻璃及显示器件业务、太阳能及其他业务</td>
+      <td>研发、生产制造和销售优质浮法玻璃和工程玻璃、太阳能玻璃和硅材料、光伏电池和组件等可再生能源产...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14</td>
+      <td>沙河股份</td>
+      <td>沙河实业股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>809.13万</td>
+      <td>-938.72万</td>
+      <td>153</td>
+      <td>1992-06-02</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>房地产开发</td>
+      <td>房地产销售</td>
+      <td>从事房地产开发与经营、现代服务型产业用房运营与管理。</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>16</td>
+      <td>深康佳A</td>
+      <td>康佳集团股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>98.22亿</td>
+      <td>1873.52万</td>
+      <td>17216</td>
+      <td>1992-03-27</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>电视机</td>
+      <td>工贸业务、彩电业务、环保业务、白电业务、半导体业务</td>
+      <td>消费类电子业务、工贸业务、环保业务、半导体业务。</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>17</td>
+      <td>深中华A</td>
+      <td>深圳中华自行车(集团)股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>2316.33万</td>
+      <td>-21.15万</td>
+      <td>65</td>
+      <td>1992-03-31</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>自行车</td>
+      <td>自行车及零配件销售、锂电池材料、珠宝黄金</td>
+      <td>自行车及锂电池材料业务、珠宝黄金业务。</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>19</td>
+      <td>深粮控股</td>
+      <td>深圳市深粮控股股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>25.29亿</td>
+      <td>1.40亿</td>
+      <td>1246</td>
+      <td>1992-10-12</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>软饮料</td>
+      <td>食品和饮料及茶加工、粮油贸易及加工、粮油仓储物流及服务</td>
+      <td>批发零售业务、食品加工制造业务、租赁及商务服务业务。</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>20</td>
+      <td>深华发A</td>
+      <td>深圳中恒华发股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>1.91亿</td>
+      <td>556.65万</td>
+      <td>1132</td>
+      <td>1992-04-28</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>电子零部件</td>
+      <td>显示器、注塑件、EPS产品、物业租赁、废料收入、水电费及其他</td>
+      <td>精密注塑件的加工、销售;液晶显示器的加工、销售;轻型包装材料的加工、销售以及物业租赁业务。</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>21</td>
+      <td>深科技</td>
+      <td>深圳长城开发科技股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>38.27亿</td>
+      <td>2.31亿</td>
+      <td>27051</td>
+      <td>1994-02-02</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>PC、服务器及硬件</td>
+      <td>存储半导体业务、自有产品、高端制造</td>
+      <td>计算机硬件、通讯设备等。</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>23</td>
+      <td>深天地A</td>
+      <td>深圳市天地(集团)股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>3.91亿</td>
+      <td>2753.23万</td>
+      <td>984</td>
+      <td>1993-04-29</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>商品混凝土</td>
+      <td>房地产、工业、租赁</td>
+      <td>商品混凝土的生产和销售、房地产的开发及物业管理等。</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>25</td>
+      <td>特力A</td>
+      <td>深圳市特力(集团)股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>1.44亿</td>
+      <td>2155.02万</td>
+      <td>302</td>
+      <td>1993-06-21</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>汽车销售</td>
+      <td>汽车销售、汽车维修及检测、珠宝批发及零售、物业租赁及服务</td>
+      <td>汽车销售、汽车检测、维修及配件销售；资源性资产管理；珠宝服务业务。</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>26</td>
+      <td>飞亚达</td>
+      <td>飞亚达精密科技股份有限公司</td>
+      <td>广东</td>
+      <td>深圳市</td>
+      <td>13.78亿</td>
+      <td>1.18亿</td>
+      <td>4901</td>
+      <td>1993-06-03</td>
+      <td>--</td>
+      <td>NaN</td>
+      <td>珠宝首饰</td>
+      <td>手表品牌业务、手表零售服务业务、精密科技业务、租赁业务</td>
+      <td>主要从事钟表及其零配件的设计、开发、制造、销售和维修业务，包括"飞亚达"表的产品经营和世界名...</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h1 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化数据连接</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://root:@localhost:3306/db2&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询语句</span></span><br><span class="line">sql = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">select * from class;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">df = pd.read_sql(sql,engine)</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  读取</span></span><br><span class="line">conn =pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>,user=<span class="string">&#x27;root&#x27;</span>,passwd=<span class="string">&#x27;&#x27;</span>,db=<span class="string">&#x27;db2&#x27;</span>,port=<span class="number">3306</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">sql_query = <span class="string">&quot;select * from class;&quot;</span></span><br><span class="line">df = pd.read_sql(sql_query,con=conn)</span><br><span class="line"><span class="comment"># conn.close()</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"> <span class="comment">#保存:</span></span><br><span class="line">df5.to_sql(<span class="string">&#x27;frame999&#x27;</span>,engine,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
 ]]></content>
       <categories>
         <category>数据分析</category>
