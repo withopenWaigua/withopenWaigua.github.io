@@ -17118,4 +17118,2389 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>Pandas</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Pandas时间序列</title>
+    <url>/21855.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">时间序列</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#pd.set_option(&#x27;display.max_rows&#x27;,None)  </span></span><br><span class="line"><span class="comment">#显示所有的行</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+<h1 id="Python内置时间模块"><a href="#Python内置时间模块" class="headerlink" title="Python内置时间模块"></a>Python内置时间模块</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1.时间戳  给机器去看懂的</span></span><br><span class="line">time.time()</span><br><span class="line"><span class="comment">#从1970年1月1日 0点0分0秒开始</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>1626600601.5184326
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.结构化时间  操作时间</span></span><br><span class="line">t = time.localtime(time.time())</span><br><span class="line"><span class="comment">#将时间戳变成我们认识的时间</span></span><br><span class="line"><span class="comment">#本地实际</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">time.gmtime(time.time())  <span class="comment">#0时区的时间</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>time.struct_time(tm_year=2021, tm_mon=7, tm_mday=18, tm_hour=9, tm_min=30, tm_sec=1, tm_wday=6, tm_yday=199, tm_isdst=0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t.tm_year,t.tm_mon</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>(2021, 7)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 3.格式化时间字符串</span></span><br><span class="line">time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>,t)</span><br><span class="line"><span class="comment">#得到字符串对象，给人类看懂的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&#39;2021-07-18 17:30:01&#39;
+</code></pre>
+<h1 id="日期和实际的数据类型"><a href="#日期和实际的数据类型" class="headerlink" title="日期和实际的数据类型"></a>日期和实际的数据类型</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">now = datetime.now()</span><br><span class="line">now</span><br><span class="line"><span class="comment">#年月日时分秒，微秒</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 7, 18, 17, 31, 52, 159024)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">now.year</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2021
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">now.year,now.month,now.day</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>(2021, 7, 18)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>) <span class="comment">#转换成datetime对象</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 7, 18, 17, 34)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>)-datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">30</span>,<span class="number">0</span>)  <span class="comment">#将这个对象相减</span></span><br><span class="line">d  <span class="comment">#第一个参数是天数，第二个参数是秒</span></span><br><span class="line"><span class="comment">#timedelta是时间间隔</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.timedelta(0, 240)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line">start = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">start+timedelta(<span class="number">0</span>, <span class="number">240</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 7, 18, 0, 4)
+</code></pre>
+<h1 id="datetime-和字符串相互转换"><a href="#datetime-和字符串相互转换" class="headerlink" title="datetime 和字符串相互转换"></a>datetime 和字符串相互转换</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">stamp = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 7, 18, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span>(stamp)  <span class="comment">#强制转换</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&#39;2021-07-18 00:00:00&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">stamp.strftime(<span class="string">&#x27;%Y-%m-%d %H-%M-%S&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&#39;2021-07-18 00-00-00&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">datetime.strptime(<span class="string">&#x27;10/1/2021&#x27;</span>,<span class="string">&#x27;%m/%d/%Y&#x27;</span>) <span class="comment">#将str转换成datetime对象</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 10, 1, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020&#x27;</span>,<span class="string">&#x27;1/1/2020&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>[&#39;12/12/2020&#39;, &#39;1/1/2020&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">[datetime.strptime(i,<span class="string">&quot;%m/%d/%Y&quot;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> d]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>[datetime.datetime(2020, 12, 12, 0, 0), datetime.datetime(2020, 1, 1, 0, 0)]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parse(<span class="string">&#x27;12/12/2021&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2021, 12, 12, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020-12-12&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2020, 12, 12, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020.12.12&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2020, 12, 12, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020 12 12&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>datetime.datetime(2020, 12, 12, 0, 0)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020 20:00:00&#x27;</span>,<span class="string">&#x27;1/1/2020 12:00:00&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>[&#39;12/12/2020 20:00:00&#39;, &#39;1/1/2020 12:00:00&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.to_datetime(d)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">idx = pd.to_datetime(d+[<span class="literal">None</span>])</span><br><span class="line">idx <span class="comment">#空的话就变成了NaT</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;, &#39;NaT&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.isnull(idx)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>array([False, False,  True])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">idx.dropna()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre>
+<h1 id="时间序列"><a href="#时间序列" class="headerlink" title="时间序列"></a>时间序列</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dates = [datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">13</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">14</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">15</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">16</span>)]</span><br><span class="line">dates</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>[datetime.datetime(2020, 12, 12, 0, 0),
+ datetime.datetime(2020, 12, 13, 0, 0),
+ datetime.datetime(2020, 12, 14, 0, 0),
+ datetime.datetime(2020, 12, 15, 0, 0),
+ datetime.datetime(2020, 12, 16, 0, 0)]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">5</span>),index=dates)  <span class="comment">#把行索引替换成datetime</span></span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-12-12    0.379713
+2020-12-13   -0.649630
+2020-12-14   -0.032518
+2020-12-15   -0.857139
+2020-12-16    1.245633
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.index</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-12-12&#39;, &#39;2020-12-13&#39;, &#39;2020-12-14&#39;, &#39;2020-12-15&#39;,
+               &#39;2020-12-16&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=None)
+</code></pre>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-12-12    0.379713
+2020-12-13   -0.649630
+2020-12-14   -0.032518
+2020-12-15   -0.857139
+2020-12-16    1.245633
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0.37971319526808683
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-12-12    0.379713
+2020-12-13   -0.649630
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-12-12    0.379713
+2020-12-14   -0.032518
+2020-12-16    1.245633
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts + ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-12-12    0.759426
+2020-12-13         NaN
+2020-12-14   -0.065036
+2020-12-15         NaN
+2020-12-16    2.491266
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020-12-16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>1.2456328552039189
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020 12 16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>1.2456328552039189
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020/12/16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>1.2456328552039189
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">range</span>(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>range(0, 10)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1 = pd.Series(np.random.randn(<span class="number">1000</span>),index=pd.date_range(<span class="string">&#x27;1/1/2020&#x27;</span>,periods=<span class="number">1000</span>)) <span class="comment">#第一个参数填起始，第二个填往后的个数</span></span><br><span class="line">ts1</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-01-01    1.015421
+2020-01-02   -0.925705
+2020-01-03    0.411136
+2020-01-04    3.277916
+2020-01-05    0.299188
+2020-01-06    0.733276
+2020-01-07   -1.107592
+2020-01-08    0.722930
+2020-01-09   -0.975348
+2020-01-10    0.003595
+2020-01-11   -1.373826
+2020-01-12   -0.638642
+2020-01-13    1.128604
+2020-01-14   -2.095346
+2020-01-15    0.144371
+2020-01-16    0.734304
+2020-01-17    1.119673
+2020-01-18    0.907931
+2020-01-19    0.256645
+2020-01-20   -0.705373
+2020-01-21    0.303569
+2020-01-22    0.547839
+2020-01-23    0.381227
+2020-01-24    0.365932
+2020-01-25    0.810783
+2020-01-26   -1.643086
+2020-01-27   -0.574171
+2020-01-28    0.562728
+2020-01-29   -1.661192
+2020-01-30    0.517097
+                ...   
+2022-08-28    0.637243
+2022-08-29   -0.169790
+2022-08-30   -0.691629
+2022-08-31   -0.842184
+2022-09-01   -2.305659
+2022-09-02    1.218228
+2022-09-03    1.237527
+2022-09-04    0.952033
+2022-09-05   -1.000737
+2022-09-06    1.487299
+2022-09-07    0.353156
+2022-09-08   -0.364672
+2022-09-09   -0.663497
+2022-09-10   -0.609711
+2022-09-11    1.085439
+2022-09-12   -1.507173
+2022-09-13    1.983437
+2022-09-14    0.770582
+2022-09-15    1.150487
+2022-09-16   -0.675567
+2022-09-17    0.414473
+2022-09-18    0.978067
+2022-09-19   -0.388370
+2022-09-20   -0.544610
+2022-09-21    1.952220
+2022-09-22    0.135257
+2022-09-23    0.131512
+2022-09-24    0.708617
+2022-09-25   -1.108808
+2022-09-26    0.120807
+Freq: D, Length: 1000, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2021-01-01    0.972144
+2021-01-02   -0.707146
+2021-01-03    0.233038
+2021-01-04   -0.525640
+2021-01-05    0.223811
+2021-01-06   -0.151318
+2021-01-07    0.614911
+2021-01-08    0.258458
+2021-01-09   -1.186136
+2021-01-10   -0.508634
+2021-01-11   -1.873592
+2021-01-12    1.345920
+2021-01-13    0.417211
+2021-01-14   -0.231822
+2021-01-15    0.113009
+2021-01-16   -0.797792
+2021-01-17    1.969733
+2021-01-18    1.766248
+2021-01-19    0.570053
+2021-01-20    0.671557
+2021-01-21    0.191409
+2021-01-22   -0.264273
+2021-01-23    0.408653
+2021-01-24    2.437735
+2021-01-25   -1.739791
+2021-01-26    0.591862
+2021-01-27   -0.772196
+2021-01-28    1.424677
+2021-01-29   -0.304999
+2021-01-30    0.433909
+                ...   
+2021-12-02    0.434412
+2021-12-03    1.323201
+2021-12-04   -0.592772
+2021-12-05    1.179661
+2021-12-06    1.616478
+2021-12-07    0.329433
+2021-12-08    0.414689
+2021-12-09    1.502765
+2021-12-10   -0.031550
+2021-12-11    0.265386
+2021-12-12    0.520567
+2021-12-13    1.184358
+2021-12-14   -0.579254
+2021-12-15   -0.086153
+2021-12-16    0.104040
+2021-12-17   -0.778835
+2021-12-18   -1.682121
+2021-12-19   -0.073131
+2021-12-20    2.452238
+2021-12-21    0.654806
+2021-12-22    0.527968
+2021-12-23   -0.141002
+2021-12-24    1.192474
+2021-12-25   -0.911540
+2021-12-26   -1.150078
+2021-12-27    1.731945
+2021-12-28    0.272643
+2021-12-29   -0.426860
+2021-12-30    2.362099
+2021-12-31   -0.820668
+Freq: D, Length: 365, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021.01&#x27;</span>].<span class="built_in">sum</span>() <span class="comment">#求值的和</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>11.933662218114787
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[datetime(<span class="number">2021</span>,<span class="number">12</span>,<span class="number">12</span>)] <span class="comment">#取值</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>0.5205669131839745
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]  <span class="comment"># 包含末端数据</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-03-16    0.256742
+2020-03-17   -0.567791
+2020-03-18    0.513700
+2020-03-19   -0.255108
+Freq: D, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>] = <span class="number">1</span></span><br><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-03-16    1.0
+2020-03-17    1.0
+2020-03-18    1.0
+2020-03-19    1.0
+Freq: D, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1[:<span class="string">&#x27;2020-01-06&#x27;</span>]  <span class="comment">#切片</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-01-01    1.015421
+2020-01-02   -0.925705
+2020-01-03    0.411136
+2020-01-04    3.277916
+2020-01-05    0.299188
+2020-01-06    0.733276
+Freq: D, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1.truncate(after=<span class="string">&#x27;1/6/2020&#x27;</span>)  <span class="comment">#找1月6之前的数据，after表示最终截至</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-01-01    1.015421
+2020-01-02   -0.925705
+2020-01-03    0.411136
+2020-01-04    3.277916
+2020-01-05    0.299188
+2020-01-06    0.733276
+Freq: D, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts1.truncate(before=<span class="string">&#x27;1/6/2021&#x27;</span>) <span class="comment">#找之后的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2021-01-06   -0.151318
+2021-01-07    0.614911
+2021-01-08    0.258458
+2021-01-09   -1.186136
+2021-01-10   -0.508634
+2021-01-11   -1.873592
+2021-01-12    1.345920
+2021-01-13    0.417211
+2021-01-14   -0.231822
+2021-01-15    0.113009
+2021-01-16   -0.797792
+2021-01-17    1.969733
+2021-01-18    1.766248
+2021-01-19    0.570053
+2021-01-20    0.671557
+2021-01-21    0.191409
+2021-01-22   -0.264273
+2021-01-23    0.408653
+2021-01-24    2.437735
+2021-01-25   -1.739791
+2021-01-26    0.591862
+2021-01-27   -0.772196
+2021-01-28    1.424677
+2021-01-29   -0.304999
+2021-01-30    0.433909
+2021-01-31    0.809407
+2021-02-01   -0.879357
+2021-02-02   -0.107760
+2021-02-03    0.448191
+2021-02-04    0.353287
+                ...   
+2022-08-28    0.637243
+2022-08-29   -0.169790
+2022-08-30   -0.691629
+2022-08-31   -0.842184
+2022-09-01   -2.305659
+2022-09-02    1.218228
+2022-09-03    1.237527
+2022-09-04    0.952033
+2022-09-05   -1.000737
+2022-09-06    1.487299
+2022-09-07    0.353156
+2022-09-08   -0.364672
+2022-09-09   -0.663497
+2022-09-10   -0.609711
+2022-09-11    1.085439
+2022-09-12   -1.507173
+2022-09-13    1.983437
+2022-09-14    0.770582
+2022-09-15    1.150487
+2022-09-16   -0.675567
+2022-09-17    0.414473
+2022-09-18    0.978067
+2022-09-19   -0.388370
+2022-09-20   -0.544610
+2022-09-21    1.952220
+2022-09-22    0.135257
+2022-09-23    0.131512
+2022-09-24    0.708617
+2022-09-25   -1.108808
+2022-09-26    0.120807
+Freq: D, Length: 629, dtype: float64
+</code></pre>
+<h2 id="带有重复索引的时间序列"><a href="#带有重复索引的时间序列" class="headerlink" title="带有重复索引的时间序列"></a>带有重复索引的时间序列</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dates = pd.DatetimeIndex([<span class="string">&#x27;1/1/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/3/2020&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts2 = pd.Series([<span class="string">&#x27;帅比&#x27;</span>,<span class="string">&#x27;呵呵&#x27;</span>,<span class="string">&#x27;张渤涛&#x27;</span>,<span class="string">&#x27;新青年&#x27;</span>,<span class="string">&#x27;小工&#x27;</span>],index=dates)</span><br><span class="line">ts2 <span class="comment">#日期可以重复、</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-01-01     帅比
+2020-01-02     呵呵
+2020-01-02    张渤涛
+2020-01-02    新青年
+2020-01-03     小工
+dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts2.index.is_unique <span class="comment">#不是重复的</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>False
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts2.groupby(level=<span class="number">0</span>).count()  <span class="comment">#level=0为最外层的索引分类</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2020-01-01    1
+2020-01-02    3
+2020-01-03    1
+dtype: int64
+</code></pre>
+<h2 id="日期范围-频率-移动"><a href="#日期范围-频率-移动" class="headerlink" title="日期范围 频率 移动"></a>日期范围 频率 移动</h2><h3 id="生成日期范围"><a href="#生成日期范围" class="headerlink" title="生成日期范围"></a>生成日期范围</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range?</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">index = pd.date_range(<span class="string">&#x27;2020-01-01&#x27;</span>,<span class="string">&#x27;2020-03-01&#x27;</span>)  <span class="comment">#起止日期</span></span><br><span class="line">index</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-01-01&#39;, &#39;2020-01-02&#39;, &#39;2020-01-03&#39;, &#39;2020-01-04&#39;,
+               &#39;2020-01-05&#39;, &#39;2020-01-06&#39;, &#39;2020-01-07&#39;, &#39;2020-01-08&#39;,
+               &#39;2020-01-09&#39;, &#39;2020-01-10&#39;, &#39;2020-01-11&#39;, &#39;2020-01-12&#39;,
+               &#39;2020-01-13&#39;, &#39;2020-01-14&#39;, &#39;2020-01-15&#39;, &#39;2020-01-16&#39;,
+               &#39;2020-01-17&#39;, &#39;2020-01-18&#39;, &#39;2020-01-19&#39;, &#39;2020-01-20&#39;,
+               &#39;2020-01-21&#39;, &#39;2020-01-22&#39;, &#39;2020-01-23&#39;, &#39;2020-01-24&#39;,
+               &#39;2020-01-25&#39;, &#39;2020-01-26&#39;, &#39;2020-01-27&#39;, &#39;2020-01-28&#39;,
+               &#39;2020-01-29&#39;, &#39;2020-01-30&#39;, &#39;2020-01-31&#39;, &#39;2020-02-01&#39;,
+               &#39;2020-02-02&#39;, &#39;2020-02-03&#39;, &#39;2020-02-04&#39;, &#39;2020-02-05&#39;,
+               &#39;2020-02-06&#39;, &#39;2020-02-07&#39;, &#39;2020-02-08&#39;, &#39;2020-02-09&#39;,
+               &#39;2020-02-10&#39;, &#39;2020-02-11&#39;, &#39;2020-02-12&#39;, &#39;2020-02-13&#39;,
+               &#39;2020-02-14&#39;, &#39;2020-02-15&#39;, &#39;2020-02-16&#39;, &#39;2020-02-17&#39;,
+               &#39;2020-02-18&#39;, &#39;2020-02-19&#39;, &#39;2020-02-20&#39;, &#39;2020-02-21&#39;,
+               &#39;2020-02-22&#39;, &#39;2020-02-23&#39;, &#39;2020-02-24&#39;, &#39;2020-02-25&#39;,
+               &#39;2020-02-26&#39;, &#39;2020-02-27&#39;, &#39;2020-02-28&#39;, &#39;2020-02-29&#39;,
+               &#39;2020-03-01&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往后100天</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2020-01-01&#39;, &#39;2020-01-02&#39;, &#39;2020-01-03&#39;, &#39;2020-01-04&#39;,
+               &#39;2020-01-05&#39;, &#39;2020-01-06&#39;, &#39;2020-01-07&#39;, &#39;2020-01-08&#39;,
+               &#39;2020-01-09&#39;, &#39;2020-01-10&#39;, &#39;2020-01-11&#39;, &#39;2020-01-12&#39;,
+               &#39;2020-01-13&#39;, &#39;2020-01-14&#39;, &#39;2020-01-15&#39;, &#39;2020-01-16&#39;,
+               &#39;2020-01-17&#39;, &#39;2020-01-18&#39;, &#39;2020-01-19&#39;, &#39;2020-01-20&#39;,
+               &#39;2020-01-21&#39;, &#39;2020-01-22&#39;, &#39;2020-01-23&#39;, &#39;2020-01-24&#39;,
+               &#39;2020-01-25&#39;, &#39;2020-01-26&#39;, &#39;2020-01-27&#39;, &#39;2020-01-28&#39;,
+               &#39;2020-01-29&#39;, &#39;2020-01-30&#39;, &#39;2020-01-31&#39;, &#39;2020-02-01&#39;,
+               &#39;2020-02-02&#39;, &#39;2020-02-03&#39;, &#39;2020-02-04&#39;, &#39;2020-02-05&#39;,
+               &#39;2020-02-06&#39;, &#39;2020-02-07&#39;, &#39;2020-02-08&#39;, &#39;2020-02-09&#39;,
+               &#39;2020-02-10&#39;, &#39;2020-02-11&#39;, &#39;2020-02-12&#39;, &#39;2020-02-13&#39;,
+               &#39;2020-02-14&#39;, &#39;2020-02-15&#39;, &#39;2020-02-16&#39;, &#39;2020-02-17&#39;,
+               &#39;2020-02-18&#39;, &#39;2020-02-19&#39;, &#39;2020-02-20&#39;, &#39;2020-02-21&#39;,
+               &#39;2020-02-22&#39;, &#39;2020-02-23&#39;, &#39;2020-02-24&#39;, &#39;2020-02-25&#39;,
+               &#39;2020-02-26&#39;, &#39;2020-02-27&#39;, &#39;2020-02-28&#39;, &#39;2020-02-29&#39;,
+               &#39;2020-03-01&#39;, &#39;2020-03-02&#39;, &#39;2020-03-03&#39;, &#39;2020-03-04&#39;,
+               &#39;2020-03-05&#39;, &#39;2020-03-06&#39;, &#39;2020-03-07&#39;, &#39;2020-03-08&#39;,
+               &#39;2020-03-09&#39;, &#39;2020-03-10&#39;, &#39;2020-03-11&#39;, &#39;2020-03-12&#39;,
+               &#39;2020-03-13&#39;, &#39;2020-03-14&#39;, &#39;2020-03-15&#39;, &#39;2020-03-16&#39;,
+               &#39;2020-03-17&#39;, &#39;2020-03-18&#39;, &#39;2020-03-19&#39;, &#39;2020-03-20&#39;,
+               &#39;2020-03-21&#39;, &#39;2020-03-22&#39;, &#39;2020-03-23&#39;, &#39;2020-03-24&#39;,
+               &#39;2020-03-25&#39;, &#39;2020-03-26&#39;, &#39;2020-03-27&#39;, &#39;2020-03-28&#39;,
+               &#39;2020-03-29&#39;, &#39;2020-03-30&#39;, &#39;2020-03-31&#39;, &#39;2020-04-01&#39;,
+               &#39;2020-04-02&#39;, &#39;2020-04-03&#39;, &#39;2020-04-04&#39;, &#39;2020-04-05&#39;,
+               &#39;2020-04-06&#39;, &#39;2020-04-07&#39;, &#39;2020-04-08&#39;, &#39;2020-04-09&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(end=<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往前100天</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2019-09-24&#39;, &#39;2019-09-25&#39;, &#39;2019-09-26&#39;, &#39;2019-09-27&#39;,
+               &#39;2019-09-28&#39;, &#39;2019-09-29&#39;, &#39;2019-09-30&#39;, &#39;2019-10-01&#39;,
+               &#39;2019-10-02&#39;, &#39;2019-10-03&#39;, &#39;2019-10-04&#39;, &#39;2019-10-05&#39;,
+               &#39;2019-10-06&#39;, &#39;2019-10-07&#39;, &#39;2019-10-08&#39;, &#39;2019-10-09&#39;,
+               &#39;2019-10-10&#39;, &#39;2019-10-11&#39;, &#39;2019-10-12&#39;, &#39;2019-10-13&#39;,
+               &#39;2019-10-14&#39;, &#39;2019-10-15&#39;, &#39;2019-10-16&#39;, &#39;2019-10-17&#39;,
+               &#39;2019-10-18&#39;, &#39;2019-10-19&#39;, &#39;2019-10-20&#39;, &#39;2019-10-21&#39;,
+               &#39;2019-10-22&#39;, &#39;2019-10-23&#39;, &#39;2019-10-24&#39;, &#39;2019-10-25&#39;,
+               &#39;2019-10-26&#39;, &#39;2019-10-27&#39;, &#39;2019-10-28&#39;, &#39;2019-10-29&#39;,
+               &#39;2019-10-30&#39;, &#39;2019-10-31&#39;, &#39;2019-11-01&#39;, &#39;2019-11-02&#39;,
+               &#39;2019-11-03&#39;, &#39;2019-11-04&#39;, &#39;2019-11-05&#39;, &#39;2019-11-06&#39;,
+               &#39;2019-11-07&#39;, &#39;2019-11-08&#39;, &#39;2019-11-09&#39;, &#39;2019-11-10&#39;,
+               &#39;2019-11-11&#39;, &#39;2019-11-12&#39;, &#39;2019-11-13&#39;, &#39;2019-11-14&#39;,
+               &#39;2019-11-15&#39;, &#39;2019-11-16&#39;, &#39;2019-11-17&#39;, &#39;2019-11-18&#39;,
+               &#39;2019-11-19&#39;, &#39;2019-11-20&#39;, &#39;2019-11-21&#39;, &#39;2019-11-22&#39;,
+               &#39;2019-11-23&#39;, &#39;2019-11-24&#39;, &#39;2019-11-25&#39;, &#39;2019-11-26&#39;,
+               &#39;2019-11-27&#39;, &#39;2019-11-28&#39;, &#39;2019-11-29&#39;, &#39;2019-11-30&#39;,
+               &#39;2019-12-01&#39;, &#39;2019-12-02&#39;, &#39;2019-12-03&#39;, &#39;2019-12-04&#39;,
+               &#39;2019-12-05&#39;, &#39;2019-12-06&#39;, &#39;2019-12-07&#39;, &#39;2019-12-08&#39;,
+               &#39;2019-12-09&#39;, &#39;2019-12-10&#39;, &#39;2019-12-11&#39;, &#39;2019-12-12&#39;,
+               &#39;2019-12-13&#39;, &#39;2019-12-14&#39;, &#39;2019-12-15&#39;, &#39;2019-12-16&#39;,
+               &#39;2019-12-17&#39;, &#39;2019-12-18&#39;, &#39;2019-12-19&#39;, &#39;2019-12-20&#39;,
+               &#39;2019-12-21&#39;, &#39;2019-12-22&#39;, &#39;2019-12-23&#39;, &#39;2019-12-24&#39;,
+               &#39;2019-12-25&#39;, &#39;2019-12-26&#39;, &#39;2019-12-27&#39;, &#39;2019-12-28&#39;,
+               &#39;2019-12-29&#39;, &#39;2019-12-30&#39;, &#39;2019-12-31&#39;, &#39;2020-01-01&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre>
+<h4 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2021-02-1&#x27;</span>,<span class="string">&#x27;2021-07-18&#x27;</span>,freq= <span class="string">&#x27;3D&#x27;</span>) <span class="comment">#freq=3h：生成的间隔为3小时  3D: 间隔3天  B：工作日，周六周日  T/min：代表分组 M:月底</span></span><br><span class="line"><span class="comment">#BM 月底  MS月初 BMS工作日月底</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>DatetimeIndex([&#39;2021-02-01&#39;, &#39;2021-02-04&#39;, &#39;2021-02-07&#39;, &#39;2021-02-10&#39;,
+               &#39;2021-02-13&#39;, &#39;2021-02-16&#39;, &#39;2021-02-19&#39;, &#39;2021-02-22&#39;,
+               &#39;2021-02-25&#39;, &#39;2021-02-28&#39;, &#39;2021-03-03&#39;, &#39;2021-03-06&#39;,
+               &#39;2021-03-09&#39;, &#39;2021-03-12&#39;, &#39;2021-03-15&#39;, &#39;2021-03-18&#39;,
+               &#39;2021-03-21&#39;, &#39;2021-03-24&#39;, &#39;2021-03-27&#39;, &#39;2021-03-30&#39;,
+               &#39;2021-04-02&#39;, &#39;2021-04-05&#39;, &#39;2021-04-08&#39;, &#39;2021-04-11&#39;,
+               &#39;2021-04-14&#39;, &#39;2021-04-17&#39;, &#39;2021-04-20&#39;, &#39;2021-04-23&#39;,
+               &#39;2021-04-26&#39;, &#39;2021-04-29&#39;, &#39;2021-05-02&#39;, &#39;2021-05-05&#39;,
+               &#39;2021-05-08&#39;, &#39;2021-05-11&#39;, &#39;2021-05-14&#39;, &#39;2021-05-17&#39;,
+               &#39;2021-05-20&#39;, &#39;2021-05-23&#39;, &#39;2021-05-26&#39;, &#39;2021-05-29&#39;,
+               &#39;2021-06-01&#39;, &#39;2021-06-04&#39;, &#39;2021-06-07&#39;, &#39;2021-06-10&#39;,
+               &#39;2021-06-13&#39;, &#39;2021-06-16&#39;, &#39;2021-06-19&#39;, &#39;2021-06-22&#39;,
+               &#39;2021-06-25&#39;, &#39;2021-06-28&#39;, &#39;2021-07-01&#39;, &#39;2021-07-04&#39;,
+               &#39;2021-07-07&#39;, &#39;2021-07-10&#39;, &#39;2021-07-13&#39;, &#39;2021-07-16&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;3D&#39;)
+</code></pre>
+<h4 id="移动数据"><a href="#移动数据" class="headerlink" title="移动数据"></a>移动数据</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">4</span>),</span><br><span class="line">                index=pd.date_range(<span class="string">&#x27;1/1/2000&#x27;</span>, periods=<span class="number">4</span>, freq=<span class="string">&#x27;M&#x27;</span>))</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2000-01-31    0.742958
+2000-02-29    0.396846
+2000-03-31   -0.555748
+2000-04-30   -0.912331
+Freq: M, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>)  <span class="comment">#数据整体往下移动两格</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2000-01-31         NaN
+2000-02-29         NaN
+2000-03-31    0.742958
+2000-04-30    0.396846
+Freq: M, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.shift(-<span class="number">2</span>)  <span class="comment">#数据整体往上移动两格</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2000-01-31   -0.555748
+2000-02-29   -0.912331
+2000-03-31         NaN
+2000-04-30         NaN
+Freq: M, dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>,freq=<span class="string">&#x27;M&#x27;</span>) <span class="comment">#只是没索引了，当间隔改为月的话，会增加两条索引重新给它设置新的索引，并且你看到的窗口往下移动</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>2000-03-31    0.742958
+2000-04-30    0.396846
+2000-05-31   -0.555748
+2000-06-30   -0.912331
+Freq: M, dtype: float64
+</code></pre>
+<h1 id="重采样"><a href="#重采样" class="headerlink" title="重采样"></a>重采样</h1><p>重采样：指得是时间序列从一个频率转换为另一个频率进行处理的过程</p>
+<ul>
+<li>从高频转换到低频  –&gt;  降采样</li>
+<li>从低频转换到高频  –&gt;  升采样</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = pd.DataFrame(np.random.uniform(<span class="number">10</span>,<span class="number">50</span>,(<span class="number">100</span>,<span class="number">1</span>)),index=pd.date_range(<span class="string">&#x27;20170101&#x27;</span>,periods=<span class="number">100</span>))</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-01</th>
+      <td>30.327404</td>
+    </tr>
+    <tr>
+      <th>2017-01-02</th>
+      <td>40.915130</td>
+    </tr>
+    <tr>
+      <th>2017-01-03</th>
+      <td>16.554264</td>
+    </tr>
+    <tr>
+      <th>2017-01-04</th>
+      <td>15.663962</td>
+    </tr>
+    <tr>
+      <th>2017-01-05</th>
+      <td>43.936492</td>
+    </tr>
+    <tr>
+      <th>2017-01-06</th>
+      <td>44.829614</td>
+    </tr>
+    <tr>
+      <th>2017-01-07</th>
+      <td>31.207797</td>
+    </tr>
+    <tr>
+      <th>2017-01-08</th>
+      <td>42.167725</td>
+    </tr>
+    <tr>
+      <th>2017-01-09</th>
+      <td>34.122413</td>
+    </tr>
+    <tr>
+      <th>2017-01-10</th>
+      <td>32.126023</td>
+    </tr>
+    <tr>
+      <th>2017-01-11</th>
+      <td>21.779617</td>
+    </tr>
+    <tr>
+      <th>2017-01-12</th>
+      <td>20.222224</td>
+    </tr>
+    <tr>
+      <th>2017-01-13</th>
+      <td>32.867062</td>
+    </tr>
+    <tr>
+      <th>2017-01-14</th>
+      <td>23.652470</td>
+    </tr>
+    <tr>
+      <th>2017-01-15</th>
+      <td>46.784360</td>
+    </tr>
+    <tr>
+      <th>2017-01-16</th>
+      <td>38.661963</td>
+    </tr>
+    <tr>
+      <th>2017-01-17</th>
+      <td>34.860746</td>
+    </tr>
+    <tr>
+      <th>2017-01-18</th>
+      <td>27.853424</td>
+    </tr>
+    <tr>
+      <th>2017-01-19</th>
+      <td>18.216845</td>
+    </tr>
+    <tr>
+      <th>2017-01-20</th>
+      <td>23.156989</td>
+    </tr>
+    <tr>
+      <th>2017-01-21</th>
+      <td>15.609212</td>
+    </tr>
+    <tr>
+      <th>2017-01-22</th>
+      <td>13.380196</td>
+    </tr>
+    <tr>
+      <th>2017-01-23</th>
+      <td>43.286301</td>
+    </tr>
+    <tr>
+      <th>2017-01-24</th>
+      <td>29.068007</td>
+    </tr>
+    <tr>
+      <th>2017-01-25</th>
+      <td>46.182942</td>
+    </tr>
+    <tr>
+      <th>2017-01-26</th>
+      <td>28.507913</td>
+    </tr>
+    <tr>
+      <th>2017-01-27</th>
+      <td>10.602039</td>
+    </tr>
+    <tr>
+      <th>2017-01-28</th>
+      <td>26.452661</td>
+    </tr>
+    <tr>
+      <th>2017-01-29</th>
+      <td>16.987459</td>
+    </tr>
+    <tr>
+      <th>2017-01-30</th>
+      <td>39.806725</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2017-03-12</th>
+      <td>43.040965</td>
+    </tr>
+    <tr>
+      <th>2017-03-13</th>
+      <td>42.985399</td>
+    </tr>
+    <tr>
+      <th>2017-03-14</th>
+      <td>25.330216</td>
+    </tr>
+    <tr>
+      <th>2017-03-15</th>
+      <td>43.512956</td>
+    </tr>
+    <tr>
+      <th>2017-03-16</th>
+      <td>13.934661</td>
+    </tr>
+    <tr>
+      <th>2017-03-17</th>
+      <td>43.991213</td>
+    </tr>
+    <tr>
+      <th>2017-03-18</th>
+      <td>19.983546</td>
+    </tr>
+    <tr>
+      <th>2017-03-19</th>
+      <td>36.754277</td>
+    </tr>
+    <tr>
+      <th>2017-03-20</th>
+      <td>46.162958</td>
+    </tr>
+    <tr>
+      <th>2017-03-21</th>
+      <td>11.674419</td>
+    </tr>
+    <tr>
+      <th>2017-03-22</th>
+      <td>17.462935</td>
+    </tr>
+    <tr>
+      <th>2017-03-23</th>
+      <td>46.230006</td>
+    </tr>
+    <tr>
+      <th>2017-03-24</th>
+      <td>26.221426</td>
+    </tr>
+    <tr>
+      <th>2017-03-25</th>
+      <td>36.613506</td>
+    </tr>
+    <tr>
+      <th>2017-03-26</th>
+      <td>23.927521</td>
+    </tr>
+    <tr>
+      <th>2017-03-27</th>
+      <td>48.427552</td>
+    </tr>
+    <tr>
+      <th>2017-03-28</th>
+      <td>26.749165</td>
+    </tr>
+    <tr>
+      <th>2017-03-29</th>
+      <td>44.609260</td>
+    </tr>
+    <tr>
+      <th>2017-03-30</th>
+      <td>11.736764</td>
+    </tr>
+    <tr>
+      <th>2017-03-31</th>
+      <td>41.990252</td>
+    </tr>
+    <tr>
+      <th>2017-04-01</th>
+      <td>25.538289</td>
+    </tr>
+    <tr>
+      <th>2017-04-02</th>
+      <td>28.554712</td>
+    </tr>
+    <tr>
+      <th>2017-04-03</th>
+      <td>25.624661</td>
+    </tr>
+    <tr>
+      <th>2017-04-04</th>
+      <td>21.508418</td>
+    </tr>
+    <tr>
+      <th>2017-04-05</th>
+      <td>35.140544</td>
+    </tr>
+    <tr>
+      <th>2017-04-06</th>
+      <td>10.490037</td>
+    </tr>
+    <tr>
+      <th>2017-04-07</th>
+      <td>23.448571</td>
+    </tr>
+    <tr>
+      <th>2017-04-08</th>
+      <td>17.295457</td>
+    </tr>
+    <tr>
+      <th>2017-04-09</th>
+      <td>33.962500</td>
+    </tr>
+    <tr>
+      <th>2017-04-10</th>
+      <td>43.824611</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 1 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t.resample(<span class="string">&#x27;M&#x27;</span>).<span class="built_in">sum</span>()  <span class="comment">#从高频到低频，重新采样 ，作用：可以想象求一个月赚了多少</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-31</th>
+      <td>930.125510</td>
+    </tr>
+    <tr>
+      <th>2017-02-28</th>
+      <td>927.387269</td>
+    </tr>
+    <tr>
+      <th>2017-03-31</th>
+      <td>930.943484</td>
+    </tr>
+    <tr>
+      <th>2017-04-30</th>
+      <td>265.387801</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t.resample(<span class="string">&#x27;10D&#x27;</span>).<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-01</th>
+      <td>331.850824</td>
+    </tr>
+    <tr>
+      <th>2017-01-11</th>
+      <td>288.055700</td>
+    </tr>
+    <tr>
+      <th>2017-01-21</th>
+      <td>269.883455</td>
+    </tr>
+    <tr>
+      <th>2017-01-31</th>
+      <td>354.272591</td>
+    </tr>
+    <tr>
+      <th>2017-02-10</th>
+      <td>334.515093</td>
+    </tr>
+    <tr>
+      <th>2017-02-20</th>
+      <td>290.188328</td>
+    </tr>
+    <tr>
+      <th>2017-03-02</th>
+      <td>268.351278</td>
+    </tr>
+    <tr>
+      <th>2017-03-12</th>
+      <td>327.370609</td>
+    </tr>
+    <tr>
+      <th>2017-03-22</th>
+      <td>323.968386</td>
+    </tr>
+    <tr>
+      <th>2017-04-01</th>
+      <td>265.387801</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 升采样</span></span><br><span class="line">frame = pd.DataFrame(np.random.randn(<span class="number">2</span>, <span class="number">4</span>),</span><br><span class="line">                    index=pd.date_range(<span class="string">&#x27;1/1/2000&#x27;</span>, periods=<span class="number">2</span>,freq=<span class="string">&#x27;W-WED&#x27;</span>),</span><br><span class="line">                    columns=[<span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;北京&#x27;</span>, <span class="string">&#x27;深圳&#x27;</span>, <span class="string">&#x27;广州&#x27;</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>上海</th>
+      <th>北京</th>
+      <th>深圳</th>
+      <th>广州</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).asfreq()  <span class="comment">#展开显示</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>上海</th>
+      <th>北京</th>
+      <th>深圳</th>
+      <th>广州</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-06</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-07</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-08</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-09</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-10</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-11</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).ffill()   <span class="comment">#往下填充</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>上海</th>
+      <th>北京</th>
+      <th>深圳</th>
+      <th>广州</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-06</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-07</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-08</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-09</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-10</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-11</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).bfill() <span class="comment">#网上填充</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>上海</th>
+      <th>北京</th>
+      <th>深圳</th>
+      <th>广州</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.203704</td>
+      <td>-0.074523</td>
+      <td>0.262120</td>
+      <td>0.895930</td>
+    </tr>
+    <tr>
+      <th>2000-01-06</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-07</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-08</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-09</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-10</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-11</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+    <tr>
+      <th>2000-01-12</th>
+      <td>0.317731</td>
+      <td>0.299179</td>
+      <td>-0.273347</td>
+      <td>-0.030339</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;数据/FremontBridge.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>,index_col=<span class="string">&#x27;Date&#x27;</span>,parse_dates=<span class="literal">True</span>)  <span class="comment">#index_col=把这一列作为index</span></span><br><span class="line">data  <span class="comment">#parse_dates告诉是时间索引数据</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fremont Bridge Total</th>
+      <th>Fremont Bridge East Sidewalk</th>
+      <th>Fremont Bridge West Sidewalk</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012-10-03 00:00:00</th>
+      <td>13.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 01:00:00</th>
+      <td>10.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 02:00:00</th>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 03:00:00</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 04:00:00</th>
+      <td>7.0</td>
+      <td>6.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 05:00:00</th>
+      <td>31.0</td>
+      <td>21.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 06:00:00</th>
+      <td>155.0</td>
+      <td>105.0</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 07:00:00</th>
+      <td>352.0</td>
+      <td>257.0</td>
+      <td>95.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 08:00:00</th>
+      <td>437.0</td>
+      <td>291.0</td>
+      <td>146.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 09:00:00</th>
+      <td>276.0</td>
+      <td>172.0</td>
+      <td>104.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 10:00:00</th>
+      <td>118.0</td>
+      <td>72.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 11:00:00</th>
+      <td>42.0</td>
+      <td>10.0</td>
+      <td>32.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 12:00:00</th>
+      <td>76.0</td>
+      <td>35.0</td>
+      <td>41.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 13:00:00</th>
+      <td>90.0</td>
+      <td>42.0</td>
+      <td>48.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 14:00:00</th>
+      <td>128.0</td>
+      <td>77.0</td>
+      <td>51.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 15:00:00</th>
+      <td>164.0</td>
+      <td>72.0</td>
+      <td>92.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 16:00:00</th>
+      <td>315.0</td>
+      <td>133.0</td>
+      <td>182.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 17:00:00</th>
+      <td>583.0</td>
+      <td>192.0</td>
+      <td>391.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 18:00:00</th>
+      <td>380.0</td>
+      <td>122.0</td>
+      <td>258.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 19:00:00</th>
+      <td>128.0</td>
+      <td>59.0</td>
+      <td>69.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 20:00:00</th>
+      <td>80.0</td>
+      <td>29.0</td>
+      <td>51.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 21:00:00</th>
+      <td>63.0</td>
+      <td>25.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 22:00:00</th>
+      <td>49.0</td>
+      <td>24.0</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 23:00:00</th>
+      <td>17.0</td>
+      <td>5.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 00:00:00</th>
+      <td>18.0</td>
+      <td>7.0</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 01:00:00</th>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 02:00:00</th>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 03:00:00</th>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 04:00:00</th>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-04 05:00:00</th>
+      <td>26.0</td>
+      <td>15.0</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 18:00:00</th>
+      <td>22.0</td>
+      <td>6.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 19:00:00</th>
+      <td>20.0</td>
+      <td>10.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 20:00:00</th>
+      <td>18.0</td>
+      <td>11.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 21:00:00</th>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 22:00:00</th>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-29 23:00:00</th>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 00:00:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 01:00:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 02:00:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 03:00:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 04:00:00</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 05:00:00</th>
+      <td>10.0</td>
+      <td>5.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 06:00:00</th>
+      <td>27.0</td>
+      <td>16.0</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 07:00:00</th>
+      <td>68.0</td>
+      <td>30.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 08:00:00</th>
+      <td>86.0</td>
+      <td>32.0</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 09:00:00</th>
+      <td>78.0</td>
+      <td>32.0</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 10:00:00</th>
+      <td>49.0</td>
+      <td>21.0</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 11:00:00</th>
+      <td>69.0</td>
+      <td>34.0</td>
+      <td>35.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 12:00:00</th>
+      <td>87.0</td>
+      <td>38.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 13:00:00</th>
+      <td>99.0</td>
+      <td>52.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 14:00:00</th>
+      <td>111.0</td>
+      <td>56.0</td>
+      <td>55.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 15:00:00</th>
+      <td>154.0</td>
+      <td>73.0</td>
+      <td>81.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 16:00:00</th>
+      <td>141.0</td>
+      <td>54.0</td>
+      <td>87.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 17:00:00</th>
+      <td>91.0</td>
+      <td>31.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 18:00:00</th>
+      <td>81.0</td>
+      <td>16.0</td>
+      <td>65.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 19:00:00</th>
+      <td>35.0</td>
+      <td>17.0</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 20:00:00</th>
+      <td>22.0</td>
+      <td>12.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 21:00:00</th>
+      <td>11.0</td>
+      <td>6.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 22:00:00</th>
+      <td>11.0</td>
+      <td>5.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30 23:00:00</th>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>137798 rows × 3 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.columns = [<span class="string">&#x27;Total&#x27;</span>,<span class="string">&#x27;East&#x27;</span>,<span class="string">&#x27;West&#x27;</span>]</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>East</th>
+      <th>West</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012-10-03 00:00:00</th>
+      <td>13.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 01:00:00</th>
+      <td>10.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 02:00:00</th>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 03:00:00</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2012-10-03 04:00:00</th>
+      <td>7.0</td>
+      <td>6.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.dropna().describe()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>East</th>
+      <th>West</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>137777.000000</td>
+      <td>137777.000000</td>
+      <td>137777.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>112.490771</td>
+      <td>51.267004</td>
+      <td>61.223767</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>143.132406</td>
+      <td>65.992109</td>
+      <td>89.076846</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>14.000000</td>
+      <td>6.000000</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>61.000000</td>
+      <td>28.000000</td>
+      <td>30.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>147.000000</td>
+      <td>69.000000</td>
+      <td>75.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1097.000000</td>
+      <td>698.000000</td>
+      <td>850.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data.plot()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x19e397a2a20&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_86_1.png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">weekly = data.resample(<span class="string">&#x27;M&#x27;</span>).<span class="built_in">sum</span>()</span><br><span class="line">weekly</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>East</th>
+      <th>West</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012-10-31</th>
+      <td>131390.0</td>
+      <td>67528.0</td>
+      <td>63862.0</td>
+    </tr>
+    <tr>
+      <th>2012-11-30</th>
+      <td>101294.0</td>
+      <td>52124.0</td>
+      <td>49170.0</td>
+    </tr>
+    <tr>
+      <th>2012-12-31</th>
+      <td>72738.0</td>
+      <td>37216.0</td>
+      <td>35522.0</td>
+    </tr>
+    <tr>
+      <th>2013-01-31</th>
+      <td>89768.0</td>
+      <td>45820.0</td>
+      <td>43948.0</td>
+    </tr>
+    <tr>
+      <th>2013-02-28</th>
+      <td>100054.0</td>
+      <td>51796.0</td>
+      <td>48258.0</td>
+    </tr>
+    <tr>
+      <th>2013-03-31</th>
+      <td>132178.0</td>
+      <td>68886.0</td>
+      <td>63292.0</td>
+    </tr>
+    <tr>
+      <th>2013-04-30</th>
+      <td>143996.0</td>
+      <td>74606.0</td>
+      <td>69390.0</td>
+    </tr>
+    <tr>
+      <th>2013-05-31</th>
+      <td>217148.0</td>
+      <td>113674.0</td>
+      <td>103474.0</td>
+    </tr>
+    <tr>
+      <th>2013-06-30</th>
+      <td>198560.0</td>
+      <td>102878.0</td>
+      <td>95682.0</td>
+    </tr>
+    <tr>
+      <th>2013-07-31</th>
+      <td>235948.0</td>
+      <td>120026.0</td>
+      <td>115922.0</td>
+    </tr>
+    <tr>
+      <th>2013-08-31</th>
+      <td>209098.0</td>
+      <td>106398.0</td>
+      <td>102700.0</td>
+    </tr>
+    <tr>
+      <th>2013-09-30</th>
+      <td>161458.0</td>
+      <td>83348.0</td>
+      <td>78110.0</td>
+    </tr>
+    <tr>
+      <th>2013-10-31</th>
+      <td>162704.0</td>
+      <td>84376.0</td>
+      <td>78328.0</td>
+    </tr>
+    <tr>
+      <th>2013-11-30</th>
+      <td>118540.0</td>
+      <td>61022.0</td>
+      <td>57518.0</td>
+    </tr>
+    <tr>
+      <th>2013-12-31</th>
+      <td>87106.0</td>
+      <td>45152.0</td>
+      <td>41954.0</td>
+    </tr>
+    <tr>
+      <th>2014-01-31</th>
+      <td>119746.0</td>
+      <td>61948.0</td>
+      <td>57798.0</td>
+    </tr>
+    <tr>
+      <th>2014-02-28</th>
+      <td>94050.0</td>
+      <td>48172.0</td>
+      <td>45878.0</td>
+    </tr>
+    <tr>
+      <th>2014-03-31</th>
+      <td>126988.0</td>
+      <td>65700.0</td>
+      <td>61288.0</td>
+    </tr>
+    <tr>
+      <th>2014-04-30</th>
+      <td>173710.0</td>
+      <td>89718.0</td>
+      <td>83992.0</td>
+    </tr>
+    <tr>
+      <th>2014-05-31</th>
+      <td>237288.0</td>
+      <td>122924.0</td>
+      <td>114364.0</td>
+    </tr>
+    <tr>
+      <th>2014-06-30</th>
+      <td>221814.0</td>
+      <td>112626.0</td>
+      <td>109188.0</td>
+    </tr>
+    <tr>
+      <th>2014-07-31</th>
+      <td>241338.0</td>
+      <td>122340.0</td>
+      <td>118998.0</td>
+    </tr>
+    <tr>
+      <th>2014-08-31</th>
+      <td>224980.0</td>
+      <td>112480.0</td>
+      <td>112500.0</td>
+    </tr>
+    <tr>
+      <th>2014-09-30</th>
+      <td>195116.0</td>
+      <td>102086.0</td>
+      <td>93030.0</td>
+    </tr>
+    <tr>
+      <th>2014-10-31</th>
+      <td>166368.0</td>
+      <td>89354.0</td>
+      <td>77014.0</td>
+    </tr>
+    <tr>
+      <th>2014-11-30</th>
+      <td>113980.0</td>
+      <td>55926.0</td>
+      <td>58054.0</td>
+    </tr>
+    <tr>
+      <th>2014-12-31</th>
+      <td>97014.0</td>
+      <td>47378.0</td>
+      <td>49636.0</td>
+    </tr>
+    <tr>
+      <th>2015-01-31</th>
+      <td>121260.0</td>
+      <td>71508.0</td>
+      <td>49752.0</td>
+    </tr>
+    <tr>
+      <th>2015-02-28</th>
+      <td>117318.0</td>
+      <td>65582.0</td>
+      <td>51736.0</td>
+    </tr>
+    <tr>
+      <th>2015-03-31</th>
+      <td>142288.0</td>
+      <td>69170.0</td>
+      <td>73118.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2018-06-30</th>
+      <td>226290.0</td>
+      <td>91374.0</td>
+      <td>134916.0</td>
+    </tr>
+    <tr>
+      <th>2018-07-31</th>
+      <td>256036.0</td>
+      <td>104378.0</td>
+      <td>151658.0</td>
+    </tr>
+    <tr>
+      <th>2018-08-31</th>
+      <td>223618.0</td>
+      <td>88074.0</td>
+      <td>135544.0</td>
+    </tr>
+    <tr>
+      <th>2018-09-30</th>
+      <td>192484.0</td>
+      <td>77548.0</td>
+      <td>114936.0</td>
+    </tr>
+    <tr>
+      <th>2018-10-31</th>
+      <td>181964.0</td>
+      <td>71942.0</td>
+      <td>110022.0</td>
+    </tr>
+    <tr>
+      <th>2018-11-30</th>
+      <td>136862.0</td>
+      <td>53386.0</td>
+      <td>83476.0</td>
+    </tr>
+    <tr>
+      <th>2018-12-31</th>
+      <td>93882.0</td>
+      <td>37088.0</td>
+      <td>56794.0</td>
+    </tr>
+    <tr>
+      <th>2019-01-31</th>
+      <td>145766.0</td>
+      <td>57414.0</td>
+      <td>88352.0</td>
+    </tr>
+    <tr>
+      <th>2019-02-28</th>
+      <td>72198.0</td>
+      <td>27632.0</td>
+      <td>44566.0</td>
+    </tr>
+    <tr>
+      <th>2019-03-31</th>
+      <td>170914.0</td>
+      <td>68628.0</td>
+      <td>102286.0</td>
+    </tr>
+    <tr>
+      <th>2019-04-30</th>
+      <td>175864.0</td>
+      <td>68452.0</td>
+      <td>107412.0</td>
+    </tr>
+    <tr>
+      <th>2019-05-31</th>
+      <td>258246.0</td>
+      <td>103078.0</td>
+      <td>155168.0</td>
+    </tr>
+    <tr>
+      <th>2019-06-30</th>
+      <td>265024.0</td>
+      <td>103952.0</td>
+      <td>161072.0</td>
+    </tr>
+    <tr>
+      <th>2019-07-31</th>
+      <td>275428.0</td>
+      <td>106332.0</td>
+      <td>169096.0</td>
+    </tr>
+    <tr>
+      <th>2019-08-31</th>
+      <td>284828.0</td>
+      <td>104880.0</td>
+      <td>179948.0</td>
+    </tr>
+    <tr>
+      <th>2019-09-30</th>
+      <td>224348.0</td>
+      <td>82898.0</td>
+      <td>141450.0</td>
+    </tr>
+    <tr>
+      <th>2019-10-31</th>
+      <td>208996.0</td>
+      <td>74218.0</td>
+      <td>134778.0</td>
+    </tr>
+    <tr>
+      <th>2019-11-30</th>
+      <td>169926.0</td>
+      <td>59488.0</td>
+      <td>110438.0</td>
+    </tr>
+    <tr>
+      <th>2019-12-31</th>
+      <td>122754.0</td>
+      <td>42736.0</td>
+      <td>80018.0</td>
+    </tr>
+    <tr>
+      <th>2020-01-31</th>
+      <td>117972.0</td>
+      <td>40564.0</td>
+      <td>77408.0</td>
+    </tr>
+    <tr>
+      <th>2020-02-29</th>
+      <td>144914.0</td>
+      <td>49512.0</td>
+      <td>95402.0</td>
+    </tr>
+    <tr>
+      <th>2020-03-31</th>
+      <td>106462.0</td>
+      <td>42959.0</td>
+      <td>63503.0</td>
+    </tr>
+    <tr>
+      <th>2020-04-30</th>
+      <td>130750.0</td>
+      <td>61868.0</td>
+      <td>68882.0</td>
+    </tr>
+    <tr>
+      <th>2020-05-31</th>
+      <td>72668.0</td>
+      <td>33702.0</td>
+      <td>38966.0</td>
+    </tr>
+    <tr>
+      <th>2020-06-30</th>
+      <td>75787.0</td>
+      <td>33053.0</td>
+      <td>42734.0</td>
+    </tr>
+    <tr>
+      <th>2020-07-31</th>
+      <td>88177.0</td>
+      <td>37788.0</td>
+      <td>50389.0</td>
+    </tr>
+    <tr>
+      <th>2020-08-31</th>
+      <td>88351.0</td>
+      <td>37919.0</td>
+      <td>50432.0</td>
+    </tr>
+    <tr>
+      <th>2020-09-30</th>
+      <td>58143.0</td>
+      <td>24703.0</td>
+      <td>33440.0</td>
+    </tr>
+    <tr>
+      <th>2020-10-31</th>
+      <td>58751.0</td>
+      <td>24210.0</td>
+      <td>34541.0</td>
+    </tr>
+    <tr>
+      <th>2020-11-30</th>
+      <td>39920.0</td>
+      <td>17168.0</td>
+      <td>22752.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>98 rows × 3 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">weekly.plot(style=[<span class="string">&#x27;:&#x27;</span>,<span class="string">&quot;--&quot;</span>,<span class="string">&quot;-&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x19e38b30668&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_88_1.png"></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据分析</category>
+        <category>Pandas</category>
+      </categories>
+      <tags>
+        <tag>数据分析</tag>
+        <tag>Pandas</tag>
+      </tags>
+  </entry>
 </search>
