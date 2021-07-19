@@ -19683,4 +19683,1179 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>Matplotlib</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Matplotlib布局</title>
+    <url>/21904.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Matplotlib</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Figure容器对象"><a href="#Figure容器对象" class="headerlink" title="Figure容器对象"></a>Figure容器对象</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>)) <span class="comment">#16*9的容器对象</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
+</code></pre>
+<h1 id="子图对象"><a href="#子图对象" class="headerlink" title="子图对象"></a>子图对象</h1><h2 id="Axes-和-Subplot"><a href="#Axes-和-Subplot" class="headerlink" title="Axes 和 Subplot"></a>Axes 和 Subplot</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Axes：坐标系 </span></span><br><span class="line"><span class="comment">#Subplot</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">221</span>)  <span class="comment">#221代表子图的位置  221：几行几列 第几个  2行2列第一个</span></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">222</span>)  <span class="comment">#</span></span><br><span class="line"><span class="comment"># ax3 = fig.add_subplot(223)</span></span><br><span class="line"><span class="comment"># ax4 = fig.add_subplot(224)</span></span><br><span class="line">ax1.<span class="built_in">set</span>(xlim=[<span class="number">0.5</span>,<span class="number">4.5</span>],ylim=[-<span class="number">2</span>,<span class="number">8</span>],title=<span class="string">&#x27;标题1&#x27;</span>,ylabel=<span class="string">&#x27;y轴&#x27;</span>,xlabel=<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">ax2.<span class="built_in">set</span>(xlim=[<span class="number">0.5</span>,<span class="number">4.5</span>],ylim=[-<span class="number">2</span>,<span class="number">8</span>],title=<span class="string">&#x27;标题2&#x27;</span>,ylabel=<span class="string">&#x27;y轴&#x27;</span>,xlabel=<span class="string">&#x27;x轴&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>[(-2, 8), Text(0,0.5,&#39;y轴&#39;), (0.5, 4.5), Text(0.5,0,&#39;x轴&#39;), Text(0.5,1,&#39;标题2&#39;)]
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_4_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax3 = fig.add_axes([<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1</span>,<span class="number">1</span>])  <span class="comment">#原点坐标    原图长宽比例</span></span><br><span class="line">ax4 = fig.add_axes([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])</span><br><span class="line">ax5 = fig.add_axes([<span class="number">0.3</span>,<span class="number">0.3</span>,<span class="number">0.5</span>,<span class="number">0.5</span>]) </span><br><span class="line">ax6 = fig.add_axes([<span class="number">0.4</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])</span><br><span class="line">ax6.<span class="built_in">set</span>(title=<span class="string">&#x27;demo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>[Text(0.5,1,&#39;demo&#39;)]
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png" alt="output_5_1"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(np.random.randn(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">axes.set_xlim([-<span class="number">3</span>,<span class="number">12</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">&#x27;y轴&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>Text(0,0.5,&#39;y轴&#39;)
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_6_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">plt.plot(data)</span><br><span class="line"><span class="comment">#添加文本内容  比annotate方便</span></span><br><span class="line">plt.text(<span class="number">0</span>,<span class="number">0</span>,<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>Text(0,0,&#39;hello&#39;)
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_7_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"> <span class="comment"># 共享x轴  增加y轴</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line">ax1.bar(np.arange(<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>),np.random.rand(<span class="number">5</span>))</span><br><span class="line">ax2 = ax1.twinx() <span class="comment">#克隆一个共享x轴的axes对象</span></span><br><span class="line">ax2.plot(np.random.randn(<span class="number">10</span>),c=<span class="string">&#x27;k&#x27;</span>)  <span class="comment">#y轴不一样，但共用了x轴</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1e5a26b1eb8&gt;]
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_8_1.png" alt="png"></p>
+<h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig = plt. figure()</span><br><span class="line">st = fig.suptitle(<span class="string">&#x27;主题&#x27;</span>)  <span class="comment">#主标题设置</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;ax1&#x27;</span>)</span><br><span class="line">ax2 = fig.add_axes([<span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">0.8</span>,<span class="number">0.3</span>])</span><br><span class="line">ax2.<span class="built_in">set</span>(title = <span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">st.set_y(<span class="number">1</span>)  <span class="comment">#0在最底下，1在最上面</span></span><br><span class="line">st.set_x(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_0.png" alt="png"></p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(fig.gca())</span><br><span class="line"><span class="built_in">print</span>(fig.sca(ax1))  <span class="comment">#检测图像分别对应那个变量</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>Axes(0,0;1x0.3)
+AxesSubplot(0.125,0.536818;0.775x0.343182)
+</code></pre>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br><span class="line"><span class="comment">#删除子图</span></span><br><span class="line">fig.delaxes(ax1)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_15_0.png" alt="png"></p>
+<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br><span class="line"><span class="comment"># ax1.grid()</span></span><br><span class="line"><span class="comment"># ax2.grid()</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> fig.axes:</span><br><span class="line">    ax.grid()  <span class="comment">#遍历每个axes</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_17_0.png" alt="png"></p>
+<h2 id="Axis容器"><a href="#Axis容器" class="headerlink" title="Axis容器"></a>Axis容器</h2><h3 id="标签位置设置"><a href="#标签位置设置" class="headerlink" title="标签位置设置"></a>标签位置设置</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">&#x27;y轴&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x轴标签位置</span></span><br><span class="line">axes.xaxis.set_label_coords(<span class="number">0.5</span>,-<span class="number">0.1</span>)</span><br><span class="line">axes.yaxis.set_label_coords(-<span class="number">0.2</span>,<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_19_0.png" alt="png"></p>
+<h2 id="刻度格式设置"><a href="#刻度格式设置" class="headerlink" title="刻度格式设置"></a>刻度格式设置</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.set_ylim([-<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;X轴&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建格式化对象</span></span><br><span class="line">formatter = ticker.FormatStrFormatter(<span class="string">&#x27;%.2f&#x27;</span>)</span><br><span class="line">axes.yaxis.set_major_formatter(formatter)  <span class="comment">#使刻度保留两位小数</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_21_0.png" alt="png"></p>
+<h2 id="Tick容器"><a href="#Tick容器" class="headerlink" title="Tick容器"></a>Tick容器</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line">data = np.random.randn(<span class="number">20</span>)*<span class="number">1000</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_label(<span class="string">&#x27;X轴&#x27;</span>)</span><br><span class="line"><span class="comment"># 创建格式化对象</span></span><br><span class="line">formatter = ticker.FormatStrFormatter(<span class="string">&#x27;%.2f&#x27;</span>)</span><br><span class="line">axes.yaxis.set_major_formatter(formatter)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> tick <span class="keyword">in</span> axes.yaxis.get_major_ticks():</span><br><span class="line">    tick.label1On = <span class="literal">True</span>  <span class="comment"># 左边  #左边右边都显示了标签</span></span><br><span class="line">    tick.label2On = <span class="literal">True</span>  <span class="comment"># 右边</span></span><br><span class="line">    tick.label2.set_color(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> tick <span class="keyword">in</span> axes.xaxis.get_major_ticks():</span><br><span class="line">    tick.label1On = <span class="literal">False</span></span><br><span class="line">    tick.label2On = <span class="literal">True</span></span><br><span class="line">    tick.label2.set_color(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#设置刻度线条的属性</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> axes.yaxis.get_ticklines():</span><br><span class="line">    line.set_color(<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">    line.set_markersize(<span class="number">50</span>)</span><br><span class="line">    line.set_markeredgewidth(<span class="number">10</span>)   </span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_23_0.png" alt="png"></p>
+<h2 id="多图布局"><a href="#多图布局" class="headerlink" title="多图布局"></a>多图布局</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_plot</span>(<span class="params">ax, fontsize=<span class="number">12</span></span>):</span></span><br><span class="line">    ax.plot([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">    ax.set_xlabel(<span class="string">&#x27;x-label&#x27;</span>, fontsize=fontsize)</span><br><span class="line">    ax.set_ylabel(<span class="string">&#x27;y-label&#x27;</span>, fontsize=fontsize)</span><br><span class="line">    ax.set_title(<span class="string">&#x27;Title&#x27;</span>, fontsize=fontsize)</span><br><span class="line"></span><br><span class="line">fig,axes = plt.subplots(<span class="number">2</span>,<span class="number">2</span>)  <span class="comment">#先创建2*2的画板</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;y&quot;</span>)  <span class="comment">#背景颜色填充</span></span><br><span class="line">example_plot(axes[<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">example_plot(axes[<span class="number">0</span>,<span class="number">1</span>])</span><br><span class="line">example_plot(axes[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">example_plot(axes[<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line"><span class="comment">#布局</span></span><br><span class="line">plt.tight_layout(w_pad=<span class="number">0.1</span>,h_pad=<span class="number">2</span>)  <span class="comment">#w_pad改左右间隔  h_pad改上下间隔</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ax1 = plt.subplot(<span class="number">211</span>)</span><br><span class="line">ax2 = plt.subplot(<span class="number">223</span>)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line">ax3 = plt.subplot(<span class="number">224</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_26_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># add_axes的方式</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.4</span>,<span class="number">0.4</span>]) <span class="comment">#相对于刻度的原点，而不是画布的原点</span></span><br><span class="line">ax2.set_title(<span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<pre><code>Text(0.5,1,&#39;ax2&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置position的方式</span></span><br><span class="line">fig,axes = plt.subplots(<span class="number">1</span>,<span class="number">2</span>)  <span class="comment">#1行2个子图</span></span><br><span class="line">axes[<span class="number">1</span>].set_position([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])  <span class="comment">#原点位置，比例</span></span><br></pre></td></tr></table></figure>
+
+<p>结果:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_1.png" alt="png"></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+        <category>Matplotlib</category>
+      </categories>
+      <tags>
+        <tag>数据可视化</tag>
+        <tag>Matplotlib</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Seaborn补充总结</title>
+    <url>/21912.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Seaborn</span></strong></p>
+<h1 id="数据分析三大类型"><a href="#数据分析三大类型" class="headerlink" title="数据分析三大类型:"></a>数据分析三大类型:</h1><p><strong>探索型数据分析   —-&gt;   图表可视化</strong></p>
+<p><strong>验证型数据分析   —-&gt;   假设检验</strong></p>
+<p><strong>预测型数据分析   —-&gt;   机器学习</strong></p>
+<h2 id="探索性数据分析的作用"><a href="#探索性数据分析的作用" class="headerlink" title="探索性数据分析的作用"></a>探索性数据分析的作用</h2><ol>
+<li>与数据清理相辅相成</li>
+<li>支持验证型数据分析和预测型数据分析<ul>
+<li>该建立怎样的假设?</li>
+<li>该使用哪些特征和模型进行预测?</li>
+</ul>
+</li>
+</ol>
+<h2 id="探索型数据分析的常用图表"><a href="#探索型数据分析的常用图表" class="headerlink" title="探索型数据分析的常用图表"></a>探索型数据分析的常用图表</h2><ul>
+<li>条形图 直方图</li>
+<li>饼图</li>
+<li>折线图 散点图</li>
+<li>箱线图</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&#x27;./seaborn-data&#x27;</span>)</span><br><span class="line">tips</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25.29</td>
+      <td>4.71</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8.77</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>26.88</td>
+      <td>3.12</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>15.04</td>
+      <td>1.96</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>14.78</td>
+      <td>3.23</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10.27</td>
+      <td>1.71</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>35.26</td>
+      <td>5.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>15.42</td>
+      <td>1.57</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>18.43</td>
+      <td>3.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14.83</td>
+      <td>3.02</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>21.58</td>
+      <td>3.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>10.33</td>
+      <td>1.67</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>16.29</td>
+      <td>3.71</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>16.97</td>
+      <td>3.50</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20.65</td>
+      <td>3.35</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>17.92</td>
+      <td>4.08</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>20.29</td>
+      <td>2.75</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>15.77</td>
+      <td>2.23</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>39.42</td>
+      <td>7.58</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>19.82</td>
+      <td>3.18</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>17.81</td>
+      <td>2.34</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>13.37</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>12.69</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>21.70</td>
+      <td>4.30</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>19.65</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>28.17</td>
+      <td>6.50</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>215</th>
+      <td>12.90</td>
+      <td>1.10</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>28.15</td>
+      <td>3.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>217</th>
+      <td>11.59</td>
+      <td>1.50</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>7.74</td>
+      <td>1.44</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>219</th>
+      <td>30.14</td>
+      <td>3.09</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>12.16</td>
+      <td>2.20</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>221</th>
+      <td>13.42</td>
+      <td>3.48</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>222</th>
+      <td>8.58</td>
+      <td>1.92</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>223</th>
+      <td>15.98</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>224</th>
+      <td>13.42</td>
+      <td>1.58</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>225</th>
+      <td>16.27</td>
+      <td>2.50</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>226</th>
+      <td>10.09</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Fri</td>
+      <td>Lunch</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>227</th>
+      <td>20.45</td>
+      <td>3.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>228</th>
+      <td>13.28</td>
+      <td>2.72</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>229</th>
+      <td>22.12</td>
+      <td>2.88</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>24.01</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>231</th>
+      <td>15.69</td>
+      <td>3.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>232</th>
+      <td>11.61</td>
+      <td>3.39</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>10.77</td>
+      <td>1.47</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>15.53</td>
+      <td>3.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>10.07</td>
+      <td>1.25</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>236</th>
+      <td>12.60</td>
+      <td>1.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>237</th>
+      <td>32.83</td>
+      <td>1.17</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>238</th>
+      <td>35.83</td>
+      <td>4.67</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 7 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">&#x27;day&#x27;</span>,y=<span class="string">&#x27;total_bill&#x27;</span>,data=tips)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd4d4470&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#黑色柱子是 Error bar 误差 越长误差越大  指的是波动</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">penguins = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">penguins.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.1</td>
+      <td>18.7</td>
+      <td>181.0</td>
+      <td>3750.0</td>
+      <td>MALE</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.5</td>
+      <td>17.4</td>
+      <td>186.0</td>
+      <td>3800.0</td>
+      <td>FEMALE</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>40.3</td>
+      <td>18.0</td>
+      <td>195.0</td>
+      <td>3250.0</td>
+      <td>FEMALE</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>36.7</td>
+      <td>19.3</td>
+      <td>193.0</td>
+      <td>3450.0</td>
+      <td>FEMALE</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">penguins = penguins.dropna()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.distplot(penguins[<span class="string">&quot;flipper_length_mm&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd8332b0&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_2.png" alt="png"></p>
+<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><p>不支持</p>
+<h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">ax = sns.pointplot(x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, data=tips,ci=<span class="number">68</span>)    <span class="comment">#  ci 68%确信周日给的小费数额在这个范围内</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_14_0.png" alt="png"></p>
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">ax = sns.regplot(x=<span class="string">&quot;total_bill&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, data=tips)     <span class="comment">#推荐使用，回归的散点图  ，成正比</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_16_0.png" alt="png"></p>
+<p>两个属性之间的相关关系<br>这条线显示的数据大概数据符合怎样的趋势</p>
+<h3 id="箱型图"><a href="#箱型图" class="headerlink" title="箱型图"></a>箱型图</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ax = sns.boxplot(x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, data=tips)   </span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_19_0.png" alt="png"></p>
+<p>官方文档：<a href="https://seaborn.apachecn.org/#/README">https://seaborn.apachecn.org/#/README</a></p>
+<p><strong>不懂的看课件</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+        <category>Seaborn</category>
+      </categories>
+      <tags>
+        <tag>数据可视化</tag>
+        <tag>Seaborn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Seaborn可视化</title>
+    <url>/21910.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Seaborn</span></strong></p>
+<h1 id="基于matplotlib"><a href="#基于matplotlib" class="headerlink" title="基于matplotlib"></a>基于matplotlib</h1><h2 id="why-Seaborn"><a href="#why-Seaborn" class="headerlink" title="why Seaborn?"></a>why Seaborn?</h2><h3 id="1-作图更容易"><a href="#1-作图更容易" class="headerlink" title="1.作图更容易"></a>1.作图更容易</h3><h3 id="2-图形更漂亮"><a href="#2-图形更漂亮" class="headerlink" title="2.图形更漂亮"></a>2.图形更漂亮</h3><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>pip install seaborn<br>conda install seaborn</p>
+<h2 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容:"></a>学习内容:</h2><h3 id="1-风格管理"><a href="#1-风格管理" class="headerlink" title="1.风格管理"></a>1.风格管理</h3><h4 id="绘图风格"><a href="#绘图风格" class="headerlink" title="- 绘图风格"></a>- 绘图风格</h4><h4 id="颜色风格"><a href="#颜色风格" class="headerlink" title="- 颜色风格"></a>- 颜色风格</h4><h3 id="2-绘图方法"><a href="#2-绘图方法" class="headerlink" title="2.绘图方法"></a>2.绘图方法</h3><h4 id="数据集的分布可视化"><a href="#数据集的分布可视化" class="headerlink" title="- 数据集的分布可视化"></a>- 数据集的分布可视化</h4><h4 id="分类数据可视化"><a href="#分类数据可视化" class="headerlink" title="- 分类数据可视化"></a>- 分类数据可视化</h4><h4 id="线性关系可视化"><a href="#线性关系可视化" class="headerlink" title="- 线性关系可视化"></a>- 线性关系可视化</h4><h3 id="3-结构网格"><a href="#3-结构网格" class="headerlink" title="3. 结构网格"></a>3. 结构网格</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#正弦波</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sinplot</span>(<span class="params">flip=<span class="number">1</span></span>):</span></span><br><span class="line">    x = np.linspace(<span class="number">0</span>,<span class="number">14</span>,<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">13</span>):</span><br><span class="line">        plt.plot(x,np.sin(x+i*<span class="number">.5</span>)*(<span class="number">7</span>-i)*flip)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_6_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.<span class="built_in">set</span>()</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_7_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;whitegrid&quot;</span>)</span><br><span class="line">data = np.random.normal(size=(<span class="number">20</span>, <span class="number">6</span>)) + np.arange(<span class="number">6</span>) / <span class="number">2</span></span><br><span class="line">sns.boxplot(data=data);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_8_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;dark&quot;</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_9_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#移除轴脊柱</span></span><br><span class="line">sinplot()</span><br><span class="line">sns.despine()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_11_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;whitegrid&quot;</span>)</span><br><span class="line">data = np.random.normal(size=(<span class="number">20</span>, <span class="number">6</span>)) + np.arange(<span class="number">6</span>) / <span class="number">2</span></span><br><span class="line">sns.boxplot(data=data)</span><br><span class="line">sns.despine(left=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 偏移轴脊柱</span></span><br><span class="line"><span class="comment"># 提琴箱线图</span></span><br><span class="line">f, ax = plt.subplots()</span><br><span class="line">sns.violinplot(data=data)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5f35860&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_13_1.png" alt="png"></p>
+<h2 id="临时的绘图风格"><a href="#临时的绘图风格" class="headerlink" title="临时的绘图风格"></a>临时的绘图风格</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> sns.axes_style(<span class="string">&#x27;darkgrid&#x27;</span>):</span><br><span class="line">    plt.subplot(<span class="number">311</span>)</span><br><span class="line">    sinplot()</span><br><span class="line">plt.subplot(<span class="number">312</span>)</span><br><span class="line">sinplot(-<span class="number">1</span>)</span><br><span class="line">plt.subplot(<span class="number">313</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_15_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.axes_style()</span><br><span class="line">&#123;<span class="string">&#x27;axes.axisbelow&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line"> <span class="string">&#x27;axes.edgecolor&#x27;</span>: <span class="string">&#x27;.8&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.facecolor&#x27;</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.grid&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line"> <span class="string">&#x27;axes.labelcolor&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.linewidth&#x27;</span>: <span class="number">1.0</span>,</span><br><span class="line"> <span class="string">&#x27;figure.facecolor&#x27;</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;font.family&#x27;</span>: [<span class="string">u&#x27;sans-serif&#x27;</span>],</span><br><span class="line"> <span class="string">&#x27;font.sans-serif&#x27;</span>: [<span class="string">u&#x27;Arial&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;DejaVu Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;Liberation Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;Bitstream Vera Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;sans-serif&#x27;</span>],</span><br><span class="line"> <span class="string">&#x27;grid.color&#x27;</span>: <span class="string">&#x27;.8&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;grid.linestyle&#x27;</span>: <span class="string">u&#x27;-&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;image.cmap&#x27;</span>: <span class="string">u&#x27;rocket&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;legend.frameon&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line"> <span class="string">&#x27;legend.numpoints&#x27;</span>: <span class="number">1</span>,</span><br><span class="line"> <span class="string">&#x27;legend.scatterpoints&#x27;</span>: <span class="number">1</span>,</span><br><span class="line"> <span class="string">&#x27;lines.solid_capstyle&#x27;</span>: <span class="string">u&#x27;round&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;text.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.direction&#x27;</span>: <span class="string">u&#x27;out&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.major.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.minor.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.direction&#x27;</span>: <span class="string">u&#x27;out&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.major.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.minor.size&#x27;</span>: <span class="number">0.0</span>&#125;</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_16_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;darkgrid&quot;</span>, &#123;<span class="string">&quot;axes.facecolor&quot;</span>: <span class="string">&quot;0.1&quot;</span>,<span class="string">&#x27;grid.color&#x27;</span>: <span class="string">&#x27;.9&#x27;</span>&#125;)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_17_0.png" alt="png"></p>
+<h2 id="绘图比例"><a href="#绘图比例" class="headerlink" title="绘图比例"></a>绘图比例</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.<span class="built_in">set</span>()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_context(<span class="string">&quot;paper&quot;</span>)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_20_0.png" alt="png"></p>
+<h2 id="颜色风格设置"><a href="#颜色风格设置" class="headerlink" title="颜色风格设置"></a>颜色风格设置</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">sns.<span class="built_in">set</span>(rc=&#123;<span class="string">&quot;figure.figsize&quot;</span>: (<span class="number">6</span>, <span class="number">6</span>)&#125;)</span><br><span class="line"><span class="comment"># np.random.seed(sum(map(ord, &quot;palettes&quot;)))</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.color_palette()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[(0.2980392156862745, 0.4470588235294118, 0.6901960784313725),
+ (0.3333333333333333, 0.6588235294117647, 0.40784313725490196),
+ (0.7686274509803922, 0.3058823529411765, 0.3215686274509804),
+ (0.5058823529411764, 0.4470588235294118, 0.6980392156862745),
+ (0.8, 0.7254901960784313, 0.4549019607843137),
+ (0.39215686274509803, 0.7098039215686275, 0.803921568627451)]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">current = sns.color_palette()</span><br><span class="line">sns.palplot(current)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_24_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">themes = [<span class="string">&#x27;deep&#x27;</span>, <span class="string">&#x27;muted&#x27;</span>, <span class="string">&#x27;pastel&#x27;</span>, <span class="string">&#x27;bright&#x27;</span>, <span class="string">&#x27;dark&#x27;</span>, <span class="string">&#x27;colorblind&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> theme <span class="keyword">in</span> themes:</span><br><span class="line">    current_palette = sns.color_palette(theme)</span><br><span class="line">    sns.palplot(current_palette)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_0.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_1.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_2.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_3.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_4.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_5.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.palplot(sns.color_palette(<span class="string">&quot;husl&quot;</span>, <span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_26_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.palplot(sns.husl_palette(<span class="number">8</span>,l=<span class="number">0.5</span>,s=<span class="number">0.5</span>))  <span class="comment"># l亮度  s饱和度</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">flatui = [<span class="string">&quot;#9b59b6&quot;</span>, <span class="string">&quot;#3498db&quot;</span>, <span class="string">&quot;#95a5a6&quot;</span>, <span class="string">&quot;#e74c3c&quot;</span>, <span class="string">&quot;#34495e&quot;</span>, <span class="string">&quot;#2ecc71&quot;</span>]</span><br><span class="line">sns.palplot(sns.color_palette(flatui))</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_28_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.plot([<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">1</span>],sns.xkcd_rgb[<span class="string">&quot;red&quot;</span>],lw=<span class="number">1</span>)</span><br><span class="line">plt.plot([<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">2</span>],sns.xkcd_rgb[<span class="string">&quot;green&quot;</span>],lw=<span class="number">3</span>)</span><br><span class="line">plt.plot([<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">3</span>],sns.xkcd_rgb[<span class="string">&quot;blue&quot;</span>],lw=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x17ae5eeed68&gt;]
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_29_1.png" alt="png"></p>
+<h2 id="数据集的分布可视化-1"><a href="#数据集的分布可视化-1" class="headerlink" title="数据集的分布可视化"></a>数据集的分布可视化</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单变量分布</span></span><br><span class="line">x = np.random.normal(size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(x)  </span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5d33d30&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_31_2.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 直方图  </span></span><br><span class="line">sns.distplot(x,kde=<span class="literal">False</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae619fbe0&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_32_2.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.distplot(x,bins=<span class="number">20</span>, kde=<span class="literal">False</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5eddac8&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_33_2.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 核密度估计</span></span><br><span class="line">sns.distplot(x,hist=<span class="literal">False</span>, kde=<span class="literal">True</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae4a1ce48&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_34_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 双变量分布</span></span><br><span class="line">mean, cov = [<span class="number">0</span>, <span class="number">1</span>], [(<span class="number">1</span>, <span class="number">.5</span>), (<span class="number">.5</span>, <span class="number">1</span>)]</span><br><span class="line">data = np.random.multivariate_normal(mean, cov, <span class="number">200</span>)</span><br><span class="line">df = pd.DataFrame(data, columns=[<span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.scatter(x=<span class="string">&quot;x&quot;</span>,y=<span class="string">&quot;y&quot;</span>,data=df)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x17ae6287e48&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_36_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.jointplot(x=<span class="string">&quot;x&quot;</span>,y=<span class="string">&quot;y&quot;</span>,data=df)</span><br></pre></td></tr></table></figure>
+
+<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
+  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
+
+
+
+
+
+&lt;seaborn.axisgrid.JointGrid at 0x17ae6246ba8&gt;
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_37_2.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置</span></span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="comment"># 使用对应得图表</span></span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Pie</span><br><span class="line"><span class="comment"># 0.5版本才这么用</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚假的数据集</span></span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = (</span><br><span class="line">    Pie()</span><br><span class="line">    .add(<span class="string">&quot;&quot;</span>, [<span class="built_in">list</span>(z) <span class="keyword">for</span> z <span class="keyword">in</span> <span class="built_in">zip</span>(Faker.choose(), Faker.values())])</span><br><span class="line">    .set_colors([<span class="string">&quot;blue&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;red&quot;</span>, <span class="string">&quot;pink&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;purple&quot;</span>])</span><br><span class="line">    .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">&quot;Pie-设置颜色&quot;</span>))</span><br><span class="line">    .set_series_opts(label_opts=opts.LabelOpts(formatter=<span class="string">&quot;&#123;b&#125;: &#123;c&#125;&quot;</span>))</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>对象 = (<br>    类()<br>    .add()  # 数据<br>    .set_global_opts() # 全局配置<br>    .set_series_opts() # 局部配置<br>    .render()  # 保存html   render.html<br>)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示</span></span><br><span class="line">c.render_notebook()</span><br></pre></td></tr></table></figure>
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+        <category>Seaborn</category>
+      </categories>
+      <tags>
+        <tag>数据可视化</tag>
+        <tag>Seaborn</tag>
+      </tags>
+  </entry>
 </search>
