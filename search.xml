@@ -19705,7 +19705,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <p>结果:</p>
 <pre><code>[Text(0.5,1,&#39;demo&#39;)]
 </code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png" alt="output_5_1"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/outp21125_1.png" alt="output_5_1"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(np.random.randn(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">axes.set_xlim([-<span class="number">3</span>,<span class="number">12</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">&#x27;y轴&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>结果:</p>
@@ -20585,14 +20585,13 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.distplot(penguins[<span class="string">&quot;flipper_length_mm&quot;</span>])</span><br></pre></td></tr></table></figure>
 
-<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
-  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
 
 
 
 
 
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd8332b0&gt;
+
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd8332b0&gt;
 </code></pre>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_2.png" alt="png"></p>
 <h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><p>不支持</p>
@@ -20692,7 +20691,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.axes_style()</span><br><span class="line">&#123;<span class="string">&#x27;axes.axisbelow&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line"> <span class="string">&#x27;axes.edgecolor&#x27;</span>: <span class="string">&#x27;.8&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.facecolor&#x27;</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.grid&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line"> <span class="string">&#x27;axes.labelcolor&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;axes.linewidth&#x27;</span>: <span class="number">1.0</span>,</span><br><span class="line"> <span class="string">&#x27;figure.facecolor&#x27;</span>: <span class="string">&#x27;white&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;font.family&#x27;</span>: [<span class="string">u&#x27;sans-serif&#x27;</span>],</span><br><span class="line"> <span class="string">&#x27;font.sans-serif&#x27;</span>: [<span class="string">u&#x27;Arial&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;DejaVu Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;Liberation Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;Bitstream Vera Sans&#x27;</span>,</span><br><span class="line">  <span class="string">u&#x27;sans-serif&#x27;</span>],</span><br><span class="line"> <span class="string">&#x27;grid.color&#x27;</span>: <span class="string">&#x27;.8&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;grid.linestyle&#x27;</span>: <span class="string">u&#x27;-&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;image.cmap&#x27;</span>: <span class="string">u&#x27;rocket&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;legend.frameon&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line"> <span class="string">&#x27;legend.numpoints&#x27;</span>: <span class="number">1</span>,</span><br><span class="line"> <span class="string">&#x27;legend.scatterpoints&#x27;</span>: <span class="number">1</span>,</span><br><span class="line"> <span class="string">&#x27;lines.solid_capstyle&#x27;</span>: <span class="string">u&#x27;round&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;text.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.direction&#x27;</span>: <span class="string">u&#x27;out&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.major.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;xtick.minor.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.color&#x27;</span>: <span class="string">&#x27;.15&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.direction&#x27;</span>: <span class="string">u&#x27;out&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.major.size&#x27;</span>: <span class="number">0.0</span>,</span><br><span class="line"> <span class="string">&#x27;ytick.minor.size&#x27;</span>: <span class="number">0.0</span>&#125;</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
 
 
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_16_0.png" alt="png"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/o222t_16_0.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.set_style(<span class="string">&quot;darkgrid&quot;</span>, &#123;<span class="string">&quot;axes.facecolor&quot;</span>: <span class="string">&quot;0.1&quot;</span>,<span class="string">&#x27;grid.color&#x27;</span>: <span class="string">&#x27;.9&#x27;</span>&#125;)</span><br><span class="line">sinplot()</span><br></pre></td></tr></table></figure>
 
 
@@ -20754,38 +20753,23 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_29_1.png" alt="png"></p>
 <h2 id="数据集的分布可视化-1"><a href="#数据集的分布可视化-1" class="headerlink" title="数据集的分布可视化"></a>数据集的分布可视化</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 单变量分布</span></span><br><span class="line">x = np.random.normal(size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(x)  </span><br></pre></td></tr></table></figure>
 
-<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
-  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
 
 
-
-
-
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5d33d30&gt;
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5d33d30&gt;
 </code></pre>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_31_2.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 直方图  </span></span><br><span class="line">sns.distplot(x,kde=<span class="literal">False</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
-  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
 
 
-
-
-
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae619fbe0&gt;
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae619fbe0&gt;
 </code></pre>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_32_2.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sns.distplot(x,bins=<span class="number">20</span>, kde=<span class="literal">False</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-<pre><code>D:\an\lib\site-packages\matplotlib\axes\_axes.py:6462: UserWarning: The &#39;normed&#39; kwarg is deprecated, and has been replaced by the &#39;density&#39; kwarg.
-  warnings.warn(&quot;The &#39;normed&#39; kwarg is deprecated, and has been &quot;
 
 
-
-
-
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5eddac8&gt;
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x17ae5eddac8&gt;
 </code></pre>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_33_2.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 核密度估计</span></span><br><span class="line">sns.distplot(x,hist=<span class="literal">False</span>, kde=<span class="literal">True</span>,rug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
