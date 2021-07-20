@@ -20839,4 +20839,1940 @@ wpac_init.push({widget: 'Rating', id: 31073});
         <tag>Seaborn</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Pyecharts可视化</title>
+    <url>/22017.html</url>
+    <content><![CDATA[<p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Pyecharts</span></strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pyecharts</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pyecharts.__version__</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;1.9.0&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#from pyecharts import Bar #0.5版本</span></span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar <span class="comment">#V1版本</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">bar = Bar()</span><br><span class="line">bar.add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">bar.add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">bar.add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line"><span class="comment"># render 会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件</span></span><br><span class="line"><span class="comment"># 也可以传入路径参数，如 bar.render(&quot;mycharts.html&quot;)</span></span><br><span class="line">bar.render()  <span class="comment">#保存成交互的文件</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;C:\\Users\\AlgoMachine\\Desktop\\暑假数模学习\\4.3\\render.html&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">bar.render_notebook()  <span class="comment">#渲染到当前页面</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;4677f953622e43aabcef49089e0d75b5&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_4677f953622e43aabcef49089e0d75b5 = echarts.init(
+                    document.getElementById('4677f953622e43aabcef49089e0d75b5'), 'white', {renderer: 'canvas'});
+                var option_4677f953622e43aabcef49089e0d75b5 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                75,
+                90
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
+            "data": [
+                10,
+                15,
+                25,
+                6,
+                80,
+                60
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A",
+                "\u5546\u5bb6B"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true,
+                "\u5546\u5bb6B": true
+            }
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u886c\u886b",
+                "\u7f8a\u6bdb\u886b",
+                "\u96ea\u7eba\u886b",
+                "\u88e4\u5b50",
+                "\u9ad8\u8ddf\u978b",
+                "\u889c\u5b50"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ]
+};
+                chart_4677f953622e43aabcef49089e0d75b5.setOption(option_4677f953622e43aabcef49089e0d75b5);
+        });
+    </script>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#链式调用</span></span><br><span class="line">bar = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">)</span><br><span class="line">bar.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;c1536bf02ffc4478b262a47f781f9bb8&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_c1536bf02ffc4478b262a47f781f9bb8 = echarts.init(
+                    document.getElementById('c1536bf02ffc4478b262a47f781f9bb8'), 'white', {renderer: 'canvas'});
+                var option_c1536bf02ffc4478b262a47f781f9bb8 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                75,
+                90
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
+            "data": [
+                10,
+                15,
+                25,
+                6,
+                80,
+                60
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A",
+                "\u5546\u5bb6B"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true,
+                "\u5546\u5bb6B": true
+            }
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u886c\u886b",
+                "\u7f8a\u6bdb\u886b",
+                "\u96ea\u7eba\u886b",
+                "\u88e4\u5b50",
+                "\u9ad8\u8ddf\u978b",
+                "\u889c\u5b50"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ]
+};
+                chart_c1536bf02ffc4478b262a47f781f9bb8.setOption(option_c1536bf02ffc4478b262a47f781f9bb8);
+        });
+    </script>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">from</span> pyecharts.render <span class="keyword">import</span> make_snapshot  <span class="comment">#保存必须导入这个</span></span><br><span class="line"><span class="comment"># 使用snapshot-selenium 渲染图片</span></span><br><span class="line"><span class="keyword">from</span> snapshot_selenium <span class="keyword">import</span> snapshot</span><br><span class="line">bar = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">)</span><br><span class="line">make_snapshot(snapshot,bar.render(),<span class="string">&#x27;bar.jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>---------------------------------------------------------------------------
+
+SessionNotCreatedException                Traceback (most recent call last)
+
+&lt;ipython-input-11-03de40c6a947&gt; in &lt;module&gt;()
+      9     .add_yaxis(&quot;商家B&quot;,[10, 15, 25, 6, 80, 60])
+     10 )
+---&gt; 11 make_snapshot(snapshot,bar.render(),&#39;bar.jpeg&#39;)
+
+
+D:\an\lib\site-packages\pyecharts\render\snapshot.py in make_snapshot(engine, file_name, output_name, delay, pixel_ratio, is_remove_html, **kwargs)
+     35         delay=delay,
+     36         pixel_ratio=pixel_ratio,
+---&gt; 37         **kwargs,
+     38     )
+     39     if file_type in [SVG_FORMAT, B64_FORMAT]:
+
+
+D:\an\lib\site-packages\snapshot_selenium\snapshot.py in make_snapshot(html_path, file_type, pixel_ratio, delay, browser, driver)
+     33     if not driver:
+     34         if browser == &quot;Chrome&quot;:
+---&gt; 35             driver = get_chrome_driver()
+     36         elif browser == &quot;Safari&quot;:
+     37             driver = get_safari_driver()
+
+
+D:\an\lib\site-packages\snapshot_selenium\snapshot.py in get_chrome_driver()
+     56     options = webdriver.ChromeOptions()
+     57     options.add_argument(&quot;headless&quot;)
+---&gt; 58     return webdriver.Chrome(options=options)
+     59 
+     60 
+
+
+D:\an\lib\site-packages\selenium\webdriver\chrome\webdriver.py in __init__(self, executable_path, port, options, service_args, desired_capabilities, service_log_path, chrome_options, keep_alive)
+     79                     remote_server_addr=self.service.service_url,
+     80                     keep_alive=keep_alive),
+---&gt; 81                 desired_capabilities=desired_capabilities)
+     82         except Exception:
+     83             self.quit()
+
+
+D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in __init__(self, command_executor, desired_capabilities, browser_profile, proxy, keep_alive, file_detector, options)
+    155             warnings.warn(&quot;Please use FirefoxOptions to set browser profile&quot;,
+    156                           DeprecationWarning, stacklevel=2)
+--&gt; 157         self.start_session(capabilities, browser_profile)
+    158         self._switch_to = SwitchTo(self)
+    159         self._mobile = Mobile(self)
+
+
+D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in start_session(self, capabilities, browser_profile)
+    250         parameters = &#123;&quot;capabilities&quot;: w3c_caps,
+    251                       &quot;desiredCapabilities&quot;: capabilities&#125;
+--&gt; 252         response = self.execute(Command.NEW_SESSION, parameters)
+    253         if &#39;sessionId&#39; not in response:
+    254             response = response[&#39;value&#39;]
+
+
+D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in execute(self, driver_command, params)
+    319         response = self.command_executor.execute(driver_command, params)
+    320         if response:
+--&gt; 321             self.error_handler.check_response(response)
+    322             response[&#39;value&#39;] = self._unwrap_value(
+    323                 response.get(&#39;value&#39;, None))
+
+
+D:\an\lib\site-packages\selenium\webdriver\remote\errorhandler.py in check_response(self, response)
+    240                 alert_text = value[&#39;alert&#39;].get(&#39;text&#39;)
+    241             raise exception_class(message, screen, stacktrace, alert_text)
+--&gt; 242         raise exception_class(message, screen, stacktrace)
+    243 
+    244     def _value_or_default(self, obj, key, default):
+
+
+SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 86
+Current browser version is 91.0.4472.124 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
+</code></pre>
+<h1 id="全局配置项"><a href="#全局配置项" class="headerlink" title="全局配置项"></a>全局配置项</h1><h2 id="初始化配置项"><a href="#初始化配置项" class="headerlink" title="初始化配置项"></a>初始化配置项</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts.render <span class="keyword">import</span> make_snapshot  <span class="comment">#保存必须导入这个</span></span><br><span class="line"><span class="comment"># 使用snapshot-selenium 渲染图片</span></span><br><span class="line"><span class="keyword">from</span> snapshot_selenium <span class="keyword">import</span> snapshot</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line">bar = (</span><br><span class="line">    Bar(init_opts=opts.InitOpts(width=<span class="string">&quot;1200px&quot;</span>,height=<span class="string">&quot;600px&quot;</span>,page_title=<span class="string">&#x27;初始化配置项&#x27;</span>,bg_color=<span class="string">&#x27;white&#x27;</span>))</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">    .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">&#x27;主标题&#x27;</span>,subtitle=<span class="string">&quot;副标题&quot;</span>,title_link=<span class="string">&quot;https://baidu.com&quot;</span>,pos_left=<span class="string">&#x27;40%&#x27;</span>,pos_top=<span class="string">&quot;50px&quot;</span>))</span><br><span class="line">)</span><br><span class="line">bar.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;582b4545c5014346a1daf9461153bfe8&quot; style=&quot;width:1200px; height:600px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_582b4545c5014346a1daf9461153bfe8 = echarts.init(
+                    document.getElementById('582b4545c5014346a1daf9461153bfe8'), 'white', {renderer: 'canvas'});
+                var option_582b4545c5014346a1daf9461153bfe8 = {
+    "backgroundColor": "white",
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                75,
+                90
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
+            "data": [
+                10,
+                15,
+                25,
+                6,
+                80,
+                60
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A",
+                "\u5546\u5bb6B"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true,
+                "\u5546\u5bb6B": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u886c\u886b",
+                "\u7f8a\u6bdb\u886b",
+                "\u96ea\u7eba\u886b",
+                "\u88e4\u5b50",
+                "\u9ad8\u8ddf\u978b",
+                "\u889c\u5b50"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "\u4e3b\u6807\u9898",
+            "link": "https://baidu.com",
+            "subtext": "\u526f\u6807\u9898",
+            "left": "40%",
+            "top": "50px",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+                chart_582b4545c5014346a1daf9461153bfe8.setOption(option_582b4545c5014346a1daf9461153bfe8);
+        });
+    </script>
+
+
+
+
+<h2 id="图例配置项"><a href="#图例配置项" class="headerlink" title="图例配置项"></a>图例配置项</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts.render <span class="keyword">import</span> make_snapshot  <span class="comment">#保存必须导入这个</span></span><br><span class="line"><span class="comment"># 使用snapshot-selenium 渲染图片</span></span><br><span class="line"><span class="keyword">from</span> snapshot_selenium <span class="keyword">import</span> snapshot</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line">bar = (</span><br><span class="line">    Bar(init_opts=opts.InitOpts(width=<span class="string">&quot;1200px&quot;</span>,height=<span class="string">&quot;600px&quot;</span>,page_title=<span class="string">&#x27;初始化配置项&#x27;</span>,bg_color=<span class="string">&#x27;white&#x27;</span>))</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">    .set_global_opts(</span><br><span class="line">        legend_opts=opts.LegendOpts(pos_top=<span class="string">&quot;50px&quot;</span>,item_gap=<span class="number">100</span>,legend_icon=<span class="string">&quot;circle&quot;</span>), <span class="comment">#图例配置项  间隔  样式</span></span><br><span class="line">        title_opts=opts.TitleOpts(title=<span class="string">&quot;主标题&quot;</span>,subtitle=<span class="string">&quot;副标题&quot;</span>,title_link=<span class="string">&quot;https://www.baidu.com/&quot;</span>,pos_left=<span class="string">&quot;center&quot;</span>) <span class="comment">#初始配置项</span></span><br><span class="line">        )</span><br><span class="line">)</span><br><span class="line">bar.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;f295e10e4737408883466333215823f0&quot; style=&quot;width:1200px; height:600px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_f295e10e4737408883466333215823f0 = echarts.init(
+                    document.getElementById('f295e10e4737408883466333215823f0'), 'white', {renderer: 'canvas'});
+                var option_f295e10e4737408883466333215823f0 = {
+    "backgroundColor": "white",
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                75,
+                90
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
+            "data": [
+                10,
+                15,
+                25,
+                6,
+                80,
+                60
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A",
+                "\u5546\u5bb6B"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true,
+                "\u5546\u5bb6B": true
+            },
+            "show": true,
+            "top": "50px",
+            "padding": 5,
+            "itemGap": 100,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "icon": "circle"
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u886c\u886b",
+                "\u7f8a\u6bdb\u886b",
+                "\u96ea\u7eba\u886b",
+                "\u88e4\u5b50",
+                "\u9ad8\u8ddf\u978b",
+                "\u889c\u5b50"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "\u4e3b\u6807\u9898",
+            "link": "https://www.baidu.com/",
+            "subtext": "\u526f\u6807\u9898",
+            "left": "center",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+                chart_f295e10e4737408883466333215823f0.setOption(option_f295e10e4737408883466333215823f0);
+        });
+    </script>
+
+
+
+
+<h2 id="区域缩放配置项"><a href="#区域缩放配置项" class="headerlink" title="区域缩放配置项"></a>区域缩放配置项</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar </span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br><span class="line"></span><br><span class="line">bar = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis(Faker.days_attrs) <span class="comment">#假的数据</span></span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,Faker.days_values,color=Faker.rand_color())</span><br><span class="line">    .set_global_opts(</span><br><span class="line">        title_opts=opts.TitleOpts(title=<span class="string">&quot;主标题&quot;</span>,subtitle=<span class="string">&quot;副标题&quot;</span>,title_link=<span class="string">&quot;https://www.baidu.com/&quot;</span>),</span><br><span class="line">        datazoom_opts=opts.DataZoomOpts() <span class="comment">#下滑拖拽 </span></span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line">bar.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;0080c58809974887b3134fb5939aeb7b&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_0080c58809974887b3134fb5939aeb7b = echarts.init(
+                    document.getElementById('0080c58809974887b3134fb5939aeb7b'), 'white', {renderer: 'canvas'});
+                var option_0080c58809974887b3134fb5939aeb7b = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                30,
+                21,
+                13,
+                13,
+                20,
+                20,
+                30,
+                24,
+                24,
+                21,
+                21,
+                4,
+                19,
+                17,
+                6,
+                1,
+                14,
+                4,
+                20,
+                24,
+                28,
+                11,
+                23,
+                17,
+                9,
+                3,
+                20,
+                7,
+                22,
+                21
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "0\u5929",
+                "1\u5929",
+                "2\u5929",
+                "3\u5929",
+                "4\u5929",
+                "5\u5929",
+                "6\u5929",
+                "7\u5929",
+                "8\u5929",
+                "9\u5929",
+                "10\u5929",
+                "11\u5929",
+                "12\u5929",
+                "13\u5929",
+                "14\u5929",
+                "15\u5929",
+                "16\u5929",
+                "17\u5929",
+                "18\u5929",
+                "19\u5929",
+                "20\u5929",
+                "21\u5929",
+                "22\u5929",
+                "23\u5929",
+                "24\u5929",
+                "25\u5929",
+                "26\u5929",
+                "27\u5929",
+                "28\u5929",
+                "29\u5929"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "\u4e3b\u6807\u9898",
+            "link": "https://www.baidu.com/",
+            "subtext": "\u526f\u6807\u9898",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ],
+    "dataZoom": {
+        "show": true,
+        "type": "slider",
+        "realtime": true,
+        "start": 20,
+        "end": 80,
+        "orient": "horizontal",
+        "zoomLock": false,
+        "filterMode": "filter"
+    }
+};
+                chart_0080c58809974887b3134fb5939aeb7b.setOption(option_0080c58809974887b3134fb5939aeb7b);
+        });
+    </script>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Geo</span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br><span class="line"><span class="keyword">from</span> pyecharts.<span class="built_in">globals</span> <span class="keyword">import</span> ChartType</span><br><span class="line"></span><br><span class="line">c = (</span><br><span class="line">    Geo()</span><br><span class="line">    .add_schema(maptype=<span class="string">&quot;广东&quot;</span>)</span><br><span class="line">    .add(</span><br><span class="line">        <span class="string">&quot;geo&quot;</span>,</span><br><span class="line">        [<span class="built_in">list</span>(z) <span class="keyword">for</span> z <span class="keyword">in</span> <span class="built_in">zip</span>(Faker.guangdong_city, Faker.values())],</span><br><span class="line">        type_=ChartType.HEATMAP,  <span class="comment">#热力地图</span></span><br><span class="line">    )</span><br><span class="line">    .set_global_opts(</span><br><span class="line">        visualmap_opts=opts.VisualMapOpts(), title_opts=opts.TitleOpts(title=<span class="string">&quot;Geo-广东地图&quot;</span>)  <span class="comment">#进行筛选</span></span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min', '广东':'https://assets.pyecharts.org/assets/maps/guangdong'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;7ebf6c52b70f45f881cff416d8d4f850&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts', '广东'], function(echarts) {
+                var chart_7ebf6c52b70f45f881cff416d8d4f850 = echarts.init(
+                    document.getElementById('7ebf6c52b70f45f881cff416d8d4f850'), 'white', {renderer: 'canvas'});
+                var option_7ebf6c52b70f45f881cff416d8d4f850 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "heatmap",
+            "name": "geo",
+            "coordinateSystem": "geo",
+            "data": [
+                {
+                    "name": "\u6c55\u5934\u5e02",
+                    "value": [
+                        116.68,
+                        23.35,
+                        124
+                    ]
+                },
+                {
+                    "name": "\u6c55\u5c3e\u5e02",
+                    "value": [
+                        115.37,
+                        22.78,
+                        124
+                    ]
+                },
+                {
+                    "name": "\u63ed\u9633\u5e02",
+                    "value": [
+                        116.37,
+                        23.55,
+                        91
+                    ]
+                },
+                {
+                    "name": "\u9633\u6c5f\u5e02",
+                    "value": [
+                        111.98,
+                        21.87,
+                        131
+                    ]
+                },
+                {
+                    "name": "\u8087\u5e86\u5e02",
+                    "value": [
+                        112.47,
+                        23.05,
+                        102
+                    ]
+                },
+                {
+                    "name": "\u5e7f\u5dde\u5e02",
+                    "value": [
+                        113.27,
+                        23.13,
+                        48
+                    ]
+                },
+                {
+                    "name": "\u60e0\u5dde\u5e02",
+                    "value": [
+                        114.42,
+                        23.12,
+                        92
+                    ]
+                }
+            ],
+            "pointSize": 20,
+            "blurSize": 20
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "geo"
+            ],
+            "selected": {
+                "geo": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "formatter": function (params) {        return params.name + ' : ' + params.value[2];    },
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "title": [
+        {
+            "text": "Geo-\u5e7f\u4e1c\u5730\u56fe",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ],
+    "visualMap": {
+        "show": true,
+        "type": "continuous",
+        "min": 0,
+        "max": 100,
+        "inRange": {
+            "color": [
+                "#50a3ba",
+                "#eac763",
+                "#d94e5d"
+            ]
+        },
+        "calculable": true,
+        "inverse": false,
+        "splitNumber": 5,
+        "orient": "vertical",
+        "showLabel": true,
+        "itemWidth": 20,
+        "itemHeight": 140,
+        "borderWidth": 0
+    },
+    "geo": {
+        "map": "\u5e7f\u4e1c",
+        "roam": true,
+        "aspectScale": 0.75,
+        "nameProperty": "name",
+        "selectedMode": false,
+        "emphasis": {}
+    }
+};
+                chart_7ebf6c52b70f45f881cff416d8d4f850.setOption(option_7ebf6c52b70f45f881cff416d8d4f850);
+        });
+    </script>
+
+
+
+
+<h2 id="工具箱配置项"><a href="#工具箱配置项" class="headerlink" title="工具箱配置项"></a>工具箱配置项</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar</span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br><span class="line"></span><br><span class="line">c = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis(Faker.choose())</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>, Faker.values())</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>, Faker.values())</span><br><span class="line">    .set_global_opts(</span><br><span class="line">        title_opts=opts.TitleOpts(title=<span class="string">&quot;Bar-显示 ToolBox&quot;</span>),</span><br><span class="line">        toolbox_opts=opts.ToolboxOpts(),  <span class="comment">#工具箱</span></span><br><span class="line">        legend_opts=opts.LegendOpts(is_show=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;624036b8053342a38612d7f5a9b0d5ba&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_624036b8053342a38612d7f5a9b0d5ba = echarts.init(
+                    document.getElementById('624036b8053342a38612d7f5a9b0d5ba'), 'white', {renderer: 'canvas'});
+                var option_624036b8053342a38612d7f5a9b0d5ba = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                32,
+                115,
+                80,
+                43,
+                141,
+                44,
+                26
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        },
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6B",
+            "legendHoverLink": true,
+            "data": [
+                88,
+                96,
+                149,
+                144,
+                97,
+                142,
+                20
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A",
+                "\u5546\u5bb6B"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true,
+                "\u5546\u5bb6B": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u5c0f\u7c73",
+                "\u4e09\u661f",
+                "\u534e\u4e3a",
+                "\u82f9\u679c",
+                "\u9b45\u65cf",
+                "VIVO",
+                "OPPO"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "Bar-\u663e\u793a ToolBox",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ],
+    "toolbox": {
+        "show": true,
+        "orient": "horizontal",
+        "itemSize": 15,
+        "itemGap": 10,
+        "left": "80%",
+        "feature": {
+            "saveAsImage": {
+                "type": "png",
+                "backgroundColor": "auto",
+                "connectedBackgroundColor": "#fff",
+                "show": true,
+                "title": "\u4fdd\u5b58\u4e3a\u56fe\u7247",
+                "pixelRatio": 1
+            },
+            "restore": {
+                "show": true,
+                "title": "\u8fd8\u539f"
+            },
+            "dataView": {
+                "show": true,
+                "title": "\u6570\u636e\u89c6\u56fe",
+                "readOnly": false,
+                "lang": [
+                    "\u6570\u636e\u89c6\u56fe",
+                    "\u5173\u95ed",
+                    "\u5237\u65b0"
+                ],
+                "backgroundColor": "#fff",
+                "textareaColor": "#fff",
+                "textareaBorderColor": "#333",
+                "textColor": "#000",
+                "buttonColor": "#c23531",
+                "buttonTextColor": "#fff"
+            },
+            "dataZoom": {
+                "show": true,
+                "title": {
+                    "zoom": "\u533a\u57df\u7f29\u653e",
+                    "back": "\u533a\u57df\u7f29\u653e\u8fd8\u539f"
+                },
+                "icon": {},
+                "xAxisIndex": false,
+                "yAxisIndex": false,
+                "filterMode": "filter"
+            },
+            "magicType": {
+                "show": true,
+                "type": [
+                    "line",
+                    "bar",
+                    "stack",
+                    "tiled"
+                ],
+                "title": {
+                    "line": "\u5207\u6362\u4e3a\u6298\u7ebf\u56fe",
+                    "bar": "\u5207\u6362\u4e3a\u67f1\u72b6\u56fe",
+                    "stack": "\u5207\u6362\u4e3a\u5806\u53e0",
+                    "tiled": "\u5207\u6362\u4e3a\u5e73\u94fa"
+                },
+                "icon": {}
+            },
+            "brush": {
+                "icon": {},
+                "title": {
+                    "rect": "\u77e9\u5f62\u9009\u62e9",
+                    "polygon": "\u5708\u9009",
+                    "lineX": "\u6a2a\u5411\u9009\u62e9",
+                    "lineY": "\u7eb5\u5411\u9009\u62e9",
+                    "keep": "\u4fdd\u6301\u9009\u62e9",
+                    "clear": "\u6e05\u9664\u9009\u62e9"
+                }
+            }
+        }
+    }
+};
+                chart_624036b8053342a38612d7f5a9b0d5ba.setOption(option_624036b8053342a38612d7f5a9b0d5ba);
+        });
+    </script>
+
+
+
+
+<h1 id="系列配置项"><a href="#系列配置项" class="headerlink" title="系列配置项"></a>系列配置项</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Geo</span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar</span><br><span class="line"><span class="keyword">from</span> pyecharts.faker <span class="keyword">import</span> Faker</span><br><span class="line"></span><br><span class="line">c = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis(Faker.choose())</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>, Faker.values())</span><br><span class="line">    .set_series_opts(label_opts=opts.LabelOpts(is_show=<span class="literal">True</span>))<span class="comment">#标签配置项  ，显示数据标签</span></span><br><span class="line">    .set_global_opts(</span><br><span class="line">        title_opts=opts.TitleOpts(title=<span class="string">&quot;Bar-显示 ToolBox&quot;</span>),</span><br><span class="line">        legend_opts=opts.LegendOpts(is_show=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">c.render_notebook()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script>
+    require.config({
+        paths: {
+            'echarts':'https://assets.pyecharts.org/assets/echarts.min'
+        }
+    });
+</script>
+
+<pre><code>    &lt;div id=&quot;c846abe1941e4e46b34e204727d621e5&quot; style=&quot;width:900px; height:500px;&quot;&gt;&lt;/div&gt;
+</code></pre>
+<script>
+        require(['echarts'], function(echarts) {
+                var chart_c846abe1941e4e46b34e204727d621e5 = echarts.init(
+                    document.getElementById('c846abe1941e4e46b34e204727d621e5'), 'white', {renderer: 'canvas'});
+                var option_c846abe1941e4e46b34e204727d621e5 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "bar",
+            "name": "\u5546\u5bb6A",
+            "legendHoverLink": true,
+            "data": [
+                68,
+                93,
+                83,
+                41,
+                62,
+                62,
+                107
+            ],
+            "showBackground": false,
+            "barMinHeight": 0,
+            "barCategoryGap": "20%",
+            "barGap": "30%",
+            "large": false,
+            "largeThreshold": 400,
+            "seriesLayoutBy": "column",
+            "datasetIndex": 0,
+            "clip": true,
+            "zlevel": 0,
+            "z": 2,
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u5546\u5bb6A"
+            ],
+            "selected": {
+                "\u5546\u5bb6A": true
+            },
+            "show": true,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "\u54c8\u58eb\u5947",
+                "\u8428\u6469\u8036",
+                "\u6cf0\u8fea",
+                "\u91d1\u6bdb",
+                "\u7267\u7f8a\u72ac",
+                "\u5409\u5a03\u5a03",
+                "\u67ef\u57fa"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "text": "Bar-\u663e\u793a ToolBox",
+            "padding": 5,
+            "itemGap": 10
+        }
+    ]
+};
+                chart_c846abe1941e4e46b34e204727d621e5.setOption(option_c846abe1941e4e46b34e204727d621e5);
+        });
+    </script>
+
+
+<p>​                                                         <a href="https://pyecharts.org/#/zh-cn/intro">pyecharts官方文档</a></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+        <category>Pyecharts</category>
+      </categories>
+      <tags>
+        <tag>数据可视化</tag>
+        <tag>Pyecharts</tag>
+      </tags>
+  </entry>
 </search>
