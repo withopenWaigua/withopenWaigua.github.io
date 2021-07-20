@@ -21279,83 +21279,9 @@ wpac_init.push({widget: 'Rating', id: 31073});
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">from</span> pyecharts.render <span class="keyword">import</span> make_snapshot  <span class="comment">#保存必须导入这个</span></span><br><span class="line"><span class="comment"># 使用snapshot-selenium 渲染图片</span></span><br><span class="line"><span class="keyword">from</span> snapshot_selenium <span class="keyword">import</span> snapshot</span><br><span class="line">bar = (</span><br><span class="line">    Bar()</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">)</span><br><span class="line">make_snapshot(snapshot,bar.render(),<span class="string">&#x27;bar.jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 
-<pre><code>---------------------------------------------------------------------------
-
-SessionNotCreatedException                Traceback (most recent call last)
-
-&lt;ipython-input-11-03de40c6a947&gt; in &lt;module&gt;()
-      9     .add_yaxis(&quot;商家B&quot;,[10, 15, 25, 6, 80, 60])
-     10 )
----&gt; 11 make_snapshot(snapshot,bar.render(),&#39;bar.jpeg&#39;)
 
 
-D:\an\lib\site-packages\pyecharts\render\snapshot.py in make_snapshot(engine, file_name, output_name, delay, pixel_ratio, is_remove_html, **kwargs)
-     35         delay=delay,
-     36         pixel_ratio=pixel_ratio,
----&gt; 37         **kwargs,
-     38     )
-     39     if file_type in [SVG_FORMAT, B64_FORMAT]:
 
-
-D:\an\lib\site-packages\snapshot_selenium\snapshot.py in make_snapshot(html_path, file_type, pixel_ratio, delay, browser, driver)
-     33     if not driver:
-     34         if browser == &quot;Chrome&quot;:
----&gt; 35             driver = get_chrome_driver()
-     36         elif browser == &quot;Safari&quot;:
-     37             driver = get_safari_driver()
-
-
-D:\an\lib\site-packages\snapshot_selenium\snapshot.py in get_chrome_driver()
-     56     options = webdriver.ChromeOptions()
-     57     options.add_argument(&quot;headless&quot;)
----&gt; 58     return webdriver.Chrome(options=options)
-     59 
-     60 
-
-
-D:\an\lib\site-packages\selenium\webdriver\chrome\webdriver.py in __init__(self, executable_path, port, options, service_args, desired_capabilities, service_log_path, chrome_options, keep_alive)
-     79                     remote_server_addr=self.service.service_url,
-     80                     keep_alive=keep_alive),
----&gt; 81                 desired_capabilities=desired_capabilities)
-     82         except Exception:
-     83             self.quit()
-
-
-D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in __init__(self, command_executor, desired_capabilities, browser_profile, proxy, keep_alive, file_detector, options)
-    155             warnings.warn(&quot;Please use FirefoxOptions to set browser profile&quot;,
-    156                           DeprecationWarning, stacklevel=2)
---&gt; 157         self.start_session(capabilities, browser_profile)
-    158         self._switch_to = SwitchTo(self)
-    159         self._mobile = Mobile(self)
-
-
-D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in start_session(self, capabilities, browser_profile)
-    250         parameters = &#123;&quot;capabilities&quot;: w3c_caps,
-    251                       &quot;desiredCapabilities&quot;: capabilities&#125;
---&gt; 252         response = self.execute(Command.NEW_SESSION, parameters)
-    253         if &#39;sessionId&#39; not in response:
-    254             response = response[&#39;value&#39;]
-
-
-D:\an\lib\site-packages\selenium\webdriver\remote\webdriver.py in execute(self, driver_command, params)
-    319         response = self.command_executor.execute(driver_command, params)
-    320         if response:
---&gt; 321             self.error_handler.check_response(response)
-    322             response[&#39;value&#39;] = self._unwrap_value(
-    323                 response.get(&#39;value&#39;, None))
-
-
-D:\an\lib\site-packages\selenium\webdriver\remote\errorhandler.py in check_response(self, response)
-    240                 alert_text = value[&#39;alert&#39;].get(&#39;text&#39;)
-    241             raise exception_class(message, screen, stacktrace, alert_text)
---&gt; 242         raise exception_class(message, screen, stacktrace)
-    243 
-    244     def _value_or_default(self, obj, key, default):
-
-
-SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 86
-Current browser version is 91.0.4472.124 with binary path C:\Program Files\Google\Chrome\Application\chrome.exe
-</code></pre>
 <h1 id="全局配置项"><a href="#全局配置项" class="headerlink" title="全局配置项"></a>全局配置项</h1><h2 id="初始化配置项"><a href="#初始化配置项" class="headerlink" title="初始化配置项"></a>初始化配置项</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyecharts.render <span class="keyword">import</span> make_snapshot  <span class="comment">#保存必须导入这个</span></span><br><span class="line"><span class="comment"># 使用snapshot-selenium 渲染图片</span></span><br><span class="line"><span class="keyword">from</span> snapshot_selenium <span class="keyword">import</span> snapshot</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line">bar = (</span><br><span class="line">    Bar(init_opts=opts.InitOpts(width=<span class="string">&quot;1200px&quot;</span>,height=<span class="string">&quot;600px&quot;</span>,page_title=<span class="string">&#x27;初始化配置项&#x27;</span>,bg_color=<span class="string">&#x27;white&#x27;</span>))</span><br><span class="line">    .add_xaxis([<span class="string">&quot;衬衫&quot;</span>, <span class="string">&quot;羊毛衫&quot;</span>, <span class="string">&quot;雪纺衫&quot;</span>, <span class="string">&quot;裤子&quot;</span>, <span class="string">&quot;高跟鞋&quot;</span>, <span class="string">&quot;袜子&quot;</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家A&quot;</span>,[<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">75</span>, <span class="number">90</span>])</span><br><span class="line">    .add_yaxis(<span class="string">&quot;商家B&quot;</span>,[<span class="number">10</span>, <span class="number">15</span>, <span class="number">25</span>, <span class="number">6</span>, <span class="number">80</span>, <span class="number">60</span>])</span><br><span class="line">    .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">&#x27;主标题&#x27;</span>,subtitle=<span class="string">&quot;副标题&quot;</span>,title_link=<span class="string">&quot;https://baidu.com&quot;</span>,pos_left=<span class="string">&#x27;40%&#x27;</span>,pos_top=<span class="string">&quot;50px&quot;</span>))</span><br><span class="line">)</span><br><span class="line">bar.render_notebook()</span><br></pre></td></tr></table></figure>
 
 
