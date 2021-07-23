@@ -1,0 +1,1017 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KNN算法分析与实现 | Alogomachine's BLOG</title><meta name="keywords" content="机器学习,算法,KNN"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="机器学习算法KNN k-近邻算法：  最容易理解的算法 最容易实现的算法  几个需要考虑的问题：  把一个物体表示成向量 标记好每个物体的标签 计算两个物体之间的距离&#x2F;相似度 选择合适的k  选择合适的K: 使用交叉验证技术(把训练数据进一步分为训练数据和验证数据集，选择在验证数据里最好的超参数组合)  核心手动实现1234import numpy as npfrom sklearn import">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KNN算法分析与实现">
+<meta property="og:url" content="http://alogomachine.com/22319.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法KNN k-近邻算法：  最容易理解的算法 最容易实现的算法  几个需要考虑的问题：  把一个物体表示成向量 标记好每个物体的标签 计算两个物体之间的距离&#x2F;相似度 选择合适的k  选择合适的K: 使用交叉验证技术(把训练数据进一步分为训练数据和验证数据集，选择在验证数据里最好的超参数组合)  核心手动实现1234import numpy as npfrom sklearn import">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/eeb670a30fd593eef0b0254807cd1c2ab1f41287.jpg">
+<meta property="article:published_time" content="2021-07-23T15:19:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T15:25:37.500Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="KNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/eeb670a30fd593eef0b0254807cd1c2ab1f41287.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://alogomachine.com/22319"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KNN算法分析与实现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-23 23:25:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/eeb670a30fd593eef0b0254807cd1c2ab1f41287.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine's BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">KNN算法分析与实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-23T15:19:00.000Z" title="发表于 2021-07-23 23:19:00">2021-07-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-23T15:25:37.500Z" title="更新于 2021-07-23 23:25:37">2021-07-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>38分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KNN算法分析与实现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">KNN</span></strong></p>
+<p><strong>k-近邻算法：</strong></p>
+<ul>
+<li><strong>最容易理解的算法</strong></li>
+<li><strong>最容易实现的算法</strong></li>
+</ul>
+<p><strong>几个需要考虑的问题：</strong></p>
+<ol>
+<li><strong>把一个物体表示成向量</strong></li>
+<li><strong>标记好每个物体的标签</strong></li>
+<li><strong>计算两个物体之间的距离/相似度</strong></li>
+<li><strong>选择合适的k</strong></li>
+</ol>
+<p><strong>选择合适的K:</strong></p>
+<p><strong>使用交叉验证技术(把训练数据进一步分为训练数据和验证数据集，选择在验证数据里最好的超参数组合)</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210723232529.png" alt="image-20210723232529264"></p>
+<h1 id="核心手动实现"><a href="#核心手动实现" class="headerlink" title="核心手动实现"></a>核心手动实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets <span class="comment">#自带数据集</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split  <span class="comment">#分割数据变成训练数据和测试数据</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter <span class="comment">#计数器，投票器</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入数据</span></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">iris <span class="comment">#target 数据标签，代表不同的类的名称</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#123;&#39;data&#39;: array([[5.1, 3.5, 1.4, 0.2],
+        [4.9, 3. , 1.4, 0.2],
+        [4.7, 3.2, 1.3, 0.2],
+        [4.6, 3.1, 1.5, 0.2],
+        [5. , 3.6, 1.4, 0.2],
+        [5.4, 3.9, 1.7, 0.4],
+        [4.6, 3.4, 1.4, 0.3],
+        [5. , 3.4, 1.5, 0.2],
+        [4.4, 2.9, 1.4, 0.2],
+        [4.9, 3.1, 1.5, 0.1],
+        [5.4, 3.7, 1.5, 0.2],
+        [4.8, 3.4, 1.6, 0.2],
+        [4.8, 3. , 1.4, 0.1],
+        [4.3, 3. , 1.1, 0.1],
+        [5.8, 4. , 1.2, 0.2],
+        [5.7, 4.4, 1.5, 0.4],
+        [5.4, 3.9, 1.3, 0.4],
+        [5.1, 3.5, 1.4, 0.3],
+        [5.7, 3.8, 1.7, 0.3],
+        [5.1, 3.8, 1.5, 0.3],
+        [5.4, 3.4, 1.7, 0.2],
+        [5.1, 3.7, 1.5, 0.4],
+        [4.6, 3.6, 1. , 0.2],
+        [5.1, 3.3, 1.7, 0.5],
+        [4.8, 3.4, 1.9, 0.2],
+        [5. , 3. , 1.6, 0.2],
+        [5. , 3.4, 1.6, 0.4],
+        [5.2, 3.5, 1.5, 0.2],
+        [5.2, 3.4, 1.4, 0.2],
+        [4.7, 3.2, 1.6, 0.2],
+        [4.8, 3.1, 1.6, 0.2],
+        [5.4, 3.4, 1.5, 0.4],
+        [5.2, 4.1, 1.5, 0.1],
+        [5.5, 4.2, 1.4, 0.2],
+        [4.9, 3.1, 1.5, 0.1],
+        [5. , 3.2, 1.2, 0.2],
+        [5.5, 3.5, 1.3, 0.2],
+        [4.9, 3.1, 1.5, 0.1],
+        [4.4, 3. , 1.3, 0.2],
+        [5.1, 3.4, 1.5, 0.2],
+        [5. , 3.5, 1.3, 0.3],
+        [4.5, 2.3, 1.3, 0.3],
+        [4.4, 3.2, 1.3, 0.2],
+        [5. , 3.5, 1.6, 0.6],
+        [5.1, 3.8, 1.9, 0.4],
+        [4.8, 3. , 1.4, 0.3],
+        [5.1, 3.8, 1.6, 0.2],
+        [4.6, 3.2, 1.4, 0.2],
+        [5.3, 3.7, 1.5, 0.2],
+        [5. , 3.3, 1.4, 0.2],
+        [7. , 3.2, 4.7, 1.4],
+        [6.4, 3.2, 4.5, 1.5],
+        [6.9, 3.1, 4.9, 1.5],
+        [5.5, 2.3, 4. , 1.3],
+        [6.5, 2.8, 4.6, 1.5],
+        [5.7, 2.8, 4.5, 1.3],
+        [6.3, 3.3, 4.7, 1.6],
+        [4.9, 2.4, 3.3, 1. ],
+        [6.6, 2.9, 4.6, 1.3],
+        [5.2, 2.7, 3.9, 1.4],
+        [5. , 2. , 3.5, 1. ],
+        [5.9, 3. , 4.2, 1.5],
+        [6. , 2.2, 4. , 1. ],
+        [6.1, 2.9, 4.7, 1.4],
+        [5.6, 2.9, 3.6, 1.3],
+        [6.7, 3.1, 4.4, 1.4],
+        [5.6, 3. , 4.5, 1.5],
+        [5.8, 2.7, 4.1, 1. ],
+        [6.2, 2.2, 4.5, 1.5],
+        [5.6, 2.5, 3.9, 1.1],
+        [5.9, 3.2, 4.8, 1.8],
+        [6.1, 2.8, 4. , 1.3],
+        [6.3, 2.5, 4.9, 1.5],
+        [6.1, 2.8, 4.7, 1.2],
+        [6.4, 2.9, 4.3, 1.3],
+        [6.6, 3. , 4.4, 1.4],
+        [6.8, 2.8, 4.8, 1.4],
+        [6.7, 3. , 5. , 1.7],
+        [6. , 2.9, 4.5, 1.5],
+        [5.7, 2.6, 3.5, 1. ],
+        [5.5, 2.4, 3.8, 1.1],
+        [5.5, 2.4, 3.7, 1. ],
+        [5.8, 2.7, 3.9, 1.2],
+        [6. , 2.7, 5.1, 1.6],
+        [5.4, 3. , 4.5, 1.5],
+        [6. , 3.4, 4.5, 1.6],
+        [6.7, 3.1, 4.7, 1.5],
+        [6.3, 2.3, 4.4, 1.3],
+        [5.6, 3. , 4.1, 1.3],
+        [5.5, 2.5, 4. , 1.3],
+        [5.5, 2.6, 4.4, 1.2],
+        [6.1, 3. , 4.6, 1.4],
+        [5.8, 2.6, 4. , 1.2],
+        [5. , 2.3, 3.3, 1. ],
+        [5.6, 2.7, 4.2, 1.3],
+        [5.7, 3. , 4.2, 1.2],
+        [5.7, 2.9, 4.2, 1.3],
+        [6.2, 2.9, 4.3, 1.3],
+        [5.1, 2.5, 3. , 1.1],
+        [5.7, 2.8, 4.1, 1.3],
+        [6.3, 3.3, 6. , 2.5],
+        [5.8, 2.7, 5.1, 1.9],
+        [7.1, 3. , 5.9, 2.1],
+        [6.3, 2.9, 5.6, 1.8],
+        [6.5, 3. , 5.8, 2.2],
+        [7.6, 3. , 6.6, 2.1],
+        [4.9, 2.5, 4.5, 1.7],
+        [7.3, 2.9, 6.3, 1.8],
+        [6.7, 2.5, 5.8, 1.8],
+        [7.2, 3.6, 6.1, 2.5],
+        [6.5, 3.2, 5.1, 2. ],
+        [6.4, 2.7, 5.3, 1.9],
+        [6.8, 3. , 5.5, 2.1],
+        [5.7, 2.5, 5. , 2. ],
+        [5.8, 2.8, 5.1, 2.4],
+        [6.4, 3.2, 5.3, 2.3],
+        [6.5, 3. , 5.5, 1.8],
+        [7.7, 3.8, 6.7, 2.2],
+        [7.7, 2.6, 6.9, 2.3],
+        [6. , 2.2, 5. , 1.5],
+        [6.9, 3.2, 5.7, 2.3],
+        [5.6, 2.8, 4.9, 2. ],
+        [7.7, 2.8, 6.7, 2. ],
+        [6.3, 2.7, 4.9, 1.8],
+        [6.7, 3.3, 5.7, 2.1],
+        [7.2, 3.2, 6. , 1.8],
+        [6.2, 2.8, 4.8, 1.8],
+        [6.1, 3. , 4.9, 1.8],
+        [6.4, 2.8, 5.6, 2.1],
+        [7.2, 3. , 5.8, 1.6],
+        [7.4, 2.8, 6.1, 1.9],
+        [7.9, 3.8, 6.4, 2. ],
+        [6.4, 2.8, 5.6, 2.2],
+        [6.3, 2.8, 5.1, 1.5],
+        [6.1, 2.6, 5.6, 1.4],
+        [7.7, 3. , 6.1, 2.3],
+        [6.3, 3.4, 5.6, 2.4],
+        [6.4, 3.1, 5.5, 1.8],
+        [6. , 3. , 4.8, 1.8],
+        [6.9, 3.1, 5.4, 2.1],
+        [6.7, 3.1, 5.6, 2.4],
+        [6.9, 3.1, 5.1, 2.3],
+        [5.8, 2.7, 5.1, 1.9],
+        [6.8, 3.2, 5.9, 2.3],
+        [6.7, 3.3, 5.7, 2.5],
+        [6.7, 3. , 5.2, 2.3],
+        [6.3, 2.5, 5. , 1.9],
+        [6.5, 3. , 5.2, 2. ],
+        [6.2, 3.4, 5.4, 2.3],
+        [5.9, 3. , 5.1, 1.8]]),
+ &#39;target&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]),
+ &#39;target_names&#39;: array([&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;], dtype=&#39;&lt;U10&#39;),
+ &#39;DESCR&#39;: &#39;Iris Plants Database\n====================\n\nNotes\n-----\nData Set Characteristics:\n    :Number of Instances: 150 (50 in each of three classes)\n    :Number of Attributes: 4 numeric, predictive attributes and the class\n    :Attribute Information:\n        - sepal length in cm\n        - sepal width in cm\n        - petal length in cm\n        - petal width in cm\n        - class:\n                - Iris-Setosa\n                - Iris-Versicolour\n                - Iris-Virginica\n    :Summary Statistics:\n\n    ============== ==== ==== ======= ===== ====================\n                    Min  Max   Mean    SD   Class Correlation\n    ============== ==== ==== ======= ===== ====================\n    sepal length:   4.3  7.9   5.84   0.83    0.7826\n    sepal width:    2.0  4.4   3.05   0.43   -0.4194\n    petal length:   1.0  6.9   3.76   1.76    0.9490  (high!)\n    petal width:    0.1  2.5   1.20  0.76     0.9565  (high!)\n    ============== ==== ==== ======= ===== ====================\n\n    :Missing Attribute Values: None\n    :Class Distribution: 33.3% for each of 3 classes.\n    :Creator: R.A. Fisher\n    :Donor: Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov)\n    :Date: July, 1988\n\nThis is a copy of UCI ML iris datasets.\nhttp://archive.ics.uci.edu/ml/datasets/Iris\n\nThe famous Iris database, first used by Sir R.A Fisher\n\nThis is perhaps the best known database to be found in the\npattern recognition literature.  Fisher\&#39;s paper is a classic in the field and\nis referenced frequently to this day.  (See Duda &amp; Hart, for example.)  The\ndata set contains 3 classes of 50 instances each, where each class refers to a\ntype of iris plant.  One class is linearly separable from the other 2; the\nlatter are NOT linearly separable from each other.\n\nReferences\n----------\n   - Fisher,R.A. &quot;The use of multiple measurements in taxonomic problems&quot;\n     Annual Eugenics, 7, Part II, 179-188 (1936); also in &quot;Contributions to\n     Mathematical Statistics&quot; (John Wiley, NY, 1950).\n   - Duda,R.O., &amp; Hart,P.E. (1973) Pattern Classification and Scene Analysis.\n     (Q327.D83) John Wiley &amp; Sons.  ISBN 0-471-22361-1.  See page 218.\n   - Dasarathy, B.V. (1980) &quot;Nosing Around the Neighborhood: A New System\n     Structure and Classification Rule for Recognition in Partially Exposed\n     Environments&quot;.  IEEE Transactions on Pattern Analysis and Machine\n     Intelligence, Vol. PAMI-2, No. 1, 67-71.\n   - Gates, G.W. (1972) &quot;The Reduced Nearest Neighbor Rule&quot;.  IEEE Transactions\n     on Information Theory, May 1972, 431-433.\n   - See also: 1988 MLC Proceedings, 54-64.  Cheeseman et al&quot;s AUTOCLASS II\n     conceptual clustering system finds 3 classes in the data.\n   - Many, many more ...\n&#39;,
+ &#39;feature_names&#39;: [&#39;sepal length (cm)&#39;,
+  &#39;sepal width (cm)&#39;,
+  &#39;petal length (cm)&#39;,
+  &#39;petal width (cm)&#39;]&#125;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iris.data.shape <span class="comment">#查看数据量，150个样本数据，4个特征</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(150, 4)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4个特征</span></span><br><span class="line"><span class="comment"># 花萼长度 花萼宽度  花瓣长度  花瓣宽度</span></span><br><span class="line">X = iris.data</span><br><span class="line"><span class="comment"># 山鸢尾  变色鸢尾  维吉尼亚鸢尾</span></span><br><span class="line">y = iris.target</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练数据和测试数据</span></span><br><span class="line"><span class="comment"># 训练数据集特征   测试集特征   训练数据类别   测试数据类别</span></span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=<span class="number">2003</span>,test_size=<span class="number">0.2</span>) <span class="comment">#设置随机数种子 设置测试集0.2</span></span><br><span class="line"><span class="comment">#返回4个变量，即都是特征和类别</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X_train[<span class="number">0</span>]</span><br><span class="line">X_train[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([5.1, 3.8, 1.5, 0.3])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#求欧氏空间距离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">euc_dis</span>(<span class="params">instance1,instance2</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    计算两个样本之间的欧式距离</span></span><br><span class="line"><span class="string">    instance1：第一个样本点</span></span><br><span class="line"><span class="string">    instance2：第二个样本点</span></span><br><span class="line"><span class="string">    return 距离</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    dist = np.sqrt(<span class="built_in">sum</span>((instance1 - instance2)**<span class="number">2</span>))  <span class="comment">#平方  = **2</span></span><br><span class="line">    <span class="keyword">return</span> dist</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter <span class="comment">#投票器</span></span><br><span class="line"></span><br><span class="line">a1 = <span class="string">&quot;abcdad&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(Counter(a1))</span><br><span class="line"><span class="built_in">print</span>(Counter(a1).most_common()[<span class="number">0</span>][<span class="number">0</span>]) <span class="comment">#取最大的那个键</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>Counter(&#123;&#39;a&#39;: 2, &#39;d&#39;: 2, &#39;b&#39;: 1, &#39;c&#39;: 1&#125;)
+a
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建模 </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">knn_classify</span>(<span class="params">X,y,testInstance,k=<span class="number">5</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    给定一个测试数据testInstance,通过KNN算法预测它的标签</span></span><br><span class="line"><span class="string">    X:训练数据的特征</span></span><br><span class="line"><span class="string">    y:训练数据的标签</span></span><br><span class="line"><span class="string">    testInstance : 测试数据  假定 一个测试数据array类型</span></span><br><span class="line"><span class="string">    k:选择多少个近邻点</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    distances = [euc_dis(x,testInstance) <span class="keyword">for</span> x <span class="keyword">in</span> X]  <span class="comment">#返回的是距离长度如:[23,41,1,4,5]</span></span><br><span class="line"><span class="comment">#     print(distances)</span></span><br><span class="line">    <span class="comment"># 排序</span></span><br><span class="line">    kneighors = np.argsort(distances)[:k] <span class="comment">#选择最近的三个点 #返回的是索引列表如： [2,3,4] </span></span><br><span class="line"><span class="comment">#     print(kneighors)</span></span><br><span class="line">    count = Counter(y[kneighors])</span><br><span class="line"><span class="comment">#     print(count)</span></span><br><span class="line">    <span class="keyword">return</span> count.most_common()[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试 预测</span></span><br><span class="line">pred = [knn_classify(X_train,y_train,data,<span class="number">5</span>) <span class="keyword">for</span> data <span class="keyword">in</span> X_test]</span><br><span class="line"><span class="built_in">print</span>(pred)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 2, 0, 2, 2, 2, 0, 1, 2, 1, 1, 0, 1, 2, 2, 1, 2]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模型验证</span></span><br><span class="line">count = np.count_nonzero((pred==y_test)==<span class="literal">True</span>)</span><br><span class="line">count <span class="comment">#模型正确率猜对20道</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>27
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;模型预测正确率:%.3f&#x27;</span>%(count/<span class="built_in">len</span>(X_test)))</span><br></pre></td></tr></table></figure>
+
+<pre><code>模型预测正确率:0.900
+</code></pre>
+<h1 id="自带模型实现"><a href="#自带模型实现" class="headerlink" title="自带模型实现"></a>自带模型实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets    </span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split    </span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier     <span class="comment">#knn分类器</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()    </span><br><span class="line"></span><br><span class="line">X = iris.data    </span><br><span class="line">y = iris.target    </span><br><span class="line"><span class="built_in">print</span>(X, y)    </span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="number">2003</span>)    </span><br><span class="line"><span class="comment"># 实例化KNN算法分类器</span></span><br><span class="line">clf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">clf.fit(X_train, y_train)    </span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line">correct = np.count_nonzero((clf.predict(X_test)==y_test)==<span class="literal">True</span>)   <span class="comment">#通过模型进行预测 </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Accuracy is: %.3f&quot;</span> %(correct/<span class="built_in">len</span>(X_test)))</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[5.1 3.5 1.4 0.2]
+ [4.9 3.  1.4 0.2]
+ [4.7 3.2 1.3 0.2]
+ [4.6 3.1 1.5 0.2]
+ [5.  3.6 1.4 0.2]
+ [5.4 3.9 1.7 0.4]
+ [4.6 3.4 1.4 0.3]
+ [5.  3.4 1.5 0.2]
+ [4.4 2.9 1.4 0.2]
+ [4.9 3.1 1.5 0.1]
+ [5.4 3.7 1.5 0.2]
+ [4.8 3.4 1.6 0.2]
+ [4.8 3.  1.4 0.1]
+ [4.3 3.  1.1 0.1]
+ [5.8 4.  1.2 0.2]
+ [5.7 4.4 1.5 0.4]
+ [5.4 3.9 1.3 0.4]
+ [5.1 3.5 1.4 0.3]
+ [5.7 3.8 1.7 0.3]
+ [5.1 3.8 1.5 0.3]
+ [5.4 3.4 1.7 0.2]
+ [5.1 3.7 1.5 0.4]
+ [4.6 3.6 1.  0.2]
+ [5.1 3.3 1.7 0.5]
+ [4.8 3.4 1.9 0.2]
+ [5.  3.  1.6 0.2]
+ [5.  3.4 1.6 0.4]
+ [5.2 3.5 1.5 0.2]
+ [5.2 3.4 1.4 0.2]
+ [4.7 3.2 1.6 0.2]
+ [4.8 3.1 1.6 0.2]
+ [5.4 3.4 1.5 0.4]
+ [5.2 4.1 1.5 0.1]
+ [5.5 4.2 1.4 0.2]
+ [4.9 3.1 1.5 0.1]
+ [5.  3.2 1.2 0.2]
+ [5.5 3.5 1.3 0.2]
+ [4.9 3.1 1.5 0.1]
+ [4.4 3.  1.3 0.2]
+ [5.1 3.4 1.5 0.2]
+ [5.  3.5 1.3 0.3]
+ [4.5 2.3 1.3 0.3]
+ [4.4 3.2 1.3 0.2]
+ [5.  3.5 1.6 0.6]
+ [5.1 3.8 1.9 0.4]
+ [4.8 3.  1.4 0.3]
+ [5.1 3.8 1.6 0.2]
+ [4.6 3.2 1.4 0.2]
+ [5.3 3.7 1.5 0.2]
+ [5.  3.3 1.4 0.2]
+ [7.  3.2 4.7 1.4]
+ [6.4 3.2 4.5 1.5]
+ [6.9 3.1 4.9 1.5]
+ [5.5 2.3 4.  1.3]
+ [6.5 2.8 4.6 1.5]
+ [5.7 2.8 4.5 1.3]
+ [6.3 3.3 4.7 1.6]
+ [4.9 2.4 3.3 1. ]
+ [6.6 2.9 4.6 1.3]
+ [5.2 2.7 3.9 1.4]
+ [5.  2.  3.5 1. ]
+ [5.9 3.  4.2 1.5]
+ [6.  2.2 4.  1. ]
+ [6.1 2.9 4.7 1.4]
+ [5.6 2.9 3.6 1.3]
+ [6.7 3.1 4.4 1.4]
+ [5.6 3.  4.5 1.5]
+ [5.8 2.7 4.1 1. ]
+ [6.2 2.2 4.5 1.5]
+ [5.6 2.5 3.9 1.1]
+ [5.9 3.2 4.8 1.8]
+ [6.1 2.8 4.  1.3]
+ [6.3 2.5 4.9 1.5]
+ [6.1 2.8 4.7 1.2]
+ [6.4 2.9 4.3 1.3]
+ [6.6 3.  4.4 1.4]
+ [6.8 2.8 4.8 1.4]
+ [6.7 3.  5.  1.7]
+ [6.  2.9 4.5 1.5]
+ [5.7 2.6 3.5 1. ]
+ [5.5 2.4 3.8 1.1]
+ [5.5 2.4 3.7 1. ]
+ [5.8 2.7 3.9 1.2]
+ [6.  2.7 5.1 1.6]
+ [5.4 3.  4.5 1.5]
+ [6.  3.4 4.5 1.6]
+ [6.7 3.1 4.7 1.5]
+ [6.3 2.3 4.4 1.3]
+ [5.6 3.  4.1 1.3]
+ [5.5 2.5 4.  1.3]
+ [5.5 2.6 4.4 1.2]
+ [6.1 3.  4.6 1.4]
+ [5.8 2.6 4.  1.2]
+ [5.  2.3 3.3 1. ]
+ [5.6 2.7 4.2 1.3]
+ [5.7 3.  4.2 1.2]
+ [5.7 2.9 4.2 1.3]
+ [6.2 2.9 4.3 1.3]
+ [5.1 2.5 3.  1.1]
+ [5.7 2.8 4.1 1.3]
+ [6.3 3.3 6.  2.5]
+ [5.8 2.7 5.1 1.9]
+ [7.1 3.  5.9 2.1]
+ [6.3 2.9 5.6 1.8]
+ [6.5 3.  5.8 2.2]
+ [7.6 3.  6.6 2.1]
+ [4.9 2.5 4.5 1.7]
+ [7.3 2.9 6.3 1.8]
+ [6.7 2.5 5.8 1.8]
+ [7.2 3.6 6.1 2.5]
+ [6.5 3.2 5.1 2. ]
+ [6.4 2.7 5.3 1.9]
+ [6.8 3.  5.5 2.1]
+ [5.7 2.5 5.  2. ]
+ [5.8 2.8 5.1 2.4]
+ [6.4 3.2 5.3 2.3]
+ [6.5 3.  5.5 1.8]
+ [7.7 3.8 6.7 2.2]
+ [7.7 2.6 6.9 2.3]
+ [6.  2.2 5.  1.5]
+ [6.9 3.2 5.7 2.3]
+ [5.6 2.8 4.9 2. ]
+ [7.7 2.8 6.7 2. ]
+ [6.3 2.7 4.9 1.8]
+ [6.7 3.3 5.7 2.1]
+ [7.2 3.2 6.  1.8]
+ [6.2 2.8 4.8 1.8]
+ [6.1 3.  4.9 1.8]
+ [6.4 2.8 5.6 2.1]
+ [7.2 3.  5.8 1.6]
+ [7.4 2.8 6.1 1.9]
+ [7.9 3.8 6.4 2. ]
+ [6.4 2.8 5.6 2.2]
+ [6.3 2.8 5.1 1.5]
+ [6.1 2.6 5.6 1.4]
+ [7.7 3.  6.1 2.3]
+ [6.3 3.4 5.6 2.4]
+ [6.4 3.1 5.5 1.8]
+ [6.  3.  4.8 1.8]
+ [6.9 3.1 5.4 2.1]
+ [6.7 3.1 5.6 2.4]
+ [6.9 3.1 5.1 2.3]
+ [5.8 2.7 5.1 1.9]
+ [6.8 3.2 5.9 2.3]
+ [6.7 3.3 5.7 2.5]
+ [6.7 3.  5.2 2.3]
+ [6.3 2.5 5.  1.9]
+ [6.5 3.  5.2 2. ]
+ [6.2 3.4 5.4 2.3]
+ [5.9 3.  5.1 1.8]] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2]
+Accuracy is: 0.921
+</code></pre>
+<h1 id="怎么选择合适的K"><a href="#怎么选择合适的K" class="headerlink" title="怎么选择合适的K"></a>怎么选择合适的K</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>] <span class="comment"># 指定默认字体</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span> <span class="comment"># 解决保存图像是负号&#x27;-&#x27;显示为方块的问题</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iris = load_iris()</span><br><span class="line"><span class="comment"># 特征</span></span><br><span class="line">data = iris.data[:,:<span class="number">2</span>] <span class="comment">#挑选前两个特征</span></span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="comment"># 标签</span></span><br><span class="line">target =iris.target</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[5.1 3.5]
+ [4.9 3. ]
+ [4.7 3.2]
+ [4.6 3.1]
+ [5.  3.6]
+ [5.4 3.9]
+ [4.6 3.4]
+ [5.  3.4]
+ [4.4 2.9]
+ [4.9 3.1]
+ [5.4 3.7]
+ [4.8 3.4]
+ [4.8 3. ]
+ [4.3 3. ]
+ [5.8 4. ]
+ [5.7 4.4]
+ [5.4 3.9]
+ [5.1 3.5]
+ [5.7 3.8]
+ [5.1 3.8]
+ [5.4 3.4]
+ [5.1 3.7]
+ [4.6 3.6]
+ [5.1 3.3]
+ [4.8 3.4]
+ [5.  3. ]
+ [5.  3.4]
+ [5.2 3.5]
+ [5.2 3.4]
+ [4.7 3.2]
+ [4.8 3.1]
+ [5.4 3.4]
+ [5.2 4.1]
+ [5.5 4.2]
+ [4.9 3.1]
+ [5.  3.2]
+ [5.5 3.5]
+ [4.9 3.1]
+ [4.4 3. ]
+ [5.1 3.4]
+ [5.  3.5]
+ [4.5 2.3]
+ [4.4 3.2]
+ [5.  3.5]
+ [5.1 3.8]
+ [4.8 3. ]
+ [5.1 3.8]
+ [4.6 3.2]
+ [5.3 3.7]
+ [5.  3.3]
+ [7.  3.2]
+ [6.4 3.2]
+ [6.9 3.1]
+ [5.5 2.3]
+ [6.5 2.8]
+ [5.7 2.8]
+ [6.3 3.3]
+ [4.9 2.4]
+ [6.6 2.9]
+ [5.2 2.7]
+ [5.  2. ]
+ [5.9 3. ]
+ [6.  2.2]
+ [6.1 2.9]
+ [5.6 2.9]
+ [6.7 3.1]
+ [5.6 3. ]
+ [5.8 2.7]
+ [6.2 2.2]
+ [5.6 2.5]
+ [5.9 3.2]
+ [6.1 2.8]
+ [6.3 2.5]
+ [6.1 2.8]
+ [6.4 2.9]
+ [6.6 3. ]
+ [6.8 2.8]
+ [6.7 3. ]
+ [6.  2.9]
+ [5.7 2.6]
+ [5.5 2.4]
+ [5.5 2.4]
+ [5.8 2.7]
+ [6.  2.7]
+ [5.4 3. ]
+ [6.  3.4]
+ [6.7 3.1]
+ [6.3 2.3]
+ [5.6 3. ]
+ [5.5 2.5]
+ [5.5 2.6]
+ [6.1 3. ]
+ [5.8 2.6]
+ [5.  2.3]
+ [5.6 2.7]
+ [5.7 3. ]
+ [5.7 2.9]
+ [6.2 2.9]
+ [5.1 2.5]
+ [5.7 2.8]
+ [6.3 3.3]
+ [5.8 2.7]
+ [7.1 3. ]
+ [6.3 2.9]
+ [6.5 3. ]
+ [7.6 3. ]
+ [4.9 2.5]
+ [7.3 2.9]
+ [6.7 2.5]
+ [7.2 3.6]
+ [6.5 3.2]
+ [6.4 2.7]
+ [6.8 3. ]
+ [5.7 2.5]
+ [5.8 2.8]
+ [6.4 3.2]
+ [6.5 3. ]
+ [7.7 3.8]
+ [7.7 2.6]
+ [6.  2.2]
+ [6.9 3.2]
+ [5.6 2.8]
+ [7.7 2.8]
+ [6.3 2.7]
+ [6.7 3.3]
+ [7.2 3.2]
+ [6.2 2.8]
+ [6.1 3. ]
+ [6.4 2.8]
+ [7.2 3. ]
+ [7.4 2.8]
+ [7.9 3.8]
+ [6.4 2.8]
+ [6.3 2.8]
+ [6.1 2.6]
+ [7.7 3. ]
+ [6.3 3.4]
+ [6.4 3.1]
+ [6.  3. ]
+ [6.9 3.1]
+ [6.7 3.1]
+ [6.9 3.1]
+ [5.8 2.7]
+ [6.8 3.2]
+ [6.7 3.3]
+ [6.7 3. ]
+ [6.3 2.5]
+ [6.5 3. ]
+ [6.2 3.4]
+ [5.9 3. ]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">label = np.array(target)  <span class="comment">#2维是一堆</span></span><br><span class="line">index_0 = np.where(label==<span class="number">0</span>) <span class="comment">#找类型的数据</span></span><br><span class="line">plt.scatter(data[index_0,<span class="number">0</span>],data[index_0,<span class="number">1</span>],marker=<span class="string">&#x27;x&#x27;</span>,color=<span class="string">&#x27;b&#x27;</span>,label=<span class="string">&#x27;0&#x27;</span>,s=<span class="number">15</span>)   <span class="comment">#蓝色</span></span><br><span class="line">index_1 = np.where(label==<span class="number">1</span>)</span><br><span class="line">plt.scatter(data[index_1,<span class="number">0</span>],data[index_1,<span class="number">1</span>],marker=<span class="string">&#x27;o&#x27;</span>,color=<span class="string">&#x27;r&#x27;</span>,label=<span class="string">&#x27;1&#x27;</span>,s=<span class="number">15</span>)   <span class="comment">#红色</span></span><br><span class="line">index_2 = np.where(label==<span class="number">2</span>)</span><br><span class="line">plt.scatter(data[index_2,<span class="number">0</span>],data[index_2,<span class="number">1</span>],marker=<span class="string">&#x27;s&#x27;</span>,color=<span class="string">&#x27;g&#x27;</span>,label=<span class="string">&#x27;2&#x27;</span>,s=<span class="number">15</span>)  <span class="comment">#绿色</span></span><br><span class="line">plt.xlabel(<span class="string">&#x27;X1&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;X2&#x27;</span>)                           </span><br><span class="line">plt.legend(loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210723231746.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA <span class="comment">#降维</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D <span class="comment">#绘制3D图</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iris = datasets.load_iris()</span><br><span class="line">data = iris.data</span><br><span class="line">target = iris.target</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 主成分分析  将四维压缩成三维</span></span><br><span class="line">pca_3 = PCA(n_components=<span class="number">3</span>) <span class="comment">#保留三组特征</span></span><br><span class="line">data_pca_3 = pca_3.fit_transform(data)</span><br><span class="line">data_pca_3</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[-2.68420713,  0.32660731, -0.02151184],
+       [-2.71539062, -0.16955685, -0.20352143],
+       [-2.88981954, -0.13734561,  0.02470924],
+       [-2.7464372 , -0.31112432,  0.03767198],
+       [-2.72859298,  0.33392456,  0.0962297 ],
+       [-2.27989736,  0.74778271,  0.17432562],
+       [-2.82089068, -0.08210451,  0.26425109],
+       [-2.62648199,  0.17040535, -0.01580151],
+       [-2.88795857, -0.57079803,  0.02733541],
+       [-2.67384469, -0.1066917 , -0.1915333 ],
+       [-2.50652679,  0.65193501, -0.069275  ],
+       [-2.61314272,  0.02152063,  0.10765035],
+       [-2.78743398, -0.22774019, -0.20032779],
+       [-3.22520045, -0.50327991,  0.06841363],
+       [-2.64354322,  1.1861949 , -0.1445057 ],
+       [-2.38386932,  1.34475434,  0.28373066],
+       [-2.6225262 ,  0.81808967,  0.14531599],
+       [-2.64832273,  0.31913667,  0.03339425],
+       [-2.19907796,  0.87924409, -0.11452146],
+       [-2.58734619,  0.52047364,  0.21957209],
+       [-2.3105317 ,  0.39786782, -0.23369561],
+       [-2.54323491,  0.44003175,  0.21483637],
+       [-3.21585769,  0.14161557,  0.29961898],
+       [-2.30312854,  0.10552268,  0.04568004],
+       [-2.35617109, -0.03120959,  0.12940758],
+       [-2.50791723, -0.13905634, -0.24711634],
+       [-2.469056  ,  0.13788731,  0.10126308],
+       [-2.56239095,  0.37468456, -0.07235916],
+       [-2.63982127,  0.31929007, -0.13925337],
+       [-2.63284791, -0.19007583,  0.04646646],
+       [-2.58846205, -0.19739308, -0.07127507],
+       [-2.41007734,  0.41808001, -0.13838824],
+       [-2.64763667,  0.81998263,  0.2305856 ],
+       [-2.59715948,  1.10002193,  0.16358191],
+       [-2.67384469, -0.1066917 , -0.1915333 ],
+       [-2.86699985,  0.0771931 , -0.15684235],
+       [-2.62522846,  0.60680001, -0.26116316],
+       [-2.67384469, -0.1066917 , -0.1915333 ],
+       [-2.98184266, -0.48025005,  0.07972481],
+       [-2.59032303,  0.23605934, -0.07390124],
+       [-2.77013891,  0.27105942,  0.08424157],
+       [-2.85221108, -0.93286537, -0.34096149],
+       [-2.99829644, -0.33430757,  0.19900842],
+       [-2.4055141 ,  0.19591726,  0.27071707],
+       [-2.20883295,  0.44269603,  0.30348781],
+       [-2.71566519, -0.24268148, -0.09051561],
+       [-2.53757337,  0.51036755,  0.1719184 ],
+       [-2.8403213 , -0.22057634,  0.09006138],
+       [-2.54268576,  0.58628103, -0.01117527],
+       [-2.70391231,  0.11501085, -0.08269573],
+       [ 1.28479459,  0.68543919, -0.40612955],
+       [ 0.93241075,  0.31919809, -0.01712991],
+       [ 1.46406132,  0.50418983, -0.33826073],
+       [ 0.18096721, -0.82560394, -0.17708286],
+       [ 1.08713449,  0.07539039, -0.30654446],
+       [ 0.64043675, -0.41732348,  0.04118877],
+       [ 1.09522371,  0.28389121,  0.17002253],
+       [-0.75146714, -1.00110751,  0.01567219],
+       [ 1.04329778,  0.22895691, -0.41481457],
+       [-0.01019007, -0.72057487,  0.28343725],
+       [-0.5110862 , -1.26249195, -0.26648995],
+       [ 0.51109806, -0.10228411,  0.13232789],
+       [ 0.26233576, -0.5478933 , -0.69194158],
+       [ 0.98404455, -0.12436042, -0.06215743],
+       [-0.174864  , -0.25181557,  0.09365864],
+       [ 0.92757294,  0.46823621, -0.3132294 ],
+       [ 0.65959279, -0.35197629,  0.3283843 ],
+       [ 0.23454059, -0.33192183, -0.27028067],
+       [ 0.94236171, -0.54182226, -0.49734854],
+       [ 0.0432464 , -0.58148945, -0.23296356],
+       [ 1.11624072, -0.08421401,  0.45984423],
+       [ 0.35678657, -0.06682383, -0.22747218],
+       [ 1.29646885, -0.32756152, -0.34751321],
+       [ 0.92050265, -0.18239036, -0.23161142],
+       [ 0.71400821,  0.15037915, -0.32037233],
+       [ 0.89964086,  0.32961098, -0.31477148],
+       [ 1.33104142,  0.24466952, -0.52124492],
+       [ 1.55739627,  0.26739258, -0.16463849],
+       [ 0.81245555, -0.16233157,  0.03634358],
+       [-0.30733476, -0.36508661, -0.3153372 ],
+       [-0.07034289, -0.70253793, -0.24175804],
+       [-0.19188449, -0.67749054, -0.30391654],
+       [ 0.13499495, -0.31170964, -0.1749733 ],
+       [ 1.37873698, -0.42120514,  0.0154805 ],
+       [ 0.58727485, -0.48328427,  0.44458375],
+       [ 0.8072055 ,  0.19505396,  0.38945871],
+       [ 1.22042897,  0.40803534, -0.23656609],
+       [ 0.81286779, -0.370679  , -0.61287105],
+       [ 0.24519516, -0.26672804,  0.18956248],
+       [ 0.16451343, -0.67966147, -0.05779924],
+       [ 0.46303099, -0.66952655, -0.02405389],
+       [ 0.89016045, -0.03381244, -0.00976803],
+       [ 0.22887905, -0.40225762, -0.22736271],
+       [-0.70708128, -1.00842476, -0.10206934],
+       [ 0.35553304, -0.50321849,  0.01788947],
+       [ 0.33112695, -0.21118014,  0.08380907],
+       [ 0.37523823, -0.29162202,  0.07907336],
+       [ 0.64169028,  0.01907118, -0.20417288],
+       [-0.90846333, -0.75156873, -0.00773658],
+       [ 0.29780791, -0.34701652,  0.01217914],
+       [ 2.53172698, -0.01184224,  0.75845865],
+       [ 1.41407223, -0.57492506,  0.29639822],
+       [ 2.61648461,  0.34193529, -0.11214137],
+       [ 1.97081495, -0.18112569,  0.10653915],
+       [ 2.34975798, -0.04188255,  0.28411068],
+       [ 3.39687992,  0.54716805, -0.35187316],
+       [ 0.51938325, -1.19135169,  0.54668553],
+       [ 2.9320051 ,  0.35237701, -0.42369128],
+       [ 2.31967279, -0.24554817, -0.34992218],
+       [ 2.91813423,  0.78038063,  0.42173893],
+       [ 1.66193495,  0.2420384 ,  0.24281526],
+       [ 1.80234045, -0.21615461, -0.03769533],
+       [ 2.16537886,  0.21528028,  0.03314818],
+       [ 1.34459422, -0.77641543,  0.28286802],
+       [ 1.5852673 , -0.53930705,  0.63057049],
+       [ 1.90474358,  0.11881899,  0.48013808],
+       [ 1.94924878,  0.04073026,  0.04272909],
+       [ 3.48876538,  1.17154454,  0.12932008],
+       [ 3.79468686,  0.25326557, -0.51697072],
+       [ 1.29832982, -0.76101394, -0.34488705],
+       [ 2.42816726,  0.37678197,  0.21864907],
+       [ 1.19809737, -0.60557896,  0.51264077],
+       [ 3.49926548,  0.45677347, -0.57691019],
+       [ 1.38766825, -0.20403099, -0.06351132],
+       [ 2.27585365,  0.33338653,  0.28467815],
+       [ 2.61419383,  0.55836695, -0.20842335],
+       [ 1.25762518, -0.179137  ,  0.04697781],
+       [ 1.29066965, -0.11642525,  0.23161356],
+       [ 2.12285398, -0.21085488,  0.15351589],
+       [ 2.3875644 ,  0.46251925, -0.45202396],
+       [ 2.84096093,  0.37274259, -0.50103154],
+       [ 3.2323429 ,  1.37052404, -0.11844878],
+       [ 2.15873837, -0.21832553,  0.20842198],
+       [ 1.4431026 , -0.14380129, -0.15408297],
+       [ 1.77964011, -0.50146479, -0.17581119],
+       [ 3.07652162,  0.68576444, -0.33642274],
+       [ 2.14498686,  0.13890661,  0.73418474],
+       [ 1.90486293,  0.04804751,  0.16047063],
+       [ 1.16885347, -0.1645025 ,  0.28246088],
+       [ 2.10765373,  0.37148225,  0.02743786],
+       [ 2.31430339,  0.18260885,  0.3228604 ],
+       [ 1.92245088,  0.40927118,  0.11549282],
+       [ 1.41407223, -0.57492506,  0.29639822],
+       [ 2.56332271,  0.2759745 ,  0.29125361],
+       [ 2.41939122,  0.30350394,  0.50430252],
+       [ 1.94401705,  0.18741522,  0.17930287],
+       [ 1.52566363, -0.37502085, -0.12063644],
+       [ 1.76404594,  0.07851919,  0.13078405],
+       [ 1.90162908,  0.11587675,  0.72287356],
+       [ 1.38966613, -0.28288671,  0.36231783]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">colors = &#123;<span class="number">0</span>:<span class="string">&#x27;r&#x27;</span>,<span class="number">1</span>:<span class="string">&#x27;b&#x27;</span>,<span class="number">2</span>:<span class="string">&#x27;k&#x27;</span>&#125;</span><br><span class="line">markers = &#123;<span class="number">0</span>:<span class="string">&#x27;x&#x27;</span>,<span class="number">1</span>:<span class="string">&#x27;D&#x27;</span>,<span class="number">2</span>:<span class="string">&#x27;o&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">fig = plt.figure(<span class="number">1</span>,figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line">ax = Axes3D(fig,elev=-<span class="number">150</span>,azim=-<span class="number">110</span>)  <span class="comment">#画板 刻度范围</span></span><br><span class="line"></span><br><span class="line">data_pca_gb  =pd.DataFrame(data_pca_3).groupby(target) <span class="comment">#根据标签来进行分组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> g <span class="keyword">in</span> data_pca_gb.groups:</span><br><span class="line">    ax.scatter(</span><br><span class="line">        data_pca_gb.get_group(g)[<span class="number">0</span>],</span><br><span class="line">        data_pca_gb.get_group(g)[<span class="number">1</span>],</span><br><span class="line">        data_pca_gb.get_group(g)[<span class="number">2</span>],</span><br><span class="line">        c=colors[g],</span><br><span class="line">        marker=markers[g],</span><br><span class="line">        cmap=plt.cm.Paired</span><br><span class="line">    )</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">#三维发现是可以区分的，能做</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210723231734.png" alt="png"></p>
+<h1 id="验证K"><a href="#验证K" class="headerlink" title="验证K"></a>验证K</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练数据特征 测试数据特征  训练数据标签  测试数据标签</span></span><br><span class="line">X, X_test, y, y_test = train_test_split(data, target, test_size=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">k_choices = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">13</span>,<span class="number">15</span>,<span class="number">21</span>,<span class="number">25</span>,<span class="number">27</span>,<span class="number">29</span>,<span class="number">31</span>]</span><br><span class="line">X_folds = np.vsplit(X,<span class="number">4</span>) <span class="comment">#训练数据分割成4份</span></span><br><span class="line">y_folds = np.hsplit(y,<span class="number">4</span>) <span class="comment">#测试数据分割成4份 ，y标签是一维的，所以只能用hsplit</span></span><br><span class="line">y_folds</span><br><span class="line"><span class="comment"># 分成4份是因为当k=1时，可能正确率会随机变化，因此分成4分，进行4次验证同一个k值，保证准确率</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[array([0, 0, 2, 0, 2, 1, 0, 0, 0, 1, 2, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 2,
+        1, 1, 2, 1, 0, 2, 0, 2]),
+ array([2, 0, 0, 1, 2, 1, 2, 0, 2, 2, 2, 0, 1, 0, 2, 1, 2, 0, 2, 1, 1, 0,
+        0, 1, 0, 0, 2, 0, 0, 2]),
+ array([0, 1, 2, 1, 1, 1, 0, 1, 2, 2, 2, 0, 0, 0, 2, 0, 2, 1, 1, 2, 1, 2,
+        0, 1, 1, 0, 1, 0, 0, 0]),
+ array([0, 2, 2, 2, 0, 0, 0, 1, 2, 2, 0, 2, 1, 1, 1, 2, 1, 1, 0, 0, 0, 2,
+        2, 2, 2, 1, 1, 2, 0, 1])]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">accuracy_of_k = &#123;&#125;  <span class="comment">#创建容器来存结果</span></span><br><span class="line">accuracy_of_k = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> k_choices:</span><br><span class="line">    accuracy_of_k[k]=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    X_train = np.vstack(X_folds[:i]+X_folds[i+<span class="number">1</span>:])</span><br><span class="line">    X_val = X_folds[i]</span><br><span class="line">    y_train = np.hstack(y_folds[:i]+y_folds[i+<span class="number">1</span>:])</span><br><span class="line">    y_val = y_folds[i]</span><br><span class="line">    <span class="built_in">print</span>(X_train.shape,X_val.shape,y_train.shape,y_val.shape)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> k_choices:</span><br><span class="line">        knn = KNeighborsClassifier(n_neighbors=k)</span><br><span class="line">        knn.fit(X_train,y_train)</span><br><span class="line">        y_val_pred = knn.predict(X_val)  <span class="comment"># 1 2  1</span></span><br><span class="line">        accuracy = np.mean(y_val_pred==y_val) <span class="comment"># k = 1    78%  80%  90%  60%</span></span><br><span class="line">        accuracy_of_k[k].append(accuracy)  <span class="comment">#&#123;&#x27;k1&#x27;:&#x27;78%&#x27;,&#x27;k3&#x27;:&#x27;&#x27;&#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">sorted</span>(k_choices):</span><br><span class="line">    <span class="keyword">for</span> accuracy <span class="keyword">in</span> accuracy_of_k[k]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;k=%d,accuracy=%f&#x27;</span>%(k,accuracy))</span><br></pre></td></tr></table></figure>
+
+<pre><code>(90, 4) (30, 4) (90,) (30,)
+(90, 4) (30, 4) (90,) (30,)
+(90, 4) (30, 4) (90,) (30,)
+(90, 4) (30, 4) (90,) (30,)
+k=1,accuracy=0.933333
+k=1,accuracy=0.966667
+k=1,accuracy=1.000000
+k=1,accuracy=0.866667
+k=3,accuracy=0.933333
+k=3,accuracy=1.000000
+k=3,accuracy=1.000000
+k=3,accuracy=0.933333
+k=5,accuracy=0.933333
+k=5,accuracy=1.000000
+k=5,accuracy=0.966667
+k=5,accuracy=0.966667
+k=7,accuracy=0.933333
+k=7,accuracy=1.000000
+k=7,accuracy=0.933333
+k=7,accuracy=0.966667
+k=9,accuracy=0.966667
+k=9,accuracy=1.000000
+k=9,accuracy=0.933333
+k=9,accuracy=0.933333
+k=13,accuracy=0.966667
+k=13,accuracy=1.000000
+k=13,accuracy=0.966667
+k=13,accuracy=0.933333
+k=15,accuracy=0.966667
+k=15,accuracy=1.000000
+k=15,accuracy=0.966667
+k=15,accuracy=0.933333
+k=21,accuracy=0.966667
+k=21,accuracy=1.000000
+k=21,accuracy=0.933333
+k=21,accuracy=0.900000
+k=25,accuracy=0.966667
+k=25,accuracy=1.000000
+k=25,accuracy=0.966667
+k=25,accuracy=0.866667
+k=27,accuracy=0.966667
+k=27,accuracy=1.000000
+k=27,accuracy=0.966667
+k=27,accuracy=0.900000
+k=29,accuracy=0.966667
+k=29,accuracy=1.000000
+k=29,accuracy=0.933333
+k=29,accuracy=0.866667
+k=31,accuracy=0.966667
+k=31,accuracy=1.000000
+k=31,accuracy=0.933333
+k=31,accuracy=0.866667
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> k_choices:</span><br><span class="line">    plt.scatter([k]*<span class="built_in">len</span>(accuracy_of_k[k]),accuracy_of_k[k])</span><br><span class="line">accuracies_mean = np.array([np.mean(v) <span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">sorted</span>(accuracy_of_k.items())])</span><br><span class="line">accuracies_std = np.array([np.std(v) <span class="keyword">for</span> k ,v <span class="keyword">in</span> <span class="built_in">sorted</span>(accuracy_of_k.items())])</span><br><span class="line">plt.errorbar(k_choices,accuracies_mean,yerr=accuracies_std)</span><br><span class="line">plt.title(<span class="string">&#x27;在k上进行交叉验证&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;k&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;交叉验证准确性&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210723231715.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">best_k = <span class="number">10</span></span><br><span class="line">knn = KNeighborsClassifier(n_neighbors=best_k)</span><br><span class="line">knn.fit(X_train,y_train)</span><br><span class="line">y_test_pred = knn.predict(X_test)</span><br><span class="line">num_correct = np.<span class="built_in">sum</span>(y_test==y_test_pred)     <span class="comment"># 测试正确的数量</span></span><br><span class="line">accuracy_test = np.mean(y_test==y_test_pred)   <span class="comment"># 测试集  30</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;test accuracy is %d/%d = %f&#x27;</span>%(num_correct,X_test.shape[<span class="number">0</span>],accuracy_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>test accuracy is 28/30 = 0.933333
+</code></pre>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://alogomachine.com/22319.html">http://alogomachine.com/22319.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://alogomachine.com" target="_blank">Alogomachine's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/KNN/">KNN</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/eeb670a30fd593eef0b0254807cd1c2ab1f41287.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/22101.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/f2bd9726224c895d95b6ea391c4373fcefa564d7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Pyecharts可视化(二)</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">核心手动实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%B8%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">自带模型实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84K"><span class="toc-number">3.</span> <span class="toc-text">怎么选择合适的K</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81K"><span class="toc-number">4.</span> <span class="toc-text">验证K</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22319.html" title="KNN算法分析与实现">KNN算法分析与实现</a><time datetime="2021-07-23T15:19:00.000Z" title="发表于 2021-07-23 23:19:00">2021-07-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22101.html" title="Pyecharts可视化(二)">Pyecharts可视化(二)</a><time datetime="2021-07-21T11:01:00.000Z" title="发表于 2021-07-21 19:01:00">2021-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22017.html" title="Pyecharts可视化">Pyecharts可视化</a><time datetime="2021-07-20T15:17:00.000Z" title="发表于 2021-07-20 23:17:00">2021-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/21912.html" title="Seaborn补充总结">Seaborn补充总结</a><time datetime="2021-07-19T15:12:00.000Z" title="发表于 2021-07-19 23:12:00">2021-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/21910.html" title="Seaborn可视化">Seaborn可视化</a><time datetime="2021-07-19T15:10:00.000Z" title="发表于 2021-07-19 23:10:00">2021-07-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/recordQuery"><img class="icp-icon" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png">粤ICP备2021089270号</a> <br><span>本网站立足于中国大陆,不对任何个人言论负责。</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>
