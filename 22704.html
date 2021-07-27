@@ -1,0 +1,1355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>线性回归分析与股票价格预测实战 | Alogomachine's BLOG</title><meta name="keywords" content="机器学习,算法,线性回归,时间序列"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="机器学习算法线性回归 回归分析线性回归（英语：linearregression)  是利用线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系建模的方法   线性回归的应用 线性回归的数学定义  线性回归的解析解与推导解释公式:  解析解推导：    实战案例-股票回归预测(时间序列操作)1234567# 你可以使用如下的方法下载某一个公司的股票交易历史# 000001 为平安银行# 如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性回归分析与股票价格预测实战">
+<meta property="og:url" content="http://alogomachine.com/22704.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法线性回归 回归分析线性回归（英语：linearregression)  是利用线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系建模的方法   线性回归的应用 线性回归的数学定义  线性回归的解析解与推导解释公式:  解析解推导：    实战案例-股票回归预测(时间序列操作)1234567# 你可以使用如下的方法下载某一个公司的股票交易历史# 000001 为平安银行# 如果">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/d5f0fbb7f4e15b6d7951dc7cb8d44cbedd9045d8.jpg">
+<meta property="article:published_time" content="2021-07-27T11:04:00.000Z">
+<meta property="article:modified_time" content="2021-07-27T11:05:09.779Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="线性回归">
+<meta property="article:tag" content="时间序列">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/d5f0fbb7f4e15b6d7951dc7cb8d44cbedd9045d8.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://alogomachine.com/22704"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '线性回归分析与股票价格预测实战',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-27 19:05:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/d5f0fbb7f4e15b6d7951dc7cb8d44cbedd9045d8.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine's BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">线性回归分析与股票价格预测实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-27T11:04:00.000Z" title="发表于 2021-07-27 19:04:00">2021-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-27T11:05:09.779Z" title="更新于 2021-07-27 19:05:09">2021-07-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="线性回归分析与股票价格预测实战"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">线性回归</span></strong></p>
+<h1 id="回归分析"><a href="#回归分析" class="headerlink" title="回归分析"></a>回归分析</h1><p>线性回归（英语：linearregression)</p>
+<ul>
+<li>是利用线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系建模的方法</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185758.png" alt="image-20210727185758930"></p>
+<h2 id="线性回归的应用"><a href="#线性回归的应用" class="headerlink" title="线性回归的应用"></a>线性回归的应用</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185826.png" alt="image-20210727185826111"></p>
+<h2 id="线性回归的数学定义"><a href="#线性回归的数学定义" class="headerlink" title="线性回归的数学定义"></a>线性回归的数学定义</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185904.png" alt="image-20210727185904264"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185926.png" alt="image-20210727185926594"></p>
+<h2 id="线性回归的解析解与推导解释"><a href="#线性回归的解析解与推导解释" class="headerlink" title="线性回归的解析解与推导解释"></a>线性回归的解析解与推导解释</h2><p>公式:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185953.png" alt="image-20210727185953662"></p>
+<p>解析解推导：</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727190140.png" alt="image-20210727190140480"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727190222.png" alt="image-20210727190222068"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727190234.png" alt="image-20210727190234286"></p>
+<h1 id="实战案例-股票回归预测-时间序列操作"><a href="#实战案例-股票回归预测-时间序列操作" class="headerlink" title="实战案例-股票回归预测(时间序列操作)"></a>实战案例-股票回归预测(时间序列操作)</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 你可以使用如下的方法下载某一个公司的股票交易历史</span></span><br><span class="line"><span class="comment"># 000001 为平安银行</span></span><br><span class="line"><span class="comment"># 如果你还没有安装, 可以使用 pip install tushare 安装tushare python包</span></span><br><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts</span><br><span class="line">df = ts.get_hist_data(<span class="string">&#x27;000001&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line">df.to_csv(<span class="string">&#x27;000001.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测股票</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np <span class="comment"># 数学计算</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd <span class="comment"># 数据处理, 读取 CSV 文件 (e.g. pd.read_csv)</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime <span class="keyword">as</span> dt  <span class="comment">#做时间处理</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;000008.csv&#x27;</span>) <span class="comment">#平安银行股票信息</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>price_change</th>
+      <th>p_change</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-07-27</td>
+      <td>2.13</td>
+      <td>2.14</td>
+      <td>2.10</td>
+      <td>2.09</td>
+      <td>134664.52</td>
+      <td>-0.03</td>
+      <td>-1.41</td>
+      <td>2.150</td>
+      <td>2.162</td>
+      <td>2.176</td>
+      <td>131424.11</td>
+      <td>110258.76</td>
+      <td>106935.07</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-07-26</td>
+      <td>2.17</td>
+      <td>2.18</td>
+      <td>2.13</td>
+      <td>2.11</td>
+      <td>223703.88</td>
+      <td>-0.04</td>
+      <td>-1.84</td>
+      <td>2.166</td>
+      <td>2.172</td>
+      <td>2.183</td>
+      <td>121426.95</td>
+      <td>106060.87</td>
+      <td>110351.05</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-07-23</td>
+      <td>2.18</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.17</td>
+      <td>96939.13</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.174</td>
+      <td>2.178</td>
+      <td>2.186</td>
+      <td>95522.00</td>
+      <td>99129.56</td>
+      <td>102828.30</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-07-22</td>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.18</td>
+      <td>2.17</td>
+      <td>95186.02</td>
+      <td>0.01</td>
+      <td>0.46</td>
+      <td>2.174</td>
+      <td>2.179</td>
+      <td>2.188</td>
+      <td>92234.78</td>
+      <td>101179.23</td>
+      <td>103448.75</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-07-21</td>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.16</td>
+      <td>106627.00</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.172</td>
+      <td>2.177</td>
+      <td>2.190</td>
+      <td>93422.51</td>
+      <td>104647.68</td>
+      <td>104303.14</td>
+      <td>0.40</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(606, 15)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 606 entries, 0 to 605
+Data columns (total 15 columns):
+date            606 non-null object
+open            606 non-null float64
+high            606 non-null float64
+close           606 non-null float64
+low             606 non-null float64
+volume          606 non-null float64
+price_change    606 non-null float64
+p_change        606 non-null float64
+ma5             606 non-null float64
+ma10            606 non-null float64
+ma20            606 non-null float64
+v_ma5           606 non-null float64
+v_ma10          606 non-null float64
+v_ma20          606 non-null float64
+turnover        606 non-null float64
+dtypes: float64(14), object(1)
+memory usage: 71.1+ KB
+</code></pre>
+<p>股票数据的特征</p>
+<ul>
+<li>date：日期</li>
+<li>open：开盘价</li>
+<li>high：最高价</li>
+<li>close：收盘价</li>
+<li>low：最低价</li>
+<li>volume：成交量</li>
+<li>price_change：价格变动</li>
+<li>p_change：涨跌幅</li>
+<li>ma5：5日均价</li>
+<li>ma10：10日均价</li>
+<li>ma20:20日均价</li>
+<li>v_ma5:5日均量</li>
+<li>v_ma10:10日均量</li>
+<li>v_ma20:20日均量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].head()</span><br><span class="line"><span class="comment"># 发现日期是字符串的类型，要把它转换成时间序列</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0    2021-07-27
+1    2021-07-26
+2    2021-07-23
+3    2021-07-22
+4    2021-07-21
+Name: date, dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(df[<span class="string">&#x27;date&#x27;</span>])</span><br><span class="line">df[<span class="string">&#x27;date&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0   2021-07-27
+1   2021-07-26
+2   2021-07-23
+3   2021-07-22
+4   2021-07-21
+Name: date, dtype: datetime64[ns]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.set_index(<span class="string">&#x27;date&#x27;</span>) <span class="comment">#s设置时间序列为索引，不能成为预测值</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>price_change</th>
+      <th>p_change</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-27</th>
+      <td>2.13</td>
+      <td>2.14</td>
+      <td>2.10</td>
+      <td>2.09</td>
+      <td>134664.52</td>
+      <td>-0.03</td>
+      <td>-1.41</td>
+      <td>2.150</td>
+      <td>2.162</td>
+      <td>2.176</td>
+      <td>131424.11</td>
+      <td>110258.76</td>
+      <td>106935.07</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <th>2021-07-26</th>
+      <td>2.17</td>
+      <td>2.18</td>
+      <td>2.13</td>
+      <td>2.11</td>
+      <td>223703.88</td>
+      <td>-0.04</td>
+      <td>-1.84</td>
+      <td>2.166</td>
+      <td>2.172</td>
+      <td>2.183</td>
+      <td>121426.95</td>
+      <td>106060.87</td>
+      <td>110351.05</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>2.18</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.17</td>
+      <td>96939.13</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.174</td>
+      <td>2.178</td>
+      <td>2.186</td>
+      <td>95522.00</td>
+      <td>99129.56</td>
+      <td>102828.30</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.18</td>
+      <td>2.17</td>
+      <td>95186.02</td>
+      <td>0.01</td>
+      <td>0.46</td>
+      <td>2.174</td>
+      <td>2.179</td>
+      <td>2.188</td>
+      <td>92234.78</td>
+      <td>101179.23</td>
+      <td>103448.75</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>2021-07-21</th>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.16</td>
+      <td>106627.00</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.172</td>
+      <td>2.177</td>
+      <td>2.190</td>
+      <td>93422.51</td>
+      <td>104647.68</td>
+      <td>104303.14</td>
+      <td>0.40</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=<span class="string">&#x27;date&#x27;</span>,inplace=<span class="literal">True</span>,ascending=<span class="literal">True</span>)  <span class="comment">#ascending时间升序排序</span></span><br><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>price_change</th>
+      <th>p_change</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-21</th>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.16</td>
+      <td>106627.00</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.172</td>
+      <td>2.177</td>
+      <td>2.190</td>
+      <td>93422.51</td>
+      <td>104647.68</td>
+      <td>104303.14</td>
+      <td>0.40</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>2.17</td>
+      <td>2.19</td>
+      <td>2.18</td>
+      <td>2.17</td>
+      <td>95186.02</td>
+      <td>0.01</td>
+      <td>0.46</td>
+      <td>2.174</td>
+      <td>2.179</td>
+      <td>2.188</td>
+      <td>92234.78</td>
+      <td>101179.23</td>
+      <td>103448.75</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>2.18</td>
+      <td>2.19</td>
+      <td>2.17</td>
+      <td>2.17</td>
+      <td>96939.13</td>
+      <td>-0.01</td>
+      <td>-0.46</td>
+      <td>2.174</td>
+      <td>2.178</td>
+      <td>2.186</td>
+      <td>95522.00</td>
+      <td>99129.56</td>
+      <td>102828.30</td>
+      <td>0.36</td>
+    </tr>
+    <tr>
+      <th>2021-07-26</th>
+      <td>2.17</td>
+      <td>2.18</td>
+      <td>2.13</td>
+      <td>2.11</td>
+      <td>223703.88</td>
+      <td>-0.04</td>
+      <td>-1.84</td>
+      <td>2.166</td>
+      <td>2.172</td>
+      <td>2.183</td>
+      <td>121426.95</td>
+      <td>106060.87</td>
+      <td>110351.05</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <th>2021-07-27</th>
+      <td>2.13</td>
+      <td>2.14</td>
+      <td>2.10</td>
+      <td>2.09</td>
+      <td>134664.52</td>
+      <td>-0.03</td>
+      <td>-1.41</td>
+      <td>2.150</td>
+      <td>2.162</td>
+      <td>2.176</td>
+      <td>131424.11</td>
+      <td>110258.76</td>
+      <td>106935.07</td>
+      <td>0.51</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测是否有缺失值,并处理缺失值</span></span><br><span class="line">df.dropna(axis=<span class="number">0</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">df.isna().<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>open            0
+high            0
+close           0
+low             0
+volume          0
+price_change    0
+p_change        0
+ma5             0
+ma10            0
+ma20            0
+v_ma5           0
+v_ma10          0
+v_ma20          0
+turnover        0
+dtype: int64
+</code></pre>
+<h2 id="K线图"><a href="#K线图" class="headerlink" title="K线图"></a>K线图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Min_date = df.index.<span class="built_in">min</span>()</span><br><span class="line">Max_date = df.index.<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;起始日期为&quot;</span>,Min_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;终止日期为&quot;</span>,Max_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;总共间隔时间为:&quot;</span>,Max_date-Min_date) <span class="comment">#包括了休息日和工作日</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>起始日期为 2019-01-28 00:00:00
+终止日期为 2021-07-27 00:00:00
+总共间隔时间为: 911 days 00:00:00
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> plotly <span class="keyword">import</span> tools</span><br><span class="line"><span class="keyword">from</span> plotly.graph_objs <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> plotly.offline <span class="keyword">import</span> init_notebook_mode, iplot, iplot_mpl</span><br><span class="line">init_notebook_mode()</span><br><span class="line"><span class="keyword">import</span> chart_studio.plotly <span class="keyword">as</span> py</span><br><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line"></span><br><span class="line">trace = go.Ohlc(x=df.index, <span class="built_in">open</span>=df[<span class="string">&#x27;open&#x27;</span>], high=df[<span class="string">&#x27;high&#x27;</span>], low=df[<span class="string">&#x27;low&#x27;</span>], close=df[<span class="string">&#x27;close&#x27;</span>])</span><br><span class="line">data = [trace]</span><br><span class="line">iplot(data, filename=<span class="string">&#x27;simple_ohlc&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185408.png" alt="image-20210727185408672"></p>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新的列，填入预测值，根据当前的数据预测5天以后的收盘价</span></span><br><span class="line">num = <span class="number">5</span> <span class="comment">#预测5天以后的情况</span></span><br><span class="line">df[<span class="string">&#x27;label&#x27;</span>] = df[<span class="string">&#x27;close&#x27;</span>].shift(-num) <span class="comment">#数据整体往上移动num格 也就是你这一天预测num天后的实际值</span></span><br><span class="line">df.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(607, 15)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>price_change</th>
+      <th>p_change</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+      <th>label</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-21</th>
+      <td>20.58</td>
+      <td>20.80</td>
+      <td>20.45</td>
+      <td>20.20</td>
+      <td>753076.50</td>
+      <td>-0.15</td>
+      <td>-0.73</td>
+      <td>21.044</td>
+      <td>21.104</td>
+      <td>21.881</td>
+      <td>721650.49</td>
+      <td>821114.23</td>
+      <td>754829.76</td>
+      <td>0.39</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>20.45</td>
+      <td>20.66</td>
+      <td>20.38</td>
+      <td>20.24</td>
+      <td>868648.06</td>
+      <td>-0.07</td>
+      <td>-0.34</td>
+      <td>20.796</td>
+      <td>20.991</td>
+      <td>21.746</td>
+      <td>704179.49</td>
+      <td>762273.08</td>
+      <td>778747.99</td>
+      <td>0.45</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>20.38</td>
+      <td>20.38</td>
+      <td>20.10</td>
+      <td>20.00</td>
+      <td>727404.31</td>
+      <td>-0.28</td>
+      <td>-1.37</td>
+      <td>20.548</td>
+      <td>20.874</td>
+      <td>21.583</td>
+      <td>735059.83</td>
+      <td>758777.04</td>
+      <td>787119.55</td>
+      <td>0.37</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-07-26</th>
+      <td>19.96</td>
+      <td>19.99</td>
+      <td>18.80</td>
+      <td>18.43</td>
+      <td>1451304.00</td>
+      <td>-1.30</td>
+      <td>-6.47</td>
+      <td>20.066</td>
+      <td>20.638</td>
+      <td>21.384</td>
+      <td>920893.44</td>
+      <td>816117.33</td>
+      <td>828371.89</td>
+      <td>0.75</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-07-27</th>
+      <td>18.87</td>
+      <td>18.99</td>
+      <td>17.76</td>
+      <td>17.60</td>
+      <td>1357551.50</td>
+      <td>-1.04</td>
+      <td>-5.53</td>
+      <td>19.498</td>
+      <td>20.302</td>
+      <td>21.155</td>
+      <td>1031596.87</td>
+      <td>886111.09</td>
+      <td>843761.99</td>
+      <td>0.70</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除‘label&#x27; &#x27;price_change&#x27;,&#x27;p_change&#x27; 因为不需要他们进行预测</span></span><br><span class="line">data = df.drop([<span class="string">&#x27;label&#x27;</span>,<span class="string">&#x27;price_change&#x27;</span>,<span class="string">&#x27;p_change&#x27;</span>],axis=<span class="number">1</span>) <span class="comment">#删除这三列</span></span><br><span class="line">data.tail()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-21</th>
+      <td>20.58</td>
+      <td>20.80</td>
+      <td>20.45</td>
+      <td>20.20</td>
+      <td>753076.50</td>
+      <td>21.044</td>
+      <td>21.104</td>
+      <td>21.881</td>
+      <td>721650.49</td>
+      <td>821114.23</td>
+      <td>754829.76</td>
+      <td>0.39</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>20.45</td>
+      <td>20.66</td>
+      <td>20.38</td>
+      <td>20.24</td>
+      <td>868648.06</td>
+      <td>20.796</td>
+      <td>20.991</td>
+      <td>21.746</td>
+      <td>704179.49</td>
+      <td>762273.08</td>
+      <td>778747.99</td>
+      <td>0.45</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>20.38</td>
+      <td>20.38</td>
+      <td>20.10</td>
+      <td>20.00</td>
+      <td>727404.31</td>
+      <td>20.548</td>
+      <td>20.874</td>
+      <td>21.583</td>
+      <td>735059.83</td>
+      <td>758777.04</td>
+      <td>787119.55</td>
+      <td>0.37</td>
+    </tr>
+    <tr>
+      <th>2021-07-26</th>
+      <td>19.96</td>
+      <td>19.99</td>
+      <td>18.80</td>
+      <td>18.43</td>
+      <td>1451304.00</td>
+      <td>20.066</td>
+      <td>20.638</td>
+      <td>21.384</td>
+      <td>920893.44</td>
+      <td>816117.33</td>
+      <td>828371.89</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>2021-07-27</th>
+      <td>18.87</td>
+      <td>18.99</td>
+      <td>17.76</td>
+      <td>17.60</td>
+      <td>1357551.50</td>
+      <td>19.498</td>
+      <td>20.302</td>
+      <td>21.155</td>
+      <td>1031596.87</td>
+      <td>886111.09</td>
+      <td>843761.99</td>
+      <td>0.70</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理特征值</span></span><br><span class="line">X = data.values</span><br><span class="line">X = preprocessing.scale(X) <span class="comment">#标准化</span></span><br><span class="line"><span class="comment"># 对每个属性/每列来说所有数据都聚集在0附近，方差值为1。</span></span><br><span class="line">X =X[:-num] <span class="comment">#去掉后5天的值，因为要当作无后面5天值，要去预测</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理标签</span></span><br><span class="line">df.dropna(inplace= <span class="literal">True</span>)</span><br><span class="line">Target = df.label</span><br><span class="line">y = Target.values</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(np.shape(X),np.shape(y))</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+
+<pre><code>(602, 12) (602,)
+
+
+
+
+
+array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
+        -0.04417715,  0.1441613 ],
+       [-1.47985847, -1.48891936, -1.4743962 , ..., -0.32467616,
+        -0.37352025, -0.27959612],
+       [-1.48257641, -1.45964914, -1.48799029, ..., -0.52646157,
+        -0.60356403, -0.52678795],
+       ...,
+       [ 1.36039855,  1.37157982,  1.33686078, ..., -0.61747576,
+        -0.95329394, -0.91523224],
+       [ 1.3468088 ,  1.26780357,  1.30151616, ..., -0.71057098,
+        -0.98416008, -1.0211716 ],
+       [ 1.27614212,  1.20660219,  1.13566831, ..., -0.70723675,
+        -0.97687653, -0.52678795]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##### 将数据分为训练数据和测试数据</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=<span class="number">2021</span>,test_size=<span class="number">0.2</span>) <span class="comment">#设置随机数种子 设置测试集0.2</span></span><br><span class="line"><span class="comment"># #自己设置比例</span></span><br><span class="line"><span class="comment"># X_train,y_train = X[0:550,:],y[0:550]</span></span><br><span class="line"><span class="comment"># X_test,y_test = X[550:,:],y[550:602]</span></span><br><span class="line"><span class="built_in">print</span>(X_train.shape)</span><br><span class="line"><span class="built_in">print</span>(y_train.shape)</span><br><span class="line"><span class="built_in">print</span>(X_test.shape)</span><br><span class="line"><span class="built_in">print</span>(y_test.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(481, 12)
+(481,)
+(121, 12)
+(121,)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lr = LinearRegression() <span class="comment">#逻辑回归模型</span></span><br><span class="line">lr.fit(X_train,y_train)</span><br><span class="line">lr.score(X_test,y_test) <span class="comment">#使用绝对系数 R^2 评估模型</span></span><br><span class="line"><span class="comment"># 绝对系数越大越拟合</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.9537276319885583
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 做预测 </span></span><br><span class="line">X_Predict = X[-num:]</span><br><span class="line">Forecast = lr.predict(X_Predict)</span><br><span class="line"><span class="built_in">print</span>(Forecast) <span class="comment">#预测最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(y[-num:]) <span class="comment">#实际最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(X_Predict)  <span class="comment">#最后5天的特征</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[20.58546463 21.30633579 21.06762328 20.90177206 20.47861039]
+[20.45 20.38 20.1  18.8  17.76]
+[[ 1.24896263  1.15338361  1.17916938  1.18973775 -0.38166387  1.29792419
+   1.49107504  1.66146894 -0.31590711 -0.56046406 -1.01335038 -0.42084859]
+ [ 1.17286005  1.34497053  1.41298766  1.2512624  -0.17701624  1.3039143
+   1.44795391  1.64112995 -0.56317108 -0.48007827 -0.93423686 -0.244283  ]
+ [ 1.36039855  1.37157982  1.33686078  1.43863295 -0.90240558  1.30772619
+   1.43512674  1.62326461 -0.65661848 -0.61747576 -0.95329394 -0.91523224]
+ [ 1.3468088   1.26780357  1.30151616  1.29321103 -0.99874522  1.31044897
+   1.41192866  1.61007175 -0.83218332 -0.71057098 -0.98416008 -1.0211716 ]
+ [ 1.27614212  1.20660219  1.13566831  1.2065172  -0.4648397   1.28213206
+   1.35243241  1.57763929 -0.75992703 -0.70723675 -0.97687653 -0.52678795]]
+</code></pre>
+<h2 id="画预测结果"><a href="#画预测结果" class="headerlink" title="画预测结果"></a>画预测结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测2021-07-21 到 2021-07-27 ,一共5天的收盘价</span></span><br><span class="line">trange = pd.date_range(<span class="string">&#x27;2021-07-19&#x27;</span>,periods=num,freq=<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">trange</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>DatetimeIndex([&#39;2021-07-19&#39;, &#39;2021-07-20&#39;, &#39;2021-07-21&#39;, &#39;2021-07-22&#39;,
+               &#39;2021-07-23&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生预测值dataframe</span></span><br><span class="line">Predict_df = pd.DataFrame(Forecast, index=trange)</span><br><span class="line">Predict_df.columns = [<span class="string">&#x27;forecast&#x27;</span>]</span><br><span class="line">Predict_df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>forecast</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-19</th>
+      <td>20.585465</td>
+    </tr>
+    <tr>
+      <th>2021-07-20</th>
+      <td>21.306336</td>
+    </tr>
+    <tr>
+      <th>2021-07-21</th>
+      <td>21.067623</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>20.901772</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>20.478610</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将预测值添加到原始dataframe</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./000001.csv&#x27;</span>) </span><br><span class="line">df[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(df[<span class="string">&#x27;date&#x27;</span>])</span><br><span class="line">df = df.set_index(<span class="string">&#x27;date&#x27;</span>)</span><br><span class="line"><span class="comment"># 按照时间升序排列</span></span><br><span class="line">df.sort_values(by=[<span class="string">&#x27;date&#x27;</span>], inplace=<span class="literal">True</span>, ascending=<span class="literal">True</span>)</span><br><span class="line">df_concat = pd.concat([df, Predict_df], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df_concat = df_concat[df_concat.index.isin(Predict_df.index)]</span><br><span class="line">df_concat.tail(num)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>close</th>
+      <th>low</th>
+      <th>volume</th>
+      <th>price_change</th>
+      <th>p_change</th>
+      <th>ma5</th>
+      <th>ma10</th>
+      <th>ma20</th>
+      <th>v_ma5</th>
+      <th>v_ma10</th>
+      <th>v_ma20</th>
+      <th>turnover</th>
+      <th>forecast</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-07-19</th>
+      <td>21.36</td>
+      <td>21.43</td>
+      <td>21.21</td>
+      <td>20.78</td>
+      <td>522135.97</td>
+      <td>-0.13</td>
+      <td>-0.61</td>
+      <td>21.210</td>
+      <td>21.532</td>
+      <td>22.134</td>
+      <td>711341.23</td>
+      <td>791493.36</td>
+      <td>737257.18</td>
+      <td>0.27</td>
+      <td>20.585465</td>
+    </tr>
+    <tr>
+      <th>2021-07-20</th>
+      <td>21.10</td>
+      <td>21.20</td>
+      <td>20.60</td>
+      <td>20.47</td>
+      <td>804034.31</td>
+      <td>-0.61</td>
+      <td>-2.88</td>
+      <td>21.106</td>
+      <td>21.314</td>
+      <td>22.016</td>
+      <td>740625.30</td>
+      <td>792701.07</td>
+      <td>739571.32</td>
+      <td>0.41</td>
+      <td>21.306336</td>
+    </tr>
+    <tr>
+      <th>2021-07-21</th>
+      <td>20.58</td>
+      <td>20.80</td>
+      <td>20.45</td>
+      <td>20.20</td>
+      <td>753076.50</td>
+      <td>-0.15</td>
+      <td>-0.73</td>
+      <td>21.044</td>
+      <td>21.104</td>
+      <td>21.881</td>
+      <td>721650.49</td>
+      <td>821114.23</td>
+      <td>754829.76</td>
+      <td>0.39</td>
+      <td>21.067623</td>
+    </tr>
+    <tr>
+      <th>2021-07-22</th>
+      <td>20.45</td>
+      <td>20.66</td>
+      <td>20.38</td>
+      <td>20.24</td>
+      <td>868648.06</td>
+      <td>-0.07</td>
+      <td>-0.34</td>
+      <td>20.796</td>
+      <td>20.991</td>
+      <td>21.746</td>
+      <td>704179.49</td>
+      <td>762273.08</td>
+      <td>778747.99</td>
+      <td>0.45</td>
+      <td>20.901772</td>
+    </tr>
+    <tr>
+      <th>2021-07-23</th>
+      <td>20.38</td>
+      <td>20.38</td>
+      <td>20.10</td>
+      <td>20.00</td>
+      <td>727404.31</td>
+      <td>-0.28</td>
+      <td>-1.37</td>
+      <td>20.548</td>
+      <td>20.874</td>
+      <td>21.583</td>
+      <td>735059.83</td>
+      <td>758777.04</td>
+      <td>787119.55</td>
+      <td>0.37</td>
+      <td>20.478610</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Axes：坐标系 </span></span><br><span class="line"><span class="comment">#Subplot</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">221</span>)  <span class="comment">#221代表子图的位置  221：几行几列 第几个  2行2列第一个</span></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">222</span>)  <span class="comment">#</span></span><br><span class="line">ax3 = fig.add_subplot(<span class="number">212</span>)</span><br><span class="line"><span class="comment"># ax4 = fig.add_subplot(224)</span></span><br><span class="line">ax1.plot(df_concat[<span class="string">&#x27;forecast&#x27;</span>],linewidth=<span class="number">1</span>,label=<span class="string">&#x27;实际值&#x27;</span>,color=<span class="string">&quot;orange&quot;</span>)</span><br><span class="line">ax2.plot(df_concat[<span class="string">&#x27;close&#x27;</span>],linewidth=<span class="number">1</span>,label=<span class="string">&#x27;实际值&#x27;</span>,color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax1.<span class="built_in">set</span>(title=<span class="string">&#x27;预测结果&#x27;</span>,ylabel=<span class="string">&#x27;预测值&#x27;</span>,xlabel=<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line">ax2.<span class="built_in">set</span>(title=<span class="string">&#x27;实际结果&#x27;</span>,ylabel=<span class="string">&#x27;预测值&#x27;</span>,xlabel=<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line"><span class="comment"># 画预测值和实际值</span></span><br><span class="line"></span><br><span class="line">ax3 = df_concat[<span class="string">&#x27;close&#x27;</span>].plot(color=<span class="string">&#x27;green&#x27;</span>, linewidth=<span class="number">1</span>)</span><br><span class="line">ax3 =df_concat[<span class="string">&#x27;forecast&#x27;</span>].plot(color=<span class="string">&#x27;orange&#x27;</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;价格&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185307.png" alt="png"></p>
+<h2 id="权重特征"><a href="#权重特征" class="headerlink" title="权重特征"></a>权重特征</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 理解模型</span></span><br><span class="line"><span class="keyword">for</span> idx, col_name <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;high&#x27;</span>, <span class="string">&#x27;close&#x27;</span>, <span class="string">&#x27;low&#x27;</span>, <span class="string">&#x27;volume&#x27;</span>, <span class="string">&#x27;ma5&#x27;</span>, <span class="string">&#x27;ma10&#x27;</span>, <span class="string">&#x27;ma20&#x27;</span>, <span class="string">&#x27;v_ma5&#x27;</span>, <span class="string">&#x27;v_ma10&#x27;</span>, <span class="string">&#x27;v_ma20&#x27;</span>]):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;The coefficient for &#123;&#125; is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(col_name, lr.coef_[idx]))</span><br><span class="line"><span class="comment"># 权重特征</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>The coefficient for open is -0.6740136248471393
+The coefficient for high is -0.3406015889420868
+The coefficient for close is 2.806477446216583
+The coefficient for low is 0.8835154370662383
+The coefficient for volume is 0.701804956701415
+The coefficient for ma5 is 1.1450434713655455
+The coefficient for ma10 is -0.14538595012110592
+The coefficient for ma20 is -0.19140806216593198
+The coefficient for v_ma5 is 0.050144303955445196
+The coefficient for v_ma10 is -0.21247175374027985
+The coefficient for v_ma20 is 0.04820620468948662
+</code></pre>
+<p><strong>看课外阅读</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://alogomachine.com/22704.html">http://alogomachine.com/22704.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://alogomachine.com" target="_blank">Alogomachine's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a><a class="post-meta__tags" href="/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">时间序列</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/d5f0fbb7f4e15b6d7951dc7cb8d44cbedd9045d8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/22657.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/f0e9b1f2296f5d53981d353699175e759b4b7a4c.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">KNN算法实战-预测二手汽车价格</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/22319.html" title="KNN算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9caa1bdabf80e7d9f51290fddc0a2ac4f36669ed.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="title">KNN算法分析与实现</div></div></a></div><div><a href="/22436.html" title="K-Means算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9eab8417d39237e7c6d726aba9d8f688ed55e307.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">K-Means算法分析与实现</div></div></a></div><div><a href="/22657.html" title="KNN算法实战-预测二手汽车价格"><img class="cover" src="https://cdn.shibe.online/shibes/f0e9b1f2296f5d53981d353699175e759b4b7a4c.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="title">KNN算法实战-预测二手汽车价格</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">回归分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">线性回归的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.</span> <span class="toc-text">线性回归的数学定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E8%A7%A3%E6%9E%90%E8%A7%A3%E4%B8%8E%E6%8E%A8%E5%AF%BC%E8%A7%A3%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">线性回归的解析解与推导解释</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B-%E8%82%A1%E7%A5%A8%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">实战案例-股票回归预测(时间序列操作)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#K%E7%BA%BF%E5%9B%BE"><span class="toc-number">2.1.</span> <span class="toc-text">K线图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">2.2.</span> <span class="toc-text">线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%BB%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C"><span class="toc-number">2.3.</span> <span class="toc-text">画预测结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%87%8D%E7%89%B9%E5%BE%81"><span class="toc-number">2.4.</span> <span class="toc-text">权重特征</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22704.html" title="线性回归分析与股票价格预测实战">线性回归分析与股票价格预测实战</a><time datetime="2021-07-27T11:04:00.000Z" title="发表于 2021-07-27 19:04:00">2021-07-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22657.html" title="KNN算法实战-预测二手汽车价格">KNN算法实战-预测二手汽车价格</a><time datetime="2021-07-26T15:57:00.000Z" title="发表于 2021-07-26 23:57:00">2021-07-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22436.html" title="K-Means算法分析与实现">K-Means算法分析与实现</a><time datetime="2021-07-24T15:36:00.000Z" title="发表于 2021-07-24 23:36:00">2021-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22319.html" title="KNN算法分析与实现">KNN算法分析与实现</a><time datetime="2021-07-23T15:19:00.000Z" title="发表于 2021-07-23 23:19:00">2021-07-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22101.html" title="Pyecharts可视化(二)">Pyecharts可视化(二)</a><time datetime="2021-07-21T11:01:00.000Z" title="发表于 2021-07-21 19:01:00">2021-07-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/recordQuery"><img class="icp-icon" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png">粤ICP备2021089270号</a> <br><span>本网站立足于中国大陆,不对任何个人言论负责。</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>
