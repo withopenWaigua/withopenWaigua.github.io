@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>朴素贝叶斯补充与情感分析案例 | Alogomachine's BLOG</title><meta name="keywords" content="机器学习,算法,朴素贝叶斯,TF-IDF,文本分类"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="机器学习算法朴素贝叶斯 朴素贝叶斯 单词表示： 把一组词典用向量表示 文本分析单词表示这个单词在词典出现的位置就标为1，其他为0  句子的表示将词典与句子比较 每个词在句子里面出现就标记为1  count_vector ： 把每个句子中的词语出现的次数作为向量的值 数一下词典里面词语出现的次数 TF-IDF表示使用Tf-idf -构建向量 并不是出现的越多越重要 并不是出现的越少越不重要 公式：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="朴素贝叶斯补充与情感分析案例">
+<meta property="og:url" content="http://alogomachine.com/22844.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法朴素贝叶斯 朴素贝叶斯 单词表示： 把一组词典用向量表示 文本分析单词表示这个单词在词典出现的位置就标为1，其他为0  句子的表示将词典与句子比较 每个词在句子里面出现就标记为1  count_vector ： 把每个句子中的词语出现的次数作为向量的值 数一下词典里面词语出现的次数 TF-IDF表示使用Tf-idf -构建向量 并不是出现的越多越重要 并不是出现的越少越不重要 公式：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/ad0935d31e084f0c906bc55b498021414ef48788.jpg">
+<meta property="article:published_time" content="2021-07-28T15:44:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T15:44:57.607Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="朴素贝叶斯">
+<meta property="article:tag" content="TF-IDF">
+<meta property="article:tag" content="文本分类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/ad0935d31e084f0c906bc55b498021414ef48788.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://alogomachine.com/22844"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '朴素贝叶斯补充与情感分析案例',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-28 23:44:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/ad0935d31e084f0c906bc55b498021414ef48788.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine's BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">朴素贝叶斯补充与情感分析案例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-28T15:44:00.000Z" title="发表于 2021-07-28 23:44:00">2021-07-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-28T15:44:57.607Z" title="更新于 2021-07-28 23:44:57">2021-07-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="朴素贝叶斯补充与情感分析案例"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">朴素贝叶斯</span></strong></p>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728232250.png" alt="image-20210728232250767"></p>
+<p>单词表示：</p>
+<p>把一组词典用向量表示</p>
+<h2 id="文本分析"><a href="#文本分析" class="headerlink" title="文本分析"></a>文本分析</h2><h3 id="单词表示"><a href="#单词表示" class="headerlink" title="单词表示"></a>单词表示</h3><p>这个单词在词典出现的位置就标为1，其他为0</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728232439.png" alt="image-20210728232438878"></p>
+<h3 id="句子的表示"><a href="#句子的表示" class="headerlink" title="句子的表示"></a>句子的表示</h3><p>将词典与句子比较</p>
+<p>每个词在句子里面出现就标记为1</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728232503.png" alt="image-20210728232502673"></p>
+<p>count_vector ：</p>
+<p>把每个句子中的词语出现的次数作为向量的值</p>
+<p>数一下词典里面词语出现的次数</p>
+<h3 id="TF-IDF表示"><a href="#TF-IDF表示" class="headerlink" title="TF-IDF表示"></a><em>TF-IDF</em>表示</h3><p>使用Tf-idf -构建向量</p>
+<p>并不是出现的越多越重要</p>
+<p>并不是出现的越少越不重要</p>
+<p>公式：</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728232746.png" alt="image-20210728232746607"></p>
+<p>解释：</p>
+<p>tf ：这个句子中词语(1，2….)出现的次数</p>
+<p>idf:</p>
+<p>N:文档的总数</p>
+<p>N（W）：w出现的次数</p>
+<p>加log为了平滑，减小数值上的差距</p>
+<p>很多文档都出现就不那么重要</p>
+<p>就几个文档出现，说明这个词语很重要</p>
+<p>具体计算:</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728232922.png" alt="image-20210728232922340"></p>
+<h1 id="情感分析"><a href="#情感分析" class="headerlink" title="情感分析"></a>情感分析</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> jieba <span class="comment"># 分词</span></span><br><span class="line"><span class="keyword">import</span> re <span class="comment"># 正则</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer <span class="comment">#tf-idf</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_data</span>(<span class="params">path, is_pos=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    给定文件的路径，读取文件</span></span><br><span class="line"><span class="string">    path: path to the data</span></span><br><span class="line"><span class="string">    is_pos: 是否数据是postive samples. </span></span><br><span class="line"><span class="string">    return: (list of review texts, list of labels) </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    reviews, labels  = [], []</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        review_start  = <span class="literal">False</span></span><br><span class="line">        review_text = []</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">            line = line.strip()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> line: <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> review_start <span class="keyword">and</span> line.startswith(<span class="string">&quot;&lt;review&quot;</span>):</span><br><span class="line">                review_start = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;label&quot;</span> <span class="keyword">in</span> line:</span><br><span class="line">                    labels.append(<span class="built_in">int</span>(line.split(<span class="string">&#x27;&quot;&#x27;</span>)[-<span class="number">2</span>]))</span><br><span class="line">                <span class="keyword">continue</span>                </span><br><span class="line">            <span class="keyword">if</span> review_start <span class="keyword">and</span> line == <span class="string">&quot;&lt;/review&gt;&quot;</span>:</span><br><span class="line">                review_start = <span class="literal">False</span></span><br><span class="line">                reviews.append(<span class="string">&quot; &quot;</span>.join(review_text))</span><br><span class="line">                review_text = []</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> review_start:</span><br><span class="line">                review_text.append(line)</span><br><span class="line">    <span class="keyword">if</span> is_pos:</span><br><span class="line">        labels = [<span class="number">1</span>]*<span class="built_in">len</span>(reviews)</span><br><span class="line">    <span class="keyword">elif</span> <span class="keyword">not</span> is_pos <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        labels = [<span class="number">0</span>]*<span class="built_in">len</span>(reviews)</span><br><span class="line">    <span class="keyword">return</span> reviews, labels</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_file</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    读取训练数据和测试数据，并对它们做一些预处理</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span>    </span><br><span class="line">    train_pos_file = <span class="string">&quot;data_sentiment/train.positive.txt&quot;</span> <span class="comment"># 训练数据</span></span><br><span class="line">    train_neg_file = <span class="string">&quot;data_sentiment/train.negative.txt&quot;</span> <span class="comment"># 训练数据</span></span><br><span class="line">    test_comb_file = <span class="string">&quot;data_sentiment/test.combined.txt&quot;</span>  <span class="comment"># 测试数据</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 读取文件部分，把具体的内容写入到变量里面</span></span><br><span class="line">    train_pos_cmts, train_pos_lbs = read_data(train_pos_file, <span class="literal">True</span>)</span><br><span class="line">    train_neg_cmts, train_neg_lbs = read_data(train_neg_file, <span class="literal">False</span>)</span><br><span class="line">    train_comments = train_pos_cmts + train_neg_cmts</span><br><span class="line">    train_labels = train_pos_lbs + train_neg_lbs</span><br><span class="line">    test_comments, test_labels = read_data(test_comb_file)</span><br><span class="line">    <span class="keyword">return</span> train_comments, train_labels, test_comments, test_labels</span><br><span class="line">train_comments, train_labels, test_comments, test_labels = process_file()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练数据和测试数据大小</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">len</span>(train_comments), <span class="built_in">len</span>(test_comments))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (train_comments[<span class="number">1</span>], train_labels[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<pre><code>8064 2500
+手感超好，而且黑色相比白色在转得时候不容易眼花，找童年的记忆啦。 1
+</code></pre>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_stopwords</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    从外部文件中导入停用词</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    stopwords = <span class="built_in">set</span>()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> in_file:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> in_file:</span><br><span class="line">            stopwords.add(line.strip())</span><br><span class="line">    <span class="keyword">return</span> stopwords</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clean_non_chinese_symbols</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    处理非中文字符</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    text = re.sub(<span class="string">&#x27;[!！]+&#x27;</span>, <span class="string">&quot;!&quot;</span>, text)</span><br><span class="line">    text = re.sub(<span class="string">&#x27;[?？]+&#x27;</span>, <span class="string">&quot;?&quot;</span>, text)</span><br><span class="line">    text = re.sub(<span class="string">&quot;[a-zA-Z#$%&amp;\&#x27;()*+,-./:;：&lt;=&gt;@，。★、…【】《》“”‘’[\\]^_`&#123;|&#125;~]+&quot;</span>, <span class="string">&quot; UNK &quot;</span>, text) <span class="comment">#用unk代替特殊的字符</span></span><br><span class="line">    <span class="keyword">return</span> re.sub(<span class="string">&quot;\s+&quot;</span>, <span class="string">&quot; &quot;</span>, text) <span class="comment"># 处理空格  </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clean_numbers</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    处理数字符号  128  190  NUM </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> re.sub(<span class="string">&quot;\d+&quot;</span>, <span class="string">&#x27; NUM &#x27;</span>, text) </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preprocess_text</span>(<span class="params">text, stopwords</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    文本的预处理过程</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    text = clean_non_chinese_symbols(text)</span><br><span class="line">    text = clean_numbers(text)</span><br><span class="line">    text = <span class="string">&quot; &quot;</span>.join([term <span class="keyword">for</span> term <span class="keyword">in</span> jieba.cut(text) <span class="keyword">if</span> term <span class="keyword">and</span> <span class="keyword">not</span> term <span class="keyword">in</span> stopwords])</span><br><span class="line">    <span class="keyword">return</span> text</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path_stopwords = <span class="string">&quot;./data_sentiment/stopwords.txt&quot;</span></span><br><span class="line">stopwords = load_stopwords(path_stopwords)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对于train_comments, test_comments进行字符串的处理，几个考虑的点：</span></span><br><span class="line"><span class="comment">#   1. 停用词过滤</span></span><br><span class="line"><span class="comment">#   2. 去掉特殊符号</span></span><br><span class="line"><span class="comment">#   3. 去掉数字（比如价格..)</span></span><br><span class="line"><span class="comment">#   4. ...</span></span><br><span class="line"><span class="comment">#   需要注意的点是，由于评论数据本身很短，如果去掉的太多，很可能字符串长度变成0</span></span><br><span class="line"><span class="comment">#   预处理部部分，可以自行选择合适的方案，只要注释就可以。</span></span><br><span class="line"></span><br><span class="line">train_comments_new = [preprocess_text(comment, stopwords) <span class="keyword">for</span> comment <span class="keyword">in</span> train_comments]</span><br><span class="line">test_comments_new = [preprocess_text(comment, stopwords) <span class="keyword">for</span> comment <span class="keyword">in</span> test_comments]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (train_comments_new[<span class="number">0</span>], test_comments_new[<span class="number">0</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>发短信 特别 不 方便 ! 背后 屏幕 很大 起来 不 舒服   UNK   手触 屏 ! 切换 屏幕 很 麻烦 ! 终于 找到 同道中人 初中   UNK   已经 喜欢 上   UNK   同学 都 鄙夷 眼光 看   UNK   人为   UNK   样子 古怪 说 ＂ 丑 ＂ 当场 气晕 现在 同道中人   UNK   好开心 !   UNK   !   UNK  
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   利用tf-idf从文本中提取特征,写到数组里面. </span></span><br><span class="line"><span class="comment">#   参考：https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</span></span><br><span class="line">tfidf = TfidfVectorizer()</span><br><span class="line">X_train =  tfidf.fit_transform(train_comments_new) <span class="comment"># 训练数据的特征</span></span><br><span class="line">y_train =  train_labels <span class="comment"># 训练数据的label</span></span><br><span class="line">X_test = tfidf.transform(test_comments_new) <span class="comment"># 测试数据的特征</span></span><br><span class="line">y_test = test_labels<span class="comment"># 测试数据的label</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (np.shape(X_train), np.shape(X_test), np.shape(y_train), np.shape(y_test))</span><br></pre></td></tr></table></figure>
+
+<pre><code>(8064, 23101) (2500, 23101) (8064,) (2500,)
+</code></pre>
+<h2 id="贝叶斯训练"><a href="#贝叶斯训练" class="headerlink" title="贝叶斯训练"></a>贝叶斯训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 8064个样本 词库共有23101</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">clf = MultinomialNB()</span><br><span class="line"><span class="comment"># 利用朴素贝叶斯做训练</span></span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line">y_pred = clf.predict(X_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;朴素贝叶斯的准确率: &quot;</span>, accuracy_score(y_test, y_pred))</span><br></pre></td></tr></table></figure>
+
+<pre><code>朴素贝叶斯的准确率:  0.6368
+</code></pre>
+<h2 id="KNN分类器训练"><a href="#KNN分类器训练" class="headerlink" title="KNN分类器训练"></a>KNN分类器训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">clf = KNeighborsClassifier(n_neighbors=<span class="number">1</span>)</span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line">y_pred = clf.predict(X_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;KNN算法准确率: &quot;</span>, accuracy_score(y_test, y_pred))</span><br></pre></td></tr></table></figure>
+
+<pre><code>KNN算法准确率:  0.524
+</code></pre>
+<p>维度过高，不适合用KNN</p>
+<h2 id="逻辑回归训练"><a href="#逻辑回归训练" class="headerlink" title="逻辑回归训练"></a>逻辑回归训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"></span><br><span class="line">clf = LogisticRegression(solver=<span class="string">&#x27;liblinear&#x27;</span>)</span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line">y_pred = clf.predict(X_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;逻辑回归的准确率: &quot;</span>, accuracy_score(y_test, y_pred))</span><br></pre></td></tr></table></figure>
+
+<pre><code>逻辑回归的准确率:  0.7136
+</code></pre>
+<h1 id="逻辑回归和朴素贝叶斯进行分类的区别"><a href="#逻辑回归和朴素贝叶斯进行分类的区别" class="headerlink" title="逻辑回归和朴素贝叶斯进行分类的区别"></a>逻辑回归和朴素贝叶斯进行分类的区别</h1><p>逻辑回归(条件)：</p>
+<ul>
+<li>根据条件区别来判别</li>
+</ul>
+<p>朴素贝叶斯 (联合)：</p>
+<ul>
+<li>根据总体特征来判断</li>
+<li>可以生成相关的数据</li>
+</ul>
+<p>比如：</p>
+<h2 id="区别人与狗"><a href="#区别人与狗" class="headerlink" title="区别人与狗"></a>区别人与狗</h2><p>逻辑回归：找到人与狗的区别，发现人两条腿走路，狗4条腿</p>
+<p>朴素贝叶斯：记住人和狗的所有特征</p>
+<h2 id="当给狗的测试样本"><a href="#当给狗的测试样本" class="headerlink" title="当给狗的测试样本"></a>当给狗的测试样本</h2><p>逻辑回归： </p>
+<ul>
+<li>四条腿走路-狗(人是两条腿走路)</li>
+</ul>
+<p>朴素贝叶斯：</p>
+<ul>
+<li>是狗头，鼻子嗅觉很强，毛很长，四条腿….. - 是狗</li>
+</ul>
+<h1 id="相关课后数学知识"><a href="#相关课后数学知识" class="headerlink" title="相关课后数学知识"></a>相关课后数学知识</h1><h2 id="当特征为实数的时候"><a href="#当特征为实数的时候" class="headerlink" title="当特征为实数的时候"></a>当特征为实数的时候</h2><p>朴素贝叶斯使用的其实是高斯朴素贝叶斯模型</p>
+<h2 id="为什么叫“朴素"><a href="#为什么叫“朴素" class="headerlink" title="为什么叫“朴素"></a>为什么叫“朴素</h2><p>因为为了简化，使用了条件独立的方法</p>
+<p>即进行了以下转换</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728233725.png" alt="image-20210728233725032"></p>
+<h2 id="朴素贝叶斯的最大似然"><a href="#朴素贝叶斯的最大似然" class="headerlink" title="朴素贝叶斯的最大似然"></a>朴素贝叶斯的最大似然</h2><p><strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71960086">最大似然估计推导</a></strong></p>
+<h2 id="生成模型和判别模型"><a href="#生成模型和判别模型" class="headerlink" title="生成模型和判别模型"></a>生成模型和判别模型</h2><p>具体看上面逻辑回归(判别模型)和朴素贝叶斯(生成模型)进行分类的区别</p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://alogomachine.com/22844.html">http://alogomachine.com/22844.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://alogomachine.com" target="_blank">Alogomachine's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/">朴素贝叶斯</a><a class="post-meta__tags" href="/tags/TF-IDF/">TF-IDF</a><a class="post-meta__tags" href="/tags/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/">文本分类</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/ad0935d31e084f0c906bc55b498021414ef48788.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/22841.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/fd1cca6386ab53fb7d210f4391d1a2d0f38dcda1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">朴素贝叶斯与垃圾邮件分类案例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/22841.html" title="朴素贝叶斯与垃圾邮件分类案例"><img class="cover" src="https://cdn.shibe.online/shibes/fd1cca6386ab53fb7d210f4391d1a2d0f38dcda1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="title">朴素贝叶斯与垃圾邮件分类案例</div></div></a></div><div><a href="/22319.html" title="KNN算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9caa1bdabf80e7d9f51290fddc0a2ac4f36669ed.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="title">KNN算法分析与实现</div></div></a></div><div><a href="/22436.html" title="K-Means算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9eab8417d39237e7c6d726aba9d8f688ed55e307.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">K-Means算法分析与实现</div></div></a></div><div><a href="/22657.html" title="KNN算法实战-预测二手汽车价格"><img class="cover" src="https://cdn.shibe.online/shibes/f0e9b1f2296f5d53981d353699175e759b4b7a4c.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="title">KNN算法实战-预测二手汽车价格</div></div></a></div><div><a href="/22704.html" title="线性回归分析与股票价格预测实战"><img class="cover" src="https://cdn.shibe.online/shibes/d5f0fbb7f4e15b6d7951dc7cb8d44cbedd9045d8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">线性回归分析与股票价格预测实战</div></div></a></div><div><a href="/22715.html" title="逻辑回归分析与预测客户是否开设存款账户实战"><img class="cover" src="https://cdn.shibe.online/shibes/9eb5eef248e9e24a4753cc31178f927675e953f1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">逻辑回归分析与预测客户是否开设存款账户实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="toc-number">1.</span> <span class="toc-text">朴素贝叶斯</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">文本分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%AF%8D%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">单词表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A5%E5%AD%90%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.2.</span> <span class="toc-text">句子的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TF-IDF%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">TF-IDF表示</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">情感分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">2.1.</span> <span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%AE%AD%E7%BB%83"><span class="toc-number">2.3.</span> <span class="toc-text">贝叶斯训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KNN%E5%88%86%E7%B1%BB%E5%99%A8%E8%AE%AD%E7%BB%83"><span class="toc-number">2.4.</span> <span class="toc-text">KNN分类器训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E8%AE%AD%E7%BB%83"><span class="toc-number">2.5.</span> <span class="toc-text">逻辑回归训练</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%92%8C%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">逻辑回归和朴素贝叶斯进行分类的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%E4%BA%BA%E4%B8%8E%E7%8B%97"><span class="toc-number">3.1.</span> <span class="toc-text">区别人与狗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E7%BB%99%E7%8B%97%E7%9A%84%E6%B5%8B%E8%AF%95%E6%A0%B7%E6%9C%AC"><span class="toc-number">3.2.</span> <span class="toc-text">当给狗的测试样本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%BE%E5%90%8E%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86"><span class="toc-number">4.</span> <span class="toc-text">相关课后数学知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E7%89%B9%E5%BE%81%E4%B8%BA%E5%AE%9E%E6%95%B0%E7%9A%84%E6%97%B6%E5%80%99"><span class="toc-number">4.1.</span> <span class="toc-text">当特征为实数的时候</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E2%80%9C%E6%9C%B4%E7%B4%A0"><span class="toc-number">4.2.</span> <span class="toc-text">为什么叫“朴素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6"><span class="toc-number">4.3.</span> <span class="toc-text">朴素贝叶斯的最大似然</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.4.</span> <span class="toc-text">生成模型和判别模型</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22844.html" title="朴素贝叶斯补充与情感分析案例">朴素贝叶斯补充与情感分析案例</a><time datetime="2021-07-28T15:44:00.000Z" title="发表于 2021-07-28 23:44:00">2021-07-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22841.html" title="朴素贝叶斯与垃圾邮件分类案例">朴素贝叶斯与垃圾邮件分类案例</a><time datetime="2021-07-28T15:41:00.000Z" title="发表于 2021-07-28 23:41:00">2021-07-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22715.html" title="逻辑回归分析与预测客户是否开设存款账户实战">逻辑回归分析与预测客户是否开设存款账户实战</a><time datetime="2021-07-27T13:15:00.000Z" title="发表于 2021-07-27 21:15:00">2021-07-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22704.html" title="线性回归分析与股票价格预测实战">线性回归分析与股票价格预测实战</a><time datetime="2021-07-27T11:04:00.000Z" title="发表于 2021-07-27 19:04:00">2021-07-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/22657.html" title="KNN算法实战-预测二手汽车价格">KNN算法实战-预测二手汽车价格</a><time datetime="2021-07-26T15:57:00.000Z" title="发表于 2021-07-26 23:57:00">2021-07-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/recordQuery"><img class="icp-icon" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png">粤ICP备2021089270号</a> <br><span>本网站立足于中国大陆,不对任何个人言论负责。</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>
