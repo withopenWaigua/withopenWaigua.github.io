@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基于矩阵分解的推荐系统分析与短视频推荐案例 | Alogomachine's BLOG</title><meta name="keywords" content="机器学习,算法,推荐系统,矩阵分解"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="机器学习算法基于矩阵分解的推荐系统 推荐系统推荐系统是什么 信息处理的系统用千预测用户对物品的偏好． 推荐系统可以应用在诸多领域： 推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品 在社交网络里面为你推荐可能会志趣相投的朋友 在金融市场为您推荐合适的股票，基金证券等理财产品 婚恋市场里为单身朋友推荐合适的另—半 推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于矩阵分解的推荐系统分析与短视频推荐案例">
+<meta property="og:url" content="http://alogomachine.com/20543.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法基于矩阵分解的推荐系统 推荐系统推荐系统是什么 信息处理的系统用千预测用户对物品的偏好． 推荐系统可以应用在诸多领域： 推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品 在社交网络里面为你推荐可能会志趣相投的朋友 在金融市场为您推荐合适的股票，基金证券等理财产品 婚恋市场里为单身朋友推荐合适的另—半 推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/36043f920585a96eaba66e637243501589456afd.jpg">
+<meta property="article:published_time" content="2021-08-05T13:43:00.000Z">
+<meta property="article:modified_time" content="2021-08-05T13:44:29.641Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="推荐系统">
+<meta property="article:tag" content="矩阵分解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/36043f920585a96eaba66e637243501589456afd.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://alogomachine.com/20543"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于矩阵分解的推荐系统分析与短视频推荐案例',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-05 21:44:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/36043f920585a96eaba66e637243501589456afd.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine's BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于矩阵分解的推荐系统分析与短视频推荐案例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-05T13:43:00.000Z" title="发表于 2021-08-05 21:43:00">2021-08-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-05T13:44:29.641Z" title="更新于 2021-08-05 21:44:29">2021-08-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于矩阵分解的推荐系统分析与短视频推荐案例"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">基于矩阵分解的推荐系统</span></strong></p>
+<h1 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a>推荐系统</h1><h2 id="推荐系统是什么"><a href="#推荐系统是什么" class="headerlink" title="推荐系统是什么"></a>推荐系统是什么</h2><ul>
+<li>信息处理的系统用千预测用户对物品的偏好．</li>
+<li>推荐系统可以应用在诸多领域：</li>
+<li>推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品</li>
+<li>在社交网络里面为你推荐可能会志趣相投的朋友</li>
+<li>在金融市场为您推荐合适的股票，基金证券等理财产品</li>
+<li>婚恋市场里为单身朋友推荐合适的另—半</li>
+<li>推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推 荐系统提高商品销量， 吸引用户注意力，提高用户活跃度，吸引新用户．</li>
+</ul>
+<h2 id="推荐系统模型"><a href="#推荐系统模型" class="headerlink" title="推荐系统模型"></a>推荐系统模型</h2><ul>
+<li>u： 所有的用户集合</li>
+<li>p： 所有的物品集合</li>
+<li> 推荐系统的模型U x P =  R</li>
+<li>R： 用户对物品的喜爱程度，许多信息系统喜欢使用1至5分的评价值来表达，也可以使用喜欢(点赞)或者不喜欢（鄙视）来表达．</li>
+</ul>
+<h2 id="基于矩阵分解的推荐系统"><a href="#基于矩阵分解的推荐系统" class="headerlink" title="基于矩阵分解的推荐系统"></a>基于矩阵分解的推荐系统</h2><p>·这个算法的基本思想：</p>
+<ul>
+<li>将推荐值矩阵R分解为矩阵U 和 P ，使得 U 和 P 的 乘积得到的矩阵R＊中的元素值与R的 中 已知元素的值非常接近</li>
+<li>那么R＊中对应于R中的未知的元素值就是预测值．</li>
+</ul>
+<p>矩阵分解：</p>
+<ul>
+<li>通过构造两个矩阵相乘与实际已知的数据矩阵相近</li>
+<li>那么空缺的位置也能够补上对应的预测值</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213406.png" alt="image-20210805213406771"></p>
+<h2 id="基于矩阵分解的推荐系统：原理"><a href="#基于矩阵分解的推荐系统：原理" class="headerlink" title="基于矩阵分解的推荐系统：原理"></a>基于矩阵分解的推荐系统：原理</h2><ul>
+<li>推荐值矩阵 R 里有—些值是已知的，如果我们将 R 分解为两个矩阵 U 和 P, U的 每— 行代 表—个用户画像向量，P 的每—行代表—个物品的画像向量．</li>
+<li>如果 U 和 P 能够 分别准备表达用户和物品画像向量，那么 U 和 pT 的乘积 R* 中的值就应 该是推荐值</li>
+<li>假设用户对物品的喜好的值是取决于几个（假 设是K 个）因素，我们不知道这些因素是什 么，所以我们命名它们为隐性因子</li>
+<li>假设用户队对物品 pl 的 喜 好 Ri] 是用户画像向量在k 个 因子上的值与物品画像向量在k 个 因子上的值的点积 Rij  = Ui* Pj</li>
+<li>如果能够通过分解推荐值矩阵，使得以上的假设在所有已知的推荐值上面是成立的</li>
+</ul>
+<p>计算流程：</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213606.png" alt="image-20210805213606588"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213621.png" alt="image-20210805213621077"></p>
+<h2 id="算法假设"><a href="#算法假设" class="headerlink" title="算法假设"></a>算法假设</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213921.png" alt="image-20210805213921643"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213946.png" alt="image-20210805213946072"></p>
+<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a>算法理解</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214012.png" alt="image-20210805214012188"></p>
+<h2 id="损失函数与梯度下降"><a href="#损失函数与梯度下降" class="headerlink" title="损失函数与梯度下降"></a>损失函数与梯度下降</h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214050.png" alt="image-20210805214050130"></p>
+<h3 id="损失函数的梯度"><a href="#损失函数的梯度" class="headerlink" title="损失函数的梯度"></a>损失函数的梯度</h3><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214121.png" alt="image-20210805214121480"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214108.png" alt="image-20210805214108700"></p>
+<h2 id="加入正则化"><a href="#加入正则化" class="headerlink" title="加入正则化"></a>加入正则化</h2><p>过拟合的表现：</p>
+<ul>
+<li>在训练数据上误差小，在测试集上误差大</li>
+<li>就是很依靠训练数据，对数据格外敏感</li>
+<li>所以需要加入正则化，目的是防止过拟合</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213647.png" alt="image-20210805213647817"></p>
+<p>梯度下降法求U、P</p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214211.png" alt="image-20210805213708639"></p>
+<h2 id="关于K"><a href="#关于K" class="headerlink" title="关于K"></a>关于K</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213728.png" alt="image-20210805213728273"></p>
+<h2 id="评估推荐系统"><a href="#评估推荐系统" class="headerlink" title="评估推荐系统"></a>评估推荐系统</h2><p>评估推荐系统:</p>
+<ul>
+<li>离线评估</li>
+<li>问卷调查</li>
+<li>用户学习</li>
+<li>在线测试(A/B测试)</li>
+</ul>
+<p>推荐系统就是要把多种算法组合起来</p>
+<h1 id="短视频推荐系统案例"><a href="#短视频推荐系统案例" class="headerlink" title="短视频推荐系统案例"></a>短视频推荐系统案例</h1><p>使用矩阵分解, 根据用户给短视频的评分数据, 做一个千人千面的个性化推荐系统</p>
+<p>需要安装推荐系统库surprise, 使用如下命令安装: pip install scikit-surprise</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入 nunpy 和 surprise 辅助库</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> surprise  </span><br></pre></td></tr></table></figure>
+
+<p>Surprise库本身没有提供纯粹的矩阵分解的算法, 在这里我们自己实现了基于Alternating Least Squares的矩阵分解, 使用梯度下降法优化</p>
+<p>矩阵分解类MatrixFactorization继承了surprise.AlgoBase, 方便我们使用surpise库提供的其它功能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MatrixFactorization</span>(<span class="params">surprise.AlgoBase</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;基于矩阵分解的推荐.&#x27;&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, learning_rate, n_epochs, n_factors, lmd</span>):</span> </span><br><span class="line">        </span><br><span class="line">        self.lr = learning_rate  <span class="comment"># 梯度下降法的学习率</span></span><br><span class="line">        self.n_epochs = n_epochs  <span class="comment"># 梯度下降法的迭代次数</span></span><br><span class="line">        self.n_factors = n_factors  <span class="comment"># 分解的矩阵的秩(rank)</span></span><br><span class="line">        self.lmd = lmd <span class="comment"># 防止过拟合的正则化的强度</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, trainset</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;通过梯度下降法训练, 得到所有 u_i 和 p_j 的值&#x27;&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Fitting data with SGD...&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 随机初始化 user 和 item 矩阵.</span></span><br><span class="line">        u = np.random.normal(<span class="number">0</span>, <span class="number">.1</span>, (trainset.n_users, self.n_factors))</span><br><span class="line">        p = np.random.normal(<span class="number">0</span>, <span class="number">.1</span>, (trainset.n_items, self.n_factors))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 梯度下降法</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(self.n_epochs):</span><br><span class="line">            <span class="keyword">for</span> i, j, r_ij <span class="keyword">in</span> trainset.all_ratings():</span><br><span class="line">                err = r_ij - np.dot(u[i], p[j])</span><br><span class="line">                <span class="comment"># 利用梯度调整 u_i 和 p_j</span></span><br><span class="line">                u[i] -= -self.lr * err * p[j] + self.lr * self.lmd * u[i]</span><br><span class="line">                p[j] -= -self.lr * err * u[i] + self.lr * self.lmd * p[j]</span><br><span class="line">                <span class="comment"># 注意: 修正 p_j 时, 按照严格定义, 我们应该使用 u_i 修正之前的值, 但是实际上差别微乎其微</span></span><br><span class="line">        </span><br><span class="line">        self.u, self.p = u, p</span><br><span class="line">        self.trainset = trainset</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">estimate</span>(<span class="params">self, i, j</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;预测 user i 对 item j 的评分.&#x27;&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果用户 i 和物品 j 是已知的值, 返回 u_i 和 p_j 的点积</span></span><br><span class="line">        <span class="comment"># 否则使用全局平均评分rating值(cold start 冷启动问题)</span></span><br><span class="line">        <span class="keyword">if</span> self.trainset.knows_user(i) <span class="keyword">and</span> self.trainset.knows_item(j):</span><br><span class="line">            <span class="keyword">return</span> np.dot(self.u[i], self.p[j])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.trainset.global_mean</span><br></pre></td></tr></table></figure>
+
+<p>演示如何调用以上定义的矩阵分解类实现短视频的推荐</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> BaselineOnly</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Reader</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> accuracy</span><br><span class="line"><span class="keyword">from</span> surprise.model_selection <span class="keyword">import</span> cross_validate</span><br><span class="line"><span class="keyword">from</span> surprise.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据文件</span></span><br><span class="line">file_path = os.path.expanduser(<span class="string">&#x27;u.data&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据文件的格式如下:</span></span><br><span class="line"><span class="comment"># &#x27;user item rating timestamp&#x27;, 使用制表符 &#x27;\t&#x27; 分割, rating值在1-5之间.</span></span><br><span class="line">reader = Reader(line_format=<span class="string">&#x27;user item rating timestamp&#x27;</span>, sep=<span class="string">&#x27;\t&#x27;</span>, rating_scale=(<span class="number">1</span>, <span class="number">5</span>))</span><br><span class="line">data = Dataset.load_from_file(file_path, reader=reader)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据随机分为训练和测试数据集</span></span><br><span class="line">trainset, testset = train_test_split(data, test_size=<span class="number">.25</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化以上定义的矩阵分解类.</span></span><br><span class="line">algo = MatrixFactorization(learning_rate=<span class="number">.005</span>, n_epochs=<span class="number">60</span>, n_factors=<span class="number">2</span>, lmd = <span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">algo.fit(trainset)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算平均绝对误差</span></span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Fitting data with SGD...
+MAE:  0.7775
+
+
+
+
+
+0.7774984667432812
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 surpise 内建的基于最近邻的方法做比较</span></span><br><span class="line">algo = surprise.KNNBasic()</span><br><span class="line">algo.fit(trainset)</span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Computing the msd similarity matrix...
+Done computing similarity matrix.
+MAE:  0.7743
+
+
+
+
+
+0.7742544761650422
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 surpise 内建的基于 SVD 的方法做比较</span></span><br><span class="line">algo = surprise.SVD()</span><br><span class="line">algo.fit(trainset)</span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>MAE:  0.7422
+
+
+
+
+
+0.7421646660769781
+</code></pre>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://alogomachine.com/20543.html">http://alogomachine.com/20543.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://alogomachine.com" target="_blank">Alogomachine's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a><a class="post-meta__tags" href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/">矩阵分解</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/36043f920585a96eaba66e637243501589456afd.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/20433.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/24f2df091f878595e1acbdd310c45a519214b223.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">K-Means数据预处理与用户分层案例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/22319.html" title="KNN算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/68ceac540c001aca4f6c8e664a7d66ab45a9b33b.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="title">KNN算法分析与实现</div></div></a></div><div><a href="/22436.html" title="K-Means算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9ebb1f06776d1bb16065047b196056d90f582626.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">K-Means算法分析与实现</div></div></a></div><div><a href="/22657.html" title="KNN算法实战-预测二手汽车价格"><img class="cover" src="https://cdn.shibe.online/shibes/c93c57013dd0e35064c8a31e40be2df4d5797b34.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="title">KNN算法实战-预测二手汽车价格</div></div></a></div><div><a href="/22704.html" title="线性回归分析与股票价格预测实战"><img class="cover" src="https://cdn.shibe.online/shibes/cdfea494b332c595fd00ea307ac94b12e7414595.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">线性回归分析与股票价格预测实战</div></div></a></div><div><a href="/22715.html" title="逻辑回归分析与预测客户是否开设存款账户实战"><img class="cover" src="https://cdn.shibe.online/shibes/40488fe5b205aefed07c01c42893e42d33c3e8b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">逻辑回归分析与预测客户是否开设存款账户实战</div></div></a></div><div><a href="/22844.html" title="朴素贝叶斯补充与情感分析案例"><img class="cover" src="https://cdn.shibe.online/shibes/aa8ba03cbd3570e7e87ea4d89ee32720aa538591.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="title">朴素贝叶斯补充与情感分析案例</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">推荐系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">推荐系统是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">推荐系统模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.3.</span> <span class="toc-text">基于矩阵分解的推荐系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">基于矩阵分解的推荐系统：原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%81%87%E8%AE%BE"><span class="toc-number">1.5.</span> <span class="toc-text">算法假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3"><span class="toc-number">1.6.</span> <span class="toc-text">算法理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="toc-number">1.7.</span> <span class="toc-text">损失函数与梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.1.</span> <span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A6"><span class="toc-number">1.7.2.</span> <span class="toc-text">损失函数的梯度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">1.8.</span> <span class="toc-text">加入正则化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EK"><span class="toc-number">1.9.</span> <span class="toc-text">关于K</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.10.</span> <span class="toc-text">评估推荐系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%AD%E8%A7%86%E9%A2%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">短视频推荐系统案例</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20543.html" title="基于矩阵分解的推荐系统分析与短视频推荐案例">基于矩阵分解的推荐系统分析与短视频推荐案例</a><time datetime="2021-08-05T13:43:00.000Z" title="发表于 2021-08-05 21:43:00">2021-08-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20433.html" title="K-Means数据预处理与用户分层案例">K-Means数据预处理与用户分层案例</a><time datetime="2021-08-04T15:33:00.000Z" title="发表于 2021-08-04 23:33:00">2021-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20431.html" title="K-Means算法解析与图像压缩案例">K-Means算法解析与图像压缩案例</a><time datetime="2021-08-04T15:31:00.000Z" title="发表于 2021-08-04 23:31:00">2021-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20118.html" title="随机森林算法分析与员工离职预测&amp;特征分析案例">随机森林算法分析与员工离职预测&amp;特征分析案例</a><time datetime="2021-08-01T13:18:00.000Z" title="发表于 2021-08-01 21:18:00">2021-08-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20116.html" title="决策树算法分析">决策树算法分析</a><time datetime="2021-08-01T13:16:00.000Z" title="发表于 2021-08-01 21:16:00">2021-08-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/recordQuery"><img class="icp-icon" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png">粤ICP备2021089270号</a> <br><span>本网站立足于中国大陆,不对任何个人言论负责。</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>
