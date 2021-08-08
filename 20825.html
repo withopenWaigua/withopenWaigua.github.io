@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Boosting算法分析与预计还款能力案例 | Alogomachine's BLOG</title><meta name="keywords" content="算法,数学建模,插值算法,拟合算法"><meta name="author" content="Alogomachine"><meta name="copyright" content="Alogomachine"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数学建模算法插值算法&#x2F;拟合算法  本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容  插值算法插值算法  数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满足需求，这就是插值的作用。  用于预测    插值算法一般分为：  分段插值 插值多项式 三角插值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boosting算法分析与预计还款能力案例">
+<meta property="og:url" content="http://alogomachine.com/20825.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="数学建模算法插值算法&#x2F;拟合算法  本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容  插值算法插值算法  数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满足需求，这就是插值的作用。  用于预测    插值算法一般分为：  分段插值 插值多项式 三角插值">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.shibe.online/shibes/98b065ee9621cad5f3a6cd9e67847e2cd19b6414.jpg">
+<meta property="article:published_time" content="2021-08-08T14:25:00.000Z">
+<meta property="article:modified_time" content="2021-08-08T14:25:43.131Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数学建模">
+<meta property="article:tag" content="插值算法">
+<meta property="article:tag" content="拟合算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.shibe.online/shibes/98b065ee9621cad5f3a6cd9e67847e2cd19b6414.jpg"><link rel="shortcut icon" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20201117114004_a1b2e.jpeg"><link rel="canonical" href="http://alogomachine.com/20825"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Boosting算法分析与预计还款能力案例',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-08 22:25:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/myfont.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/macblack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/bcack.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/gd.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/quchu.csshttps://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><link rel="stylesheet" href="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pl.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.shibe.online/shibes/98b065ee9621cad5f3a6cd9e67847e2cd19b6414.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Alogomachine's BLOG</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-link"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 说说</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Boosting算法分析与预计还款能力案例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-08T14:25:00.000Z" title="发表于 2021-08-08 22:25:00">2021-08-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-08T14:25:43.131Z" title="更新于 2021-08-08 22:25:43">2021-08-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Boosting算法分析与预计还款能力案例"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><span id="yellow-block">数学建模</span><span id="green-block">算法</span><span id="gray-block">插值算法/拟合算法</span></strong></p>
+<blockquote>
+<p>本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容</p>
+</blockquote>
+<h1 id="插值算法"><a href="#插值算法" class="headerlink" title="插值算法"></a><strong>插值算法</strong></h1><p><strong>插值算法</strong></p>
+<ul>
+<li><p><strong>数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和</strong><br><strong>分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就</strong><br><strong>需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满</strong><br><strong>足需求，这就是插值的作用。</strong></p>
+</li>
+<li><p><strong>用于预测</strong></p>
+</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808222234.png" alt="image-20210808222234729"></p>
+<p><strong>插值算法一般分为：</strong></p>
+<ul>
+<li><strong>分段插值</strong></li>
+<li><strong>插值多项式</strong></li>
+<li><strong>三角插值</strong></li>
+</ul>
+<ul>
+<li><strong>n+1个节点互异，满足插值算法的多项式是唯一的</strong></li>
+<li><strong>如果不限制多项式的次数，那么插值算法的多项式是不唯一的</strong></li>
+</ul>
+<p><strong>拉格朗日插值法：</strong></p>
+<p><strong>一个点:</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221402.png" alt="image-20210808221402732"></p>
+<p><strong>两个点：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221410.png" alt="image-20210808221410784"></p>
+<p><strong>三个点：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221417.png" alt="image-20210808221417835"></p>
+<p><strong>容易产生龙格现象:</strong></p>
+<ul>
+<li><strong>高次插值会产生龙格现象，在两端处波动极大</strong></li>
+<li><strong>因此在不熟悉曲线运动趋势下，不要轻易使用</strong></li>
+<li><strong>X大一点，次数大就会波动特别大</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221434.png" alt="image-20210808221433897"></p>
+<p><strong>牛顿插值法</strong></p>
+<ul>
+<li><strong>计算过程具有继承性</strong></li>
+<li><strong>增加一个点只要在原来的式子上增加就行</strong></li>
+<li><strong>但未解决龙格现象</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221814.png" alt="image-20210808221813814"></p>
+<p><strong>分段插值(常用)</strong></p>
+<p><strong>运用分段思想解决龙格现象(X大的时候不稳定)</strong></p>
+<ul>
+<li><strong>根据最接近的两/三个点来确定函数</strong></li>
+<li><strong>然后在两个点的区间内计算插值的具体值</strong></li>
+</ul>
+<p><strong>埃尔米特插值法：</strong></p>
+<ul>
+<li><strong>要找到2n+1的多项式</strong></li>
+<li><strong>再通过分段来解决龙格现象</strong></li>
+<li><strong>函数和导数都要想等</strong></li>
+</ul>
+<p><strong>分段三次埃尔米特插值法</strong></p>
+<p><strong>使用内置的pchip(点x,点y,要插值区间)</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% plot函数用法:</span></span><br><span class="line"><span class="comment">% plot(x1,y1,x2,y2)  # 把两个图像画在一起</span></span><br><span class="line"><span class="comment">% 线方式： - 实线 :点线 -. 虚点线 - - 波折线 </span></span><br><span class="line"><span class="comment">% 点方式： . 圆点  +加号  * 星号  x x形  o 小圆</span></span><br><span class="line"><span class="comment">% 颜色： y黄； r红； g绿； b蓝； w白； k黑； m紫； c青</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本点&#x27;</span>,<span class="string">&#x27;三次埃尔米特插值&#x27;</span>,<span class="string">&#x27;三次样条插值&#x27;</span>,<span class="string">&#x27;Location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)   <span class="comment">%标注显示在东南方向</span></span><br><span class="line"><span class="comment">% 说明：</span></span><br><span class="line"><span class="comment">% LEGEND(string1,string2,string3, …)</span></span><br><span class="line"><span class="comment">% 分别将字符串1、字符串2、字符串3……标注到图中，每个字符串对应的图标为画图时的图标。</span></span><br><span class="line"><span class="comment">% ‘Location’用来指定标注显示的位置</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>); <span class="comment">% 在同一个脚本文件里面，要想画多个图，需要给每个图编号，否则只会显示最后一个图哦~</span></span><br><span class="line"><span class="comment">%不命名就会覆盖前面的</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>三次样条插值法：</strong></p>
+<ul>
+<li><strong>更难满足(条件多)</strong><ul>
+<li><strong>满足二阶函数可微</strong></li>
+</ul>
+</li>
+<li><strong>要更为光滑</strong></li>
+<li><strong>内置的spline函数就可以使用</strong></li>
+</ul>
+<p><strong>一般使用：</strong></p>
+<ul>
+<li><strong>三次样条插值法</strong></li>
+<li><strong>三次埃尔米特插值法</strong></li>
+<li><strong>两者平均</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221549.png" alt="image-20210808221548883"></p>
+<p><strong>n维数据插值：</strong></p>
+<ul>
+<li><strong>一般优先使用三次样条插值</strong></li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% n维数据的插值</span></span><br><span class="line">x = -<span class="built_in">pi</span>:<span class="built_in">pi</span>; y = <span class="built_in">sin</span>(x); </span><br><span class="line">new_x = -<span class="built_in">pi</span>:<span class="number">0.1</span>:<span class="built_in">pi</span>;</span><br><span class="line">p = interpn (x, y, new_x, <span class="string">&#x27;spline&#x27;</span>);</span><br><span class="line"><span class="comment">% 等价于 p = spline(x, y, new_x);</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>);</span><br><span class="line"><span class="built_in">plot</span>(x, y, <span class="string">&#x27;o&#x27;</span>, new_x, p, <span class="string">&#x27;r-&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用插值算法：</strong></p>
+<p><strong>插值算法较于灰色预测更有数学解释的背景</strong></p>
+<ul>
+<li><strong>较于拟合的处理所需要的样本点比较少</strong></li>
+<li><strong>并且有数据缺少，需要去补全数据</strong></li>
+<li><strong>数据少，不易删除，需要去补全数据</strong></li>
+<li><strong>可以很好保留数据的光滑性</strong></li>
+</ul>
+<h1 id="拟合算法"><a href="#拟合算法" class="headerlink" title="拟合算法"></a><strong>拟合算法</strong></h1><ul>
+<li><strong>与插值问题不同，在拟合问题中不需要曲线一定经过给定的点。拟</strong><br><strong>合问题的目标是寻求一个函数（曲线），使得该曲线在某种准则下与所</strong><br><strong>有的数据点最为接近，即曲线拟合的最好（最小化损失函数）</strong></li>
+</ul>
+<p><strong>尽可能我们的曲线接近每个点，而不要求过每一个点，不像分段函数那样复杂</strong></p>
+<p><strong>数据多的时候可以用拟合找出某个确定的曲线，避免X大的时候出现的龙格现象</strong></p>
+<p><strong>通过最小二乘法找到拟合函数：</strong></p>
+<p><strong>那么怎么找到合适的k和b，使得最拟合呢?</strong></p>
+<ul>
+<li><strong>第一种定义</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221001.png" alt="image-20210808221001216"></p>
+<ul>
+<li><strong>第二种定义</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221010.png" alt="image-20210808221010433"></p>
+<p><strong>因为第一种定义有绝对值，因此我们往往使用第二种定义</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% % 画出y=kx+b的函数图像 plot(x,y)</span></span><br><span class="line"><span class="comment">% % 传统的画法：模拟生成x和y的序列，比如要画出[0,5]上的图形</span></span><br><span class="line"><span class="comment">% xx = 2.5: 0.1 :7  % 间隔设置的越小画出来的图形越准确</span></span><br><span class="line"><span class="comment">% yy = k * xx + b  % k和b都是已知值</span></span><br><span class="line"><span class="comment">% plot(xx,yy,&#x27;-&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%匿名函数</span></span><br><span class="line"><span class="comment">% 匿名函数的基本用法。</span></span><br><span class="line"><span class="comment">% handle = @(arglist) anonymous_function</span></span><br><span class="line"><span class="comment">% 其中handle为调用匿名函数时使用的名字。</span></span><br><span class="line"><span class="comment">% arglist为匿名函数的输入参数，可以是一个，也可以是多个，用逗号分隔。</span></span><br><span class="line"><span class="comment">% anonymous_function为匿名函数的表达式。</span></span><br><span class="line"><span class="comment">% 举个小例子</span></span><br><span class="line"><span class="comment">%  z=@(x,y) x^2+y^2; </span></span><br><span class="line"><span class="comment">%  z(1,2) </span></span><br><span class="line"><span class="comment">% % ans =  5</span></span><br><span class="line"><span class="comment">% fplot函数可用于画出匿名一元函数的图形。</span></span><br><span class="line"><span class="comment">% fplot(f,xinterval) 将匿名函数f在指定区间xinterval绘图。xinterval =  [xmin xmax] 表示定义域的范围</span></span><br><span class="line"></span><br><span class="line">f=@(x) k*x+b; <span class="comment">% @声明x是未知数 后面接上函数式子</span></span><br><span class="line">fplot(f,[<span class="number">2.5</span>,<span class="number">7</span>]); <span class="comment">%后面跟上x的范围</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本数据&#x27;</span>,<span class="string">&#x27;拟合函数&#x27;</span>,<span class="string">&#x27;location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>拟合优度来评价拟合的好坏</strong></p>
+<p><strong>SST总体平方和：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221030.png" alt="image-20210808221030411"></p>
+<p><strong>SSE误差平方和：越小越好</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221047.png" alt="image-20210808221047779"></p>
+<p><strong>SSE需要注意量纲的问题(万元/元会有影响)</strong></p>
+<p><strong>SST = SSE+SSR</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221056.png" alt="image-20210808221056110"></p>
+<p><strong>因此我们需要计算R^2</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221121.png" alt="image-20210808221121097"></p>
+<p><strong>R^2接近1，说明误差平方接近0，说明拟合效果好</strong></p>
+<p><strong>因为函数越复杂拟合越好</strong></p>
+<p><strong>因此我们要权重取舍</strong></p>
+<ul>
+<li><strong>既要比较简单</strong></li>
+<li><strong>又要拟合好些</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221145.png" alt="image-20210808221145731"></p>
+<p><strong>R^2只能用于线性函数的情况下</strong></p>
+<ul>
+<li><strong>对参数为线性(a,b)</strong></li>
+<li><strong>y = a + bx^2为线性(因为不是a^2那些)</strong></li>
+<li><strong>对变量为线性</strong></li>
+</ul>
+<p><strong>复杂非线性函数的话直接看SSE就行</strong></p>
+<ul>
+<li><strong>asinb  复合参数</strong></li>
+<li><strong>a^2/ab  不能乘以或除以任何其他参数</strong></li>
+</ul>
+<p><strong>曲线拟合工具箱</strong></p>
+<ul>
+<li><strong>下面的框框可以标准化</strong></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Alogomachine</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://alogomachine.com/20825.html">http://alogomachine.com/20825.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://alogomachine.com" target="_blank">Alogomachine's BLOG</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a><a class="post-meta__tags" href="/tags/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/">插值算法</a><a class="post-meta__tags" href="/tags/%E6%8B%9F%E5%90%88%E7%AE%97%E6%B3%95/">拟合算法</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.shibe.online/shibes/98b065ee9621cad5f3a6cd9e67847e2cd19b6414.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/20611.html"><img class="next-cover" src="https://cdn.shibe.online/shibes/5608d057e152470dd9509fb43374eb046efe5a7a.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Boosting算法分析与预计还款能力案例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/22319.html" title="KNN算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/68ceac540c001aca4f6c8e664a7d66ab45a9b33b.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-23</div><div class="title">KNN算法分析与实现</div></div></a></div><div><a href="/22436.html" title="K-Means算法分析与实现"><img class="cover" src="https://cdn.shibe.online/shibes/9ebb1f06776d1bb16065047b196056d90f582626.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">K-Means算法分析与实现</div></div></a></div><div><a href="/22657.html" title="KNN算法实战-预测二手汽车价格"><img class="cover" src="https://cdn.shibe.online/shibes/c93c57013dd0e35064c8a31e40be2df4d5797b34.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-26</div><div class="title">KNN算法实战-预测二手汽车价格</div></div></a></div><div><a href="/22704.html" title="线性回归分析与股票价格预测实战"><img class="cover" src="https://cdn.shibe.online/shibes/cdfea494b332c595fd00ea307ac94b12e7414595.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">线性回归分析与股票价格预测实战</div></div></a></div><div><a href="/22715.html" title="逻辑回归分析与预测客户是否开设存款账户实战"><img class="cover" src="https://cdn.shibe.online/shibes/40488fe5b205aefed07c01c42893e42d33c3e8b8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-27</div><div class="title">逻辑回归分析与预测客户是否开设存款账户实战</div></div></a></div><div><a href="/22844.html" title="朴素贝叶斯补充与情感分析案例"><img class="cover" src="https://cdn.shibe.online/shibes/aa8ba03cbd3570e7e87ea4d89ee32720aa538591.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="title">朴素贝叶斯补充与情感分析案例</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210225222957_1baea.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Alogomachine</div><div class="author-info__description">不定时记录学习进度</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/withopenWaigua"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">插值算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9F%E5%90%88%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">拟合算法</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20825.html" title="Boosting算法分析与预计还款能力案例">Boosting算法分析与预计还款能力案例</a><time datetime="2021-08-08T14:25:00.000Z" title="发表于 2021-08-08 22:25:00">2021-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20611.html" title="Boosting算法分析与预计还款能力案例">Boosting算法分析与预计还款能力案例</a><time datetime="2021-08-06T15:11:00.000Z" title="发表于 2021-08-06 23:11:00">2021-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20543.html" title="基于矩阵分解的推荐系统分析与短视频推荐案例">基于矩阵分解的推荐系统分析与短视频推荐案例</a><time datetime="2021-08-05T13:43:00.000Z" title="发表于 2021-08-05 21:43:00">2021-08-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20433.html" title="K-Means数据预处理与用户分层案例">K-Means数据预处理与用户分层案例</a><time datetime="2021-08-04T15:33:00.000Z" title="发表于 2021-08-04 23:33:00">2021-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20431.html" title="K-Means算法解析与图像压缩案例">K-Means算法解析与图像压缩案例</a><time datetime="2021-08-04T15:31:00.000Z" title="发表于 2021-08-04 23:31:00">2021-08-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 <i style="color:#FF6A6A;animation: announ_animation 0.8s linear infinite;" class="fa fa-heartbeat"></i> Alogomachine</div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/recordQuery"><img class="icp-icon" src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png">粤ICP备2021089270号</a> <br><span>本网站立足于中国大陆,不对任何个人言论负责。</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'TO8BH5zsJh0qklsNSzUuTEvR-MdYXbMMI',
+      appKey: 'CvJMWqMQkV6A30AqXCLDE4PB',
+      placeholder: '快来踩踩吧',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, {"bg":"https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich30.gif","count":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script><script src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/cccc.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/title.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body></html>
