@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,K-Means," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法K-Means 数据处理与K-Means补充 数值型  归一化:映射到标准差N[0-1](高斯分布)或直接映射到[0-1] 离散化:进行分类(A1,B2,C3),进行非线性转换             类别型(男&#x2F;女,[本科&#x2F;硕士&#x2F;博士])数据  需要转换为独热编码   评价⭐&#x2F;问卷调查程度(非常好\一般\不好)：  独热编码处理 直接把1&#x2F;2&#x2F;3&#x2F;4&#x2F;5的评分当数值处理    用户分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K-Means数据预处理与用户分层案例">
+<meta property="og:url" content="http://alogomachine.com/20433.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法K-Means 数据处理与K-Means补充 数值型  归一化:映射到标准差N[0-1](高斯分布)或直接映射到[0-1] 离散化:进行分类(A1,B2,C3),进行非线性转换             类别型(男&#x2F;女,[本科&#x2F;硕士&#x2F;博士])数据  需要转换为独热编码   评价⭐&#x2F;问卷调查程度(非常好\一般\不好)：  独热编码处理 直接把1&#x2F;2&#x2F;3&#x2F;4&#x2F;5的评分当数值处理    用户分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804234224.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804232305.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804232238.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805000157.png">
+<meta property="article:published_time" content="2021-08-04T15:33:00.000Z">
+<meta property="article:modified_time" content="2021-08-04T16:03:08.794Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="K-Means">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804234224.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20433.html"/>
+
+
+
+
+
+  <title>K-Means数据预处理与用户分层案例 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20433.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">K-Means数据预处理与用户分层案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-04T23:33:00+08:00">
+                2021-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">K-Means</span></strong></p>
+<h1 id="数据处理与K-Means补充"><a href="#数据处理与K-Means补充" class="headerlink" title="数据处理与K-Means补充"></a><strong>数据处理与K-Means补充</strong></h1><ul>
+<li><p><strong>数值型</strong></p>
+<ul>
+<li><strong>归一化:映射到标准差N[0-1](高斯分布)或直接映射到[0-1]</strong></li>
+<li><strong>离散化:进行分类(A1,B2,C3),进行非线性转换</strong>          </li>
+</ul>
+</li>
+<li><p><strong>类别型(男/女,[本科/硕士/博士])数据</strong></p>
+<ul>
+<li><strong>需要转换为独热编码</strong></li>
+</ul>
+</li>
+<li><p><strong>评价⭐/问卷调查程度(非常好\一般\不好)：</strong></p>
+<ul>
+<li><strong>独热编码处理</strong></li>
+<li><strong>直接把1/2/3/4/5的评分当数值处理</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="用户分层案例"><a href="#用户分层案例" class="headerlink" title="用户分层案例"></a><strong>用户分层案例</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据合并分析"><a href="#数据合并分析" class="headerlink" title="数据合并分析"></a><strong>数据合并分析</strong></h2><p><strong>数据里包含了产品的信息，以及用户购买产品的记录。</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data_offer = pd.read_excel(<span class="string">&quot;WineKMC.xlsx&quot;</span>, sheet_name=<span class="number">0</span>)</span><br><span class="line">data_offer.columns = [<span class="string">&quot;offer_id&quot;</span>, <span class="string">&quot;campaign&quot;</span>, <span class="string">&quot;varietal&quot;</span>, <span class="string">&quot;min_qty&quot;</span>, <span class="string">&quot;discount&quot;</span>, <span class="string">&quot;origin&quot;</span>, <span class="string">&quot;past_peak&quot;</span>]</span><br><span class="line">data_offer.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offer_id</th>
+      <th>campaign</th>
+      <th>varietal</th>
+      <th>min_qty</th>
+      <th>discount</th>
+      <th>origin</th>
+      <th>past_peak</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>January</td>
+      <td>Malbec</td>
+      <td>72</td>
+      <td>56</td>
+      <td>France</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>January</td>
+      <td>Pinot Noir</td>
+      <td>72</td>
+      <td>17</td>
+      <td>France</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>February</td>
+      <td>Espumante</td>
+      <td>144</td>
+      <td>32</td>
+      <td>Oregon</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>February</td>
+      <td>Champagne</td>
+      <td>72</td>
+      <td>48</td>
+      <td>France</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>February</td>
+      <td>Cabernet Sauvignon</td>
+      <td>144</td>
+      <td>44</td>
+      <td>New Zealand</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data_transactions = pd.read_excel(<span class="string">&quot;./WineKMC.xlsx&quot;</span>, sheet_name=<span class="number">1</span>) <span class="comment"># 导入第二个表</span></span><br><span class="line">data_transactions.columns = [<span class="string">&quot;customer_name&quot;</span>, <span class="string">&quot;offer_id&quot;</span>]</span><br><span class="line">data_transactions[<span class="string">&#x27;n&#x27;</span>] = <span class="number">1</span></span><br><span class="line">data_transactions.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_name</th>
+      <th>offer_id</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Smith</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Smith</td>
+      <td>24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Johnson</td>
+      <td>17</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Johnson</td>
+      <td>24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Johnson</td>
+      <td>26</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 合并两个表</span></span><br><span class="line">cust_compare = data_transactions.merge(data_offer, on = <span class="string">&#x27;offer_id&#x27;</span>)</span><br><span class="line">cust_compare.head()</span><br><span class="line"><span class="comment"># 去掉某些不需要的特征</span></span><br><span class="line">cust_compare = cust_compare.drop([<span class="string">&#x27;campaign&#x27;</span>, <span class="string">&#x27;varietal&#x27;</span>, <span class="string">&#x27;min_qty&#x27;</span>, <span class="string">&#x27;discount&#x27;</span>, <span class="string">&#x27;origin&#x27;</span>, <span class="string">&#x27;past_peak&#x27;</span>], axis = <span class="number">1</span>)</span><br><span class="line">cust_compare.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_name</th>
+      <th>offer_id</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Smith</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Rodriguez</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Martin</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Jackson</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Campbell</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pivot_table为统计分类表的内容，重造计算表</span></span><br><span class="line">table = pd.pivot_table(cust_compare,  index = <span class="string">&#x27;customer_name&#x27;</span>, columns = <span class="string">&#x27;offer_id&#x27;</span>, aggfunc=np.<span class="built_in">sum</span>, fill_value = <span class="number">0</span>) <span class="comment">#利用n=1来统计</span></span><br><span class="line">table.head()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead tr th &#123;
+    text-align: left;
+&#125;
+
+.dataframe thead tr:last-of-type th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="21" halign="left">n</th>
+    </tr>
+    <tr>
+      <th>offer_id</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>...</th>
+      <th>23</th>
+      <th>24</th>
+      <th>25</th>
+      <th>26</th>
+      <th>27</th>
+      <th>28</th>
+      <th>29</th>
+      <th>30</th>
+      <th>31</th>
+      <th>32</th>
+    </tr>
+    <tr>
+      <th>customer_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adams</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Allen</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Anderson</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Bailey</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Baker</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 32 columns</p>
+**</div>**
+
+<h2 id="选择合适的K"><a href="#选择合适的K" class="headerlink" title="选择合适的K"></a><strong>选择合适的K</strong></h2><ul>
+<li><strong>The Elbow Sum-of-Squares Method</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804234224.png" alt="image-20210804234224816"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#offers = table.columns.get_level_values(&#x27;offer_id&#x27;)</span></span><br><span class="line"><span class="comment">#x_cols = np.matrix(offers) # 生成一个矩阵</span></span><br><span class="line">SS = []</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"><span class="keyword">for</span> K <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">20</span>): <span class="comment">#K从2-20</span></span><br><span class="line">    kmeans = KMeans(n_clusters = K).fit(table) <span class="comment">#使用方法中的所有默认值</span></span><br><span class="line">    SS.append(kmeans.inertia_)</span><br><span class="line">    </span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>,<span class="number">20</span>), SS);</span><br><span class="line">plt.xlabel(<span class="string">&#x27;K&#x27;</span>);</span><br><span class="line">plt.ylabel(<span class="string">&#x27;SS&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804232305.png" alt="output_7_0"></p>
+<ul>
+<li><strong>结论：我们要选择转折点，前面下降很快，后面很慢的K</strong></li>
+</ul>
+<h2 id="分析聚类的情况"><a href="#分析聚类的情况" class="headerlink" title="分析聚类的情况"></a><strong>分析聚类的情况</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#选择 K=5</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>] <span class="comment"># 指定默认字体| #不然就画图显示不了中文说明</span></span><br><span class="line"><span class="comment"># 显示负号</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span>    <span class="comment">#默认不显示负号，所以我们得加</span></span><br><span class="line">kmeans_5 = KMeans(n_clusters = <span class="number">5</span>).fit_predict(table)</span><br><span class="line">points = <span class="built_in">list</span>(kmeans_5)</span><br><span class="line">d = &#123;x:points.count(x) <span class="keyword">for</span> x <span class="keyword">in</span> points&#125;</span><br><span class="line">heights = <span class="built_in">list</span>(d.values())</span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="number">5</span>),heights)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;聚类种类标签&#x27;</span>,size=<span class="number">15</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;聚类的数量&#x27;</span>,size=<span class="number">15</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>Text(0,0.5,&#39;聚类的数量&#39;)
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804232238.png" alt="output_6_1"></p>
+<h2 id="PCA降维生成可视化样本"><a href="#PCA降维生成可视化样本" class="headerlink" title="PCA降维生成可视化样本"></a><strong>PCA降维生成可视化样本</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line">pca = PCA(n_components = <span class="number">2</span>) <span class="comment">#32-&gt;2</span></span><br><span class="line">-data_new = pca.fit_transform(table)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(table.shape)</span><br><span class="line"><span class="built_in">print</span>(data_new.shape)</span><br><span class="line"></span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;m&#x27;</span>]</span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        points = np.array([data_new[j] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data_new)) <span class="keyword">if</span> kmeans_5[j] == i])</span><br><span class="line">        ax.scatter(points[:, <span class="number">0</span>], points[:, <span class="number">1</span>], s=<span class="number">7</span>, c=colors[i])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>(100, 32)
+(100, 2)
+</code></pre>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805000157.png" alt="output_8_1"></p>
+<h1 id="其他聚类算法"><a href="#其他聚类算法" class="headerlink" title="其他聚类算法"></a>其他聚类算法</h1><ul>
+<li><strong>GMM</strong></li>
+<li><strong>层次聚类(从底层搭一个树/上面也能)</strong></li>
+<li><strong>Kernel K-Means</strong></li>
+<li><strong>K-means++</strong></li>
+<li><strong>Spectral Clustering</strong></li>
+<li><strong>DBSCAN     (用neigbor）</strong></li>
+<li><strong>…….</strong></li>
+</ul>
+<h2 id="K-MEANS"><a href="#K-MEANS" class="headerlink" title="K-MEANS:"></a><strong>K-MEANS:</strong></h2><ul>
+<li><p><strong>随机选择两个点</strong></p>
+</li>
+<li><p><strong>离得很近效果不好并且迭代次数会很多</strong></p>
+<p><strong>（加速K-means：用计算距离间接比较的方法,大概即可）</strong></p>
+</li>
+</ul>
+<h2 id="K-means-："><a href="#K-means-：" class="headerlink" title="K-means++："></a><strong>K-means++：</strong></h2><ul>
+<li><strong>把初始点离得越远越好</strong></li>
+<li><strong>多项式分布</strong></li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/K-Means/" rel="tag"># K-Means</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20431.html" rel="next" title="K-Means算法解析与图像压缩案例">
+                <i class="fa fa-chevron-left"></i> K-Means算法解析与图像压缩案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20543.html" rel="prev" title="基于矩阵分解的推荐系统分析与短视频推荐案例">
+                基于矩阵分解的推荐系统分析与短视频推荐案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8EK-Means%E8%A1%A5%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">数据处理与K-Means补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E5%B1%82%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">用户分层案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">数据合并分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84K"><span class="nav-number">2.2.</span> <span class="nav-text">选择合适的K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E8%81%9A%E7%B1%BB%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">2.3.</span> <span class="nav-text">分析聚类的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E9%99%8D%E7%BB%B4%E7%94%9F%E6%88%90%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A0%B7%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">PCA降维生成可视化样本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">其他聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#K-MEANS"><span class="nav-number">3.1.</span> <span class="nav-text">K-MEANS:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K-means-%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">K-means++：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据可视化,Matplotlib," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据分析数据可视化Matplotlib 1234567import numpy as npimport pandas as pdimport matplotlib.pyplot as plt%matplotlib inlineplt.rcParams[&amp;#x27;font.sans-serif&amp;#x27;] &#x3D; [&amp;#x27;SimHei&amp;#x27;]plt.rcParams[&amp;#x27;axes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matplotlib布局">
+<meta property="og:url" content="http://alogomachine.com/21904.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="数据分析数据可视化Matplotlib 1234567import numpy as npimport pandas as pdimport matplotlib.pyplot as plt%matplotlib inlineplt.rcParams[&amp;#x27;font.sans-serif&amp;#x27;] &#x3D; [&amp;#x27;SimHei&amp;#x27;]plt.rcParams[&amp;#x27;axes">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_4_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/outp21125_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_6_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_7_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_8_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12_0%20(2).png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_1221_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output22_15_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12217_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_1129_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_21_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_23_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_0211.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_2216_0.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_1.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_1.png">
+<meta property="article:published_time" content="2021-07-19T15:04:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T15:58:17.539Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="数据可视化">
+<meta property="article:tag" content="Matplotlib">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_4_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/21904.html"/>
+
+
+
+
+
+  <title>Matplotlib布局 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/21904.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Matplotlib布局</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-19T23:04:00+08:00">
+                2021-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">数据可视化</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Matplotlib/" itemprop="url" rel="index">
+                    <span itemprop="name">Matplotlib</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Matplotlib</span></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Figure容器对象"><a href="#Figure容器对象" class="headerlink" title="Figure容器对象"></a><strong>Figure容器对象</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>)) <span class="comment">#16*9的容器对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>&lt;Figure size 1152x648 with 0 Axes&gt;
+</code></pre>
+<h1 id="子图对象"><a href="#子图对象" class="headerlink" title="子图对象"></a><strong>子图对象</strong></h1><h2 id="Axes-和-Subplot"><a href="#Axes-和-Subplot" class="headerlink" title="Axes 和 Subplot"></a><strong>Axes 和 Subplot</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Axes：坐标系 </span></span><br><span class="line"><span class="comment">#Subplot</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">221</span>)  <span class="comment">#221代表子图的位置  221：几行几列 第几个  2行2列第一个</span></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">222</span>)  <span class="comment">#</span></span><br><span class="line"><span class="comment"># ax3 = fig.add_subplot(223)</span></span><br><span class="line"><span class="comment"># ax4 = fig.add_subplot(224)</span></span><br><span class="line">ax1.<span class="built_in">set</span>(xlim=[<span class="number">0.5</span>,<span class="number">4.5</span>],ylim=[-<span class="number">2</span>,<span class="number">8</span>],title=<span class="string">&#x27;标题1&#x27;</span>,ylabel=<span class="string">&#x27;y轴&#x27;</span>,xlabel=<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">ax2.<span class="built_in">set</span>(xlim=[<span class="number">0.5</span>,<span class="number">4.5</span>],ylim=[-<span class="number">2</span>,<span class="number">8</span>],title=<span class="string">&#x27;标题2&#x27;</span>,ylabel=<span class="string">&#x27;y轴&#x27;</span>,xlabel=<span class="string">&#x27;x轴&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>[(-2, 8), Text(0,0.5,&#39;y轴&#39;), (0.5, 4.5), Text(0.5,0,&#39;x轴&#39;), Text(0.5,1,&#39;标题2&#39;)]
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_4_1.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">ax3 = fig.add_axes([<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1</span>,<span class="number">1</span>])  <span class="comment">#原点坐标    原图长宽比例</span></span><br><span class="line">ax4 = fig.add_axes([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])</span><br><span class="line">ax5 = fig.add_axes([<span class="number">0.3</span>,<span class="number">0.3</span>,<span class="number">0.5</span>,<span class="number">0.5</span>]) </span><br><span class="line">ax6 = fig.add_axes([<span class="number">0.4</span>,<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])</span><br><span class="line">ax6.<span class="built_in">set</span>(title=<span class="string">&#x27;demo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>[Text(0.5,1,&#39;demo&#39;)]
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/outp21125_1.png" alt="output_5_1"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(np.random.randn(<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">axes.set_xlim([-<span class="number">3</span>,<span class="number">12</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">&#x27;y轴&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>Text(0,0.5,&#39;y轴&#39;)
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_6_1.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">plt.plot(data)</span><br><span class="line"><span class="comment">#添加文本内容  比annotate方便</span></span><br><span class="line">plt.text(<span class="number">0</span>,<span class="number">0</span>,<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>Text(0,0,&#39;hello&#39;)
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_7_1.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 共享x轴  增加y轴</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line">ax1.bar(np.arange(<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>),np.random.rand(<span class="number">5</span>))</span><br><span class="line">ax2 = ax1.twinx() <span class="comment">#克隆一个共享x轴的axes对象</span></span><br><span class="line">ax2.plot(np.random.randn(<span class="number">10</span>),c=<span class="string">&#x27;k&#x27;</span>)  <span class="comment">#y轴不一样，但共用了x轴</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1e5a26b1eb8&gt;]
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_8_1.png" alt="png"></strong></p>
+<h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a><strong>添加</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fig = plt. figure()</span><br><span class="line">st = fig.suptitle(<span class="string">&#x27;主题&#x27;</span>)  <span class="comment">#主标题设置</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line">ax1.set_title(<span class="string">&#x27;ax1&#x27;</span>)</span><br><span class="line">ax2 = fig.add_axes([<span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">0.8</span>,<span class="number">0.3</span>])</span><br><span class="line">ax2.<span class="built_in">set</span>(title = <span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">st.set_y(<span class="number">1</span>)  <span class="comment">#0在最底下，1在最上面</span></span><br><span class="line">st.set_x(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12_0%20(2).png" alt="png"></strong></p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a><strong>操作</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_1221_0.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(fig.gca())</span><br><span class="line"><span class="built_in">print</span>(fig.sca(ax1))  <span class="comment">#检测图像分别对应那个变量</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>Axes(0,0;1x0.3)
+AxesSubplot(0.125,0.536818;0.775x0.343182)
+</code></pre>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a><strong>删除</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br><span class="line"><span class="comment">#删除子图</span></span><br><span class="line">fig.delaxes(ax1)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output22_15_0.png" alt="png"></strong></p>
+<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a><strong>获取</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个figure对象</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 添加一个Axes</span></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">211</span>)</span><br><span class="line"><span class="comment"># 添加一个Axes，其中参数是left,bottom,width,height</span></span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0.3</span>])</span><br><span class="line"><span class="comment"># ax1.grid()</span></span><br><span class="line"><span class="comment"># ax2.grid()</span></span><br><span class="line"><span class="keyword">for</span> ax <span class="keyword">in</span> fig.axes:</span><br><span class="line">    ax.grid()  <span class="comment">#遍历每个axes</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_12217_0.png" alt="png"></strong></p>
+<h2 id="Axis容器"><a href="#Axis容器" class="headerlink" title="Axis容器"></a><strong>Axis容器</strong></h2><h3 id="标签位置设置"><a href="#标签位置设置" class="headerlink" title="标签位置设置"></a><strong>标签位置设置</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;x轴&#x27;</span>)</span><br><span class="line">axes.set_ylabel(<span class="string">&#x27;y轴&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># x轴标签位置</span></span><br><span class="line">axes.xaxis.set_label_coords(<span class="number">0.5</span>,-<span class="number">0.1</span>)</span><br><span class="line">axes.yaxis.set_label_coords(-<span class="number">0.2</span>,<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_1129_0.png" alt="png"></strong></p>
+<h2 id="刻度格式设置"><a href="#刻度格式设置" class="headerlink" title="刻度格式设置"></a><strong>刻度格式设置</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line">data = np.random.randn(<span class="number">10</span>)</span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.set_ylim([-<span class="number">3</span>,<span class="number">3</span>])</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_xlabel(<span class="string">&#x27;X轴&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建格式化对象</span></span><br><span class="line">formatter = ticker.FormatStrFormatter(<span class="string">&#x27;%.2f&#x27;</span>)</span><br><span class="line">axes.yaxis.set_major_formatter(formatter)  <span class="comment">#使刻度保留两位小数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_21_0.png" alt="png"></strong></p>
+<h2 id="Tick容器"><a href="#Tick容器" class="headerlink" title="Tick容器"></a><strong>Tick容器</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line">data = np.random.randn(<span class="number">20</span>)*<span class="number">1000</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">axes = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">axes.plot(data)</span><br><span class="line">axes.set_label(<span class="string">&#x27;X轴&#x27;</span>)</span><br><span class="line"><span class="comment"># 创建格式化对象</span></span><br><span class="line">formatter = ticker.FormatStrFormatter(<span class="string">&#x27;%.2f&#x27;</span>)</span><br><span class="line">axes.yaxis.set_major_formatter(formatter)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> tick <span class="keyword">in</span> axes.yaxis.get_major_ticks():</span><br><span class="line">    tick.label1On = <span class="literal">True</span>  <span class="comment"># 左边  #左边右边都显示了标签</span></span><br><span class="line">    tick.label2On = <span class="literal">True</span>  <span class="comment"># 右边</span></span><br><span class="line">    tick.label2.set_color(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> tick <span class="keyword">in</span> axes.xaxis.get_major_ticks():</span><br><span class="line">    tick.label1On = <span class="literal">False</span></span><br><span class="line">    tick.label2On = <span class="literal">True</span></span><br><span class="line">    tick.label2.set_color(<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#设置刻度线条的属性</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> axes.yaxis.get_ticklines():</span><br><span class="line">    line.set_color(<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">    line.set_markersize(<span class="number">50</span>)</span><br><span class="line">    line.set_markeredgewidth(<span class="number">10</span>)   </span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_23_0.png" alt="png"></strong></p>
+<h2 id="多图布局"><a href="#多图布局" class="headerlink" title="多图布局"></a><strong>多图布局</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_plot</span>(<span class="params">ax, fontsize=<span class="number">12</span></span>):</span></span><br><span class="line">    ax.plot([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">    ax.set_xlabel(<span class="string">&#x27;x-label&#x27;</span>, fontsize=fontsize)</span><br><span class="line">    ax.set_ylabel(<span class="string">&#x27;y-label&#x27;</span>, fontsize=fontsize)</span><br><span class="line">    ax.set_title(<span class="string">&#x27;Title&#x27;</span>, fontsize=fontsize)</span><br><span class="line"></span><br><span class="line">fig,axes = plt.subplots(<span class="number">2</span>,<span class="number">2</span>)  <span class="comment">#先创建2*2的画板</span></span><br><span class="line">fig.set_facecolor(<span class="string">&quot;y&quot;</span>)  <span class="comment">#背景颜色填充</span></span><br><span class="line">example_plot(axes[<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">example_plot(axes[<span class="number">0</span>,<span class="number">1</span>])</span><br><span class="line">example_plot(axes[<span class="number">1</span>,<span class="number">0</span>])</span><br><span class="line">example_plot(axes[<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line"><span class="comment">#布局</span></span><br><span class="line">plt.tight_layout(w_pad=<span class="number">0.1</span>,h_pad=<span class="number">2</span>)  <span class="comment">#w_pad改左右间隔  h_pad改上下间隔</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_25_0211.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ax1 = plt.subplot(<span class="number">211</span>)</span><br><span class="line">ax2 = plt.subplot(<span class="number">223</span>)</span><br><span class="line">ax2.set_title(<span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line">ax3 = plt.subplot(<span class="number">224</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_2216_0.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># add_axes的方式</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">ax2 = fig.add_axes([<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.4</span>,<span class="number">0.4</span>]) <span class="comment">#相对于刻度的原点，而不是画布的原点</span></span><br><span class="line">ax2.set_title(<span class="string">&#x27;ax2&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<pre><code>Text(0.5,1,&#39;ax2&#39;)
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_1.png" alt="output_27_1"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置position的方式</span></span><br><span class="line">fig,axes = plt.subplots(<span class="number">1</span>,<span class="number">2</span>)  <span class="comment">#1行2个子图</span></span><br><span class="line">axes[<span class="number">1</span>].set_position([<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.5</span>])  <span class="comment">#原点位置，比例</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_27_1.png" alt="png"></strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"># 数据可视化</a>
+          
+            <a href="/tags/Matplotlib/" rel="tag"># Matplotlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/21907.html" rel="next" title="Matplotlib可视化">
+                <i class="fa fa-chevron-left"></i> Matplotlib可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/21910.html" rel="prev" title="Seaborn可视化">
+                Seaborn可视化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure%E5%AE%B9%E5%99%A8%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">Figure容器对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">子图对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Axes-%E5%92%8C-Subplot"><span class="nav-number">2.1.</span> <span class="nav-text">Axes 和 Subplot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0"><span class="nav-number">2.2.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">2.3.1.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96"><span class="nav-number">2.3.2.</span> <span class="nav-text">获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Axis%E5%AE%B9%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">Axis容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BD%8D%E7%BD%AE%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.4.1.</span> <span class="nav-text">标签位置设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%BB%E5%BA%A6%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.5.</span> <span class="nav-text">刻度格式设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tick%E5%AE%B9%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">Tick容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%9B%BE%E5%B8%83%E5%B1%80"><span class="nav-number">2.7.</span> <span class="nav-text">多图布局</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

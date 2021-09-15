@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,KNN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns   1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KNN算法实战-预测二手汽车价格">
+<meta property="og:url" content="http://alogomachine.com/22657.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns   1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000008.png">
+<meta property="article:published_time" content="2021-07-26T15:57:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T15:56:28.241Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="KNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/22657.html"/>
+
+
+
+
+
+  <title>KNN算法实战-预测二手汽车价格 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/22657.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">KNN算法实战-预测二手汽车价格</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-26T23:57:00+08:00">
+                2021-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">KNN</span></strong></p>
+<p><strong>因为是预测价格，所以不需要使用到验证k，</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br><span class="line">df.head()  <span class="comment"># data frame</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Brand</th>
+      <th>Type</th>
+      <th>Color</th>
+      <th>Construction Year</th>
+      <th>Odometer</th>
+      <th>Ask Price</th>
+      <th>Days Until MOT</th>
+      <th>HP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Peugeot 106</td>
+      <td>1.0</td>
+      <td>blue</td>
+      <td>2002</td>
+      <td>166879</td>
+      <td>999</td>
+      <td>138</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Peugeot 106</td>
+      <td>1.0</td>
+      <td>blue</td>
+      <td>1998</td>
+      <td>234484</td>
+      <td>999</td>
+      <td>346</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>black</td>
+      <td>1997</td>
+      <td>219752</td>
+      <td>500</td>
+      <td>-5</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>red</td>
+      <td>2001</td>
+      <td>223692</td>
+      <td>750</td>
+      <td>-87</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>grey</td>
+      <td>2002</td>
+      <td>120275</td>
+      <td>1650</td>
+      <td>356</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>red</td>
+      <td>2003</td>
+      <td>131358</td>
+      <td>1399</td>
+      <td>266</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>green</td>
+      <td>1999</td>
+      <td>304277</td>
+      <td>799</td>
+      <td>173</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Peugeot 106</td>
+      <td>1.4</td>
+      <td>green</td>
+      <td>1998</td>
+      <td>93685</td>
+      <td>1300</td>
+      <td>0</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>white</td>
+      <td>2002</td>
+      <td>225935</td>
+      <td>950</td>
+      <td>113</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Peugeot 106</td>
+      <td>1.4</td>
+      <td>green</td>
+      <td>1997</td>
+      <td>252319</td>
+      <td>650</td>
+      <td>133</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Peugeot 106</td>
+      <td>1.0</td>
+      <td>black</td>
+      <td>1998</td>
+      <td>220000</td>
+      <td>700</td>
+      <td>82</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>black</td>
+      <td>1997</td>
+      <td>212000</td>
+      <td>700</td>
+      <td>75</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Peugeot 106</td>
+      <td>1.1</td>
+      <td>black</td>
+      <td>2003</td>
+      <td>255134</td>
+      <td>799</td>
+      <td>197</td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 13 entries, 0 to 12
+Data columns (total 8 columns):
+Brand                13 non-null object
+Type                 13 non-null float64
+Color                13 non-null object
+Construction Year    13 non-null int64
+Odometer             13 non-null int64
+Ask Price            13 non-null int64
+Days Until MOT       13 non-null int64
+HP                   13 non-null int64
+dtypes: float64(1), int64(5), object(2)
+memory usage: 912.0+ bytes
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清洗数据</span></span><br><span class="line"><span class="comment"># 把颜色独热编码</span></span><br><span class="line">df_colors = df[<span class="string">&#x27;Color&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Color: &#x27;</span>) <span class="comment">#构造独热编码</span></span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_type = df[<span class="string">&#x27;Type&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Type: &#x27;</span>) <span class="comment">#把它当成分类</span></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_colors, df_type], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;Brand&#x27;</span>, <span class="string">&#x27;Type&#x27;</span>, <span class="string">&#x27;Color&#x27;</span>], axis=<span class="number">1</span>) </span><br><span class="line">df.head()</span><br><span class="line"><span class="comment"># brand 都一样，不需要</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Construction Year</th>
+      <th>Odometer</th>
+      <th>Ask Price</th>
+      <th>Days Until MOT</th>
+      <th>HP</th>
+      <th>Color: black</th>
+      <th>Color: blue</th>
+      <th>Color: green</th>
+      <th>Color: grey</th>
+      <th>Color: red</th>
+      <th>Color: white</th>
+      <th>Type: 1.0</th>
+      <th>Type: 1.1</th>
+      <th>Type: 1.4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2002</td>
+      <td>166879</td>
+      <td>999</td>
+      <td>138</td>
+      <td>60</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1998</td>
+      <td>234484</td>
+      <td>999</td>
+      <td>346</td>
+      <td>60</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1997</td>
+      <td>219752</td>
+      <td>500</td>
+      <td>-5</td>
+      <td>60</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2001</td>
+      <td>223692</td>
+      <td>750</td>
+      <td>-87</td>
+      <td>60</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2002</td>
+      <td>120275</td>
+      <td>1650</td>
+      <td>356</td>
+      <td>59</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 13 entries, 0 to 12
+Data columns (total 14 columns):
+Construction Year    13 non-null int64
+Odometer             13 non-null int64
+Ask Price            13 non-null int64
+Days Until MOT       13 non-null int64
+HP                   13 non-null int64
+Color: black         13 non-null int64
+Color: blue          13 non-null int64
+Color: green         13 non-null int64
+Color: grey          13 non-null int64
+Color: red           13 non-null int64
+Color: white         13 non-null int64
+Type: 1.0            13 non-null int64
+Type: 1.1            13 non-null int64
+Type: 1.4            13 non-null int64
+dtypes: int64(14)
+memory usage: 1.5 KB
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据转换</span></span><br><span class="line">matrix = df.corr()</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">sns.heatmap(matrix, square=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Car Price Variables&#x27;</span>)</span><br><span class="line"> <span class="comment"># 观察特征关联性</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>Text(0.5,1,&#39;Car Price Variables&#39;)
+</code></pre>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>, <span class="string">&#x27;Ask Price&#x27;</span>]], size=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA <span class="comment">#降维</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D <span class="comment">#绘制3D图</span></span><br><span class="line"><span class="comment"># 主成分分析  将n维压缩成三维</span></span><br><span class="line">pca_3 = PCA(n_components=<span class="number">3</span>) <span class="comment">#保留三组特征</span></span><br><span class="line"><span class="comment"># X = pca_3.fit_transform(df[[&#x27;Construction Year&#x27;,&#x27;Odometer&#x27;,&#x27;Ask Price&#x27;,&#x27;Days Until MOT&#x27;,&#x27;HP&#x27;,&#x27;Color: black&#x27;,&#x27;Color: blue&#x27;,&#x27;Color: green&#x27;,&#x27;Color: grey&#x27;,&#x27;Color: red&#x27;,&#x27;Color: white&#x27;,&#x27;Type: 1.0&#x27;,&#x27;Type: 1.1&#x27;,&#x27;Type: 1.4&#x27;]])</span></span><br><span class="line"><span class="comment">#PCA降维，看着使用，对比一下</span></span><br><span class="line">X = df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>]] <span class="comment">#只选3个特征。根据特征图选择</span></span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Construction Year</th>
+      <th>Days Until MOT</th>
+      <th>Odometer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2002</td>
+      <td>138</td>
+      <td>166879</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1998</td>
+      <td>346</td>
+      <td>234484</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1997</td>
+      <td>-5</td>
+      <td>219752</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2001</td>
+      <td>-87</td>
+      <td>223692</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2002</td>
+      <td>356</td>
+      <td>120275</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2003</td>
+      <td>266</td>
+      <td>131358</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1999</td>
+      <td>173</td>
+      <td>304277</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1998</td>
+      <td>0</td>
+      <td>93685</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2002</td>
+      <td>113</td>
+      <td>225935</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1997</td>
+      <td>133</td>
+      <td>252319</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1998</td>
+      <td>82</td>
+      <td>220000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1997</td>
+      <td>75</td>
+      <td>212000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2003</td>
+      <td>197</td>
+      <td>255134</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter <span class="comment">#计数器，投票器</span></span><br><span class="line"><span class="comment">#他是一个数，所以使用回归，不是分类</span></span><br><span class="line">y = df[<span class="string">&#x27;Ask Price&#x27;</span>].values.reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">1</span>/<span class="number">3</span>, random_state=<span class="number">41</span>)</span><br><span class="line"></span><br><span class="line">X_normalizer = StandardScaler() <span class="comment"># N(0,1)  标准化</span></span><br><span class="line">X_train = X_normalizer.fit_transform(X_train)  <span class="comment">#依赖fit后的数据再-&gt;transform   </span></span><br><span class="line">X_test = X_normalizer.transform(X_test)  </span><br><span class="line"></span><br><span class="line">y_normalizer = StandardScaler()</span><br><span class="line">y_train = y_normalizer.fit_transform(y_train) <span class="comment"># 训练数据需要fit 再transform</span></span><br><span class="line">y_test = y_normalizer.transform(y_test)</span><br><span class="line"></span><br><span class="line">knn = KNeighborsRegressor(n_neighbors=<span class="number">2</span>)  <span class="comment">#回归，不是分类，所以可以是2</span></span><br><span class="line">knn.fit(X_train, y_train.ravel())</span><br><span class="line"></span><br><span class="line"><span class="comment">#Now we can predict prices:</span></span><br><span class="line">y_pred = knn.predict(X_test)</span><br><span class="line">y_pred_inv = y_normalizer.inverse_transform(y_pred)   <span class="comment">#转换回正常的数据</span></span><br><span class="line">y_test_inv = y_normalizer.inverse_transform(y_test) <span class="comment">#转换回正常的数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Build a plot</span></span><br><span class="line">plt.scatter(y_pred_inv, y_test_inv)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Prediction&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Real value&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now add the perfect prediction line</span></span><br><span class="line">diagonal = np.linspace(<span class="number">500</span>, <span class="number">1500</span>, <span class="number">100</span>) <span class="comment"># 500-1500 划分100个</span></span><br><span class="line">plt.plot(diagonal, diagonal, <span class="string">&#x27;-r&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Predicted ask price&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Ask price&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 调整画大致的预测线 </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000008.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">knn</span><br><span class="line">X_test</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[-0.97085465, -0.99146682, -3.07178611],
+       [ 0.66426897,  1.71581745, -2.36134577],
+       [-1.37963555,  0.01996242,  1.1666491 ],
+       [-0.56207374,  0.32415166,  2.55487998],
+       [-0.97085465, -0.36787887,  0.30313947]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred = knn.predict(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 1.24495111,  1.24495111, -1.14519542,  0.04788274, -1.14519542])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"></span><br><span class="line">mean_absolute_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>160.4
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">mean_squared_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>47220.4
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_pred_inv</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([1199., 1199.,  600.,  899.,  600.])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test_inv</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[1300.],
+       [1650.],
+       [ 650.],
+       [ 799.],
+       [ 700.]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span></span><br><span class="line">u  = (y_test_inv - y_pred_inv).diagonal() </span><br><span class="line">u</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">4</span>):</span><br><span class="line">        x += <span class="built_in">abs</span>(u[i]/y_test_inv[i][<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;偏差率为：&#123;:.4&#125;&quot;</span>.<span class="built_in">format</span>(x/<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>偏差率为：0.1383
+</code></pre>
+<h1 id="验证K"><a href="#验证K" class="headerlink" title="验证K"></a><strong>验证K</strong></h1><p><strong>因为是算预测价格的回归分析，因此不用验证k，如果是分类的话需要验证K</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/KNN/" rel="tag"># KNN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/22436.html" rel="next" title="K-Means算法分析与实现">
+                <i class="fa fa-chevron-left"></i> K-Means算法分析与实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22704.html" rel="prev" title="线性回归分析与股票价格预测实战">
+                线性回归分析与股票价格预测实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81K"><span class="nav-number">1.</span> <span class="nav-text">验证K</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

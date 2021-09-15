@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,决策树," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法决策树 决策树介绍决策树基本架构  决策树特点 能解决非线性的情况 多条件决定(多条组合方式)  决策树基本组成信息熵信息熵  衡量信息的不确定性或者混乱程度的指标 信息的不确定越大，熵越大 抛硬币50正50反， 下一次不确定性大，所以信息熵大 99正1反，下一次不确定性小，所以信息熵小    计算公式：  条件熵条件熵：  是通过获得更多的信息来减小不确定性。我们知道的信息越多，信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树算法分析">
+<meta property="og:url" content="http://alogomachine.com/20116.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法决策树 决策树介绍决策树基本架构  决策树特点 能解决非线性的情况 多条件决定(多条组合方式)  决策树基本组成信息熵信息熵  衡量信息的不确定性或者混乱程度的指标 信息的不确定越大，熵越大 抛硬币50正50反， 下一次不确定性大，所以信息熵大 99正1反，下一次不确定性小，所以信息熵小    计算公式：  条件熵条件熵：  是通过获得更多的信息来减小不确定性。我们知道的信息越多，信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210011.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210022.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210152.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210225.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210309.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210336.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210559.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210903.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210438.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801211259.png">
+<meta property="article:published_time" content="2021-08-01T13:16:00.000Z">
+<meta property="article:modified_time" content="2021-08-01T13:19:30.556Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="决策树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210011.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20116.html"/>
+
+
+
+
+
+  <title>决策树算法分析 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20116.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">决策树算法分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-01T21:16:00+08:00">
+                2021-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">决策树</span></strong></p>
+<h1 id="决策树介绍"><a href="#决策树介绍" class="headerlink" title="决策树介绍"></a><strong>决策树介绍</strong></h1><h2 id="决策树基本架构"><a href="#决策树基本架构" class="headerlink" title="决策树基本架构"></a><strong>决策树基本架构</strong></h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210011.png" alt="image-20210801210011901"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210022.png" alt="image-20210801210022902"></p>
+<h2 id="决策树特点"><a href="#决策树特点" class="headerlink" title="决策树特点"></a><strong>决策树特点</strong></h2><ul>
+<li><strong>能解决非线性的情况</strong></li>
+<li><strong>多条件决定(多条组合方式)</strong></li>
+</ul>
+<h2 id="决策树基本组成"><a href="#决策树基本组成" class="headerlink" title="决策树基本组成"></a><strong>决策树基本组成</strong></h2><h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a><strong>信息熵</strong></h3><p><strong>信息熵</strong></p>
+<ul>
+<li><strong>衡量信息的不确定性或者混乱程度的指标</strong></li>
+<li><strong>信息的不确定越大，熵越大</strong><ul>
+<li><strong>抛硬币50正50反， 下一次不确定性大，所以信息熵大</strong></li>
+<li><strong>99正1反，下一次不确定性小，所以信息熵小</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>计算公式：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210152.png" alt="image-20210801210152379"></strong></p>
+<h3 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a><strong>条件熵</strong></h3><p><strong>条件熵：</strong></p>
+<ul>
+<li><strong>是通过获得更多的信息来减小不确定性。我们知道的信息越多，信息的不确定性越小</strong></li>
+<li><strong>采取某个条件分为两个部分</strong></li>
+<li><strong>子节点加权熵</strong></li>
+</ul>
+<p><strong>计算公式：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210225.png" alt="image-20210801210225536"></strong></p>
+<h3 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a><strong>信息增益</strong></h3><p><strong>信息增益：</strong></p>
+<ul>
+<li><strong>根据信息熵与条件熵来计算</strong></li>
+<li><strong>信息增益=父节点熵-子节点加权熵</strong></li>
+<li><strong>决策树要计算不同特征下的信息增益</strong><ul>
+<li><strong>信息增益最大的是最佳分隔间隔</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>计算公式:</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210309.png" alt="image-20210801210309848"></strong></p>
+<p><strong>示例：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210336.png" alt="image-20210801210336550"></strong></p>
+<p><strong>计算信息熵-&gt;条件熵-&gt;信息增益(最大的为根节点)</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210559.png" alt="image-20210801210559553"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210903.png" alt="image-20210801210903926"></p>
+<h2 id="对于属性是连续值而非类别的处理"><a href="#对于属性是连续值而非类别的处理" class="headerlink" title="对于属性是连续值而非类别的处理"></a><strong>对于属性是连续值而非类别的处理</strong></h2><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801210438.png" alt="image-20210801210438267"></strong></p>
+<h2 id="决策树的优点与缺点"><a href="#决策树的优点与缺点" class="headerlink" title="决策树的优点与缺点"></a><strong>决策树的优点与缺点</strong></h2><p><strong>优点：</strong></p>
+<ul>
+<li><p><strong>可解释性高</strong></p>
+</li>
+<li><p><strong>能处理非线性的数据</strong></p>
+</li>
+<li><p><strong>不需要数据的归一化</strong></p>
+</li>
+<li><p><strong>可以用于特征工程，特征选择</strong>**</p>
+</li>
+<li><p><strong>对数据分布没有偏好</strong></p>
+</li>
+<li><p><strong>广泛使用</strong></p>
+</li>
+<li><p><strong>容易软件实现</strong></p>
+</li>
+<li><p><strong>可以转换规则(代码容易实现)</strong></p>
+</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>启发式生成，不是最优解</strong></li>
+<li><strong>容易过拟合(直接分类到只有Yes/NO)</strong></li>
+<li><strong>微小的数据改变会改变整个树的形状</strong></li>
+<li><strong>对类别不平衡情况下模型效果差(多个类别的训练数据不平衡99Sunny/1Windy)</strong></li>
+</ul>
+<h1 id="计算决策树特征的重要性"><a href="#计算决策树特征的重要性" class="headerlink" title="计算决策树特征的重要性"></a>计算决策树特征的重要性</h1><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801211259.png" alt="image-20210801211258989"></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag"># 决策树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/23047.html" rel="next" title="SVM补充和肿瘤预测案例">
+                <i class="fa fa-chevron-left"></i> SVM补充和肿瘤预测案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20118.html" rel="prev" title="随机森林算法分析与员工离职预测&特征分析案例">
+                随机森林算法分析与员工离职预测&特征分析案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">决策树介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">决策树基本架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">决策树特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">1.3.</span> <span class="nav-text">决策树基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%86%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%86%B5"><span class="nav-number">1.3.2.</span> <span class="nav-text">条件熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A"><span class="nav-number">1.3.3.</span> <span class="nav-text">信息增益</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E5%B1%9E%E6%80%A7%E6%98%AF%E8%BF%9E%E7%BB%AD%E5%80%BC%E8%80%8C%E9%9D%9E%E7%B1%BB%E5%88%AB%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">对于属性是连续值而非类别的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E4%BC%98%E7%82%B9%E4%B8%8E%E7%BC%BA%E7%82%B9"><span class="nav-number">1.5.</span> <span class="nav-text">决策树的优点与缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%86%B3%E7%AD%96%E6%A0%91%E7%89%B9%E5%BE%81%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">计算决策树特征的重要性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

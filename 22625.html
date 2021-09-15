@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数 基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象    基类指针 父类指针不能调动子类函数  12345Human* phuman &#x3D; new Men; &#x2F;&#x2F;父类指针可以生成一个子类指针ph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的基类指针、虚和纯虚函数、多态性、虚析构函数">
+<meta property="og:url" content="http://alogomachine.com/22625.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数 基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象    基类指针 父类指针不能调动子类函数  12345Human* phuman &#x3D; new Men; &#x2F;&#x2F;父类指针可以生成一个子类指针ph">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-24T17:26:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T15:38:49.962Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/22625.html"/>
+
+
+
+
+
+  <title>C++的基类指针、虚和纯虚函数、多态性、虚析构函数 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/22625.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++的基类指针、虚和纯虚函数、多态性、虚析构函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-25T01:26:00+08:00">
+                2021-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">基类指针、虚和纯虚函数、多态性、虚析构函数<br></span></strong></p>
+<h2 id="基类、派生类指针"><a href="#基类、派生类指针" class="headerlink" title="基类、派生类指针"></a>基类、派生类指针</h2><h3 id="派生类指针"><a href="#派生类指针" class="headerlink" title="派生类指针"></a>派生类指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Human;  <span class="comment">//基类指针</span></span><br><span class="line">Men* pmen = <span class="keyword">new</span>  Men; <span class="comment">//派生类指针</span></span><br><span class="line"><span class="comment">//新玩法：父类指针可以new一个子类对象</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="基类指针"><a href="#基类指针" class="headerlink" title="基类指针"></a>基类指针</h3><ul>
+<li>父类指针不能调动子类函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">funchuman</span>();  <span class="comment">//可以</span></span><br><span class="line"><span class="comment">//phuman-&gt;funmen(); </span></span><br><span class="line"><span class="comment">//虽然你new的是子类对象，但你是父类指针，无法调用子类函数</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>(); <span class="comment">//调用的是父类的eat函数，而不是men的eat函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>需要一个解决方法使我们只定义一个对象指针，就能调用父类以及各个子类的同名函数</p>
+<p>解决办法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line">phuman-&gt;eat;<span class="comment">//调用的是父类的eat函数，无法使用子类的eat函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>如果我们想通过一个父类指针调用父类、子类中的同名同参数的函数的话，对这个函数也是有要求:<ul>
+<li>在父类中，eat函数声明之前必须要加virtual声明eat()函数成虚函数</li>
+</ul>
+</li>
+</ul>
+<p>父类中操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;人类吃各种粮食&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>一旦某个函数(在基类)声明成虚函数，那么子类的同名函数都是属于virtual</li>
+</ul>
+<p>改造后：</p>
+<p>h中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>CPP使用中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是men子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Women;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是women子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Human;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的Human类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>父类的同名函数不是虚函数的时候，new出来的指针不管是那个子类，都是只能调用父类的函数</li>
+<li>当父类的同名函数是虚函数的时候，new子类出来的指针，虽然是父类指针，但调动的可以是子类函数，主要是看它new谁</li>
+</ul>
+<h3 id="override关键字"><a href="#override关键字" class="headerlink" title="override关键字"></a>override关键字</h3><ul>
+<li>为了避免你在子类中写错虚函数，在C++11中可以在函数声明中增加一个override关键字<ul>
+<li>这个关键字 用在“子类”中</li>
+</ul>
+</li>
+<li>override关键字可以用来说明派生类中的虚函数，你用了这个关键字之后，编译器就会认为你这个eat覆盖了父类中的同名同参的函数，那么编译器就会在父类中找到同名同参的虚函数，如果没找到，编译就会报错。这样，如果你没写好虚函数，那么可以帮你纠错。</li>
+<li>一般override在子类声明里面写</li>
+</ul>
+<h3 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h3><ul>
+<li><p>final与override相反</p>
+</li>
+<li><p>final也是虚函数专用，但是用在父类中，如果我们在父类的函数声明中加入final，那么任何尝试覆盖父类函数的行为都会报错，拒绝给你访问</p>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>调用虚函数执行的是“动态绑定”。动态表示的是我们程序运行的时候才知道我们使用了那个子类或是父类的eat()函数</li>
+<li>动态的绑定的是是Men还是，Women取决于new的是Men还是Women；</li>
+<li>动态绑定:运行的时候才知道运行的是那个eat函数。</li>
+</ul>
+<p>不用虚函数的话，生成那个对象，调用的eat肯定是属于它自己类的函数，不可能是其他子类或者父类的函数。</p>
+<ul>
+<li>这样就体现不出来了</li>
+</ul>
+<h2 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h2><ul>
+<li>多态性：知识针对虚函数来说可以理解</li>
+</ul>
+<p>多态性的体现：</p>
+<ul>
+<li>体现具有继承关系的父类和子类之间，子类重新定义(重写)父类的成员函数eat()，同时父类把这个eat()函数声明成了virtual虚函数</li>
+<li>通过父类指针，只有运行到了程序运行时期，找到了绑定到父类指针上的对象，这个对象他有可能是某个子类对象，也可能是父类对象</li>
+<li>然后系统内部实际上要查一个虚函数表，找到eat函数的入口地址，从而调用父类或子类的eat函数，这就是运行时期的多态性</li>
+</ul>
+<h2 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h2><ul>
+<li>纯虚函数 是在基类中声明的虚函数，但是他在基类中没有定义，但是要求任何派生类都要定义该虚函数的实现方法</li>
+</ul>
+<p>基类中实现纯虚函数的方法:</p>
+<ul>
+<li>在基类的虚函数，它没有定义，但让他在声明中等于0</li>
+</ul>
+<p>humanh中:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span> </span>= <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>cpp使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human human;  <span class="comment">//报错</span></span><br><span class="line">Human* phuman = <span class="keyword">new</span> Men;  <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>一旦一个类中有纯虚函数，那么你就不能生成这个类的对象了(父类指针也不行);</li>
+<li>那么这个类就成为了抽象类了</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><ul>
+<li><p>一旦有纯虚函数，那么这个类就变成抽象类</p>
+</li>
+<li><p>一旦基类中的虚函数没有定义，而是直接让他等于0，那么这个类就成为了抽象类</p>
+</li>
+</ul>
+<p>作用：</p>
+<ul>
+<li>主要用来统一管理子类对象</li>
+</ul>
+<p>记住两点：</p>
+<ol>
+<li>函数虚函数的类 叫抽象类，不能用来定义该类对象，主要用来做基类来生成子类用的</li>
+<li>子类必须实现该基类中定义的纯虚函数;</li>
+</ol>
+<p>纯虚函数不实现该基类的虚函数是不能给你生成的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = new Men;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>想让这个实现的办法：</p>
+<ul>
+<li>子类实现该虚函数</li>
+</ul>
+<p>h中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或cpp定义里实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>纯虚函数不能new自己这个父类</li>
+</ul>
+<h2 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h2><ul>
+<li>基类的虚构函数一般写出虚函数(虚析构函数)</li>
+</ul>
+<p>普通的虚构函数的问题：</p>
+<ul>
+<li>父类指针只执行了自己的父类析构函数</li>
+<li>没调用子类的析构函数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line"><span class="keyword">delete</span> phuman;  <span class="comment">//没有执行子类的析构函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>结论：用基类指针new子类对象的时候，在delete的时候系统不会调用派生类的析构函数，这就会发生问题</p>
+<p>解决方法:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">virtual</span> ~<span class="built_in">Human</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在public继承中，基类对派生类及其对象的操作，只能影响到那些从基类继承下来的成员</p>
+<ul>
+<li>如果想要用基类对非继承成员进行操作，则要把这个基类的函数定义为虚函数，析构函数也如此</li>
+<li>另外就是基类中的析构函数的虚属性也会被继承给子类，这样的话子类中的析构函数也就自然而然成为了虚函数，虽然名字和基类的析构函数不同</li>
+<li>delete phuman的时候肯定是要调用父类的析构函数，但在父类中想要调用子类的Men的析构函数，那么Human这个类中的析构函数就要声明为virtual，也就是说C++中为了获得运行时候的多态行为，所调用的成员函数必须是virtual；</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>如果一个类想要做积累，我们务必要把这个基类的析构函数写成virtual析构函数</li>
+<li>只要基类的析构函数是虚函数，就能够保证我们delete基类指针时候能运行正确的析构函数版本</li>
+<li>普通类我们可以不写析构函数，但如果是基类，就必须写一个析构函数，并且还是虚析构函数</li>
+<li>虚函数会增加内存开销，类里面定义虚函数，编译器就会给这个类增加虚函数表，在这个表存虚函数的指针</li>
+</ol>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/22525.html" rel="next" title="C++的派生类、调用顺序、访问等级与函数遮蔽">
+                <i class="fa fa-chevron-left"></i> C++的派生类、调用顺序、访问等级与函数遮蔽
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22825.html" rel="prev" title="C++的友元函数、友元类、友元成员函数">
+                C++的友元函数、友元类、友元成员函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%B1%BB%E3%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">基类、派生类指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BE%E7%94%9F%E7%B1%BB%E6%8C%87%E9%92%88"><span class="nav-number">1.1.</span> <span class="nav-text">派生类指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%B1%BB%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">基类指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">虚函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#override%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">2.1.</span> <span class="nav-text">override关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">2.2.</span> <span class="nav-text">final关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">多态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">纯虚函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">抽象类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">虚析构函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

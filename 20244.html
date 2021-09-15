@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++基础语法成员函数、对象拷贝、私有对象 一、类是我们自己定义的数据类型设计类时候要考虑：  站在设计和实现者的角度考虑问题 站在使用者的角度来考虑 父类、子类  二、类基础 一个类就是一个用户自己定义的数据类型，我们可以把类想象成一个命名空间，包着一堆东西（成员函数、成员变量） 一个类的构成:成员变量，成员函数（ 许多特殊的函数） 我们访问类成员时候，如果是类的对象，我们就使用对象名.成员名来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的成员函数、对象拷贝、私有对象">
+<meta property="og:url" content="http://alogomachine.com/20244.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="C++基础语法成员函数、对象拷贝、私有对象 一、类是我们自己定义的数据类型设计类时候要考虑：  站在设计和实现者的角度考虑问题 站在使用者的角度来考虑 父类、子类  二、类基础 一个类就是一个用户自己定义的数据类型，我们可以把类想象成一个命名空间，包着一堆东西（成员函数、成员变量） 一个类的构成:成员变量，成员函数（ 许多特殊的函数） 我们访问类成员时候，如果是类的对象，我们就使用对象名.成员名来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-23T16:15:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T15:38:01.252Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20244.html"/>
+
+
+
+
+
+  <title>C++的成员函数、对象拷贝、私有对象 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20244.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++的成员函数、对象拷贝、私有对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-24T00:15:00+08:00">
+                2021-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">成员函数、对象拷贝、私有对象</span></strong></p>
+<h2 id="一、类是我们自己定义的数据类型"><a href="#一、类是我们自己定义的数据类型" class="headerlink" title="一、类是我们自己定义的数据类型"></a><strong>一、类是我们自己定义的数据类型</strong></h2><p><strong>设计类时候要考虑：</strong></p>
+<ol>
+<li><strong>站在设计和实现者的角度考虑问题</strong></li>
+<li><strong>站在使用者的角度来考虑</strong></li>
+<li><strong>父类、子类</strong></li>
+</ol>
+<h2 id="二、类基础"><a href="#二、类基础" class="headerlink" title="二、类基础"></a><strong>二、类基础</strong></h2><ol>
+<li><strong>一个类就是一个用户自己定义的数据类型，我们可以把类想象成一个命名空间，包着一堆东西（成员函数、成员变量）</strong></li>
+<li><strong>一个类的构成:成员变量，成员函数（ 许多特殊的函数）</strong></li>
+<li><strong>我们访问类成员时候，如果是类的对象，我们就使用对象名.成员名来访问成员</strong></li>
+<li><strong>如果是使用这个对象的指针，我们就使用 指针名-&gt;成员名 来访问成员</strong></li>
+<li><strong>public成员提供类的接口，暴露给外界调用。private成员提供各种实现类功能的细节方法，但不暴露给使用者，外界无法使用这些接口</strong></li>
+<li><strong>struct 是成员默认为public的clas；struct A{….};</strong></li>
+<li><strong>class的成员默认是private；class A{….};</strong></li>
+<li><strong>struct和class基本可以作为等价</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    student someone;</span><br><span class="line">    someone.num = <span class="number">100</span>;</span><br><span class="line">    student* pstu = &amp;someone;</span><br><span class="line">    pstu-&gt;num = <span class="number">106</span>;</span><br><span class="line">    cout &lt;&lt; someone.num &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、成员函数"><a href="#三、成员函数" class="headerlink" title="三、成员函数"></a><strong>三、成员函数</strong></h2><p><strong>定义一个时钟类，且初始化时间</strong></p>
+<h3 id="传统C语言写法"><a href="#传统C语言写法" class="headerlink" title="传统C语言写法"></a><strong>传统C语言写法</strong></h3><p><strong>初始化是通过外面构造一个函数来让他初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(Time&amp; stmptime, <span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;  <span class="comment">//初始化的函数</span></span><br><span class="line">    stmptime.Hour = tmphour;</span><br><span class="line">    stmptime.Minute = tmpmin;</span><br><span class="line">    stmptime.Second = tmpsec;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    <span class="built_in">initTime</span>(mytime, <span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>);</span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;  <span class="comment">//打印11</span></span><br><span class="line">    cout &lt;&lt; mytime.Minute &lt;&lt; endl; <span class="comment">//打印14</span></span><br><span class="line">    cout &lt;&lt; mytime.Second &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="C-写法"><a href="#C-写法" class="headerlink" title="C++写法"></a><strong>C++写法</strong></h3><p><strong>是这个道理但不规范的写法：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;</span><br><span class="line">        Hour = tmphour;  <span class="comment">//可以直接调用本类里面的成员变量</span></span><br><span class="line">        Minute = tmpmin;</span><br><span class="line">        Second = tmpsec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    mytime.<span class="built_in">initTime</span>(<span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>); <span class="comment">//直接利用类里面的成员函数进行初始化</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>标准规范的写法:</strong></p>
+<p><strong>在Time.h中写:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __MYTIME__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __MYTIME__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒  //成员变量</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span>; <span class="comment">//成员函数的定义</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>在cpp实现文件中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//成员函数initTime的实现，::是作用域运算符，表示init这个函数属于Time类，声明只属于Time类</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Time.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;  </span><br><span class="line">    Hour = tmphour;  <span class="comment">//我们在成员函数中，可以直接使用之前在类定义的成员变量名</span></span><br><span class="line">    Minute = tmpmin;  <span class="comment">//不同类的Minute值不会冲突，成员变量的值不是唯一的，不同的类成员不同</span></span><br><span class="line">    Second = tmpsec;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp的使用文件：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//另一个文件的cpp使用</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Time.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">    mytime.<span class="built_in">initTime</span>(<span class="number">11</span>, <span class="number">14</span>, <span class="number">5</span>);</span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mytime.Minute &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mytime.Second &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>PS:类的重复定义（也可以理解为声明）是可以的，但全局变量不能多次定义（在头文件中被cpp中#include）</strong></p>
+<p><strong>类的init：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Time mytime2 = mytime; <span class="comment">//四种类初始化的方式，属于拷贝，地址都不一样</span></span><br><span class="line">Time mytime3&#123; mytime &#125;;  <span class="comment">//把mytime的成员变量都赋值过去了</span></span><br><span class="line"><span class="function">Time <span class="title">mytime4</span><span class="params">(mytime)</span></span>;  <span class="comment">//每个成员变量都是逐个拷贝</span></span><br><span class="line">Time mytime5 = &#123; mytime &#125;;</span><br><span class="line">mytime5.Hour = <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>如果不使用初始化的函数，它的值就会不确定</strong></li>
+</ul>
+<h2 id="五、私有成员"><a href="#五、私有成员" class="headerlink" title="五、私有成员"></a><strong>五、私有成员</strong></h2><ul>
+<li><p><strong>私有成员、函数可以在类内被其他函数调用，但不能被外界初始化类后调用;</strong></p>
+</li>
+<li><p><strong>私有成员、函数就是专门为其他函数的实现服务的，而不是直接作用于外界。</strong></p>
+</li>
+<li><p><strong>变量/函数往上找，先找到什么就是什么类型的变量/函数</strong></p>
+</li>
+</ul>
+<p><strong>class默认为私有</strong></p>
+<p><strong>h中：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __MYTIME__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __MYTIME__</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Hour; <span class="comment">//时</span></span><br><span class="line">    <span class="keyword">int</span> Minute; <span class="comment">//分</span></span><br><span class="line">    <span class="keyword">int</span> Second; <span class="comment">//秒</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> Millisecond; <span class="comment">//毫秒，无法在别的cpp中给它赋值使用</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initMillTime</span><span class="params">(<span class="keyword">int</span> mls)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp定义中：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initTime</span><span class="params">(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec)</span> </span>&#123;</span><br><span class="line">    Hour = tmphour;  <span class="comment">//我们在成员函数中，可以直接使用之前在类定义的成员变量名</span></span><br><span class="line">    Minute = tmpmin;  <span class="comment">//不同类的Minute值不会冲突，成员变量的值不是唯一的，不同的类成员不同</span></span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::initMillTime</span><span class="params">(<span class="keyword">int</span> mls)</span> </span>&#123;  <span class="comment">//不能被用户调用，但可以被定义</span></span><br><span class="line">    Millisecond = mls;  <span class="comment">//成员函数可以访问成员变量，不管成员变量是否是私有</span></span><br><span class="line">                        <span class="comment">//公有肯定可以，私有就是只给类内的成员函数服务的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>cpp使用：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Time</span> <span class="title">mytime</span>;</span></span><br><span class="line">   <span class="comment">// mytime.initMillTime(0); 非法，不能被外界调用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20243.html" rel="next" title="C++的迭代器简介、容器的迭代器、迭代器各类操作">
+                <i class="fa fa-chevron-left"></i> C++的迭代器简介、容器的迭代器、迭代器各类操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20276.html" rel="prev" title="C++的结构函数详解、explict、初始化列表">
+                C++的结构函数详解、explict、初始化列表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%B1%BB%E6%98%AF%E6%88%91%E4%BB%AC%E8%87%AA%E5%B7%B1%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">一、类是我们自己定义的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%B1%BB%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">二、类基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">三、成员函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9FC%E8%AF%AD%E8%A8%80%E5%86%99%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">传统C语言写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%86%99%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">C++写法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="nav-number">4.</span> <span class="nav-text">五、私有成员</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

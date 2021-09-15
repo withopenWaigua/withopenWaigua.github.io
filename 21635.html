@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据分析,Pandas," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd   12s1 &#x3D; pd.Series(np.random.randn(12),index&#x3D;[[&amp;#x27;a&amp;#x27;,&amp;#x27;a&amp;#x27;,&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pandas层级索引">
+<meta property="og:url" content="http://alogomachine.com/21635.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd   12s1 &#x3D; pd.Series(np.random.randn(12),index&#x3D;[[&amp;#x27;a&amp;#x27;,&amp;#x27;a&amp;#x27;,&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-16T15:35:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T15:57:08.107Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="Pandas">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/21635.html"/>
+
+
+
+
+
+  <title>Pandas层级索引 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/21635.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Pandas层级索引</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-16T23:35:00+08:00">
+                2021-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/Pandas/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandas</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = pd.Series(np.random.randn(<span class="number">12</span>),index=[[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]])</span><br><span class="line">s1  <span class="comment">#层级索引，索引对象有两层</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.values</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>array([ 1.07856561,  0.44885274, -1.24475853,  1.35527405,  0.9851262 ,
+       -1.79409542, -0.32332902, -1.0093075 , -0.14117406, -0.25820478,
+        0.79421376,  1.11484842])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.index</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>MultiIndex(levels=[[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], [0, 1, 2]],
+           labels=[[0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3], [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2]])
+</code></pre>
+<h1 id="层级索引"><a href="#层级索引" class="headerlink" title="层级索引"></a><strong>层级索引</strong></h1><ul>
+<li><strong>数据重塑</strong></li>
+<li><strong>分组操作</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>1.3552740496781421
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1[<span class="string">&#x27;b&#x27;</span>] <span class="comment">#先外层选取</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0    1.355274
+1    0.985126
+2   -1.794095
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1[<span class="string">&#x27;b&#x27;</span>][<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0.9851261951239859
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1[<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;c&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1[:,<span class="number">0</span>] <span class="comment">#选全部0的数据，先外层筛选，再内层筛选</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.loc[:,[<span class="number">0</span>,<span class="number">1</span>]]  <span class="comment"># 选每个的前2个</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a  0    1.078566
+   1    0.448853
+b  0    1.355274
+   1    0.985126
+c  0   -0.323329
+   1   -1.009308
+d  0   -0.258205
+   1    0.794214
+dtype: float64
+</code></pre>
+<h1 id="swaplevel"><a href="#swaplevel" class="headerlink" title="swaplevel"></a><strong>swaplevel</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1  </span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a  0    1.078566
+   1    0.448853
+   2   -1.244759
+b  0    1.355274
+   1    0.985126
+   2   -1.794095
+c  0   -0.323329
+   1   -1.009308
+   2   -0.141174
+d  0   -0.258205
+   1    0.794214
+   2    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s2 =s1.swaplevel()  <span class="comment">#交换内外两层索引</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2.loc[[<span class="number">0</span>,<span class="number">1</span>]] <span class="comment">#,代表这两个都，:代表到</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+0  b    1.355274
+1  b    0.985126
+0  c   -0.323329
+1  c   -1.009308
+0  d   -0.258205
+1  d    0.794214
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.unstack()  <span class="comment">#将层级索引的Series转换成DataFrame对象</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.078566</td>
+      <td>0.448853</td>
+      <td>-1.244759</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>1.355274</td>
+      <td>0.985126</td>
+      <td>-1.794095</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>-0.323329</td>
+      <td>-1.009308</td>
+      <td>-0.141174</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>-0.258205</td>
+      <td>0.794214</td>
+      <td>1.114848</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.unstack().T.stack()  <span class="comment">#把dataframe对象转换成series</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+   b    1.355274
+   c   -0.323329
+   d   -0.258205
+1  a    0.448853
+   b    0.985126
+   c   -1.009308
+   d    0.794214
+2  a   -1.244759
+   b   -1.794095
+   c   -0.141174
+   d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>a    1.078566
+b    1.355274
+c   -0.323329
+d   -0.258205
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2.loc[[<span class="number">0</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+0  b    1.355274
+1  b    0.985126
+0  c   -0.323329
+1  c   -1.009308
+0  d   -0.258205
+1  d    0.794214
+dtype: float64
+</code></pre>
+<h1 id="sortlevel"><a href="#sortlevel" class="headerlink" title="sortlevel"></a><strong>sortlevel</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 = s2.unstack()</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.078566</td>
+      <td>1.355274</td>
+      <td>-0.323329</td>
+      <td>-0.258205</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.448853</td>
+      <td>0.985126</td>
+      <td>-1.009308</td>
+      <td>0.794214</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-1.244759</td>
+      <td>-1.794095</td>
+      <td>-0.141174</td>
+      <td>1.114848</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.swaplevel()</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+1  a    0.448853
+2  a   -1.244759
+0  b    1.355274
+1  b    0.985126
+2  b   -1.794095
+0  c   -0.323329
+1  c   -1.009308
+2  c   -0.141174
+0  d   -0.258205
+1  d    0.794214
+2  d    1.114848
+dtype: float64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s2 = s1.swaplevel().sortlevel() <span class="comment">#先排外层再排内层</span></span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果：</strong></p>
+<pre><code>0  a    1.078566
+   b    1.355274
+   c   -0.323329
+   d   -0.258205
+1  a    0.448853
+   b    0.985126
+   c   -1.009308
+   d    0.794214
+2  a   -1.244759
+   b   -1.794095
+   c   -0.141174
+   d    1.114848
+dtype: float64
+</code></pre>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据分析</a>
+          
+            <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/21554.html" rel="next" title="Pandas索引操作">
+                <i class="fa fa-chevron-left"></i> Pandas索引操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/21636.html" rel="prev" title="Pandas统计计算和描述">
+                Pandas统计计算和描述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%E7%B4%A2%E5%BC%95"><span class="nav-number">1.</span> <span class="nav-text">层级索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#swaplevel"><span class="nav-number">2.</span> <span class="nav-text">swaplevel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sortlevel"><span class="nav-number">3.</span> <span class="nav-text">sortlevel</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,逻辑回归,SMOTE过采样,ROC评估指标," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法逻辑回归 逻辑回归 一般用于分类 一般逻辑回归只能解决分类两种（是&#x2F;否），解决二元分类模型 但其实可以扩展为多元分类  损失函数是判断模型好不好：  有一个凸函数 有全局的最优解 求梯度  由于二元分类的值不是连续的，只有0&#x2F;1，因此如果使用线性回归的话，对数据会很容易敏感  因此我们需要引入逻辑回归对二元分类问题进行处理：  相关知识点  逻辑回归预测银行客户是否会开设定期存款账户逻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑回归分析与预测客户是否开设存款账户实战">
+<meta property="og:url" content="http://alogomachine.com/22715.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法逻辑回归 逻辑回归 一般用于分类 一般逻辑回归只能解决分类两种（是&#x2F;否），解决二元分类模型 但其实可以扩展为多元分类  损失函数是判断模型好不好：  有一个凸函数 有全局的最优解 求梯度  由于二元分类的值不是连续的，只有0&#x2F;1，因此如果使用线性回归的话，对数据会很容易敏感  因此我们需要引入逻辑回归对二元分类问题进行处理：  相关知识点  逻辑回归预测银行客户是否会开设定期存款账户逻">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211118.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211159.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211212.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211238.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210209.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210217.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210221.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210227.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210231.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210244.png">
+<meta property="article:published_time" content="2021-07-27T13:15:00.000Z">
+<meta property="article:modified_time" content="2021-08-01T13:27:59.540Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="逻辑回归">
+<meta property="article:tag" content="SMOTE过采样">
+<meta property="article:tag" content="ROC评估指标">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211118.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/22715.html"/>
+
+
+
+
+
+  <title>逻辑回归分析与预测客户是否开设存款账户实战 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/22715.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">逻辑回归分析与预测客户是否开设存款账户实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-27T21:15:00+08:00">
+                2021-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">逻辑回归</span></strong></p>
+<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><ul>
+<li><strong>一般用于分类</strong></li>
+<li><strong>一般逻辑回归只能解决分类两种（是/否），解决二元分类模型</strong></li>
+<li><strong>但其实可以扩展为多元分类</strong></li>
+</ul>
+<p><strong>损失函数是判断模型好不好：</strong></p>
+<ol>
+<li><strong>有一个凸函数</strong></li>
+<li><strong>有全局的最优解</strong></li>
+<li><strong>求梯度</strong></li>
+</ol>
+<p><strong>由于二元分类的值不是连续的，只有0/1，因此如果使用线性回归的话，对数据会很容易敏感</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211118.png" alt="image-20210727211118260"></p>
+<p><strong>因此我们需要引入逻辑回归对二元分类问题进行处理：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211159.png" alt="image-20210727211159865"></p>
+<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211212.png" alt="image-20210727211212225"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211238.png" alt="image-20210727211238821"></p>
+<h1 id="逻辑回归预测银行客户是否会开设定期存款账户"><a href="#逻辑回归预测银行客户是否会开设定期存款账户" class="headerlink" title="逻辑回归预测银行客户是否会开设定期存款账户"></a>逻辑回归预测银行客户是否会开设定期存款账户</h1><p><strong>逻辑回归要求预测值为 0 或者 1, 自变量特征值应该彼此独立。</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line">plt.rc(<span class="string">&quot;font&quot;</span>, size=<span class="number">14</span>)</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.<span class="built_in">set</span>(style=<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.<span class="built_in">set</span>(style=<span class="string">&quot;whitegrid&quot;</span>, color_codes=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>该数据集来自UCI机器学习库(<a target="_blank" rel="noopener" href="http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)%EF%BC%8C%E8%91%A1%E8%90%84%E7%89%99%E9%93%B6%E8%A1%8C%E7%9A%84%E7%94%B5%E8%AF%9D%E8%90%A5%E9%94%80%E3%80%82">http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)，葡萄牙银行的电话营销。</a> 分类目标是预测客户是否会开设到定期存款账户（预测值y）。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;banking.csv&#x27;</span>) </span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>month</th>
+      <th>day_of_week</th>
+      <th>...</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>emp_var_rate</th>
+      <th>cons_price_idx</th>
+      <th>cons_conf_idx</th>
+      <th>euribor3m</th>
+      <th>nr_employed</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>44</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>basic.4y</td>
+      <td>unknown</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>aug</td>
+      <td>thu</td>
+      <td>...</td>
+      <td>1</td>
+      <td>999</td>
+      <td>0</td>
+      <td>nonexistent</td>
+      <td>1.4</td>
+      <td>93.444</td>
+      <td>-36.1</td>
+      <td>4.963</td>
+      <td>5228.1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>53</td>
+      <td>technician</td>
+      <td>married</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>no</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>nov</td>
+      <td>fri</td>
+      <td>...</td>
+      <td>1</td>
+      <td>999</td>
+      <td>0</td>
+      <td>nonexistent</td>
+      <td>-0.1</td>
+      <td>93.200</td>
+      <td>-42.0</td>
+      <td>4.021</td>
+      <td>5195.8</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>28</td>
+      <td>management</td>
+      <td>single</td>
+      <td>university.degree</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>jun</td>
+      <td>thu</td>
+      <td>...</td>
+      <td>3</td>
+      <td>6</td>
+      <td>2</td>
+      <td>success</td>
+      <td>-1.7</td>
+      <td>94.055</td>
+      <td>-39.8</td>
+      <td>0.729</td>
+      <td>4991.6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39</td>
+      <td>services</td>
+      <td>married</td>
+      <td>high.school</td>
+      <td>no</td>
+      <td>no</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>apr</td>
+      <td>fri</td>
+      <td>...</td>
+      <td>2</td>
+      <td>999</td>
+      <td>0</td>
+      <td>nonexistent</td>
+      <td>-1.8</td>
+      <td>93.075</td>
+      <td>-47.1</td>
+      <td>1.405</td>
+      <td>5099.1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>55</td>
+      <td>retired</td>
+      <td>married</td>
+      <td>basic.4y</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>cellular</td>
+      <td>aug</td>
+      <td>fri</td>
+      <td>...</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>success</td>
+      <td>-2.9</td>
+      <td>92.201</td>
+      <td>-31.4</td>
+      <td>0.869</td>
+      <td>5076.2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.info()</span><br><span class="line"><span class="built_in">print</span>(data.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 41188 entries, 0 to 41187
+Data columns (total 21 columns):
+age               41188 non-null int64
+job               41188 non-null object
+marital           41188 non-null object
+education         41188 non-null object
+default           41188 non-null object
+housing           41188 non-null object
+loan              41188 non-null object
+contact           41188 non-null object
+month             41188 non-null object
+day_of_week       41188 non-null object
+duration          41188 non-null int64
+campaign          41188 non-null int64
+pdays             41188 non-null int64
+previous          41188 non-null int64
+poutcome          41188 non-null object
+emp_var_rate      41188 non-null float64
+cons_price_idx    41188 non-null float64
+cons_conf_idx     41188 non-null float64
+euribor3m         41188 non-null float64
+nr_employed       41188 non-null float64
+y                 41188 non-null int64
+dtypes: float64(5), int64(6), object(10)
+memory usage: 6.6+ MB
+(41188, 21)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(data.columns)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Index([&#39;age&#39;, &#39;job&#39;, &#39;marital&#39;, &#39;education&#39;, &#39;default&#39;, &#39;housing&#39;, &#39;loan&#39;,
+       &#39;contact&#39;, &#39;month&#39;, &#39;day_of_week&#39;, &#39;duration&#39;, &#39;campaign&#39;, &#39;pdays&#39;,
+       &#39;previous&#39;, &#39;poutcome&#39;, &#39;emp_var_rate&#39;, &#39;cons_price_idx&#39;,
+       &#39;cons_conf_idx&#39;, &#39;euribor3m&#39;, &#39;nr_employed&#39;, &#39;y&#39;],
+      dtype=&#39;object&#39;)
+</code></pre>
+<p><strong>特征的意义:</strong> </p>
+<p><strong>bank client data:</strong></p>
+<ul>
+<li><strong>1 - age (numeric)</strong></li>
+<li><strong>2 - job : type of job (categorical: ‘admin.’,’blue-collar’,’entrepreneur’,’housemaid’,’management’,’retired’,’self-employed’,’services’,’student’,’technician’,’unemployed’,’unknown’)</strong></li>
+<li><strong>3 - marital : marital status (categorical: ‘divorced’,’married’,’single’,’unknown’; note: ‘divorced’ means divorced or widowed)</strong></li>
+<li><strong>4 - education (categorical: ‘basic.4y’,’basic.6y’,’basic.9y’,’high.school’,’illiterate’,’professional.course’,’university.degree’,’unknown’)</strong></li>
+<li><strong>5 - default: has credit in default? (categorical: ‘no’,’yes’,’unknown’)</strong></li>
+<li><strong>6 - housing: has housing loan? (categorical: ‘no’,’yes’,’unknown’)</strong></li>
+<li><strong>7 - loan: has personal loan? (categorical: ‘no’,’yes’,’unknown’)</strong> </li>
+</ul>
+<p><strong>related with the last contact of the current campaign:</strong></p>
+<ul>
+<li><strong>8 - contact: contact communication type (categorical: ‘cellular’,’telephone’)</strong> </li>
+<li><strong>9 - month: last contact month of year (categorical: ‘jan’, ‘feb’, ‘mar’, …, ‘nov’, ‘dec’)</strong></li>
+<li><strong>10 - day_of_week: last contact day of the week (categorical: ‘mon’,’tue’,’wed’,’thu’,’fri’)</strong></li>
+<li><strong>11 - duration: last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then y=’no’). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.</strong></li>
+</ul>
+<p><strong>other attributes:</strong></p>
+<ul>
+<li><strong>12 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)</strong></li>
+<li><strong>13 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; * 999 means client was not previously contacted)</strong></li>
+<li><strong>14 - previous: number of contacts performed before this campaign and for this client (numeric)</strong></li>
+<li><strong>15 - poutcome: outcome of the previous marketing campaign (categorical: ‘failure’,’nonexistent’,’success’)</strong></li>
+</ul>
+<p><strong>social and economic context attributes</strong></p>
+<ul>
+<li><strong>16 - emp.var.rate: employment variation rate - quarterly indicator (numeric)</strong></li>
+<li><strong>17 - cons.price.idx: consumer price index - monthly indicator (numeric)</strong> </li>
+<li><strong>18 - cons.conf.idx: consumer confidence index - monthly indicator (numeric)</strong> </li>
+<li><strong>19 - euribor3m: euribor 3 month rate - daily indicator (numeric)</strong></li>
+<li><strong>20 - nr.employed: number of employees - quarterly indicator (numeric)</strong></li>
+</ul>
+<p><strong>Output variable (desired target):</strong></p>
+<ul>
+<li><strong>21 - y - has the client subscribed a term deposit? (binary: ‘yes’,’no’)</strong></li>
+</ul>
+<p><strong>其中的y列，0代表推销不成功，1代表推销成功</strong></p>
+<h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a><strong>特征工程</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;education&#x27;</span>].unique()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([&#39;basic.4y&#39;, &#39;unknown&#39;, &#39;university.degree&#39;, &#39;high.school&#39;,
+       &#39;basic.9y&#39;, &#39;professional.course&#39;, &#39;basic.6y&#39;, &#39;illiterate&#39;],
+      dtype=object)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 觉得基础教育4-9年没区别，所以放在一组</span></span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.4y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.6y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.9y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>].unique()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([&#39;Basic&#39;, &#39;unknown&#39;, &#39;university.degree&#39;, &#39;high.school&#39;,
+       &#39;professional.course&#39;, &#39;illiterate&#39;], dtype=object)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;y&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0    36548
+1     4640
+Name: y, dtype: int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.countplot(x=<span class="string">&#x27;y&#x27;</span>,data=data,palette=<span class="string">&#x27;hls&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment">#数据特别不平衡，差别太大比例是7：1</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210209.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#尽量0和1把比例控制在1：1</span></span><br><span class="line">count_no_sub = <span class="built_in">len</span>(data[data[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>])</span><br><span class="line">count_sub = <span class="built_in">len</span>(data[data[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>])</span><br><span class="line">pct_of_no_sub = count_no_sub / (count_no_sub+count_sub)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的百分比: %.2f%%&quot;</span>%(pct_of_no_sub*<span class="number">100</span>))</span><br><span class="line">pct_of_sub = count_sub /(count_no_sub+count_sub)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的百分比：%.2f%%&quot;</span>%(pct_of_sub*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>未开户的百分比: 88.73%
+开户的百分比：11.27%
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;y&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>emp_var_rate</th>
+      <th>cons_price_idx</th>
+      <th>cons_conf_idx</th>
+      <th>euribor3m</th>
+      <th>nr_employed</th>
+    </tr>
+    <tr>
+      <th>y</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>39.911185</td>
+      <td>220.844807</td>
+      <td>2.633085</td>
+      <td>984.113878</td>
+      <td>0.132374</td>
+      <td>0.248875</td>
+      <td>93.603757</td>
+      <td>-40.593097</td>
+      <td>3.811491</td>
+      <td>5176.166600</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>40.913147</td>
+      <td>553.191164</td>
+      <td>2.051724</td>
+      <td>792.035560</td>
+      <td>0.492672</td>
+      <td>-1.233448</td>
+      <td>93.354386</td>
+      <td>-39.789784</td>
+      <td>2.123135</td>
+      <td>5095.115991</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+<h2 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a><strong>数据可视化分析</strong></h2><p><strong>购买定期存款的客户的平均年龄高于未购买定期存款的客户的平均年龄。</strong></p>
+<p><strong>购买定期存款的客户的 pdays（自上次联系客户以来的日子）较低。 pdays越低，最后一次通话的记忆越好，因此销售的机会就越大。</strong></p>
+<p><strong>令人惊讶的是，购买定期存款的客户的销售通话次数较低。</strong></p>
+<p><strong>我们可以计算其他特征值（如教育和婚姻状况）的分布，以更详细地了解我们的数据。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;job&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>emp_var_rate</th>
+      <th>cons_price_idx</th>
+      <th>cons_conf_idx</th>
+      <th>euribor3m</th>
+      <th>nr_employed</th>
+      <th>y</th>
+    </tr>
+    <tr>
+      <th>job</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>admin.</th>
+      <td>38.187296</td>
+      <td>254.312128</td>
+      <td>2.623489</td>
+      <td>954.319229</td>
+      <td>0.189023</td>
+      <td>0.015563</td>
+      <td>93.534054</td>
+      <td>-40.245433</td>
+      <td>3.550274</td>
+      <td>5164.125350</td>
+      <td>0.129726</td>
+    </tr>
+    <tr>
+      <th>blue-collar</th>
+      <td>39.555760</td>
+      <td>264.542360</td>
+      <td>2.558461</td>
+      <td>985.160363</td>
+      <td>0.122542</td>
+      <td>0.248995</td>
+      <td>93.656656</td>
+      <td>-41.375816</td>
+      <td>3.771996</td>
+      <td>5175.615150</td>
+      <td>0.068943</td>
+    </tr>
+    <tr>
+      <th>entrepreneur</th>
+      <td>41.723214</td>
+      <td>263.267857</td>
+      <td>2.535714</td>
+      <td>981.267170</td>
+      <td>0.138736</td>
+      <td>0.158723</td>
+      <td>93.605372</td>
+      <td>-41.283654</td>
+      <td>3.791120</td>
+      <td>5176.313530</td>
+      <td>0.085165</td>
+    </tr>
+    <tr>
+      <th>housemaid</th>
+      <td>45.500000</td>
+      <td>250.454717</td>
+      <td>2.639623</td>
+      <td>960.579245</td>
+      <td>0.137736</td>
+      <td>0.433396</td>
+      <td>93.676576</td>
+      <td>-39.495283</td>
+      <td>4.009645</td>
+      <td>5179.529623</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>management</th>
+      <td>42.362859</td>
+      <td>257.058140</td>
+      <td>2.476060</td>
+      <td>962.647059</td>
+      <td>0.185021</td>
+      <td>-0.012688</td>
+      <td>93.522755</td>
+      <td>-40.489466</td>
+      <td>3.611316</td>
+      <td>5166.650513</td>
+      <td>0.112175</td>
+    </tr>
+    <tr>
+      <th>retired</th>
+      <td>62.027326</td>
+      <td>273.712209</td>
+      <td>2.476744</td>
+      <td>897.936047</td>
+      <td>0.327326</td>
+      <td>-0.698314</td>
+      <td>93.430786</td>
+      <td>-38.573081</td>
+      <td>2.770066</td>
+      <td>5122.262151</td>
+      <td>0.252326</td>
+    </tr>
+    <tr>
+      <th>self-employed</th>
+      <td>39.949331</td>
+      <td>264.142153</td>
+      <td>2.660802</td>
+      <td>976.621393</td>
+      <td>0.143561</td>
+      <td>0.094159</td>
+      <td>93.559982</td>
+      <td>-40.488107</td>
+      <td>3.689376</td>
+      <td>5170.674384</td>
+      <td>0.104856</td>
+    </tr>
+    <tr>
+      <th>services</th>
+      <td>37.926430</td>
+      <td>258.398085</td>
+      <td>2.587805</td>
+      <td>979.974049</td>
+      <td>0.154951</td>
+      <td>0.175359</td>
+      <td>93.634659</td>
+      <td>-41.290048</td>
+      <td>3.699187</td>
+      <td>5171.600126</td>
+      <td>0.081381</td>
+    </tr>
+    <tr>
+      <th>student</th>
+      <td>25.894857</td>
+      <td>283.683429</td>
+      <td>2.104000</td>
+      <td>840.217143</td>
+      <td>0.524571</td>
+      <td>-1.408000</td>
+      <td>93.331613</td>
+      <td>-40.187543</td>
+      <td>1.884224</td>
+      <td>5085.939086</td>
+      <td>0.314286</td>
+    </tr>
+    <tr>
+      <th>technician</th>
+      <td>38.507638</td>
+      <td>250.232241</td>
+      <td>2.577339</td>
+      <td>964.408127</td>
+      <td>0.153789</td>
+      <td>0.274566</td>
+      <td>93.561471</td>
+      <td>-39.927569</td>
+      <td>3.820401</td>
+      <td>5175.648391</td>
+      <td>0.108260</td>
+    </tr>
+    <tr>
+      <th>unemployed</th>
+      <td>39.733728</td>
+      <td>249.451677</td>
+      <td>2.564103</td>
+      <td>935.316568</td>
+      <td>0.199211</td>
+      <td>-0.111736</td>
+      <td>93.563781</td>
+      <td>-40.007594</td>
+      <td>3.466583</td>
+      <td>5157.156509</td>
+      <td>0.142012</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>45.563636</td>
+      <td>239.675758</td>
+      <td>2.648485</td>
+      <td>938.727273</td>
+      <td>0.154545</td>
+      <td>0.357879</td>
+      <td>93.718942</td>
+      <td>-38.797879</td>
+      <td>3.949033</td>
+      <td>5172.931818</td>
+      <td>0.112121</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;marital&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>emp_var_rate</th>
+      <th>cons_price_idx</th>
+      <th>cons_conf_idx</th>
+      <th>euribor3m</th>
+      <th>nr_employed</th>
+      <th>y</th>
+    </tr>
+    <tr>
+      <th>marital</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>divorced</th>
+      <td>44.899393</td>
+      <td>253.790330</td>
+      <td>2.61340</td>
+      <td>968.639853</td>
+      <td>0.168690</td>
+      <td>0.163985</td>
+      <td>93.606563</td>
+      <td>-40.707069</td>
+      <td>3.715603</td>
+      <td>5170.878643</td>
+      <td>0.103209</td>
+    </tr>
+    <tr>
+      <th>married</th>
+      <td>42.307165</td>
+      <td>257.438623</td>
+      <td>2.57281</td>
+      <td>967.247673</td>
+      <td>0.155608</td>
+      <td>0.183625</td>
+      <td>93.597367</td>
+      <td>-40.270659</td>
+      <td>3.745832</td>
+      <td>5171.848772</td>
+      <td>0.101573</td>
+    </tr>
+    <tr>
+      <th>single</th>
+      <td>33.158714</td>
+      <td>261.524378</td>
+      <td>2.53380</td>
+      <td>949.909578</td>
+      <td>0.211359</td>
+      <td>-0.167989</td>
+      <td>93.517300</td>
+      <td>-40.918698</td>
+      <td>3.317447</td>
+      <td>5155.199265</td>
+      <td>0.140041</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>40.275000</td>
+      <td>312.725000</td>
+      <td>3.18750</td>
+      <td>937.100000</td>
+      <td>0.275000</td>
+      <td>-0.221250</td>
+      <td>93.471250</td>
+      <td>-40.820000</td>
+      <td>3.313038</td>
+      <td>5157.393750</td>
+      <td>0.150000</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;education&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>emp_var_rate</th>
+      <th>cons_price_idx</th>
+      <th>cons_conf_idx</th>
+      <th>euribor3m</th>
+      <th>nr_employed</th>
+      <th>y</th>
+    </tr>
+    <tr>
+      <th>education</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Basic</th>
+      <td>42.163910</td>
+      <td>263.043874</td>
+      <td>2.559498</td>
+      <td>974.877967</td>
+      <td>0.141053</td>
+      <td>0.191329</td>
+      <td>93.639933</td>
+      <td>-40.927595</td>
+      <td>3.729654</td>
+      <td>5172.014113</td>
+      <td>0.087029</td>
+    </tr>
+    <tr>
+      <th>high.school</th>
+      <td>37.998213</td>
+      <td>260.886810</td>
+      <td>2.568576</td>
+      <td>964.358382</td>
+      <td>0.185917</td>
+      <td>0.032937</td>
+      <td>93.584857</td>
+      <td>-40.940641</td>
+      <td>3.556157</td>
+      <td>5164.994735</td>
+      <td>0.108355</td>
+    </tr>
+    <tr>
+      <th>illiterate</th>
+      <td>48.500000</td>
+      <td>276.777778</td>
+      <td>2.277778</td>
+      <td>943.833333</td>
+      <td>0.111111</td>
+      <td>-0.133333</td>
+      <td>93.317333</td>
+      <td>-39.950000</td>
+      <td>3.516556</td>
+      <td>5171.777778</td>
+      <td>0.222222</td>
+    </tr>
+    <tr>
+      <th>professional.course</th>
+      <td>40.080107</td>
+      <td>252.533855</td>
+      <td>2.586115</td>
+      <td>960.765974</td>
+      <td>0.163075</td>
+      <td>0.173012</td>
+      <td>93.569864</td>
+      <td>-40.124108</td>
+      <td>3.710457</td>
+      <td>5170.155979</td>
+      <td>0.113485</td>
+    </tr>
+    <tr>
+      <th>university.degree</th>
+      <td>38.879191</td>
+      <td>253.223373</td>
+      <td>2.563527</td>
+      <td>951.807692</td>
+      <td>0.192390</td>
+      <td>-0.028090</td>
+      <td>93.493466</td>
+      <td>-39.975805</td>
+      <td>3.529663</td>
+      <td>5163.226298</td>
+      <td>0.137245</td>
+    </tr>
+    <tr>
+      <th>unknown</th>
+      <td>43.481225</td>
+      <td>262.390526</td>
+      <td>2.596187</td>
+      <td>942.830734</td>
+      <td>0.226459</td>
+      <td>0.059099</td>
+      <td>93.658615</td>
+      <td>-39.877816</td>
+      <td>3.571098</td>
+      <td>5159.549509</td>
+      <td>0.145003</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">table=pd.crosstab(data.job,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Job title vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Job&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Purchase&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;purchase_vs_job&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210217.png" alt="png"></p>
+<p><strong>具有不同职位的人购买存款的频率不一样。 因此，职称可以是良好的预测因素。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.marital,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Marital Status vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Marital Status&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Customers&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;mariral_vs_pur_stack&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210221.png" alt="png"></p>
+<p><strong>婚姻状况似乎不是好的预测因素。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.education,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Education vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Education&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Customers&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;edu_vs_pur_stack&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210227.png" alt="png"></p>
+<p><strong>教育似乎是结果变量的良好预测指标。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.day_of_week,data.y)<span class="comment">#.plot(kind=&#x27;bar&#x27;)</span></span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Day of Week vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Day of Week&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Purchase&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;dow_vs_purchase&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210231.png" alt="png"></p>
+<p><strong>一周工作时间不是预测结果的良好预测因素。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat_vars=[<span class="string">&#x27;job&#x27;</span>,<span class="string">&#x27;marital&#x27;</span>,<span class="string">&#x27;education&#x27;</span>,<span class="string">&#x27;default&#x27;</span>,<span class="string">&#x27;housing&#x27;</span>,<span class="string">&#x27;loan&#x27;</span>,<span class="string">&#x27;contact&#x27;</span>,<span class="string">&#x27;month&#x27;</span>,<span class="string">&#x27;day_of_week&#x27;</span>,<span class="string">&#x27;poutcome&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> cat_vars:</span><br><span class="line">    cat_list = pd.get_dummies(data[var], prefix=var)</span><br><span class="line">    data=data.join(cat_list)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_final=data.drop(cat_vars, axis=<span class="number">1</span>)</span><br><span class="line">data_final.columns.values</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([&#39;age&#39;, &#39;duration&#39;, &#39;campaign&#39;, &#39;pdays&#39;, &#39;previous&#39;, &#39;emp_var_rate&#39;,
+       &#39;cons_price_idx&#39;, &#39;cons_conf_idx&#39;, &#39;euribor3m&#39;, &#39;nr_employed&#39;, &#39;y&#39;,
+       &#39;job_admin.&#39;, &#39;job_blue-collar&#39;, &#39;job_entrepreneur&#39;,
+       &#39;job_housemaid&#39;, &#39;job_management&#39;, &#39;job_retired&#39;,
+       &#39;job_self-employed&#39;, &#39;job_services&#39;, &#39;job_student&#39;,
+       &#39;job_technician&#39;, &#39;job_unemployed&#39;, &#39;job_unknown&#39;,
+       &#39;marital_divorced&#39;, &#39;marital_married&#39;, &#39;marital_single&#39;,
+       &#39;marital_unknown&#39;, &#39;education_Basic&#39;, &#39;education_high.school&#39;,
+       &#39;education_illiterate&#39;, &#39;education_professional.course&#39;,
+       &#39;education_university.degree&#39;, &#39;education_unknown&#39;, &#39;default_no&#39;,
+       &#39;default_unknown&#39;, &#39;default_yes&#39;, &#39;housing_no&#39;, &#39;housing_unknown&#39;,
+       &#39;housing_yes&#39;, &#39;loan_no&#39;, &#39;loan_unknown&#39;, &#39;loan_yes&#39;,
+       &#39;contact_cellular&#39;, &#39;contact_telephone&#39;, &#39;month_apr&#39;, &#39;month_aug&#39;,
+       &#39;month_dec&#39;, &#39;month_jul&#39;, &#39;month_jun&#39;, &#39;month_mar&#39;, &#39;month_may&#39;,
+       &#39;month_nov&#39;, &#39;month_oct&#39;, &#39;month_sep&#39;, &#39;day_of_week_fri&#39;,
+       &#39;day_of_week_mon&#39;, &#39;day_of_week_thu&#39;, &#39;day_of_week_tue&#39;,
+       &#39;day_of_week_wed&#39;, &#39;poutcome_failure&#39;, &#39;poutcome_nonexistent&#39;,
+       &#39;poutcome_success&#39;], dtype=object)
+</code></pre>
+<p><strong>……</strong><br><strong>了解数据的特征和关系</strong></p>
+<p><strong>当训练数据不平衡的时候，我们可以采取的措施:</strong></p>
+<ul>
+<li><strong>把数据量小的扩充成与大的1:1的比例(SMOTE采样，推荐)</strong></li>
+<li><strong>把数据量大的删掉一部分，与小的保持1:1的比例（不推荐）</strong></li>
+</ul>
+<h2 id="使用SMOTE进行过采样"><a href="#使用SMOTE进行过采样" class="headerlink" title="使用SMOTE进行过采样"></a><strong>使用SMOTE进行过采样</strong></h2><p><strong>创建我们的训练数据后，我将使用SMOTE算法（合成少数过采样技术）对已经开户的用户进行上采样。 在高层次上，SMOTE：</strong></p>
+<pre><code>通过从次要类（已经开户的用户）创建合成样本而不是创建副本来工作。
+随机选择一个k-最近邻居并使用它来创建一个类似但随机调整的新观察结果。
+</code></pre>
+<p><strong>使用如下命令安装:</strong><br><strong>conda install -c conda-forge imbalanced-learn</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">X = data_final.loc[:, data_final.columns != <span class="string">&#x27;y&#x27;</span>] <span class="comment">#把不为y的这几列拿出来 （y为判断列）</span></span><br><span class="line">y = data_final.loc[:, data_final.columns == <span class="string">&#x27;y&#x27;</span>].values.ravel()  <span class="comment">#把为y的这几列拿出来</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行过采样</span></span><br><span class="line"><span class="keyword">from</span> imblearn.over_sampling <span class="keyword">import</span> SMOTE</span><br><span class="line">os = SMOTE(random_state=<span class="number">0</span>) <span class="comment"># 给一个随机数的种子</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">0</span>)</span><br><span class="line">columns = X_train.columns</span><br><span class="line">os_data_X,os_data_y=os.fit_resample(X_train, y_train)</span><br><span class="line">os_data_X = pd.DataFrame(data=os_data_X,columns=columns )</span><br><span class="line">os_data_y= pd.DataFrame(data=os_data_y,columns=[<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line"><span class="comment"># we can Check the numbers of our data</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;过采样以后的数据量: &quot;</span>,<span class="built_in">len</span>(os_data_X))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的用户数量: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的用户数量: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的用户数量的百分比: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>])/<span class="built_in">len</span>(os_data_X))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的用户数量的百分比: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>])/<span class="built_in">len</span>(os_data_X))</span><br></pre></td></tr></table></figure>
+
+<pre><code>过采样以后的数据量:  51134
+未开户的用户数量:  25567
+开户的用户数量:  25567
+未开户的用户数量的百分比:  0.5
+开户的用户数量的百分比:  0.5
+</code></pre>
+<p><strong>现在我们拥有完美平衡的数据！ 您可能已经注意到我仅对训练数据进行了过采样</strong></p>
+<p><strong>就算实际的数据就不是1:1，那么我们也需要用过采样保证数据1:1</strong><br>        <strong>（本来开户的就是小部分，但我们仍然需要弄成1:1）</strong></p>
+<h2 id="逻辑回归训练"><a href="#逻辑回归训练" class="headerlink" title="逻辑回归训练"></a><strong>逻辑回归训练</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="comment">#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)</span></span><br><span class="line">logreg = LogisticRegression()</span><br><span class="line">logreg.fit(os_data_X, os_data_y.values.reshape(-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = logreg.predict(X_test) <span class="comment">#测试数据</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练出来的准确率为:&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(logreg.score(X_test,y_test)))</span><br></pre></td></tr></table></figure>
+
+<pre><code>训练出来的准确率为:0.89
+</code></pre>
+<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a><strong>模型评估</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># metrics可以得到一个报告：准确度 召回率  值越大越好  support:测试数据里面有多少这个类别的</span></span><br><span class="line"><span class="comment">#评价分类模型效果</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test,y_pred)) <span class="comment"># 测试数据不需要进行过采样，</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>              precision    recall  f1-score   support
+
+           0       0.96      0.92      0.94     10981
+           1       0.50      0.67      0.58      1376
+
+    accuracy                           0.89     12357
+   macro avg       0.73      0.80      0.76     12357
+weighted avg       0.91      0.89      0.90     12357
+</code></pre>
+<hr>
+<p><strong>对0类别的判断有96%的准确率</strong></p>
+<p><strong>对1类别的判断只有50%的准确率</strong></p>
+<p><strong>但由于数据量不平衡，权重测试后的准确率为91%</strong></p>
+<h3 id="补充看分类模型的效果方法-roc-auc-score"><a href="#补充看分类模型的效果方法-roc-auc-score" class="headerlink" title="补充看分类模型的效果方法-roc_auc_score"></a><strong>补充看分类模型的效果方法-roc_auc_score</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line">logit_roc_auc = roc_auc_score(y_test, logreg.predict(X_test))</span><br><span class="line">fpr, tpr, thresholds = roc_curve(y_test, logreg.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(fpr, tpr, label=<span class="string">&#x27;Logistic Regression (area = %0.2f)&#x27;</span> % logit_roc_auc)</span><br><span class="line">plt.plot([<span class="number">0</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">1</span>],<span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;False Positive Rate&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;True Positive Rate&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Receiver operating characteristic&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;Log_ROC&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210244.png" alt="png"></strong></p>
+<p><strong>算蓝色曲线与X轴的面积，越大越好,越大效果越好</strong></p>
+<p><strong>这个面积占1*1正方形的比例为0.8，所以准确率也可以当作80%</strong></p>
+<p><strong>红色虚线就是随机乱猜-50%的概率</strong></p>
+<h1 id="逻辑回归和线性回归的区别"><a href="#逻辑回归和线性回归的区别" class="headerlink" title="逻辑回归和线性回归的区别"></a><strong>逻辑回归和线性回归的区别</strong></h1><ul>
+<li><strong>线性回归一般是用于预测连续的值，比如说年龄，发病率</strong></li>
+<li><strong>逻辑回归一般用于分类（一般是二元分类）</strong></li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="tag"># 逻辑回归</a>
+          
+            <a href="/tags/SMOTE%E8%BF%87%E9%87%87%E6%A0%B7/" rel="tag"># SMOTE过采样</a>
+          
+            <a href="/tags/ROC%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" rel="tag"># ROC评估指标</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/22704.html" rel="next" title="线性回归分析与股票价格预测实战">
+                <i class="fa fa-chevron-left"></i> 线性回归分析与股票价格预测实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22841.html" rel="prev" title="朴素贝叶斯与垃圾邮件分类案例">
+                朴素贝叶斯与垃圾邮件分类案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">相关知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%93%B6%E8%A1%8C%E5%AE%A2%E6%88%B7%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BC%80%E8%AE%BE%E5%AE%9A%E6%9C%9F%E5%AD%98%E6%AC%BE%E8%B4%A6%E6%88%B7"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归预测银行客户是否会开设定期存款账户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">特征工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">数据可视化分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SMOTE%E8%BF%9B%E8%A1%8C%E8%BF%87%E9%87%87%E6%A0%B7"><span class="nav-number">2.3.</span> <span class="nav-text">使用SMOTE进行过采样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.</span> <span class="nav-text">逻辑回归训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">2.5.</span> <span class="nav-text">模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E7%9C%8B%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%95%88%E6%9E%9C%E6%96%B9%E6%B3%95-roc-auc-score"><span class="nav-number">2.5.1.</span> <span class="nav-text">补充看分类模型的效果方法-roc_auc_score</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">逻辑回归和线性回归的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

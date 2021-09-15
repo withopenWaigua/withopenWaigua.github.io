@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,数学建模,插值算法,拟合算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数学建模算法插值算法&#x2F;拟合算法  本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容  插值算法插值算法  数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满足需求，这就是插值的作用。  用于预测    插值算法一般分为：  分段插值 插值多项式 三角插值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拟合算法与插值算法">
+<meta property="og:url" content="http://alogomachine.com/20825.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="数学建模算法插值算法&#x2F;拟合算法  本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容  插值算法插值算法  数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满足需求，这就是插值的作用。  用于预测    插值算法一般分为：  分段插值 插值多项式 三角插值">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808222234.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221402.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221410.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221417.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221434.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221814.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221549.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221001.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221010.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221030.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221047.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221056.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221121.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221145.png">
+<meta property="article:published_time" content="2021-08-08T14:25:00.000Z">
+<meta property="article:modified_time" content="2021-08-16T15:29:25.505Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数学建模">
+<meta property="article:tag" content="插值算法">
+<meta property="article:tag" content="拟合算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808222234.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20825.html"/>
+
+
+
+
+
+  <title>拟合算法与插值算法 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20825.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">拟合算法与插值算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-08T22:25:00+08:00">
+                2021-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">数学建模</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">数学建模</span><span id="green-block">算法</span><span id="gray-block">插值算法/拟合算法</span></strong></p>
+<blockquote>
+<p>本笔记均来自于清风数学建模课程PPT上知识以及课上所讲内容</p>
+</blockquote>
+<h1 id="插值算法"><a href="#插值算法" class="headerlink" title="插值算法"></a><strong>插值算法</strong></h1><p><strong>插值算法</strong></p>
+<ul>
+<li><p><strong>数模比赛中，常常需要根据已知的函数点进行数据、模型的处理和</strong><br><strong>分析，而有时候现有的数据是极少的，不足以支撑分析的进行，这时就</strong><br><strong>需要使用一些数学的方法，“模拟产生”一些新的但又比较靠谱的值来满</strong><br><strong>足需求，这就是插值的作用。</strong></p>
+</li>
+<li><p><strong>用于预测</strong></p>
+</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808222234.png" alt="image-20210808222234729"></p>
+<p><strong>插值算法一般分为：</strong></p>
+<ul>
+<li><strong>分段插值</strong></li>
+<li><strong>插值多项式</strong></li>
+<li><strong>三角插值</strong></li>
+</ul>
+<ul>
+<li><strong>n+1个节点互异，满足插值算法的多项式是唯一的</strong></li>
+<li><strong>如果不限制多项式的次数，那么插值算法的多项式是不唯一的</strong></li>
+</ul>
+<p><strong>拉格朗日插值法：</strong></p>
+<p><strong>一个点:</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221402.png" alt="image-20210808221402732"></p>
+<p><strong>两个点：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221410.png" alt="image-20210808221410784"></p>
+<p><strong>三个点：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221417.png" alt="image-20210808221417835"></p>
+<p><strong>容易产生龙格现象:</strong></p>
+<ul>
+<li><strong>高次插值会产生龙格现象，在两端处波动极大</strong></li>
+<li><strong>因此在不熟悉曲线运动趋势下，不要轻易使用</strong></li>
+<li><strong>X大一点，次数大就会波动特别大</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221434.png" alt="image-20210808221433897"></p>
+<p><strong>牛顿插值法</strong></p>
+<ul>
+<li><strong>计算过程具有继承性</strong></li>
+<li><strong>增加一个点只要在原来的式子上增加就行</strong></li>
+<li><strong>但未解决龙格现象</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221814.png" alt="image-20210808221813814"></p>
+<p><strong>分段插值(常用)</strong></p>
+<p><strong>运用分段思想解决龙格现象(X大的时候不稳定)</strong></p>
+<ul>
+<li><strong>根据最接近的两/三个点来确定函数</strong></li>
+<li><strong>然后在两个点的区间内计算插值的具体值</strong></li>
+</ul>
+<p><strong>埃尔米特插值法：</strong></p>
+<ul>
+<li><strong>要找到2n+1的多项式</strong></li>
+<li><strong>再通过分段来解决龙格现象</strong></li>
+<li><strong>函数和导数都要想等</strong></li>
+</ul>
+<p><strong>分段三次埃尔米特插值法</strong></p>
+<p><strong>使用内置的pchip(点x,点y,要插值区间)</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% plot函数用法:</span></span><br><span class="line"><span class="comment">% plot(x1,y1,x2,y2)  # 把两个图像画在一起</span></span><br><span class="line"><span class="comment">% 线方式： - 实线 :点线 -. 虚点线 - - 波折线 </span></span><br><span class="line"><span class="comment">% 点方式： . 圆点  +加号  * 星号  x x形  o 小圆</span></span><br><span class="line"><span class="comment">% 颜色： y黄； r红； g绿； b蓝； w白； k黑； m紫； c青</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本点&#x27;</span>,<span class="string">&#x27;三次埃尔米特插值&#x27;</span>,<span class="string">&#x27;三次样条插值&#x27;</span>,<span class="string">&#x27;Location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)   <span class="comment">%标注显示在东南方向</span></span><br><span class="line"><span class="comment">% 说明：</span></span><br><span class="line"><span class="comment">% LEGEND(string1,string2,string3, …)</span></span><br><span class="line"><span class="comment">% 分别将字符串1、字符串2、字符串3……标注到图中，每个字符串对应的图标为画图时的图标。</span></span><br><span class="line"><span class="comment">% ‘Location’用来指定标注显示的位置</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>); <span class="comment">% 在同一个脚本文件里面，要想画多个图，需要给每个图编号，否则只会显示最后一个图哦~</span></span><br><span class="line"><span class="comment">%不命名就会覆盖前面的</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>三次样条插值法：</strong></p>
+<ul>
+<li><strong>更难满足(条件多)</strong><ul>
+<li><strong>满足二阶函数可微</strong></li>
+</ul>
+</li>
+<li><strong>要更为光滑</strong></li>
+<li><strong>内置的spline函数就可以使用</strong></li>
+</ul>
+<p><strong>一般使用：</strong></p>
+<ul>
+<li><strong>三次样条插值法</strong></li>
+<li><strong>三次埃尔米特插值法</strong></li>
+<li><strong>两者平均</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221549.png" alt="image-20210808221548883"></p>
+<p><strong>n维数据插值：</strong></p>
+<ul>
+<li><strong>一般优先使用三次样条插值</strong></li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% n维数据的插值</span></span><br><span class="line">x = -<span class="built_in">pi</span>:<span class="built_in">pi</span>; y = <span class="built_in">sin</span>(x); </span><br><span class="line">new_x = -<span class="built_in">pi</span>:<span class="number">0.1</span>:<span class="built_in">pi</span>;</span><br><span class="line">p = interpn (x, y, new_x, <span class="string">&#x27;spline&#x27;</span>);</span><br><span class="line"><span class="comment">% 等价于 p = spline(x, y, new_x);</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>);</span><br><span class="line"><span class="built_in">plot</span>(x, y, <span class="string">&#x27;o&#x27;</span>, new_x, p, <span class="string">&#x27;r-&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>使用插值算法：</strong></p>
+<p><strong>插值算法较于灰色预测更有数学解释的背景</strong></p>
+<ul>
+<li><strong>较于拟合的处理所需要的样本点比较少</strong></li>
+<li><strong>并且有数据缺少，需要去补全数据</strong></li>
+<li><strong>数据少，不易删除，需要去补全数据</strong></li>
+<li><strong>可以很好保留数据的光滑性</strong></li>
+</ul>
+<h1 id="拟合算法"><a href="#拟合算法" class="headerlink" title="拟合算法"></a><strong>拟合算法</strong></h1><ul>
+<li><strong>与插值问题不同，在拟合问题中不需要曲线一定经过给定的点。拟</strong><br><strong>合问题的目标是寻求一个函数（曲线），使得该曲线在某种准则下与所</strong><br><strong>有的数据点最为接近，即曲线拟合的最好（最小化损失函数）</strong></li>
+</ul>
+<p><strong>尽可能我们的曲线接近每个点，而不要求过每一个点，不像分段函数那样复杂</strong></p>
+<p><strong>数据多的时候可以用拟合找出某个确定的曲线，避免X大的时候出现的龙格现象</strong></p>
+<p><strong>通过最小二乘法找到拟合函数：</strong></p>
+<p><strong>那么怎么找到合适的k和b，使得最拟合呢?</strong></p>
+<ul>
+<li><strong>第一种定义</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221001.png" alt="image-20210808221001216"></p>
+<ul>
+<li><strong>第二种定义</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221010.png" alt="image-20210808221010433"></p>
+<p><strong>因为第一种定义有绝对值，因此我们往往使用第二种定义</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% % 画出y=kx+b的函数图像 plot(x,y)</span></span><br><span class="line"><span class="comment">% % 传统的画法：模拟生成x和y的序列，比如要画出[0,5]上的图形</span></span><br><span class="line"><span class="comment">% xx = 2.5: 0.1 :7  % 间隔设置的越小画出来的图形越准确</span></span><br><span class="line"><span class="comment">% yy = k * xx + b  % k和b都是已知值</span></span><br><span class="line"><span class="comment">% plot(xx,yy,&#x27;-&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%匿名函数</span></span><br><span class="line"><span class="comment">% 匿名函数的基本用法。</span></span><br><span class="line"><span class="comment">% handle = @(arglist) anonymous_function</span></span><br><span class="line"><span class="comment">% 其中handle为调用匿名函数时使用的名字。</span></span><br><span class="line"><span class="comment">% arglist为匿名函数的输入参数，可以是一个，也可以是多个，用逗号分隔。</span></span><br><span class="line"><span class="comment">% anonymous_function为匿名函数的表达式。</span></span><br><span class="line"><span class="comment">% 举个小例子</span></span><br><span class="line"><span class="comment">%  z=@(x,y) x^2+y^2; </span></span><br><span class="line"><span class="comment">%  z(1,2) </span></span><br><span class="line"><span class="comment">% % ans =  5</span></span><br><span class="line"><span class="comment">% fplot函数可用于画出匿名一元函数的图形。</span></span><br><span class="line"><span class="comment">% fplot(f,xinterval) 将匿名函数f在指定区间xinterval绘图。xinterval =  [xmin xmax] 表示定义域的范围</span></span><br><span class="line"></span><br><span class="line">f=@(x) k*x+b; <span class="comment">% @声明x是未知数 后面接上函数式子</span></span><br><span class="line">fplot(f,[<span class="number">2.5</span>,<span class="number">7</span>]); <span class="comment">%后面跟上x的范围</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本数据&#x27;</span>,<span class="string">&#x27;拟合函数&#x27;</span>,<span class="string">&#x27;location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>拟合优度来评价拟合的好坏</strong></p>
+<p><strong>SST总体平方和：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221030.png" alt="image-20210808221030411"></p>
+<p><strong>SSE误差平方和：越小越好</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221047.png" alt="image-20210808221047779"></p>
+<p><strong>SSE需要注意量纲的问题(万元/元会有影响)</strong></p>
+<p><strong>SST = SSE+SSR</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221056.png" alt="image-20210808221056110"></p>
+<p><strong>因此我们需要计算R^2</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221121.png" alt="image-20210808221121097"></p>
+<p><strong>R^2接近1，说明误差平方接近0，说明拟合效果好</strong></p>
+<p><strong>因为函数越复杂拟合越好</strong></p>
+<p><strong>因此我们要权重取舍</strong></p>
+<ul>
+<li><strong>既要比较简单</strong></li>
+<li><strong>又要拟合好些</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221145.png" alt="image-20210808221145731"></p>
+<p><strong>R^2只能用于线性函数的情况下</strong></p>
+<ul>
+<li><strong>对参数为线性(a,b)</strong></li>
+<li><strong>y = a + bx^2为线性(因为不是a^2那些)</strong></li>
+<li><strong>对变量为线性</strong></li>
+</ul>
+<p><strong>复杂非线性函数的话直接看SSE就行</strong></p>
+<ul>
+<li><strong>asinb  复合参数</strong></li>
+<li><strong>a^2/ab  不能乘以或除以任何其他参数</strong></li>
+</ul>
+<p><strong>曲线拟合工具箱</strong></p>
+<ul>
+<li><strong>下面的框框可以标准化</strong></li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" rel="tag"># 数学建模</a>
+          
+            <a href="/tags/%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/" rel="tag"># 插值算法</a>
+          
+            <a href="/tags/%E6%8B%9F%E5%90%88%E7%AE%97%E6%B3%95/" rel="tag"># 拟合算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20611.html" rel="next" title="Boosting算法分析与预计还款能力案例">
+                <i class="fa fa-chevron-left"></i> Boosting算法分析与预计还款能力案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/21631.html" rel="prev" title="蒙特卡罗与三门问题&模拟排队问题分析">
+                蒙特卡罗与三门问题&模拟排队问题分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">插值算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%9F%E5%90%88%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">拟合算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,Boosting," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法Boosting&#x2F;Xgboot Boosting与Bagging的区别：  集成模型 每个模型都很好 但因为过好，所以容易过拟合  Boosting：  竞赛第一的模型 不易过拟合 但效果可能不会很好（降低风险） 作为一个框架，可以嵌套多个模型。   基于残差的算法 残差：预测值和真实之间的差距(真实-预测)  基于第一次的残差构造第二棵树 XGBOOT 快和表现的好 运用并行 更加优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boosting算法分析与预计还款能力案例">
+<meta property="og:url" content="http://alogomachine.com/20611.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法Boosting&#x2F;Xgboot Boosting与Bagging的区别：  集成模型 每个模型都很好 但因为过好，所以容易过拟合  Boosting：  竞赛第一的模型 不易过拟合 但效果可能不会很好（降低风险） 作为一个框架，可以嵌套多个模型。   基于残差的算法 残差：预测值和真实之间的差距(真实-预测)  基于第一次的残差构造第二棵树 XGBOOT 快和表现的好 运用并行 更加优">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-06T15:11:00.000Z">
+<meta property="article:modified_time" content="2021-08-06T15:11:21.784Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="Boosting">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20611.html"/>
+
+
+
+
+
+  <title>Boosting算法分析与预计还款能力案例 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20611.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Boosting算法分析与预计还款能力案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-06T23:11:00+08:00">
+                2021-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">Boosting/Xgboot</span></strong></p>
+<h1 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a><strong>Boosting</strong></h1><p><strong>与Bagging的区别：</strong></p>
+<ul>
+<li><strong>集成模型</strong></li>
+<li><strong>每个模型都很好</strong></li>
+<li><strong>但因为过好，所以容易过拟合</strong></li>
+</ul>
+<p><strong>Boosting：</strong></p>
+<ul>
+<li><strong>竞赛第一的模型</strong></li>
+<li><strong>不易过拟合</strong></li>
+<li><strong>但效果可能不会很好（降低风险）</strong></li>
+<li><strong>作为一个框架，可以嵌套多个模型。</strong></li>
+</ul>
+<ul>
+<li><strong>基于残差的算法</strong></li>
+<li><strong>残差：预测值和真实之间的差距(真实-预测)</strong></li>
+</ul>
+<p><strong>基于第一次的残差构造第二棵树</strong></p>
+<h2 id="XGBOOT"><a href="#XGBOOT" class="headerlink" title="XGBOOT"></a><strong>XGBOOT</strong></h2><ul>
+<li><strong>快和表现的好</strong></li>
+<li><strong>运用并行</strong></li>
+<li><strong>更加优秀</strong></li>
+<li><strong>有许多超参数可以调节</strong></li>
+</ul>
+<p><strong>方法：</strong></p>
+<ol>
+<li><strong>构造目标函数</strong></li>
+<li><strong>通过泰勒级数去近似目标函数，求得最值</strong></li>
+<li><strong>利用树的变换改造目标函数</strong></li>
+<li><strong>使用贪心算法构造树</strong></li>
+</ol>
+<p><strong>多棵树相加在一起</strong></p>
+<h1 id="还款能力预测"><a href="#还款能力预测" class="headerlink" title="还款能力预测"></a><strong>还款能力预测</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;LoanStats3a_2.csv&#x27;</span>,low_memory=<span class="literal">False</span>,skiprows=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().<span class="built_in">any</span>()  <span class="comment"># 检查 null</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>id                                            True
+member_id                                     True
+loan_amnt                                     True
+funded_amnt                                   True
+funded_amnt_inv                               True
+term                                          True
+int_rate                                      True
+installment                                   True
+grade                                         True
+sub_grade                                     True
+emp_title                                     True
+emp_length                                    True
+home_ownership                                True
+annual_inc                                    True
+verification_status                           True
+issue_d                                       True
+loan_status                                   True
+pymnt_plan                                    True
+url                                           True
+desc                                          True
+purpose                                       True
+title                                         True
+zip_code                                      True
+addr_state                                    True
+dti                                           True
+delinq_2yrs                                   True
+earliest_cr_line                              True
+inq_last_6mths                                True
+mths_since_last_delinq                        True
+mths_since_last_record                        True
+                                              ... 
+sec_app_mort_acc                              True
+sec_app_open_acc                              True
+sec_app_revol_util                            True
+sec_app_open_act_il                           True
+sec_app_num_rev_accts                         True
+sec_app_chargeoff_within_12_mths              True
+sec_app_collections_12_mths_ex_med            True
+sec_app_mths_since_last_major_derog           True
+hardship_flag                                 True
+hardship_type                                 True
+hardship_reason                               True
+hardship_status                               True
+deferral_term                                 True
+hardship_amount                               True
+hardship_start_date                           True
+hardship_end_date                             True
+payment_plan_start_date                       True
+hardship_length                               True
+hardship_dpd                                  True
+hardship_loan_status                          True
+orig_projected_additional_accrued_interest    True
+hardship_payoff_balance_amount                True
+hardship_last_payment_amount                  True
+debt_settlement_flag                          True
+debt_settlement_flag_date                     True
+settlement_status                             True
+settlement_date                               True
+settlement_amount                             True
+settlement_percentage                         True
+settlement_term                               True
+Length: 144, dtype: bool
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>member_id</th>
+      <th>loan_amnt</th>
+      <th>funded_amnt</th>
+      <th>funded_amnt_inv</th>
+      <th>term</th>
+      <th>int_rate</th>
+      <th>installment</th>
+      <th>grade</th>
+      <th>sub_grade</th>
+      <th>...</th>
+      <th>orig_projected_additional_accrued_interest</th>
+      <th>hardship_payoff_balance_amount</th>
+      <th>hardship_last_payment_amount</th>
+      <th>debt_settlement_flag</th>
+      <th>debt_settlement_flag_date</th>
+      <th>settlement_status</th>
+      <th>settlement_date</th>
+      <th>settlement_amount</th>
+      <th>settlement_percentage</th>
+      <th>settlement_term</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5000.0</td>
+      <td>5000.0</td>
+      <td>4975.0</td>
+      <td>36 months</td>
+      <td>10.65%</td>
+      <td>162.87</td>
+      <td>B</td>
+      <td>B2</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>N</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>60 months</td>
+      <td>15.27%</td>
+      <td>59.83</td>
+      <td>C</td>
+      <td>C4</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>N</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>36 months</td>
+      <td>15.96%</td>
+      <td>84.33</td>
+      <td>C</td>
+      <td>C5</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>N</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>36 months</td>
+      <td>13.49%</td>
+      <td>339.31</td>
+      <td>C</td>
+      <td>C1</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>N</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>60 months</td>
+      <td>12.69%</td>
+      <td>67.79</td>
+      <td>B</td>
+      <td>B5</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>N</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 144 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(42538, 144)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = df.iloc[:,<span class="number">2</span>:<span class="number">111</span>]  <span class="comment"># 删掉很多空的列</span></span><br><span class="line">empty_cols = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">45</span>,<span class="number">72</span>)]   <span class="comment"># 删除更多的列</span></span><br><span class="line">df = df.drop(df.columns[empty_cols],axis=<span class="number">1</span>)</span><br><span class="line">df.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(42538, 82)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df[(df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Fully Paid&quot;</span>) | (df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Charged Off&quot;</span>)]</span><br><span class="line">df[<span class="string">&#x27;loan_status&#x27;</span>] = df[<span class="string">&#x27;loan_status&#x27;</span>].<span class="built_in">map</span>(&#123;<span class="string">&#x27;Fully Paid&#x27;</span>:<span class="number">0</span>, <span class="string">&#x27;Charged Off&#x27;</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df=df.dropna(axis=<span class="number">1</span>) <span class="comment">#340000有效数据</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loan_amnt</th>
+      <th>funded_amnt</th>
+      <th>funded_amnt_inv</th>
+      <th>term</th>
+      <th>int_rate</th>
+      <th>installment</th>
+      <th>grade</th>
+      <th>sub_grade</th>
+      <th>home_ownership</th>
+      <th>annual_inc</th>
+      <th>...</th>
+      <th>out_prncp_inv</th>
+      <th>total_pymnt</th>
+      <th>total_pymnt_inv</th>
+      <th>total_rec_prncp</th>
+      <th>total_rec_int</th>
+      <th>total_rec_late_fee</th>
+      <th>recoveries</th>
+      <th>collection_recovery_fee</th>
+      <th>last_pymnt_amnt</th>
+      <th>delinq_amnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5000.0</td>
+      <td>5000.0</td>
+      <td>4975.0</td>
+      <td>36 months</td>
+      <td>10.65%</td>
+      <td>162.87</td>
+      <td>B</td>
+      <td>B2</td>
+      <td>RENT</td>
+      <td>24000.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>5863.155187</td>
+      <td>5833.84</td>
+      <td>5000.00</td>
+      <td>863.16</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>171.62</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>60 months</td>
+      <td>15.27%</td>
+      <td>59.83</td>
+      <td>C</td>
+      <td>C4</td>
+      <td>RENT</td>
+      <td>30000.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1014.530000</td>
+      <td>1014.53</td>
+      <td>456.46</td>
+      <td>435.17</td>
+      <td>0.00</td>
+      <td>122.9</td>
+      <td>1.11</td>
+      <td>119.66</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>36 months</td>
+      <td>15.96%</td>
+      <td>84.33</td>
+      <td>C</td>
+      <td>C5</td>
+      <td>RENT</td>
+      <td>12252.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>3005.666844</td>
+      <td>3005.67</td>
+      <td>2400.00</td>
+      <td>605.67</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>649.91</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>36 months</td>
+      <td>13.49%</td>
+      <td>339.31</td>
+      <td>C</td>
+      <td>C1</td>
+      <td>RENT</td>
+      <td>49200.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>12231.890000</td>
+      <td>12231.89</td>
+      <td>10000.00</td>
+      <td>2214.92</td>
+      <td>16.97</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>357.48</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>60 months</td>
+      <td>12.69%</td>
+      <td>67.79</td>
+      <td>B</td>
+      <td>B5</td>
+      <td>RENT</td>
+      <td>80000.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>4066.908161</td>
+      <td>4066.91</td>
+      <td>3000.00</td>
+      <td>1066.91</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>67.30</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 37 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df_grade = df[<span class="string">&#x27;grade&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;grade: &#x27;</span>)</span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_subgrad = df[<span class="string">&#x27;sub_grade&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;sub_grade: &#x27;</span>)</span><br><span class="line">df_home = df[<span class="string">&#x27;home_ownership&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;home_ownership: &#x27;</span>)</span><br><span class="line">df_addr = df[<span class="string">&#x27;addr_state&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;addr_state: &#x27;</span>)</span><br><span class="line">df_term = df[<span class="string">&#x27;term&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;term: &#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_grade, df_subgrad, df_home, df_addr, df_term], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;grade&#x27;</span>, <span class="string">&#x27;sub_grade&#x27;</span>, <span class="string">&#x27;home_ownership&#x27;</span>, <span class="string">&#x27;addr_state&#x27;</span>, <span class="string">&#x27;int_rate&#x27;</span>, <span class="string">&#x27;term&#x27;</span>, <span class="string">&#x27;zip_code&#x27;</span>,<span class="string">&#x27;purpose&#x27;</span>,<span class="string">&#x27;initial_list_status&#x27;</span>,<span class="string">&#x27;initial_list_status&#x27;</span>,<span class="string">&#x27;pymnt_plan&#x27;</span>,<span class="string">&#x27;issue_d&#x27;</span>,<span class="string">&#x27;earliest_cr_line&#x27;</span>,<span class="string">&#x27;verification_status&#x27;</span>], axis=<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loan_amnt</th>
+      <th>funded_amnt</th>
+      <th>funded_amnt_inv</th>
+      <th>installment</th>
+      <th>annual_inc</th>
+      <th>loan_status</th>
+      <th>dti</th>
+      <th>delinq_2yrs</th>
+      <th>inq_last_6mths</th>
+      <th>open_acc</th>
+      <th>...</th>
+      <th>addr_state: TX</th>
+      <th>addr_state: UT</th>
+      <th>addr_state: VA</th>
+      <th>addr_state: VT</th>
+      <th>addr_state: WA</th>
+      <th>addr_state: WI</th>
+      <th>addr_state: WV</th>
+      <th>addr_state: WY</th>
+      <th>term:  36 months</th>
+      <th>term:  60 months</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5000.0</td>
+      <td>5000.0</td>
+      <td>4975.0</td>
+      <td>162.87</td>
+      <td>24000.0</td>
+      <td>0</td>
+      <td>27.65</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>2500.0</td>
+      <td>59.83</td>
+      <td>30000.0</td>
+      <td>1</td>
+      <td>1.00</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>2400.0</td>
+      <td>84.33</td>
+      <td>12252.0</td>
+      <td>0</td>
+      <td>8.72</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>10000.0</td>
+      <td>339.31</td>
+      <td>49200.0</td>
+      <td>0</td>
+      <td>20.00</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>10.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>3000.0</td>
+      <td>67.79</td>
+      <td>80000.0</td>
+      <td>0</td>
+      <td>17.94</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 123 columns</p>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.dtypes</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>loan_amnt                  float64
+funded_amnt                float64
+funded_amnt_inv            float64
+installment                float64
+annual_inc                 float64
+loan_status                  int64
+dti                        float64
+delinq_2yrs                float64
+inq_last_6mths             float64
+open_acc                   float64
+pub_rec                    float64
+revol_bal                  float64
+total_acc                  float64
+out_prncp                  float64
+out_prncp_inv              float64
+total_pymnt                float64
+total_pymnt_inv            float64
+total_rec_prncp            float64
+total_rec_int              float64
+total_rec_late_fee         float64
+recoveries                 float64
+collection_recovery_fee    float64
+last_pymnt_amnt            float64
+delinq_amnt                float64
+grade: A                     int64
+grade: B                     int64
+grade: C                     int64
+grade: D                     int64
+grade: E                     int64
+grade: F                     int64
+                            ...   
+addr_state: MI               int64
+addr_state: MN               int64
+addr_state: MO               int64
+addr_state: MS               int64
+addr_state: MT               int64
+addr_state: NC               int64
+addr_state: NE               int64
+addr_state: NH               int64
+addr_state: NJ               int64
+addr_state: NM               int64
+addr_state: NV               int64
+addr_state: NY               int64
+addr_state: OH               int64
+addr_state: OK               int64
+addr_state: OR               int64
+addr_state: PA               int64
+addr_state: RI               int64
+addr_state: SC               int64
+addr_state: SD               int64
+addr_state: TN               int64
+addr_state: TX               int64
+addr_state: UT               int64
+addr_state: VA               int64
+addr_state: VT               int64
+addr_state: WA               int64
+addr_state: WI               int64
+addr_state: WV               int64
+addr_state: WY               int64
+term:  36 months             int64
+term:  60 months             int64
+Length: 123, dtype: object
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 准备数据</span></span><br><span class="line">X = df.drop(<span class="string">&#x27;loan_status&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = df[<span class="string">&#x27;loan_status&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span> (X.shape, y.shape)</span><br></pre></td></tr></table></figure>
+
+<pre><code>(39786, 122) (39786,)
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</span><br><span class="line">xg_classifier = xgb.XGBClassifier(objective =<span class="string">&#x27;binary:logistic&#x27;</span>, colsample_bytree = <span class="number">0.3</span>, learning_rate = <span class="number">0.1</span>,</span><br><span class="line">                max_depth = <span class="number">5</span>, alpha = <span class="number">10</span>, n_estimators = <span class="number">10</span>)</span><br><span class="line">xg_classifier.fit(X_train,y_train)</span><br><span class="line">xg_classifier.score(X_test, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>0.9982407640110581
+</code></pre>
+<p>二、</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xgboost</span><br><span class="line">xgb = xgboost.XGBClassifier(eval_metric=[<span class="string">&#x27;logloss&#x27;</span>,<span class="string">&#x27;auc&#x27;</span>,<span class="string">&#x27;error&#x27;</span>])</span><br><span class="line">xgb.fit(X_train,y_train)</span><br><span class="line">xgb.score(X_test, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>0.9994973611460166
+</code></pre>
+<p><strong>正确率高达99.95% 模型很优秀</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/Boosting/" rel="tag"># Boosting</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20543.html" rel="next" title="基于矩阵分解的推荐系统分析与短视频推荐案例">
+                <i class="fa fa-chevron-left"></i> 基于矩阵分解的推荐系统分析与短视频推荐案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20825.html" rel="prev" title="拟合算法与插值算法">
+                拟合算法与插值算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Boosting"><span class="nav-number">1.</span> <span class="nav-text">Boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XGBOOT"><span class="nav-number">1.1.</span> <span class="nav-text">XGBOOT</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%98%E6%AC%BE%E8%83%BD%E5%8A%9B%E9%A2%84%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">还款能力预测</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,朴素贝叶斯,文本分类," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法朴素贝叶斯 朴素贝叶斯朴素贝叶斯  最适合简单的文本分析算法  公式推导 最大似然估计推导 贝叶斯定理：   朴素贝叶斯核心思想  根据某些词频大小的特征来判断属于什么类别 似然&#x2F;条件独立…..  垃圾邮件分类步骤 归纳词库，确定垃圾词语 计算垃圾词语在正常邮件和垃圾邮件的概率以及先验概率 对需要分类的邮件进行分词 根据P(正常|邮件内容) 与 P(垃圾|邮件内容)的比较来进行分类(用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="朴素贝叶斯与垃圾邮件分类案例">
+<meta property="og:url" content="http://alogomachine.com/22841.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法朴素贝叶斯 朴素贝叶斯朴素贝叶斯  最适合简单的文本分析算法  公式推导 最大似然估计推导 贝叶斯定理：   朴素贝叶斯核心思想  根据某些词频大小的特征来判断属于什么类别 似然&#x2F;条件独立…..  垃圾邮件分类步骤 归纳词库，确定垃圾词语 计算垃圾词语在正常邮件和垃圾邮件的概率以及先验概率 对需要分类的邮件进行分词 根据P(正常|邮件内容) 与 P(垃圾|邮件内容)的比较来进行分类(用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230651.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230906.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728231519.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728231336.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230227.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210729003706.png">
+<meta property="article:published_time" content="2021-07-28T15:41:00.000Z">
+<meta property="article:modified_time" content="2021-07-28T16:37:23.107Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="朴素贝叶斯">
+<meta property="article:tag" content="文本分类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230651.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/22841.html"/>
+
+
+
+
+
+  <title>朴素贝叶斯与垃圾邮件分类案例 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/22841.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">朴素贝叶斯与垃圾邮件分类案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-28T23:41:00+08:00">
+                2021-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">朴素贝叶斯</span></strong></p>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a><strong>朴素贝叶斯</strong></h1><p><strong>朴素贝叶斯</strong></p>
+<ul>
+<li><strong>最适合简单的文本分析算法</strong></li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69492871">公式推导</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71960086">最大似然估计推导</a></strong></p>
+<p><strong>贝叶斯定理：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230651.png" alt="image-20210728230651797"></strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230906.png" alt="image-20210728230906004"></strong></p>
+<p><strong>朴素贝叶斯核心思想</strong></p>
+<ul>
+<li><strong>根据某些词频大小的特征来判断属于什么类别</strong></li>
+<li><strong>似然/条件独立…..</strong></li>
+</ul>
+<h2 id="垃圾邮件分类"><a href="#垃圾邮件分类" class="headerlink" title="垃圾邮件分类"></a><strong>垃圾邮件分类</strong></h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a><strong>步骤</strong></h3><ol>
+<li><strong>归纳词库，确定垃圾词语</strong></li>
+<li><strong>计算垃圾词语在正常邮件和垃圾邮件的概率以及先验概率</strong></li>
+<li><strong>对需要分类的邮件进行分词</strong></li>
+<li><strong>根据P(正常|邮件内容) 与 P(垃圾|邮件内容)的比较来进行分类(用到条件独立进行简化)</strong></li>
+</ol>
+<p>​        <strong>分别计算出邮件中的单词在正常邮件和垃圾邮件中的概率：</strong></p>
+<p>​        <strong>P(垃圾|邮件内容) =  一封邮件为垃圾的概率</strong></p>
+<p>​        <strong>P(正常|邮件内容) =  一封邮件为正常的概率</strong></p>
+<p>​        <strong>如果 P(垃圾|邮件内容) &gt; P(正常|邮件内容)，则推测此邮件为垃圾邮件；如果 P(垃圾|邮件内容) &lt; P(正常|邮件内容)，则推测此邮件为正常邮件。</strong></p>
+<h3 id="先验概率"><a href="#先验概率" class="headerlink" title="先验概率"></a><strong>先验概率</strong></h3><ul>
+<li><strong>垃圾邮件占总邮件的比例</strong></li>
+<li><strong>正常邮件占邮件的比例</strong></li>
+</ul>
+<h3 id="处理某个P为0的情况："><a href="#处理某个P为0的情况：" class="headerlink" title="处理某个P为0的情况："></a><strong>处理某个P为0的情况：</strong></h3><ul>
+<li><strong>使用平滑的方法（分子+1，分母加V）</strong></li>
+<li><strong>V是词库的大小</strong></li>
+<li><strong>也就是把0极小化，而让他不能为0</strong></li>
+</ul>
+<p><strong>利用贝叶斯公式进行推导过程图：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728231519.png" alt="image-20210728231519251"></strong></p>
+<p><strong>具体计算过程：</strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728231336.png" alt="image-20210728231336309"></strong></p>
+<h3 id="归纳词库"><a href="#归纳词库" class="headerlink" title="归纳词库"></a><strong>归纳词库</strong></h3><p><strong>= .unique()</strong></p>
+<h1 id="垃圾邮件分类-1"><a href="#垃圾邮件分类-1" class="headerlink" title="垃圾邮件分类"></a>垃圾邮件分类</h1><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a><strong>代码实现</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;spam.csv&#x27;</span>,encoding=<span class="string">&#x27;latin&#x27;</span>)</span><br><span class="line">data.head()</span><br><span class="line"><span class="comment"># ham 正常 spam垃圾邮件</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>v1</th>
+      <th>v2</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.rename(columns=&#123;<span class="string">&quot;v1&quot;</span>:<span class="string">&quot;Label&quot;</span>,<span class="string">&quot;v2&quot;</span>:<span class="string">&#x27;Text&#x27;</span>&#125;,inplace=<span class="literal">True</span>) <span class="comment">#重命名</span></span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label</th>
+      <th>Text</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把ham改为0 ，spam改为1</span></span><br><span class="line">data[<span class="string">&#x27;num_label&#x27;</span>] =  data[<span class="string">&#x27;Label&#x27;</span>].<span class="built_in">map</span>(&#123;<span class="string">&quot;ham&quot;</span>:<span class="number">0</span>,<span class="string">&quot;spam&quot;</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+<p><strong></style></strong></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Label</th>
+      <th>Text</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>num_label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+**</div>**
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;正常邮件的数目为:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(data[data[<span class="string">&#x27;num_label&#x27;</span>] == <span class="number">0</span>])))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;垃圾邮件的数目为:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(data[data[<span class="string">&#x27;num_label&#x27;</span>] == <span class="number">1</span>])))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;总共邮件有&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(data[data[<span class="string">&#x27;num_label&#x27;</span>] == <span class="number">1</span>])+<span class="built_in">len</span>(data[data[<span class="string">&#x27;num_label&#x27;</span>] == <span class="number">0</span>])))</span><br></pre></td></tr></table></figure>
+
+<pre><code>正常邮件的数目为:4825
+垃圾邮件的数目为:747
+总共邮件有5572
+</code></pre>
+<p><strong>7:1 还好</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.loc[<span class="number">1</span>,<span class="string">&#x27;Text&#x27;</span>] <span class="comment"># [1.&#x27;Text&#x27;] 取第2行的数据中的Text列</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;Ok lar... Joking wif u oni...&#39;
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 统计文本长度</span></span><br><span class="line">text_lengths = [<span class="built_in">len</span>(data.loc[i,<span class="string">&#x27;Text&#x27;</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data))]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;最短的邮件内容长度为&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">min</span>(text_lengths)))</span><br></pre></td></tr></table></figure>
+
+<pre><code>最短的邮件内容长度为2
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.hist(text_lengths,<span class="number">50</span>,facecolor=<span class="string">&#x27;blue&#x27;</span>,alpha=<span class="number">0.5</span>) <span class="comment"># bins =100 分为100个格子</span></span><br><span class="line">plt.xlim([<span class="number">0</span>,<span class="number">200</span>]) <span class="comment"># 重新设置x长度</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210728230227.png" alt="png"></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要把文章转换成向量的形式</span></span><br><span class="line"><span class="keyword">from</span> nltk.corpus <span class="keyword">import</span> stopwords</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer <span class="comment"># 能把某个词语转换成向量的形式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># stopset = set(stopwords.words(&quot;english&quot;))</span></span><br><span class="line"><span class="comment"># 解决停用词可选可不选（在文本中没有什么作用的词语：他（he） 她（she） 一个（an/a），这个（this），那个（that）.....）</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建文本向量</span></span><br><span class="line">vectorizer = CountVectorizer()</span><br><span class="line">X = vectorizer.fit_transform(data.Text)</span><br><span class="line">y = data.num_label</span><br><span class="line"><span class="built_in">print</span>(X) <span class="comment">#稀疏矩阵</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>  (0, 8267)    1
+  (0, 1069)    1
+  (0, 3594)    1
+  (0, 7645)    1
+  (0, 2048)    1
+  (0, 1749)    1
+  (0, 4476)    1
+  (0, 8489)    1
+  (0, 3634)    1
+  (0, 1751)    1
+  (0, 4087)    1
+  (0, 5537)    1
+  (0, 1303)    1
+  (0, 2327)    1
+  (0, 5920)    1
+  (0, 4350)    1
+  (0, 8030)    1
+  (0, 3550)    1
+  (1, 5533)    1
+  (1, 8392)    1
+  (1, 4318)    1
+  (1, 4512)    1
+  (1, 5504)    1
+  (2, 77)    1
+  (2, 1156)    1
+  :    :
+  (5570, 1786)    1
+  (5570, 3470)    1
+  (5570, 2892)    1
+  (5570, 7049)    1
+  (5570, 1778)    1
+  (5570, 8065)    1
+  (5570, 2592)    1
+  (5570, 5334)    1
+  (5570, 1438)    1
+  (5570, 7627)    1
+  (5570, 3308)    1
+  (5570, 7039)    1
+  (5570, 4615)    1
+  (5570, 1084)    1
+  (5570, 8313)    1
+  (5570, 4218)    1
+  (5570, 3781)    1
+  (5570, 7756)    1
+  (5570, 3358)    1
+  (5570, 4087)    1
+  (5571, 6505)    1
+  (5571, 7885)    1
+  (5571, 4225)    2
+  (5571, 5244)    1
+  (5571, 7756)    1
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=<span class="number">2021</span>,test_size=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练数据为&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(X_train.shape[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;测试数据为&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(X_test.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+
+<pre><code>训练数据为4457
+测试数据为1115
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用朴素贝叶斯做训练</span></span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">clf = MultinomialNB(alpha = <span class="number">1.0</span>,fit_prior = <span class="literal">True</span>) <span class="comment"># alpha =1.0 使用平滑的方法， fit_prior使用先验概率</span></span><br><span class="line">clf.fit(X_train,y_train)</span><br><span class="line">y_pred = clf.predict(X_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;模型拟合的准确率为&#123;:.1f&#125;%&quot;</span>.<span class="built_in">format</span>(accuracy_score(y_test,y_pred)*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>模型拟合的结果为98.3%
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印混淆矩阵</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">confusion_matrix(y_test,y_pred,labels=[<span class="number">0</span>,<span class="number">1</span>])  <span class="comment"># 以0 和1的方式展示它，两个不同的标签，使用展示的就是2*2</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[958,  11],
+       [  8, 138]], dtype=int64)
+</code></pre>
+<p>混淆矩阵可视化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line">cm = confusion_matrix(y_test,y_pred,labels=[<span class="number">0</span>,<span class="number">1</span>]) <span class="comment">#混淆矩阵</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt <span class="comment">#导入作图库</span></span><br><span class="line">plt.matshow(cm, cmap=plt.cm.cool) <span class="comment">#画混淆矩阵图，配色风格使用cm.Greens，更多风格请参考官网。</span></span><br><span class="line">plt.colorbar() <span class="comment">#颜色标签</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(cm)): <span class="comment">#数据标签</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(cm)):</span><br><span class="line">        plt.annotate(cm[x,y], xy=(x, y), horizontalalignment=<span class="string">&#x27;center&#x27;</span>, verticalalignment=<span class="string">&#x27;center&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.ylabel(<span class="string">&#x27;True label&#x27;</span>) <span class="comment">#坐标轴标签</span></span><br><span class="line">plt.xlabel(<span class="string">&#x27;Predicted label&#x27;</span>) <span class="comment">#坐标轴标签</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210729003706.png" alt="output_18_0"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28485501/article/details/82656614">具体配色点击</a></p>
+<h3 id="查看模型的训练效果-混淆矩阵"><a href="#查看模型的训练效果-混淆矩阵" class="headerlink" title="查看模型的训练效果-混淆矩阵"></a><strong>查看模型的训练效果-混淆矩阵</strong></h3><p><strong>通过混淆矩阵</strong></p>
+<ul>
+<li><p><strong>958+11 = 969 个标签为0的  但958个是正确的 11个错误的</strong></p>
+</li>
+<li><p><strong>8+138 = 146 个标签为1的  但8个是分类错误的  138 个是分类正确的</strong></p>
+</li>
+<li><p><strong>测试数据时候总共分类了969个标签为0的  146个标签为1的</strong></p>
+</li>
+<li><p><strong>但0有958个正确了 11个错误了</strong></p>
+</li>
+<li><p><strong>但1有 8个错误了  138个正确了</strong></p>
+</li>
+<li><p><strong>主对角线是正确的</strong></p>
+</li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/" rel="tag"># 朴素贝叶斯</a>
+          
+            <a href="/tags/%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB/" rel="tag"># 文本分类</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/22715.html" rel="next" title="逻辑回归分析与预测客户是否开设存款账户实战">
+                <i class="fa fa-chevron-left"></i> 逻辑回归分析与预测客户是否开设存款账户实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22844.html" rel="prev" title="朴素贝叶斯补充与情感分析案例">
+                朴素贝叶斯补充与情感分析案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">1.</span> <span class="nav-text">朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">垃圾邮件分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E9%AA%8C%E6%A6%82%E7%8E%87"><span class="nav-number">1.1.2.</span> <span class="nav-text">先验概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%9F%90%E4%B8%AAP%E4%B8%BA0%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">处理某个P为0的情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3%E8%AF%8D%E5%BA%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">归纳词库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6%E5%88%86%E7%B1%BB-1"><span class="nav-number">2.</span> <span class="nav-text">垃圾邮件分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.0.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83%E6%95%88%E6%9E%9C-%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="nav-number">2.0.2.</span> <span class="nav-text">查看模型的训练效果-混淆矩阵</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

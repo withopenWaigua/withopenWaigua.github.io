@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++基础语法C++的范围for语句、动态内存分配、nullptr  范围for语句F9加断点，F10往下一格 用于遍历一个序列 方式一： 123456int v[]&amp;#123; 12,13,14,16,18 &amp;#125;;for (auto x: v) &#x2F;&#x2F;遍历数组中每个元素，依次放入x中并打印x值，&amp;#123;	cout &lt;&lt; x &lt;&lt; endl;&amp;#125;&#x2F;&#x2F;多了个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的范围for语句、动态内存分配、nullptr">
+<meta property="og:url" content="http://alogomachine.com/20221.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="C++基础语法C++的范围for语句、动态内存分配、nullptr  范围for语句F9加断点，F10往下一格 用于遍历一个序列 方式一： 123456int v[]&amp;#123; 12,13,14,16,18 &amp;#125;;for (auto x: v) &#x2F;&#x2F;遍历数组中每个元素，依次放入x中并打印x值，&amp;#123;	cout &lt;&lt; x &lt;&lt; endl;&amp;#125;&#x2F;&#x2F;多了个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-20T17:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T15:45:01.637Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20221.html"/>
+
+
+
+
+
+  <title>C++的范围for语句、动态内存分配、nullptr | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20221.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++的范围for语句、动态内存分配、nullptr</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-21T01:00:00+08:00">
+                2021-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">C++的范围for语句、动态内存分配、nullptr </span></strong></p>
+<h2 id="范围for语句"><a href="#范围for语句" class="headerlink" title="范围for语句"></a><strong>范围for语句</strong></h2><p><strong>F9加断点，F10往下一格</strong></p>
+<p><strong>用于遍历一个序列</strong></p>
+<p><strong>方式一：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> v[]&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">18</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> x: v) <span class="comment">//遍历数组中每个元素，依次放入x中并打印x值，</span></span><br><span class="line">&#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//多了个拷贝的过程</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方式二：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> y : &#123; <span class="number">11</span>,<span class="number">34</span>,<span class="number">15</span>,<span class="number">134</span>,<span class="number">1232</span> &#125;) &#123;</span><br><span class="line">	cout &lt;&lt; y &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式三:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; x : v) &#123;</span><br><span class="line">	cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//直接用引用，省了拷贝的过程，提高了效率</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a><strong>动态内存分配</strong></h2><p><strong>C中供程序使用的存储空间，有程序区，静态存储区，动态存储区。</strong></p>
+<p><strong>C++我们把内存进一步详细分为：</strong></p>
+<ol>
+<li><strong>栈：函数内的局部变量都会放在这里，由编译器自动分配和释放</strong></li>
+<li><strong>堆：程序员用，malloc/new分配，用free/delete来释放。忘记释放后，系统会回收</strong></li>
+<li><strong>全局/静态存储区：放全局变量和静态变量static。程序结束时系统释放</strong></li>
+<li><strong>常量存储区：“i love china”</strong></li>
+<li><strong>程序代码区</strong></li>
+</ol>
+<p><strong>堆和栈不同的用途和区别：</strong></p>
+<ol>
+<li><strong>栈的空间是有限的。例int a =4； 自动给你4个字节的空间，分配速度快，程序员也控制不了</strong></li>
+<li><strong>堆:只要不超出你实际拥有的物理内存，也在操作系统允许你能够分配的最大内存大小之内都可以分配给你</strong></li>
+<li><strong>堆的分配速度比栈慢，你可以随时使用malloc/new来分配，free/delete来释放，非常灵活。</strong></li>
+</ol>
+<ul>
+<li><p><strong>在c语言一般用malloc和free从堆中分配和释放内存使用，malloc和free 是函数带（）</strong></p>
+<ul>
+<li><strong>malloc（memory allocation）：动态内存分配</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">int</span> NumBytes)</span></span>; </span><br><span class="line"><span class="comment">//bymbytes:要分配的字节数 （void*可以被强制转换成任何指针）</span></span><br><span class="line"><span class="comment">//分配成功则返回指向被分配内存的指针，分配失败则返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	*p = <span class="number">5</span>; <span class="comment">//指针加*=取值，把值变成5</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">free</span>(p); <span class="comment">//必须要释放掉</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="void-malloc-int-NumBytes"><a href="#void-malloc-int-NumBytes" class="headerlink" title="void *malloc(int NumBytes);"></a>void *malloc(int NumBytes);</h4><ul>
+<li><p><strong>bymbytes:要分配的字节数 （void*可以被强制转换成任何指针），所以malloc前面要强转成你想要的</strong></p>
+</li>
+<li><p><strong>分配成功则返回指向被分配内存的指针，分配失败则返回NULL</strong></p>
+</li>
+<li><p><strong>当不需要使用这块内存的时候，你应该使用free()函数来将内存释放掉，供其他地方使用</strong></p>
+</li>
+</ul>
+<h4 id="void-free-void-FirstByte-（free一个malloc指针"><a href="#void-free-void-FirstByte-（free一个malloc指针" class="headerlink" title="void free(void* FirstByte); （free一个malloc指针)"></a>void free(void* FirstByte); （free一个malloc指针)</h4><ul>
+<li><strong>将之前用malloc分配的内存空间还给程序（操作系统），也就是说释放了这块内存，这样这块内存就被系统回收</strong></li>
+<li><strong>并在需要的时候将系统分配出去再给其他地方使用</strong></li>
+</ul>
+<p><strong>字符串的malloc/free</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *p = <span class="literal">NULL</span>; <span class="comment">//c语言写法，等价于数字0</span></span><br><span class="line">p = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">100</span> * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">char</span>));<span class="comment">// 在堆里面分配4个字节 ,void *是万能指针，要用适当的来给它强转</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="built_in">strcpy_s</span>(p,<span class="number">100</span>, <span class="string">&quot;hello world!&quot;</span>); <span class="comment">//更安全的字符串拷贝函数，防止内存溢出崩溃 ,第二个参数填最多多少个字节，溢出了就会有提醒</span></span><br><span class="line">	cout &lt;&lt; p &lt;&lt; endl; <span class="comment">//字符串指针=字符串的值</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>好好解读以下程序:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="literal">NULL</span>;</span><br><span class="line">p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) *<span class="number">100</span>); <span class="comment">//分配可以存下放的下100个整数的内存空间</span></span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>;  <span class="comment">//等价与 *（q++） --&gt; *q= 1  q++（跳了4个内存地址，因为为整型指针）</span></span><br><span class="line">	*q++ = <span class="number">5</span>;</span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;  <span class="comment">//p指针没动，还在第一个，但q指针改变了它指向的值</span></span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl; <span class="comment">//q指针在p指针移动前改变了p指针指向的后一个值</span></span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>在C++一般使用new和delete来分配和释放内存，它们不是函数,是运算符(标识符)。C++中就用new/delete中分配和释放内存，不再使用malloc和free来分配和释放内存</strong></p>
+</li>
+</ul>
+<p><strong>new/delete 和malloc，free干了一样的事情，就是分配和释放内存。同时new，delete还干了更多的事情。</strong></p>
+<p><strong>使用方法：</strong></p>
+<ol>
+<li><p><strong>指针类型名 = new 类型标识符;</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="keyword">int</span>;  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	*myint = <span class="number">8</span>;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl;</span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>指针类型名 = new 类型标识符(初始值) ;   //注意这里是使用圆括号括起来，表示初始值</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* myint = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">18</span>);  <span class="comment">//int* p = (int*)malloc(sizeof(int) * 100)</span></span><br><span class="line"><span class="keyword">if</span> (myint != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	cout &lt;&lt; *myint &lt;&lt; endl; <span class="comment">//打印18</span></span><br><span class="line">	<span class="built_in"><span class="keyword">delete</span></span>(myint);  <span class="comment">//释放单个myint空间</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>指针类型名 = new 类型标识符[内存单元个数]  //注意使用[]来代表单元个数</strong></p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span>* q = p;</span><br><span class="line">	*q++ = <span class="number">1</span>; <span class="comment">//给数组[0]赋值</span></span><br><span class="line">	*q++ = <span class="number">5</span>; <span class="comment">//给数组[1]赋值</span></span><br><span class="line">	cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; *(p + <span class="number">1</span>) &lt;&lt; endl;  <span class="comment">//p+1 指针+1 =跳了4个字节内存地址</span></span><br><span class="line">	<span class="keyword">delete</span>[] p; <span class="comment">//释放int p的数组空间</span></span><br><span class="line">				<span class="comment">//new时候我们用[]，那么delete就必须使用[]，[]不用写数组大小</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li><strong>配对使用，有malloc成功就必须要有free，有free成功，就必须要有delete</strong></li>
+<li><strong>free/delete 不能重复调用</strong></li>
+</ul>
+<h2 id="nullptr"><a href="#nullptr" class="headerlink" title="nullptr"></a><strong>nullptr</strong></h2><p><strong>代表的是空指针</strong></p>
+<p><strong>nullptr能够避免在整数和指针之间发生混淆</strong></p>
+<p><strong>typeid().name() 可以查看类型</strong></p>
+<p><strong>NULL和nullptr 满足 NULL == nullptr</strong></p>
+<p><strong>但实际上是不同的类型</strong></p>
+<p><strong>结论：对于指针的初始化，和以往用到的和指针有关NULL的场合，能用nullptr的都用nullptr取代NULL</strong></p>
+<p><strong>nullptr认为是真的指针类型</strong></p>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20230.html" rel="next" title="C++的auto、头文件防卫、引用、常量">
+                <i class="fa fa-chevron-left"></i> C++的auto、头文件防卫、引用、常量
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20257.html" rel="prev" title="C++的结构、权限修饰、类简介">
+                C++的结构、权限修饰、类简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4for%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">范围for语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">动态内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#void-malloc-int-NumBytes"><span class="nav-number">2.0.1.</span> <span class="nav-text">void *malloc(int NumBytes);</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#void-free-void-FirstByte-%EF%BC%88free%E4%B8%80%E4%B8%AAmalloc%E6%8C%87%E9%92%88"><span class="nav-number">2.0.2.</span> <span class="nav-text">void free(void* FirstByte); （free一个malloc指针)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nullptr"><span class="nav-number">3.</span> <span class="nav-text">nullptr</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

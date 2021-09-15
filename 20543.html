@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,推荐系统,矩阵分解," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习算法基于矩阵分解的推荐系统 推荐系统推荐系统是什么 信息处理的系统用千预测用户对物品的偏好． 推荐系统可以应用在诸多领域： 推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品 在社交网络里面为你推荐可能会志趣相投的朋友 在金融市场为您推荐合适的股票，基金证券等理财产品 婚恋市场里为单身朋友推荐合适的另—半 推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于矩阵分解的推荐系统分析与短视频推荐案例">
+<meta property="og:url" content="http://alogomachine.com/20543.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="机器学习算法基于矩阵分解的推荐系统 推荐系统推荐系统是什么 信息处理的系统用千预测用户对物品的偏好． 推荐系统可以应用在诸多领域： 推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品 在社交网络里面为你推荐可能会志趣相投的朋友 在金融市场为您推荐合适的股票，基金证券等理财产品 婚恋市场里为单身朋友推荐合适的另—半 推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213406.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213606.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213621.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213921.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213946.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214012.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214050.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214121.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214108.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213647.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214211.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213728.png">
+<meta property="article:published_time" content="2021-08-05T13:43:00.000Z">
+<meta property="article:modified_time" content="2021-08-05T13:50:27.274Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="推荐系统">
+<meta property="article:tag" content="矩阵分解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213406.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20543.html"/>
+
+
+
+
+
+  <title>基于矩阵分解的推荐系统分析与短视频推荐案例 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20543.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于矩阵分解的推荐系统分析与短视频推荐案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-05T21:43:00+08:00">
+                2021-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">基于矩阵分解的推荐系统</span></strong></p>
+<h1 id="推荐系统"><a href="#推荐系统" class="headerlink" title="推荐系统"></a><strong>推荐系统</strong></h1><h2 id="推荐系统是什么"><a href="#推荐系统是什么" class="headerlink" title="推荐系统是什么"></a><strong>推荐系统是什么</strong></h2><ul>
+<li><strong>信息处理的系统用千预测用户对物品的偏好．</strong></li>
+<li><strong>推荐系统可以应用在诸多领域：</strong></li>
+<li><strong>推荐个性化的新闻，视频，音乐，图书，游戏，食品，衣物以及其它各种商品</strong></li>
+<li><strong>在社交网络里面为你推荐可能会志趣相投的朋友</strong></li>
+<li><strong>在金融市场为您推荐合适的股票，基金证券等理财产品</strong></li>
+<li><strong>婚恋市场里为单身朋友推荐合适的另—半</strong></li>
+<li><strong>推荐系统已经成为许多网 站和手机App不可或缺的—部分，它们依靠推 荐系统提高商品销量， 吸引用户注意力，提高用户活跃度，吸引新用户．</strong></li>
+</ul>
+<h2 id="推荐系统模型"><a href="#推荐系统模型" class="headerlink" title="推荐系统模型"></a><strong>推荐系统模型</strong></h2><ul>
+<li><strong>u： 所有的用户集合</strong></li>
+<li><strong>p： 所有的物品集合</strong></li>
+<li> <strong>推荐系统的模型U x P =  R</strong></li>
+<li><strong>R： 用户对物品的喜爱程度，许多信息系统喜欢使用1至5分的评价值来表达，也可以使用喜欢(点赞)或者不喜欢（鄙视）来表达．</strong></li>
+</ul>
+<h2 id="基于矩阵分解的推荐系统"><a href="#基于矩阵分解的推荐系统" class="headerlink" title="基于矩阵分解的推荐系统"></a><strong>基于矩阵分解的推荐系统</strong></h2><p><strong>·这个算法的基本思想：</strong></p>
+<ul>
+<li><strong>将推荐值矩阵R分解为矩阵U 和 P ，使得 U 和 P 的 乘积得到的矩阵R＊中的元素值与R的 中 已知元素的值非常接近</strong></li>
+<li><strong>那么R＊中对应于R中的未知的元素值就是预测值．</strong></li>
+</ul>
+<p><strong>矩阵分解：</strong></p>
+<ul>
+<li><strong>通过构造两个矩阵相乘与实际已知的数据矩阵相近</strong></li>
+<li><strong>那么空缺的位置也能够补上对应的预测值</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213406.png" alt="image-20210805213406771"></p>
+<h2 id="基于矩阵分解的推荐系统：原理"><a href="#基于矩阵分解的推荐系统：原理" class="headerlink" title="基于矩阵分解的推荐系统：原理"></a><strong>基于矩阵分解的推荐系统：原理</strong></h2><ul>
+<li><strong>推荐值矩阵 R 里有—些值是已知的，如果我们将 R 分解为两个矩阵 U 和 P, U的 每— 行代 表—个用户画像向量，P 的每—行代表—个物品的画像向量．</strong></li>
+<li><em><em>如果 U 和 P 能够 分别准备表达用户和物品画像向量，那么 U 和 pT 的乘积 R</em> 中的值就应 该是推荐值</em>*</li>
+<li><strong>假设用户对物品的喜好的值是取决于几个（假 设是K 个）因素，我们不知道这些因素是什 么，所以我们命名它们为隐性因子</strong></li>
+<li><em><em>假设用户队对物品 pl 的 喜 好 Ri] 是用户画像向量在k 个 因子上的值与物品画像向量在k 个 因子上的值的点积 Rij  = Ui</em> Pj</em>*</li>
+<li><strong>如果能够通过分解推荐值矩阵，使得以上的假设在所有已知的推荐值上面是成立的</strong></li>
+</ul>
+<p><strong>计算流程：</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213606.png" alt="image-20210805213606588"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213621.png" alt="image-20210805213621077"></p>
+<h2 id="算法假设"><a href="#算法假设" class="headerlink" title="算法假设"></a><strong>算法假设</strong></h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213921.png" alt="image-20210805213921643"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213946.png" alt="image-20210805213946072"></p>
+<h2 id="算法理解"><a href="#算法理解" class="headerlink" title="算法理解"></a><strong>算法理解</strong></h2><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214012.png" alt="image-20210805214012188"></strong></p>
+<h2 id="损失函数与梯度下降"><a href="#损失函数与梯度下降" class="headerlink" title="损失函数与梯度下降"></a><strong>损失函数与梯度下降</strong></h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a><strong>损失函数</strong></h3><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214050.png" alt="image-20210805214050130"></p>
+<h3 id="损失函数的梯度"><a href="#损失函数的梯度" class="headerlink" title="损失函数的梯度"></a><strong>损失函数的梯度</strong></h3><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214121.png" alt="image-20210805214121480"></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214108.png" alt="image-20210805214108700"></p>
+<h2 id="加入正则化"><a href="#加入正则化" class="headerlink" title="加入正则化"></a><strong>加入正则化</strong></h2><p><strong>过拟合的表现：</strong></p>
+<ul>
+<li><strong>在训练数据上误差小，在测试集上误差大</strong></li>
+<li><strong>就是很依靠训练数据，对数据格外敏感</strong></li>
+<li><strong>所以需要加入正则化，目的是防止过拟合</strong></li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213647.png" alt="image-20210805213647817"></p>
+<p><strong>梯度下降法求U、P</strong></p>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805214211.png" alt="image-20210805213708639"></p>
+<h2 id="关于K"><a href="#关于K" class="headerlink" title="关于K"></a><strong>关于K</strong></h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210805213728.png" alt="image-20210805213728273"></p>
+<h2 id="评估推荐系统"><a href="#评估推荐系统" class="headerlink" title="评估推荐系统"></a><strong>评估推荐系统</strong></h2><p><strong>评估推荐系统:</strong></p>
+<ul>
+<li><strong>离线评估</strong></li>
+<li><strong>问卷调查</strong></li>
+<li><strong>用户学习</strong></li>
+<li><strong>在线测试(A/B测试)</strong></li>
+</ul>
+<p><strong>推荐系统就是要把多种算法组合起来</strong></p>
+<h1 id="短视频推荐系统案例"><a href="#短视频推荐系统案例" class="headerlink" title="短视频推荐系统案例"></a><strong>短视频推荐系统案例</strong></h1><p><strong>使用矩阵分解, 根据用户给短视频的评分数据, 做一个千人千面的个性化推荐系统</strong></p>
+<p><strong>需要安装推荐系统库surprise, 使用如下命令安装: pip install scikit-surprise</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入 nunpy 和 surprise 辅助库</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> surprise  </span><br></pre></td></tr></table></figure>
+
+<p><strong>Surprise库本身没有提供纯粹的矩阵分解的算法, 在这里我们自己实现了基于Alternating Least Squares的矩阵分解, 使用梯度下降法优化</strong></p>
+<p><strong>矩阵分解类MatrixFactorization继承了surprise.AlgoBase, 方便我们使用surpise库提供的其它功能</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MatrixFactorization</span>(<span class="params">surprise.AlgoBase</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;基于矩阵分解的推荐.&#x27;&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, learning_rate, n_epochs, n_factors, lmd</span>):</span> </span><br><span class="line">        </span><br><span class="line">        self.lr = learning_rate  <span class="comment"># 梯度下降法的学习率</span></span><br><span class="line">        self.n_epochs = n_epochs  <span class="comment"># 梯度下降法的迭代次数</span></span><br><span class="line">        self.n_factors = n_factors  <span class="comment"># 分解的矩阵的秩(rank)</span></span><br><span class="line">        self.lmd = lmd <span class="comment"># 防止过拟合的正则化的强度</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, trainset</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;通过梯度下降法训练, 得到所有 u_i 和 p_j 的值&#x27;&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Fitting data with SGD...&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 随机初始化 user 和 item 矩阵.</span></span><br><span class="line">        u = np.random.normal(<span class="number">0</span>, <span class="number">.1</span>, (trainset.n_users, self.n_factors))</span><br><span class="line">        p = np.random.normal(<span class="number">0</span>, <span class="number">.1</span>, (trainset.n_items, self.n_factors))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 梯度下降法</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(self.n_epochs):</span><br><span class="line">            <span class="keyword">for</span> i, j, r_ij <span class="keyword">in</span> trainset.all_ratings():</span><br><span class="line">                err = r_ij - np.dot(u[i], p[j])</span><br><span class="line">                <span class="comment"># 利用梯度调整 u_i 和 p_j</span></span><br><span class="line">                u[i] -= -self.lr * err * p[j] + self.lr * self.lmd * u[i]</span><br><span class="line">                p[j] -= -self.lr * err * u[i] + self.lr * self.lmd * p[j]</span><br><span class="line">                <span class="comment"># 注意: 修正 p_j 时, 按照严格定义, 我们应该使用 u_i 修正之前的值, 但是实际上差别微乎其微</span></span><br><span class="line">        </span><br><span class="line">        self.u, self.p = u, p</span><br><span class="line">        self.trainset = trainset</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">estimate</span>(<span class="params">self, i, j</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;预测 user i 对 item j 的评分.&#x27;&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果用户 i 和物品 j 是已知的值, 返回 u_i 和 p_j 的点积</span></span><br><span class="line">        <span class="comment"># 否则使用全局平均评分rating值(cold start 冷启动问题)</span></span><br><span class="line">        <span class="keyword">if</span> self.trainset.knows_user(i) <span class="keyword">and</span> self.trainset.knows_item(j):</span><br><span class="line">            <span class="keyword">return</span> np.dot(self.u[i], self.p[j])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.trainset.global_mean</span><br></pre></td></tr></table></figure>
+
+<p><strong>演示如何调用以上定义的矩阵分解类实现短视频的推荐</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> BaselineOnly</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Reader</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> accuracy</span><br><span class="line"><span class="keyword">from</span> surprise.model_selection <span class="keyword">import</span> cross_validate</span><br><span class="line"><span class="keyword">from</span> surprise.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据文件</span></span><br><span class="line">file_path = os.path.expanduser(<span class="string">&#x27;u.data&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据文件的格式如下:</span></span><br><span class="line"><span class="comment"># &#x27;user item rating timestamp&#x27;, 使用制表符 &#x27;\t&#x27; 分割, rating值在1-5之间.</span></span><br><span class="line">reader = Reader(line_format=<span class="string">&#x27;user item rating timestamp&#x27;</span>, sep=<span class="string">&#x27;\t&#x27;</span>, rating_scale=(<span class="number">1</span>, <span class="number">5</span>))</span><br><span class="line">data = Dataset.load_from_file(file_path, reader=reader)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据随机分为训练和测试数据集</span></span><br><span class="line">trainset, testset = train_test_split(data, test_size=<span class="number">.25</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化以上定义的矩阵分解类.</span></span><br><span class="line">algo = MatrixFactorization(learning_rate=<span class="number">.005</span>, n_epochs=<span class="number">60</span>, n_factors=<span class="number">2</span>, lmd = <span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">algo.fit(trainset)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算平均绝对误差</span></span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Fitting data with SGD...
+MAE:  0.7775
+
+
+
+
+
+0.7774984667432812
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 surpise 内建的基于最近邻的方法做比较</span></span><br><span class="line">algo = surprise.KNNBasic()</span><br><span class="line">algo.fit(trainset)</span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Computing the msd similarity matrix...
+Done computing similarity matrix.
+MAE:  0.7743
+
+
+
+
+
+0.7742544761650422
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 surpise 内建的基于 SVD 的方法做比较</span></span><br><span class="line">algo = surprise.SVD()</span><br><span class="line">algo.fit(trainset)</span><br><span class="line">predictions = algo.test(testset)</span><br><span class="line">accuracy.mae(predictions)</span><br></pre></td></tr></table></figure>
+
+<pre><code>MAE:  0.7422
+
+
+
+
+
+0.7421646660769781
+</code></pre>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="tag"># 推荐系统</a>
+          
+            <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/" rel="tag"># 矩阵分解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20433.html" rel="next" title="K-Means数据预处理与用户分层案例">
+                <i class="fa fa-chevron-left"></i> K-Means数据预处理与用户分层案例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/20611.html" rel="prev" title="Boosting算法分析与预计还款能力案例">
+                Boosting算法分析与预计还款能力案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">推荐系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">推荐系统是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">推荐系统模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.3.</span> <span class="nav-text">基于矩阵分解的推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%EF%BC%9A%E5%8E%9F%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">基于矩阵分解的推荐系统：原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%81%87%E8%AE%BE"><span class="nav-number">1.5.</span> <span class="nav-text">算法假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%90%86%E8%A7%A3"><span class="nav-number">1.6.</span> <span class="nav-text">算法理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.7.</span> <span class="nav-text">损失函数与梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%A2%AF%E5%BA%A6"><span class="nav-number">1.7.2.</span> <span class="nav-text">损失函数的梯度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E6%AD%A3%E5%88%99%E5%8C%96"><span class="nav-number">1.8.</span> <span class="nav-text">加入正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EK"><span class="nav-number">1.9.</span> <span class="nav-text">关于K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.10.</span> <span class="nav-text">评估推荐系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E8%A7%86%E9%A2%91%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">短视频推荐系统案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

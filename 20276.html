@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++基础语法结构函数详解、explict、初始化列表 构造函数构造函数的目的就是初始化类对象的函数（自动调用）  在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数” 有了构造函数就不怕对象忘记初始化，导致成员变量有不确定的值  构造函数的写法： h中写： 1234class Time&amp;#123;pub">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的结构函数详解、explict、初始化列表">
+<meta property="og:url" content="http://alogomachine.com/20276.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:description" content="C++基础语法结构函数详解、explict、初始化列表 构造函数构造函数的目的就是初始化类对象的函数（自动调用）  在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数” 有了构造函数就不怕对象忘记初始化，导致成员变量有不确定的值  构造函数的写法： h中写： 1234class Time&amp;#123;pub">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-23T16:16:00.000Z">
+<meta property="article:modified_time" content="2021-07-23T15:38:17.537Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20276.html"/>
+
+
+
+
+
+  <title>C++的结构函数详解、explict、初始化列表 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20276.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++的结构函数详解、explict、初始化列表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-24T00:16:00+08:00">
+                2021-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="https://myhkw.cn/player/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
+
+<p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构函数详解、explict、初始化列表</span></strong></p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a><strong>构造函数</strong></h2><p><strong>构造函数的目的就是初始化类对象的函数（自动调用）</strong></p>
+<ul>
+<li><strong>在类中，有一种特殊的成员函数，它的名字和类名相同，我们在创建类对象的时候，这个特殊的成员函数会被系统自动调用。这个成员函数就叫做“构造函数”</strong></li>
+<li><strong>有了构造函数就不怕对象忘记初始化，导致成员变量有不确定的值</strong></li>
+</ul>
+<p><strong>构造函数的写法：</strong></p>
+<p><strong>h中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec); <span class="comment">//构造函数声明</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp实现中写定义：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> h</span></span><br><span class="line"></span><br><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec) &#123; <span class="comment">//构造函数不能有返回值</span></span><br><span class="line">    Hour = tmphour;  </span><br><span class="line">    Minute = tmpmin;  </span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>); <span class="comment">//私有函数的调用，OK的</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>cpp使用中写：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> h</span></span><br><span class="line"><span class="comment">//5中初始化的方式，构造函数包含几个形参就需要带进去几个参数</span></span><br><span class="line">Time mytime = <span class="built_in">Time</span>(<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>); </span><br><span class="line"><span class="function">Time <span class="title">mtytime2</span><span class="params">(<span class="number">12</span>, <span class="number">13</span>, <span class="number">52</span>)</span></span>; </span><br><span class="line">Time mytime3 = Time&#123; <span class="number">12</span>,<span class="number">14</span>,<span class="number">52</span> &#125;;</span><br><span class="line">Time mytime4 = &#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br><span class="line">Time mytime5&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>特点:</strong></p>
+<ol>
+<li><strong>构造函数不能有返回值（连void都不写）</strong></li>
+<li><strong>不可以手动调用构造函数，否则就会出错</strong></li>
+<li><strong>声明的类型应该是public，因为我们创建一个对象需要系统帮我们调用构造函数，这说明他需要是一个public函数来给系统调用</strong><ul>
+<li><strong>因为类缺少的成员是私有成员，所以我们必须说明构造函数是一个public函数，否则是无法直接创建该类的对象</strong></li>
+</ul>
+</li>
+<li><strong>在构造函数中有多个参数，我们创建对象的时候也要带上这些参数</strong></li>
+<li><strong>对象初始化需要带上构造函数声明上的全部参数</strong></li>
+</ol>
+<h2 id="多个构造函数"><a href="#多个构造函数" class="headerlink" title="多个构造函数"></a><strong>多个构造函数</strong></h2><p><strong>一个类中可以有个构造函数，但不同的构造函数总要有不同的东西（形参个数/形参类型）</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Time mytime = <span class="built_in">Time</span>(<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>);</span><br><span class="line"><span class="function">Time <span class="title">mtytime2</span><span class="params">(<span class="number">12</span>, <span class="number">13</span>, <span class="number">52</span>)</span></span>;</span><br><span class="line">Time mytime3 = Time&#123; <span class="number">12</span>,<span class="number">14</span>,<span class="number">52</span> &#125;;</span><br><span class="line">Time mytime4 = &#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;</span><br><span class="line">Time mytime5&#123; <span class="number">12</span>,<span class="number">13</span>,<span class="number">42</span> &#125;;  <span class="comment">//调用了有三个参数的构造函数</span></span><br><span class="line">Time mytime7&#123;&#125;; <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line"></span><br><span class="line">Time myTime20;  <span class="comment">//调用了无参数的构造函数</span></span><br><span class="line">Time myTime22 = myTime20;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line"><span class="function">Time <span class="title">myTime23</span><span class="params">(myTime20)</span></span>;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime24&#123;myTime20&#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br><span class="line">Time myTime25 = &#123; myTime20 &#125;;  <span class="comment">//没有调用无参数的构造函数,调用的是拷贝构造函数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="函数默认参数"><a href="#函数默认参数" class="headerlink" title="函数默认参数"></a><strong>函数默认参数</strong></h2><ol>
+<li><strong>函数的默认参数只能放到声明中,不能放在实现里面。（如果有没声明的函数则可以放在里面）</strong><ul>
+<li><strong>函数默认参数有声明必须放到声明里面</strong></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec = <span class="number">12</span>;); <span class="comment">//函数声明h</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><strong>在具有多个函数默认参数的时候，有默认参数值的参数后面的参数都必须带有参数</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin = <span class="number">12</span>, <span class="keyword">int</span> tmpsec;); <span class="comment">//函数声明h 错误</span></span><br><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin = <span class="number">12</span>, <span class="keyword">int</span> tmpsec= <span class="number">12</span>;); <span class="comment">//函数声明h 正确</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>有三个参数的构造函数带一个默认参数，如果有带两个参数的构造函数，当你赋2个值的时候就会报错，系统不知道调用哪一个。</strong></li>
+</ul>
+<h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a><strong>隐式转换</strong></h2><p><strong>系统会能够把把比如int类型转换成其他类型，比如说上面定义的Time类都行</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Time的构造函数带一个参数</span></span><br><span class="line">Time mytime = <span class="number">16</span>； <span class="comment">//int转Time类 == Time mytime = Time(16) </span></span><br><span class="line">Time mytime = &#123;<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>&#125;;  <span class="comment">//可以，相当于上面的Time mytime = 15</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>禁止隐式类型转换:</strong></p>
+<ul>
+<li><strong>我们不需要隐式转换的时候，使用explict在函数声明前面加就行</strong></li>
+<li><strong>对于单参数的构造函数，我们一般都需要在函数声明之前加explict。</strong></li>
+</ul>
+<h2 id="构造函数初始化列表"><a href="#构造函数初始化列表" class="headerlink" title="构造函数初始化列表"></a><strong>构造函数初始化列表</strong></h2><p><strong>构造函数初始化列表，在大括号里面之前成员变量已经就初始化了</strong></p>
+<ul>
+<li><strong>注意写法：:成员变量(形参),成员变量(形参)</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpmin,<span class="keyword">int</span> tmpsec) <span class="comment">//构造函数不能有返回值，void也不行</span></span><br><span class="line">    :<span class="built_in">Hour</span>(tmphour),<span class="built_in">Minute</span>(tmpmin),<span class="built_in">Second</span>(tmpsec),<span class="built_in">initMillTime</span>(<span class="number">0</span>)  <span class="comment">//注意写法：:成员变量(形参)</span></span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了1的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提倡：</strong></p>
+<ol>
+<li><strong>显得专业，高大上</strong></li>
+<li><strong>效率上更高</strong></li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>构造函数初始化列表不能把其他成员变量放入形参的位置，因为成员变量的初始化顺序是由类里面声明的顺序从上往下的，所以这样赋值的化很可能会出现问题。</strong></li>
+</ul>
+<center>
+<a href="" class="wpac-cr">顺便评个分吧！👇</a>
+<div id="wpac-rating"></div>
+<script type="text/javascript">
+wpac_init = window.wpac_init || [];
+wpac_init.push({widget: 'Rating', id: 31073});
+(function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+})();
+</script>
+</center>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/20244.html" rel="next" title="C++的成员函数、对象拷贝、私有对象">
+                <i class="fa fa-chevron-left"></i> C++的成员函数、对象拷贝、私有对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22425.html" rel="prev" title="C++的inline、const、mutable、this、static">
+                C++的inline、const、mutable、this、static <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">多个构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">函数默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">构造函数初始化列表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备 -
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
