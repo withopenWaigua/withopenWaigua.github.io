@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="C++基础语法类内初始化、默认构造函数、&#x3D;default 类相关非成员函数有点关系，但关系不大，可以放在类外作为普通函数 实现： h内填： 12345class Time&amp;#123;......&amp;#125;;&#x2F;&#x2F;类外void WriteTime(Time&amp; mytime);    cpp实现内填: 123void WriteTime(Time &amp;mytime) &amp;#123;  &#x2F;&#x2F;">
+<meta name="description" content="C++基础语法类内初始化、默认构造函数、&#x3D;default 类相关非成员函数有点关系，但关系不大，可以放在类外作为普通函数 实现：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的类内初始化、默认构造函数、&#x3D;default">
 <meta property="og:url" content="http://alogomachine.com/22517.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="C++基础语法类内初始化、默认构造函数、&#x3D;default 类相关非成员函数有点关系，但关系不大，可以放在类外作为普通函数 实现： h内填： 12345class Time&amp;#123;......&amp;#125;;&#x2F;&#x2F;类外void WriteTime(Time&amp; mytime);    cpp实现内填: 123void WriteTime(Time &amp;mytime) &amp;#123;  &#x2F;&#x2F;">
+<meta property="og:description" content="C++基础语法类内初始化、默认构造函数、&#x3D;default 类相关非成员函数有点关系，但关系不大，可以放在类外作为普通函数 实现：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-24T17:17:00.000Z">
-<meta property="article:modified_time" content="2021-07-23T15:38:33.221Z">
+<meta property="article:modified_time" content="2021-09-15T13:23:30.956Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -148,7 +148,7 @@
   
     
   
-
+  
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
@@ -195,20 +195,84 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Archives
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -216,7 +280,7 @@
 
  </div>
     </header>
-
+	
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
@@ -338,127 +402,129 @@
 
       
         <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">类内初始化、默认构造函数、=default</span></strong></p>
-<h2 id="类相关非成员函数"><a href="#类相关非成员函数" class="headerlink" title="类相关非成员函数"></a>类相关非成员函数</h2><p>有点关系，但关系不大，可以放在类外作为普通函数</p>
-<p>实现：</p>
-<p>h内填：</p>
+<h2 id="类相关非成员函数"><a href="#类相关非成员函数" class="headerlink" title="类相关非成员函数"></a><strong>类相关非成员函数</strong></h2><p><strong>有点关系，但关系不大，可以放在类外作为普通函数</strong></p>
+<p><strong>实现：</strong></p>
+<span id="more"></span>
+
+<p><strong>h内填：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span>&#123;</span></span><br><span class="line">......</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类外</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time&amp; mytime)</span></span>;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>cpp实现内填:</p>
+<p><strong>cpp实现内填:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time &amp;mytime)</span> </span>&#123;  <span class="comment">//用了类的引用，注意不能填Time::</span></span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
 
 
-<p>cpp使用:</p>
+<p><strong>cpp使用:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Time <span class="title">mytime</span><span class="params">(<span class="number">13</span>, <span class="number">14</span>, <span class="number">145</span>)</span></span>;</span><br><span class="line">    <span class="built_in">WriteTime</span>(mytime); <span class="comment">//普通函数直接写，不需要使用调用符号.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<h3 id="类内初始化"><a href="#类内初始化" class="headerlink" title="类内初始化"></a>类内初始化</h3><ul>
-<li>在C++11内我们可以为类内的成员变量提供一个初始值，那么我们在创建对象的时候，这个初始化值就用来初始化该成员变量。</li>
+<h3 id="类内初始化"><a href="#类内初始化" class="headerlink" title="类内初始化"></a><strong>类内初始化</strong></h3><ul>
+<li><strong>在C++11内我们可以为类内的成员变量提供一个初始值，那么我们在创建对象的时候，这个初始化值就用来初始化该成员变量。</strong></li>
 </ul>
-<p>类内初始化就是直接在h声明的时候直接给值：</p>
+<p><strong>类内初始化就是直接在h声明的时候直接给值：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Second = <span class="number">4</span>; <span class="comment">//秒</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>构造函数也可以初始化，它会把类内初始化给覆盖。</p>
-<p>但我们一般也使用构造函数进行初始化。</p>
+<p><strong>构造函数也可以初始化，它会把类内初始化给覆盖。</strong></p>
+<p><strong>但我们一般也使用构造函数进行初始化。</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">Hour</span>(<span class="number">12</span>),<span class="built_in">Minute</span>(<span class="number">13</span>)....&#123;</span><br><span class="line">  .....  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="const成员变量的初始化"><a href="#const成员变量的初始化" class="headerlink" title="const成员变量的初始化"></a>const成员变量的初始化</h3><p>const必须给初值</p>
+<h3 id="const成员变量的初始化"><a href="#const成员变量的初始化" class="headerlink" title="const成员变量的初始化"></a><strong>const成员变量的初始化</strong></h3><p><strong>const必须给初值</strong></p>
 <ol>
-<li><p>方法1：</p>
-<p>h内：</p>
+<li><p><strong>方法1：</strong></p>
+<p><strong>h内：</strong></p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel =<span class="number">80</span> ; <span class="comment">//可以</span></span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li><p>方法2：</p>
-<p>h内不给初值：</p>
+<li><p><strong>方法2：</strong></p>
+<p><strong>h内不给初值：</strong></p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel;</span><br></pre></td></tr></table></figure>
 
-<p>cpp实现内：</p>
+<p><strong>cpp实现内：</strong></p>
 <ul>
-<li>每个构造函数都得赋初值，可以用:vale() 赋值</li>
+<li><strong>每个构造函数都得赋初值，可以用:vale() 赋值</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">testcvel</span>(<span class="number">34</span>)&#123;  <span class="comment">//给值后才真正具有const作用，之前只是声明并未实现const</span></span><br><span class="line">    Hour = <span class="number">12</span>;</span><br><span class="line">    Minute = <span class="number">13</span>;</span><br><span class="line">    Second = <span class="number">59</span>;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了2的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec) :<span class="built_in">testcvel</span>(<span class="number">23</span>)&#123; </span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpmin;</span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;调用了1的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">     <span class="comment">//私有函数的调用，OK的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 <ul>
-<li>const成员变量的初始化，在构造函数的初始化列表中进行，不可以通过赋值语句进行初始化</li>
+<li><strong>const成员变量的初始化，在构造函数的初始化列表中进行，不可以通过赋值语句进行初始化</strong></li>
 </ul>
-<h2 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h2><p>没有参数的构造函数就叫做默认构造函数</p>
+<h2 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a><strong>默认构造函数</strong></h2><p><strong>没有参数的构造函数就叫做默认构造函数</strong></p>
 <ul>
-<li>如果没有写构造函数，那么这个类会通过特殊的构造函数来进行初始化，这个特殊的构造函数就叫做“默认构造函数”，也就是无参数的构造函数（它的值会随机）</li>
-<li>原来，在我们类定义中，如果没有构造函数的情况下，编译器会为我们隐式自定义一个默认的构造函数（无参）。称为“合成的默认构造函数”</li>
+<li><strong>如果没有写构造函数，那么这个类会通过特殊的构造函数来进行初始化，这个特殊的构造函数就叫做“默认构造函数”，也就是无参数的构造函数（它的值会随机）</strong></li>
+<li><strong>原来，在我们类定义中，如果没有构造函数的情况下，编译器会为我们隐式自定义一个默认的构造函数（无参）。称为“合成的默认构造函数”</strong></li>
 </ul>
-<p>“合成的默认函数”：没有给值的会随机给乱值，给值的直接赋值，但它的作用很小</p>
+<p><strong>“合成的默认函数”：没有给值的会随机给乱值，给值的直接赋值，但它的作用很小</strong></p>
 <ul>
-<li>如果你自己定义了构造函数（不管带几个参数），系统就不会构造合成的默认构造函数了，你初始化使用的时候不带参数就会报错（除非你定义的就是无参数的构造函数）</li>
+<li><strong>如果你自己定义了构造函数（不管带几个参数），系统就不会构造合成的默认构造函数了，你初始化使用的时候不带参数就会报错（除非你定义的就是无参数的构造函数）</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() &#123;&#125;; <span class="comment">//在h加入&#123;&#125;可以让编译器自动生成函数体，就不需要在cpp实现里面再写函数实现了Time(int)&#123;&#125;;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="default，-delete；"><a href="#default，-delete；" class="headerlink" title="=default，=delete；"></a>=default，=delete；</h2><ul>
-<li><p>C++11标准引用的</p>
-<p>在h头文件中我们直接写：</p>
+<h2 id="default，-delete；"><a href="#default，-delete；" class="headerlink" title="=default，=delete；"></a><strong>=default，=delete；</strong></h2><ul>
+<li><p><strong>C++11标准引用的</strong></p>
+<p><strong>在h头文件中我们直接写：</strong></p>
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">default</span>; <span class="comment">//编译器为这种=default的函数自动生成函数体</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>编译器自动帮我们生成函数体</li>
+<li><strong>编译器自动帮我们生成函数体</strong></li>
 </ul>
-<p>错误:</p>
+<p><strong>错误:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span>) =<span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li> 带了参数就不是可默认的特殊函数。</li>
+<li> <strong>带了参数就不是可默认的特殊函数。</strong></li>
 </ul>
 <ul>
-<li><p>普通函数不能写=default</p>
+<li><p><strong>普通函数不能写=default</strong></p>
 </li>
-<li><p>特殊的构造函数才能使用=default</p>
+<li><p><strong>特殊的构造函数才能使用=default</strong></p>
 </li>
-<li><p>带参数的构造函数(普通)不能使用default</p>
+<li><p><strong>带参数的构造函数(普通)不能使用default</strong></p>
 </li>
 </ul>
-<p>当然也可以</p>
-<p>在h中：</p>
+<p><strong>当然也可以</strong></p>
+<p><strong>在h中：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>();</span><br></pre></td></tr></table></figure>
 
-<p>在cpp中：</p>
+<p><strong>在cpp中：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() = <span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<p>在h内：</p>
+<p><strong>在h内：</strong></p>
 <ul>
-<li>=default  可以等价于{}</li>
-<li>让系统帮我们写构造函数的函数体</li>
+<li><strong>=default  可以等价于{}</strong></li>
+<li><strong>让系统帮我们写构造函数的函数体</strong></li>
 </ul>
 <ul>
-<li>=delete（让程序员显式的禁用构造函数）</li>
+<li><strong>=delete（让程序员显式的禁用构造函数）</strong></li>
 </ul>
-<p>h：</p>
+<p><strong>h：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">delete</span>; <span class="comment">//禁止系统给你生成不带参数的默认构造函数</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p>若cpp：</p>
+<p><strong>若cpp：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time mytime; <span class="comment">//就会报错，因为你不让系统给你生成不带参数的默认构造函数，你不带参数，无对应的构造函数就不能生成对象</span></span><br></pre></td></tr></table></figure>
 
 
@@ -600,7 +666,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7Carchive">
+                <a href="/archives/">
               
                   <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
@@ -797,6 +863,13 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -845,6 +918,323 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -864,5 +1254,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
   
 
+  <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
 </body>
 </html>

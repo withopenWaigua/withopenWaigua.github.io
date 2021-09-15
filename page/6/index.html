@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -95,7 +95,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -145,7 +145,7 @@
   
     
   
-
+  
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
@@ -193,20 +193,84 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             Archives
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -214,7 +278,7 @@
 
  </div>
     </header>
-
+	
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
@@ -338,93 +402,16 @@
 
       
         
-          
-            <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
+          <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
 <p><strong>局部变量及初始化</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//i的作用域仅仅在for语句内    </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以写作</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i&#123; <span class="number">0</span> &#125;; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//i=0  == i&#123;0&#125; == i=&#123;0&#125; 数组同理</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//int abcde &#123;3.5f&#125;; //失败， 从“float”转换到“int”需要收缩转换，系统执行了一个从浮点到整数的转换</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a><strong>auto</strong></h2><p><strong>auto变量的自动类型推断</strong></p>
-<p><strong>auto可以在声明变量的时候根据变量的初始值类型自动为此变量选择匹配的类型；（声明的时候要赋初值）</strong></p>
-<p><strong>auto自动类型推断发生在编译期间，所以使用auto不会造成程序执行效率降低</strong></p>
-<h2 id="头文件防卫式声明"><a href="#头文件防卫式声明" class="headerlink" title="头文件防卫式声明"></a><strong>头文件防卫式声明</strong></h2><p><strong>容易重定义，多次定义一个变量，引用别人的头文件，全局变量重定义</strong></p>
-<p><strong>#ifdef ,ifndef 条件编译</strong></p>
-<p><strong>#ifndef 标识符  当标志符没有定义过（没有用#define定义），则对程序段进行编译</strong></p>
-<p>​    <strong>//程序段</strong></p>
-<p><strong>#endif</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HEAD1__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HEAD1__   <span class="comment">//没有定义head1就定义head1</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写头文件程序代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !__HEAD1__</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a><strong>引用</strong></h2><p><strong>引用理解成，为变量起了另外一个名字，一般用符合&amp;表示，起完别名后和变量本身看成同一个变量；</strong></p>
-<ul>
-<li><strong>定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</strong></li>
-<li><strong>定义引用的时候必须初始化</strong></li>
-<li><strong>引用，&amp;的符号在=的左边</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = value; <span class="comment">//value的别名,不是求地址运算符，只是起标识作用</span></span><br><span class="line"><span class="comment">//定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</span></span><br><span class="line"><span class="comment">//定义引用的时候必须初始化</span></span><br><span class="line">cout &lt;&lt; refval &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"><span class="comment">//int&amp; refval13 = 10; 错误，引用必须绑定到变量上去，不能绑定到常量上去</span></span><br><span class="line"><span class="comment">//float &amp;refval23 = value; 错误，引用类型必须要相同</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>要和取地址区别开来。</strong></p>
-<ul>
-<li><strong>&amp;在=的右边</strong></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;a; <span class="comment">//取地址</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong>实例：</strong></p>
-<p><strong>可以改变函数值</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>&amp; ta, <span class="keyword">int</span>&amp; tb)</span> <span class="comment">//注意形参是引用类型</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ta = <span class="number">4</span>;</span><br><span class="line">    tb = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">13</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">14</span>;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印13</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印14</span></span><br><span class="line">    <span class="built_in">func</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印4</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a><strong>常量</strong></h2><p><strong>常量就是不变的量</strong></p>
-<h3 id="const-常量关键字，表示不变的意思"><a href="#const-常量关键字，表示不变的意思" class="headerlink" title="const 常量关键字，表示不变的意思"></a><strong>const 常量关键字，表示不变的意思</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> var = <span class="number">7</span>;  <span class="comment">//一种承诺，表示这个变量的值我不会去改变（命名常量）</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>实际上const可以改，但一般不要去改</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;var2 = (<span class="keyword">int</span> &amp;)var;  <span class="comment">//强原来的const变量转成引用</span></span><br><span class="line">var2 = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>vs查地址  shift + F9</strong> </p>
-<p><strong>搜索的名字求地址要加&amp;  ，求值就直接写变量名</strong></p>
-<h3 id="constexpr-关键字"><a href="#constexpr-关键字" class="headerlink" title="constexpr 关键字"></a><strong>constexpr 关键字</strong></h3><p><strong>C++11才引入的，它也是个常量的概念，在编译的时候求值，可以提升性能</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> abc)</span> </span>&#123;  <span class="comment">//这个函数里面必须要有初值，参数，或者在函数体内写 int ab=10;这种</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> var2 = <span class="built_in">func2</span>(<span class="number">11</span>); <span class="comment">//不报错，因为系统认为这是常量函数，返回一个常量</span></span><br><span class="line"><span class="comment">//int b=11；</span></span><br><span class="line"><span class="comment">//constexpr int var2 = b;  //报错，因为系统不认为b是常量，它可以改，是变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>常量const/constexpr 必须包含参量</strong></p>
-<center>
-<a href="" class="wpac-cr">顺便评个分吧！👇</a>
-<div id="wpac-rating"></div>
-<script type="text/javascript">
-wpac_init = window.wpac_init || [];
-wpac_init.push({widget: 'Rating', id: 31073});
-(function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-})();
-</script>
-</center>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/20230.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -462,8 +449,9 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
   </nav>
+
 
 
 
@@ -506,7 +494,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7Carchive">
+                <a href="/archives/">
               
                   <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
@@ -687,6 +675,13 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
   
 
   
@@ -731,6 +726,323 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -750,5 +1062,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
 
   
 
+  <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
 </body>
 </html>
