@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="线性回归求线性回归系数的方法总结 ：  损失函数LS求的是在损失函数值最小情况下的向量WS $$argMinJ(\Theta)&#x3D;\frac{1}{2 m} \sum_{i&#x3D;1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}$$ 梯度下降法$$\Theta_{1}&#x3D;\Theta_{0}-\alpha * J^{\prime}(\Theta">
+<meta name="description" content="线性回归求线性回归系数的方法总结 ：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性回归算法-OLS&#x2F;局部线性加权&#x2F;岭回归&#x2F;前向逐步回归">
+<meta property="og:title" content="梯度下降法以及线性回归算法-OLS&#x2F;局部线性加权&#x2F;岭回归&#x2F;前向逐步回归">
 <meta property="og:url" content="http://alogomachine.com/22031.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="线性回归求线性回归系数的方法总结 ：  损失函数LS求的是在损失函数值最小情况下的向量WS $$argMinJ(\Theta)&#x3D;\frac{1}{2 m} \sum_{i&#x3D;1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}$$ 梯度下降法$$\Theta_{1}&#x3D;\Theta_{0}-\alpha * J^{\prime}(\Theta">
+<meta property="og:description" content="线性回归求线性回归系数的方法总结 ：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%B3%BB%E6%95%B0.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210920160630932.png">
 <meta property="article:published_time" content="2021-09-20T08:31:00.000Z">
-<meta property="article:modified_time" content="2021-09-20T08:33:01.051Z">
+<meta property="article:modified_time" content="2021-09-20T08:34:51.475Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="算法">
@@ -131,7 +131,7 @@
 
 
 
-  <title>线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归 | Alogomachine's BLOG</title>
+  <title>梯度下降法以及线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归 | Alogomachine's BLOG</title>
   
 
 
@@ -323,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归</h1>
+          <h1 class="post-title" itemprop="name headline">梯度下降法以及线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归</h1>
         
 
         <div class="post-meta">
@@ -408,6 +408,8 @@
       
         <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>求线性回归系数的方法总结 ：</p>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%B3%BB%E6%95%B0.png" alt="线性回归系数"></p>
+<span id="more"></span>
+
 <h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>LS求的是在损失函数值最小情况下的向量WS</p>
 <p>$$<br>argMinJ(\Theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}<br>$$</p>
 <h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><p>$$<br>\Theta_{1}=\Theta_{0}-\alpha * J^{\prime}(\Theta)<br>$$</p>

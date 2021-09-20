@@ -318,7 +318,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/22031.html" itemprop="url">线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归</a></h1>
+                <a class="post-title-link" href="/22031.html" itemprop="url">梯度下降法以及线性回归算法-OLS/局部线性加权/岭回归/前向逐步回归</a></h1>
         
 
         <div class="post-meta">
@@ -402,79 +402,15 @@
 
       
         
-          
-            <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>求线性回归系数的方法总结 ：</p>
+          <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>求线性回归系数的方法总结 ：</p>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%B3%BB%E6%95%B0.png" alt="线性回归系数"></p>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>LS求的是在损失函数值最小情况下的向量WS</p>
-<p>$$<br>argMinJ(\Theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}<br>$$</p>
-<h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><p>$$<br>\Theta_{1}=\Theta_{0}-\alpha * J^{\prime}(\Theta)<br>$$</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>现在我们有一个单变量的损失函数：<br>$$<br>J(\Theta)=\Theta^{2}<br>$$<br>对函数求微分：<br>$$<br>J^{\prime}(\Theta)=2 \Theta<br>$$</p>
-<p>$$<br>设定 \Theta_{0}=1 ，学习率 \alpha=0.4<br>$$</p>
-<p>根据梯度下降的公式<br>$$<br>\Theta_{1}=\Theta_{0}-\alpha * J^{\prime}(\Theta)<br>$$<br>我们不断迭代：<br>$$<br>\begin{gathered}<br>\Theta_{0}=1 \<br>\Theta_{1}=0.2 \<br>\Theta_{2}=0.04 \<br>\Theta_{3}=0.008 \<br>\Theta_{4}=0.0016<br>\end{gathered}<br>$$<br>经过4次迭代，最终结果也接近了函数的最小值。</p>
-<p>多变量函数的求解过程和单变量的求解如出一辙。</p>
-<p>方法：</p>
-<ol>
-<li>根据损失函数以及梯度下降法公式，对每个θ求偏导</li>
-<li>并同时替换掉所有梯度下降公式的θ</li>
-<li>令所有θ迭代到不变</li>
-<li>而α为步长，需要自己调整</li>
-</ol>
-<h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><h3 id="普通最小二乘法"><a href="#普通最小二乘法" class="headerlink" title="普通最小二乘法"></a>普通最小二乘法</h3><ul>
-<li>需要求X.T*X的逆</li>
-<li>不需要标准化</li>
-<li>需要在最前面加上一列1的来求常数项</li>
-</ul>
-<h4 id="不可求逆的情况"><a href="#不可求逆的情况" class="headerlink" title="不可求逆的情况"></a>不可求逆的情况</h4><ol>
-<li>特征量大于训练数据个数m –岭回归</li>
-<li>有特征相似度极高</li>
-</ol>
-<h4 id="拟合效果判断"><a href="#拟合效果判断" class="headerlink" title="拟合效果判断"></a>拟合效果判断</h4><ul>
-<li>协方差系数coffe</li>
-<li>RSSE</li>
-</ul>
-<h3 id="局部线性加权"><a href="#局部线性加权" class="headerlink" title="局部线性加权"></a>局部线性加权</h3><ul>
-<li>计算慢，很少用，过拟合造成预测效果差</li>
-<li>通过调整权重可以使拟合的线为曲线，增大拟合程度</li>
-<li>适用于OLS拟合效果很差的情况，需要人为干预</li>
-<li>添加了高斯核的权重，类似KNN，越近给其越大的权重，让它影响预测值更多，远的让其影响为0</li>
-<li>适用于数据小<ul>
-<li>缺点：每次预测都要重新计算高斯核</li>
-<li>在数据量大的时候运算极慢</li>
-</ul>
-</li>
-<li>高斯核的k用于影响多远之内的点才能影响预测点的值</li>
-<li>k=1的时候与OLS类似，K极小的时候容易过拟合</li>
-<li>需要标准化，不加常数项1</li>
-</ul>
-<h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><ul>
-<li><strong>需要标准化，不加常数项系数</strong></li>
-<li>就是在矩阵X.T*X上加了λI，（I为对角矩阵，其大小为特征数）</li>
-<li>加上一个λI从而使得矩阵非奇异，进而能对矩阵求逆。</li>
-<li>岭回归最先用来处理特征数多于样本数的情况，现在也用于在估计中加入偏差，从而得到更好的估计。这里通过引入λ来限制了所有w之和，通过引入该惩罚项，能够减少不重要的参数，这个技术在统计学中也可以叫做缩减（shrinkage）。</li>
-<li>一般用交叉验证求得适合的lambda以及系数</li>
-</ul>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210920160630932.png" alt="image-20210920160630932"></p>
-<p>各回归系数会随λ的增大而减小</p>
-<p><strong>降维：一般选择这幅图内系数比较大，且没那么快收敛到0的特征作为所需特征，如紫色以及棕色</strong></p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li>避免出现很大的正以及很大的负的情况</li>
-<li>数据量小于特征量的时候使用</li>
-<li>解决了 因为普通最小二乘法不能求其逆</li>
-<li>具有降维以及特征选择的作用</li>
-</ol>
-<h2 id="前向逐步回归"><a href="#前向逐步回归" class="headerlink" title="前向逐步回归"></a>前向逐步回归</h2><ul>
-<li>利用了贪心算法的思想<ul>
-<li>每一个特征都加减很小的距离</li>
-<li>不断更新求得更小的RSSE</li>
-</ul>
-</li>
-<li>逐步计算最小的RSSE</li>
-<li>可以得到lasso回归差不多的效果(更简单)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rssError</span>(<span class="params">yarr,yhatarr</span>):</span></span><br><span class="line">    <span class="keyword">return</span> ((yarr-yhatarr)**<span class="number">2</span>).<span class="built_in">sum</span>() <span class="comment">#矩阵.sum()</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">regularize</span>(<span class="params">xmat</span>):</span></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    meanofmat = np.mean(xmat,axis=<span class="number">0</span>)</span><br><span class="line">    varofmat = np.var(xmat,axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> (xmat -meanofmat)/varofmat</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stageWise</span>(<span class="params">xarr,yarr,eps=<span class="number">0.01</span>,numIt=<span class="number">100</span></span>):</span></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    xmat = np.mat(xarr)</span><br><span class="line">    ymat = np.mat(yarr).T</span><br><span class="line">    yMean = np.mean(ymat,<span class="number">0</span>)</span><br><span class="line">    yamt = ymat-yMean</span><br><span class="line">    xmat = regularize(xmat)</span><br><span class="line">    m,n = xmat.shape</span><br><span class="line">    ws = np.zeros((n,<span class="number">1</span>))</span><br><span class="line">    wsTest=ws.copy()</span><br><span class="line">    wsMax=ws.copy()</span><br><span class="line">    returnMax = np.zeros((numIt,n))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numIt):</span><br><span class="line">        lowererror = +np.inf</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">for</span> jiange <span class="keyword">in</span> [-<span class="number">1</span>,<span class="number">1</span>]:</span><br><span class="line">                wsTest = ws.copy()</span><br><span class="line">                wsTest[j] += eps*jiange</span><br><span class="line">                yhat = xmat*wsTest</span><br><span class="line">                error = rssError(yamt.A,yhat.A)</span><br><span class="line">                <span class="keyword">if</span> error &lt; lowererror:</span><br><span class="line">                    lowererror = error</span><br><span class="line">                    wsMax = wsTest</span><br><span class="line">        ws = wsMax.copy()</span><br><span class="line">        returnMax[i,:] = ws.T</span><br><span class="line">    <span class="keyword">return</span> returnMax</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    xarr,yarr = loaddata(<span class="string">&#x27;abalone.txt&#x27;</span>)</span><br><span class="line">    u = stageWise(xarr,yarr,eps=<span class="number">0.0001</span>,numIt=<span class="number">100000</span>)  <span class="comment"># eps越小以及迭代次数越多，越容易找到最优解</span></span><br><span class="line">    u[-<span class="number">1</span>]  <span class="comment">#最后一行即最优解</span></span><br></pre></td></tr></table></figure>
-
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/22031.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
