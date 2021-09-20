@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -404,9 +400,7 @@
         <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">函数回顾和后置返回类型、内联函数、函数杂合用法总结、const char * 组合、形参带const</span></strong></p>
 <h2 id="函数回顾和后置返回类型"><a href="#函数回顾和后置返回类型" class="headerlink" title="函数回顾和后置返回类型"></a><strong>函数回顾和后置返回类型</strong></h2><p><strong>函数定义中，形参如果在函数体内用不到的话，则可以不给形参变量名字，只给其类型</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span>)</span> </span>&#123; <span class="comment">//不需要所以可以不给变量名</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span>)</span></span>; <span class="comment">//函数声明同理</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//但最好还是都带上</span></span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <p><strong>把函数返回类型放到函数名字之前，这种写法，叫做前置返回类型</strong></p>
 <p><strong>C++还有后置返回类型:</strong></p>
 <ul>
@@ -415,11 +409,9 @@
 <p><strong>格式：前面放auto，表示函数返回类型放在参数列表之后，而放在参数列表之后的返回类型是通过-&gt;开始的。</strong></p>
 <p><strong>格式：auto  XXX(int a)  -&gt; 真类型</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">func123</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span>)</span> -&gt; <span class="keyword">void</span></span>; <span class="comment">//函数声明</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">func213</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> -&gt; <span class="keyword">void</span> </span>&#123;  <span class="comment">//函数定义</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>优点：便于处理某些复杂的类型返回值声明</strong></p>
 <h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a><strong>内联函数</strong></h2><p><strong>将普通函数变成内联函数</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">myfunc</span><span class="params">(<span class="keyword">int</span> testv)</span> </span>&#123; <span class="comment">//在函数定义前面加一个inline</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注意：函数定义放到头文件（一般都要互相引用）中会导致函数重复被定义，所以一般头文件只放函数的声明，不能放函数的定义，函数的定义放在CPP文件中</strong></p>
 <p><strong>但内联函数的定义一般就要放在头文件中。这样需要用到这个内联函数的CPP文件都能通过#include把这个内联函数源代码#include进来</strong></p>
 <p><strong>（因为内联函数要用函数本体替换函数调用，所以声明那里直接写定义，以便找到函数的本体）</strong></p>
@@ -450,28 +442,23 @@
 <li><strong>函数返回类型为void，表示函数不返回任何类型。但我们可以调用一个返回类型是void的函数，让它作为另一个返回类型是void函数的返回值</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">func1</span>();  <span class="comment">//返回另一个返回值是void的函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><p><strong>函数返回指针和返回引用的问题情况</strong></p>
 <p><strong>返回指针：</strong></p>
 <p><strong>极大的问题：</strong></p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">mm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">9</span>;  <span class="comment">//不报错，但有巨大的隐患</span></span><br><span class="line">    <span class="keyword">return</span> &amp;t; <span class="comment">//返回了局部变量的地址，产生隐患，一调用完，局部变量就没了，会造成程序崩溃</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>​    <strong>正确的用法：使用全局变量代替局部变量赋值</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> q = <span class="number">10</span> ; <span class="comment">//全局变量，地址不会发生改变，一直地址都有值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">mm</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;q; <span class="comment">//全局变量，地址不会发生改变，一直地址都有值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <hr>
 <p>​        <strong>返回引用：</strong></p>
 <p>​        <strong>极大的问题：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同理也是巨大隐患</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">qq</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> v = <span class="number">9</span>;</span><br><span class="line">    cout &lt;&lt; &amp;v &lt;&lt; endl; <span class="comment">//地址相同</span></span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; k = <span class="built_in">qq</span>();</span><br><span class="line">    k = <span class="number">10</span>; <span class="comment">//往不存在的地址写了值，巨大隐患</span></span><br><span class="line">    cout &lt;&lt; &amp;k &lt;&lt; endl; <span class="comment">//地址相同</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>​        <strong>正确的用法：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">qq</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> v = <span class="number">9</span>;</span><br><span class="line">    cout &lt;&lt; &amp;v &lt;&lt; endl; <span class="comment">//地址不相同</span></span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">qq</span>(); <span class="comment">//改了这个</span></span><br><span class="line">    k = <span class="number">10</span>; <span class="comment">//往存在新建的地址写了值，安全</span></span><br><span class="line">    cout &lt;&lt; &amp;k &lt;&lt; endl; <span class="comment">//地址不相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>牢记：不能调动局部变量的地址（返回的是局部变量地址的时候要时刻注意）</strong></p>
-<ol start="3">
+<ol>
 <li><strong>没有形参可以报错形参列表为空或者写void</strong></li>
 <li><strong>如果一个函数我们不调用的话，则该函数可以只有声明部分，没有函数调用部分</strong></li>
 <li><strong>普通函数（不是inline函数），声明可以声明多次，定义只能定义一次。一般函数声明的CPP文件会inclide自己函数声明的文件.h</strong></li>
@@ -485,51 +472,34 @@
 <li><strong>类型不一样</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">float</span> a)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><strong>形参数量不一样</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;    &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">float</span> b)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>不行：</strong></p>
 <ol>
 <li><strong>形参数量和类型一致</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><strong>加上const常量标识修饰也不行</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> a)</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
 <p><strong>3.形参名字不同也没用</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun23</span><span class="params">(<span class="keyword">int</span> b)</span> </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="const-char-、char-const-、char-const-的区别"><a href="#const-char-、char-const-、char-const-的区别" class="headerlink" title="**const char 、char const *、char const 的区别"></a>**const char <em>、char const *、char <em>const 的区别</em></em></h2><ul>
-<li><em><em>const char</em> p的意思:</em>*</li>
+<h2 id="const-char-、char-const-、char-const-的区别"><a href="#const-char-、char-const-、char-const-的区别" class="headerlink" title="const char 、char const \、char *const 的区别"></a><strong>const char <em>、char const \</em>、char *const 的区别</strong></h2><ul>
+<li><strong>const char* p的意思:</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p = str;  <span class="comment">//代表p指向的东西不能通过p来修改</span></span><br><span class="line"><span class="comment">//*p = &#x27;y&#x27;; 错误</span></span><br><span class="line"><span class="comment">//str[0]=&#x27;y&#x27;; 可以</span></span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
-<li><em><em>char const * 的意思：与 const char</em> p等价</em>*</li>
-<li>*<em>char <em>const</em></em><ul>
+<li><strong>char const * 的意思：与 const char* p等价</strong></li>
+<li><strong>char *const</strong><ul>
 <li><strong>p一旦指向一个东西就不可以改变其他东西了，与常量一样</strong></li>
 <li><strong>定义的时候必须初始化</strong></li>
 </ul>
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[] = <span class="string">&quot;i love china&quot;</span>;</span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p = str;  <span class="comment">//定义的时候必须初始化</span></span><br><span class="line">*p = <span class="string">&#x27;y&#x27;</span>;   		  <span class="comment">//p一旦指向一个东西就不可以改变其他东西了，与常量一样</span></span><br><span class="line">cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"><span class="comment">//p++; 不行</span></span><br><span class="line">cout &lt;&lt; *p &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>常量指针不能改常量值，</strong></p>
 <p><strong>指针常量不可以改指针。</strong></p>
 <ul>
@@ -537,12 +507,8 @@
 </ul>
 <p><strong>同理引用：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c = <span class="number">1232</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; a = c; <span class="comment">//同理值不能通过a来修改</span></span><br><span class="line"><span class="keyword">int</span> <span class="keyword">const</span>&amp; a = c; <span class="comment">//同理值不能通过a来修改</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;b = <span class="number">31</span>; <span class="comment">//可以，不同于int&amp;b=31不行，就能跟常量绑定在一起了 //还可以拿来使用，也分配了内存了</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="函数形参中带const"><a href="#函数形参中带const" class="headerlink" title="函数形参中带const"></a><strong>函数形参中带const</strong></h2><p><strong>更加推荐在形参前面加const</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func411</span><span class="params">(<span class="keyword">const</span> student&amp; stu)</span> </span>&#123;</span><br><span class="line">    stu.num = <span class="number">1000</span>;<span class="comment">//非法，不能改变它的值了</span></span><br><span class="line">    <span class="comment">//学习在形参里面加入const的写法的习惯，不会无意改值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dasd</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    c = <span class="number">100</span>;<span class="comment">//非法，不能改变它的值了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p><strong>加入const可以防止你无意修改了形参的值</strong></p>
 </li>
@@ -550,15 +516,11 @@
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func411</span><span class="params">( student&amp; stu)</span> </span>&#123;</span><br><span class="line">    stu.num = <span class="number">1000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func412</span><span class="params">(<span class="keyword">const</span> student&amp; stu)</span> </span>&#123;</span><br><span class="line">    stu.num = <span class="number">1000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	student ac;</span><br><span class="line">	<span class="keyword">const</span> student&amp; av = ac;</span><br><span class="line">	<span class="built_in">func411</span>(av); <span class="comment">//不行 ,因为形参不是常量引用，而代入的是常量引用</span></span><br><span class="line">    <span class="built_in">func412</span>(av); <span class="comment">//可以</span></span><br><span class="line">    <span class="built_in">func412</span>(ac); <span class="comment">//可以，既可以接受普通的类型以及常量类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>引用形参还能直接用常量代入</strong></li>
 <li><strong>引用也推荐与const组合</strong> </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dasd</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">dasd</span>(<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
-
-
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -749,7 +711,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9B%9E%E9%A1%BE%E5%92%8C%E5%90%8E%E7%BD%AE%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">函数回顾和后置返回类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%9D%82%E5%90%88%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">函数杂合用法总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-char-%E3%80%81char-const-%E3%80%81char-const-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">**const char 、char const *、char const 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%B8%AD%E5%B8%A6const"><span class="nav-number">5.</span> <span class="nav-text">函数形参中带const</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%9B%9E%E9%A1%BE%E5%92%8C%E5%90%8E%E7%BD%AE%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">函数回顾和后置返回类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%9D%82%E5%90%88%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">函数杂合用法总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-char-%E3%80%81char-const-%E3%80%81char-const-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">const char 、char const \、char *const 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%B8%AD%E5%B8%A6const"><span class="nav-number">5.</span> <span class="nav-text">函数形参中带const</span></a></li></ol></div>
             
 
           </div>
@@ -1281,5 +1243,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

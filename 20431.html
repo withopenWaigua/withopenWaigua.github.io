@@ -146,11 +146,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -425,11 +421,6 @@
 </ul>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804224916.png" alt="image-20210804224916388"></p>
 <span id="more"></span>
-
-
-
-
-
 <ul>
 <li><strong>如何评估相似度</strong></li>
 </ul>
@@ -472,19 +463,11 @@
 <li><strong>我们要选择转折点，前面下降很快，后面很慢</strong></li>
 </ul>
 <h1 id="K-Means手动算法实现"><a href="#K-Means手动算法实现" class="headerlink" title="K-Means手动算法实现"></a><strong>K-Means手动算法实现</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入相应的包</span></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Input Data and Shape&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(data.shape)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
 <pre><code>Input Data and Shape
 (3000, 2)
-</code></pre>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -492,9 +475,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -529,22 +511,11 @@
       <td>2.557729</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可视化</span></span><br><span class="line"><span class="comment"># 提取字段并可视化数据，使用scatter plot</span></span><br><span class="line">f1 = data[<span class="string">&#x27;V1&#x27;</span>].values</span><br><span class="line">f2 = data[<span class="string">&#x27;V2&#x27;</span>].values</span><br><span class="line">X = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(f1, f2)))  <span class="comment"># 数据的点</span></span><br><span class="line"><span class="comment"># X = np.random.random((200, 2))*10  # 随机点</span></span><br><span class="line">plt.scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=<span class="string">&#x27;red&#x27;</span>, s=<span class="number">6</span>) <span class="comment"># s代表每个点的大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#plt.scatter(f1, f2, c=&#x27;black&#x27;, s=8)</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>&lt;matplotlib.collections.PathCollection at 0x1ea00ac7240&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230823.png" alt="png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230823.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># K-means里的K值</span></span><br><span class="line">k = <span class="number">3</span></span><br><span class="line"><span class="comment"># 随机初始化K个中心点，把结果存储在C</span></span><br><span class="line">C_x = np.random.randint(<span class="number">0</span>, np.<span class="built_in">max</span>(X), size=k)  <span class="comment"># 生成X，随机点的初始化为k个</span></span><br><span class="line">C_y = np.random.randint(<span class="number">0</span>, np.<span class="built_in">max</span>(X), size=k) <span class="comment"># 生成Y，随机点的初始化为k个</span></span><br><span class="line">C = np.array(<span class="built_in">list</span>(<span class="built_in">zip</span>(C_x, C_y)), dtype=np.float32)  <span class="comment"># 组合成（X，Y）</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;初始化之后的中心点：&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(C)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把中心点也展示一下</span></span><br><span class="line">plt.scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>], c=<span class="string">&#x27;red&#x27;</span>, s=<span class="number">7</span>)</span><br><span class="line">plt.scatter(C[:,<span class="number">0</span>], C[:,<span class="number">1</span>], marker=<span class="string">&#x27;*&#x27;</span>, s=<span class="number">300</span>, c=<span class="string">&#x27;g&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <pre><code>初始化之后的中心点：
 [[71. 46.]
  [74. 90.]
@@ -555,23 +526,16 @@
 
 
 &lt;matplotlib.collections.PathCollection at 0x1ea00b2ba90&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230831.png" alt="png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230831.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 存储之前的中心点</span></span><br><span class="line">C_old = np.zeros(C.shape)</span><br><span class="line"></span><br><span class="line">clusters = np.zeros(<span class="built_in">len</span>(X)) <span class="comment"># K=3,  clusters = [0,0,1,2,1,0]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dist</span>(<span class="params">a, b, ax=<span class="number">1</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> np.linalg.norm(a - b, axis=ax)  <span class="comment"># 欧式距离实现</span></span><br><span class="line"></span><br><span class="line">error = dist(C, C_old, <span class="literal">None</span>)</span><br><span class="line"><span class="comment"># 循环算法，直到收敛。收敛的条件就是，判断当前的中心点与之前的中心点之间有没有变化，没有变化距离就会变成0，然后抛出异常</span></span><br><span class="line"><span class="keyword">while</span> error != <span class="number">0</span>:</span><br><span class="line">    <span class="comment"># Assigning each value to its closest cluster</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(X)):</span><br><span class="line">        distances = dist(X[i], C)</span><br><span class="line">        cluster = np.argmin(distances)</span><br><span class="line">        clusters[i] = cluster</span><br><span class="line">    <span class="comment"># 在计算新的中心点之前，先把旧的中心点存下来，以便计算距离</span></span><br><span class="line">    C_old = deepcopy(C)</span><br><span class="line">    <span class="comment"># 计算新的中心点</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">        points = [X[j] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(X)) <span class="keyword">if</span> clusters[j] == i]</span><br><span class="line">        C[i] = np.mean(points, axis=<span class="number">0</span>)</span><br><span class="line">    error = dist(C, C_old, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">colors = [<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;m&#x27;</span>]</span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">        points = np.array([X[j] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(X)) <span class="keyword">if</span> clusters[j] == i])</span><br><span class="line">        ax.scatter(points[:, <span class="number">0</span>], points[:, <span class="number">1</span>], s=<span class="number">7</span>, c=colors[i])</span><br><span class="line">ax.scatter(C[:, <span class="number">0</span>], C[:, <span class="number">1</span>], marker=<span class="string">&#x27;*&#x27;</span>, s=<span class="number">200</span>, c=<span class="string">&#x27;#050505&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>&lt;matplotlib.collections.PathCollection at 0x1ea00b7cc18&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230836.png" alt="png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230836.png" alt="png"></p>
 <h1 id="VectorQuantization-图像压缩"><a href="#VectorQuantization-图像压缩" class="headerlink" title="VectorQuantization-图像压缩"></a><strong>VectorQuantization-图像压缩</strong></h1><ul>
 <li><strong>运用于压缩</strong></li>
 <li><strong>也有降噪的作用</strong></li>
 </ul>
 <p><strong>原理就是本来是8*8的有色图片，但因为有色(RGB),其实图片的大小为8*8*3(3代表3个数的向量),</strong><br><strong>K-means处理后，向量直接变成中心点的颜色，就不储存那么多颜色向量，缩小了图片的大小</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pylab <span class="keyword">import</span> imread,imshow,figure,show,subplot</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> reshape,uint8,flipud</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"></span><br><span class="line">img = imread(<span class="string">&#x27;sample2.jpeg&#x27;</span>)  <span class="comment"># img： 图片的数据   存储图片数据</span></span><br><span class="line"> </span><br><span class="line">pixel = reshape(img,(img.shape[<span class="number">0</span>]*img.shape[<span class="number">1</span>],<span class="number">3</span>))</span><br><span class="line">pixel_new = deepcopy(pixel)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (img.shape)</span><br><span class="line"></span><br><span class="line">model = KMeans(n_clusters=<span class="number">5</span>) <span class="comment"># K=3 3种颜色  越大越清晰但越慢</span></span><br><span class="line">labels = model.fit_predict(pixel)   </span><br><span class="line">palette = model.cluster_centers_    <span class="comment"># 找中心点</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(pixel)):</span><br><span class="line">    pixel_new[i,:] = palette[labels[i]]</span><br><span class="line">    </span><br><span class="line">imshow(reshape(pixel_new, (img.shape[<span class="number">0</span>], img.shape[<span class="number">1</span>],<span class="number">3</span>)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <pre><code>(315, 474, 3)
 
 
@@ -579,8 +543,7 @@
 
 
 &lt;matplotlib.image.AxesImage at 0x1ea00abf978&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230840.png" alt="png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210804230840.png" alt="png"></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -776,7 +739,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#K-Means%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%BF%AD%E4%BB%A3%E5%BC%8F%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">循环迭代式的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EK-means%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">关于K-means几个问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#K-Means%E6%89%8B%E5%8A%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">K-Means手动算法实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VectorQuantization-%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9"><span class="nav-number">3.</span> <span class="nav-text">VectorQuantization-图像压缩</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#K-Means%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%BF%AD%E4%BB%A3%E5%BC%8F%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">循环迭代式的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EK-means%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">关于K-means几个问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#K-Means%E6%89%8B%E5%8A%A8%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">K-Means手动算法实现</span></a></li></ol></div>
             
 
           </div>
@@ -1308,5 +1271,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

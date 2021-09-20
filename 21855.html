@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="数据分析pandas时间序列 12#pd.set_option(&amp;#x27;display.max_rows&amp;#x27;,None)  #显示所有的行   12import numpy as npimport pandas as pd  Python内置时间模块1import time   123# 1.时间戳  给机器去看懂的time.time()#从1970年1月1日 0点0分0秒开始">
+<meta name="description" content="数据分析pandas时间序列 12#pd.set_option(&amp;#x27;display.max_rows&amp;#x27;,None)  #显示所有的行 12import numpy as npimport pandas as pd Python内置时间模块1import time 123# 1.时间戳  给机器去看懂的time.time()#从1970年1月1日 0点0分0秒开始">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pandas时间序列">
 <meta property="og:url" content="http://alogomachine.com/21855.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="数据分析pandas时间序列 12#pd.set_option(&amp;#x27;display.max_rows&amp;#x27;,None)  #显示所有的行   12import numpy as npimport pandas as pd  Python内置时间模块1import time   123# 1.时间戳  给机器去看懂的time.time()#从1970年1月1日 0点0分0秒开始">
+<meta property="og:description" content="数据分析pandas时间序列 12#pd.set_option(&amp;#x27;display.max_rows&amp;#x27;,None)  #显示所有的行 12import numpy as npimport pandas as pd Python内置时间模块1import time 123# 1.时间戳  给机器去看懂的time.time()#从1970年1月1日 0点0分0秒开始">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_86_1.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_88_1.png">
@@ -141,11 +141,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -408,160 +404,95 @@
       
         <p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">时间序列</span></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pd.set_option(&#x27;display.max_rows&#x27;,None)  </span></span><br><span class="line"><span class="comment">#显示所有的行</span></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
 <h1 id="Python内置时间模块"><a href="#Python内置时间模块" class="headerlink" title="Python内置时间模块"></a>Python内置时间模块</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.时间戳  给机器去看懂的</span></span><br><span class="line">time.time()</span><br><span class="line"><span class="comment">#从1970年1月1日 0点0分0秒开始</span></span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <p>结果：</p>
 <pre><code>1626600601.5184326
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.结构化时间  操作时间</span></span><br><span class="line">t = time.localtime(time.time())</span><br><span class="line"><span class="comment">#将时间戳变成我们认识的时间</span></span><br><span class="line"><span class="comment">#本地实际</span></span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.结构化时间  操作时间</span></span><br><span class="line">t = time.localtime(time.time())</span><br><span class="line"><span class="comment">#将时间戳变成我们认识的时间</span></span><br><span class="line"><span class="comment">#本地实际</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.gmtime(time.time())  <span class="comment">#0时区的时间</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>time.struct_time(tm_year=2021, tm_mon=7, tm_mday=18, tm_hour=9, tm_min=30, tm_sec=1, tm_wday=6, tm_yday=199, tm_isdst=0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.tm_year,t.tm_mon</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.tm_year,t.tm_mon</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>(2021, 7)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3.格式化时间字符串</span></span><br><span class="line">time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>,t)</span><br><span class="line"><span class="comment">#得到字符串对象，给人类看懂的</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3.格式化时间字符串</span></span><br><span class="line">time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>,t)</span><br><span class="line"><span class="comment">#得到字符串对象，给人类看懂的</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>&#39;2021-07-18 17:30:01&#39;
-</code></pre>
-<h1 id="日期和实际的数据类型"><a href="#日期和实际的数据类型" class="headerlink" title="日期和实际的数据类型"></a>日期和实际的数据类型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><h1 id="日期和实际的数据类型"><a href="#日期和实际的数据类型" class="headerlink" title="日期和实际的数据类型"></a>日期和实际的数据类型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">now = datetime.now()</span><br><span class="line">now</span><br><span class="line"><span class="comment">#年月日时分秒，微秒</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 7, 18, 17, 31, 52, 159024)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2021
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year,now.month,now.day</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">now.year,now.month,now.day</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>(2021, 7, 18)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>) <span class="comment">#转换成datetime对象</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>) <span class="comment">#转换成datetime对象</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 7, 18, 17, 34)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>)-datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">30</span>,<span class="number">0</span>)  <span class="comment">#将这个对象相减</span></span><br><span class="line">d  <span class="comment">#第一个参数是天数，第二个参数是秒</span></span><br><span class="line"><span class="comment">#timedelta是时间间隔</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">34</span>,<span class="number">0</span>)-datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>,<span class="number">17</span>,<span class="number">30</span>,<span class="number">0</span>)  <span class="comment">#将这个对象相减</span></span><br><span class="line">d  <span class="comment">#第一个参数是天数，第二个参数是秒</span></span><br><span class="line"><span class="comment">#timedelta是时间间隔</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.timedelta(0, 240)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line">start = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">start+timedelta(<span class="number">0</span>, <span class="number">240</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line">start = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">start+timedelta(<span class="number">0</span>, <span class="number">240</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 7, 18, 0, 4)
-</code></pre>
-<h1 id="datetime-和字符串相互转换"><a href="#datetime-和字符串相互转换" class="headerlink" title="datetime 和字符串相互转换"></a>datetime 和字符串相互转换</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
-
+</code></pre><h1 id="datetime-和字符串相互转换"><a href="#datetime-和字符串相互转换" class="headerlink" title="datetime 和字符串相互转换"></a>datetime 和字符串相互转换</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stamp = datetime(<span class="number">2021</span>,<span class="number">7</span>,<span class="number">18</span>)</span><br><span class="line">stamp</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 7, 18, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>(stamp)  <span class="comment">#强制转换</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span>(stamp)  <span class="comment">#强制转换</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>&#39;2021-07-18 00:00:00&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">stamp.strftime(<span class="string">&#x27;%Y-%m-%d %H-%M-%S&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">stamp.strftime(<span class="string">&#x27;%Y-%m-%d %H-%M-%S&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>&#39;2021-07-18 00-00-00&#39;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.strptime(<span class="string">&#x27;10/1/2021&#x27;</span>,<span class="string">&#x27;%m/%d/%Y&#x27;</span>) <span class="comment">#将str转换成datetime对象</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.strptime(<span class="string">&#x27;10/1/2021&#x27;</span>,<span class="string">&#x27;%m/%d/%Y&#x27;</span>) <span class="comment">#将str转换成datetime对象</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 10, 1, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020&#x27;</span>,<span class="string">&#x27;1/1/2020&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020&#x27;</span>,<span class="string">&#x27;1/1/2020&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>[&#39;12/12/2020&#39;, &#39;1/1/2020&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">[datetime.strptime(i,<span class="string">&quot;%m/%d/%Y&quot;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> d]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式化</span></span><br><span class="line">[datetime.strptime(i,<span class="string">&quot;%m/%d/%Y&quot;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> d]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>[datetime.datetime(2020, 12, 12, 0, 0), datetime.datetime(2020, 1, 1, 0, 0)]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;12/12/2021&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>datetime.datetime(2021, 12, 12, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020-12-12&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020-12-12&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2020, 12, 12, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020.12.12&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020.12.12&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2020, 12, 12, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020 12 12&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(<span class="string">&#x27;2020 12 12&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>datetime.datetime(2020, 12, 12, 0, 0)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020 20:00:00&#x27;</span>,<span class="string">&#x27;1/1/2020 12:00:00&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = [<span class="string">&#x27;12/12/2020 20:00:00&#x27;</span>,<span class="string">&#x27;1/1/2020 12:00:00&#x27;</span>]</span><br><span class="line">d</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>[&#39;12/12/2020 20:00:00&#39;, &#39;1/1/2020 12:00:00&#39;]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.to_datetime(d)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.to_datetime(d)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx = pd.to_datetime(d+[<span class="literal">None</span>])</span><br><span class="line">idx <span class="comment">#空的话就变成了NaT</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx = pd.to_datetime(d+[<span class="literal">None</span>])</span><br><span class="line">idx <span class="comment">#空的话就变成了NaT</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;, &#39;NaT&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.isnull(idx)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.isnull(idx)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>array([False, False,  True])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx.dropna()</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx.dropna()</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-12-12 20:00:00&#39;, &#39;2020-01-01 12:00:00&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)
-</code></pre>
-<h1 id="时间序列"><a href="#时间序列" class="headerlink" title="时间序列"></a>时间序列</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dates = [datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">13</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">14</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">15</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">16</span>)]</span><br><span class="line">dates</span><br></pre></td></tr></table></figure>
-
+</code></pre><h1 id="时间序列"><a href="#时间序列" class="headerlink" title="时间序列"></a>时间序列</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dates = [datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">12</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">13</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">14</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">15</span>),datetime(<span class="number">2020</span>, <span class="number">12</span>, <span class="number">16</span>)]</span><br><span class="line">dates</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>[datetime.datetime(2020, 12, 12, 0, 0),
  datetime.datetime(2020, 12, 13, 0, 0),
  datetime.datetime(2020, 12, 14, 0, 0),
  datetime.datetime(2020, 12, 15, 0, 0),
  datetime.datetime(2020, 12, 16, 0, 0)]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">5</span>),index=dates)  <span class="comment">#把行索引替换成datetime</span></span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">5</span>),index=dates)  <span class="comment">#把行索引替换成datetime</span></span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-12-12    0.379713
 2020-12-13   -0.649630
@@ -569,16 +500,12 @@
 2020-12-15   -0.857139
 2020-12-16    1.245633
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.index</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-12-12&#39;, &#39;2020-12-13&#39;, &#39;2020-12-14&#39;, &#39;2020-12-15&#39;,
                &#39;2020-12-16&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=None)
-</code></pre>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts</span><br></pre></td></tr></table></figure>
-
+</code></pre><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-12-12    0.379713
 2020-12-13   -0.649630
@@ -586,29 +513,21 @@ dtype: float64
 2020-12-15   -0.857139
 2020-12-16    1.245633
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>0.37971319526808683
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-12-12    0.379713
 2020-12-13   -0.649630
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-12-12    0.379713
 2020-12-14   -0.032518
 2020-12-16    1.245633
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts + ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts + ts[::<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-12-12    0.759426
 2020-12-13         NaN
@@ -616,29 +535,19 @@ dtype: float64
 2020-12-15         NaN
 2020-12-16    2.491266
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020-12-16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020-12-16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>1.2456328552039189
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020 12 16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020 12 16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>1.2456328552039189
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020/12/16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts[<span class="string">&#x27;2020/12/16 &#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>1.2456328552039189
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">range</span>(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">range</span>(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>range(0, 10)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts1 = pd.Series(np.random.randn(<span class="number">1000</span>),index=pd.date_range(<span class="string">&#x27;1/1/2020&#x27;</span>,periods=<span class="number">1000</span>)) <span class="comment">#第一个参数填起始，第二个填往后的个数</span></span><br><span class="line">ts1</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts1 = pd.Series(np.random.randn(<span class="number">1000</span>),index=pd.date_range(<span class="string">&#x27;1/1/2020&#x27;</span>,periods=<span class="number">1000</span>)) <span class="comment">#第一个参数填起始，第二个填往后的个数</span></span><br><span class="line">ts1</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-01-01    1.015421
 2020-01-02   -0.925705
@@ -702,9 +611,7 @@ dtype: float64
 2022-09-25   -1.108808
 2022-09-26    0.120807
 Freq: D, Length: 1000, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2021-01-01    0.972144
 2021-01-02   -0.707146
@@ -768,37 +675,27 @@ Freq: D, Length: 1000, dtype: float64
 2021-12-30    2.362099
 2021-12-31   -0.820668
 Freq: D, Length: 365, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021.01&#x27;</span>].<span class="built_in">sum</span>() <span class="comment">#求值的和</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;2021.01&#x27;</span>].<span class="built_in">sum</span>() <span class="comment">#求值的和</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>11.933662218114787
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[datetime(<span class="number">2021</span>,<span class="number">12</span>,<span class="number">12</span>)] <span class="comment">#取值</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[datetime(<span class="number">2021</span>,<span class="number">12</span>,<span class="number">12</span>)] <span class="comment">#取值</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>0.5205669131839745
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]  <span class="comment"># 包含末端数据</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]  <span class="comment"># 包含末端数据</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-03-16    0.256742
 2020-03-17   -0.567791
 2020-03-18    0.513700
 2020-03-19   -0.255108
 Freq: D, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>] = <span class="number">1</span></span><br><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>] = <span class="number">1</span></span><br><span class="line">ts1[<span class="string">&#x27;3/16/2020&#x27;</span>:<span class="string">&#x27;3/19/2020&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-03-16    1.0
 2020-03-17    1.0
 2020-03-18    1.0
 2020-03-19    1.0
 Freq: D, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[:<span class="string">&#x27;2020-01-06&#x27;</span>]  <span class="comment">#切片</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1[:<span class="string">&#x27;2020-01-06&#x27;</span>]  <span class="comment">#切片</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-01-01    1.015421
 2020-01-02   -0.925705
@@ -807,9 +704,7 @@ Freq: D, dtype: float64
 2020-01-05    0.299188
 2020-01-06    0.733276
 Freq: D, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1.truncate(after=<span class="string">&#x27;1/6/2020&#x27;</span>)  <span class="comment">#找1月6之前的数据，after表示最终截至</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1.truncate(after=<span class="string">&#x27;1/6/2020&#x27;</span>)  <span class="comment">#找1月6之前的数据，after表示最终截至</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-01-01    1.015421
 2020-01-02   -0.925705
@@ -818,9 +713,7 @@ Freq: D, dtype: float64
 2020-01-05    0.299188
 2020-01-06    0.733276
 Freq: D, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1.truncate(before=<span class="string">&#x27;1/6/2021&#x27;</span>) <span class="comment">#找之后的</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts1.truncate(before=<span class="string">&#x27;1/6/2021&#x27;</span>) <span class="comment">#找之后的</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2021-01-06   -0.151318
 2021-01-07    0.614911
@@ -884,12 +777,8 @@ Freq: D, dtype: float64
 2022-09-25   -1.108808
 2022-09-26    0.120807
 Freq: D, Length: 629, dtype: float64
-</code></pre>
-<h2 id="带有重复索引的时间序列"><a href="#带有重复索引的时间序列" class="headerlink" title="带有重复索引的时间序列"></a>带有重复索引的时间序列</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.DatetimeIndex([<span class="string">&#x27;1/1/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/3/2020&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><h2 id="带有重复索引的时间序列"><a href="#带有重复索引的时间序列" class="headerlink" title="带有重复索引的时间序列"></a>带有重复索引的时间序列</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.DatetimeIndex([<span class="string">&#x27;1/1/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/2/2020&#x27;</span>,<span class="string">&#x27;1/3/2020&#x27;</span>])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts2 = pd.Series([<span class="string">&#x27;帅比&#x27;</span>,<span class="string">&#x27;呵呵&#x27;</span>,<span class="string">&#x27;张渤涛&#x27;</span>,<span class="string">&#x27;新青年&#x27;</span>,<span class="string">&#x27;小工&#x27;</span>],index=dates)</span><br><span class="line">ts2 <span class="comment">#日期可以重复、</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>2020-01-01     帅比
 2020-01-02     呵呵
@@ -897,25 +786,17 @@ Freq: D, Length: 629, dtype: float64
 2020-01-02    新青年
 2020-01-03     小工
 dtype: object
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts2.index.is_unique <span class="comment">#不是重复的</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts2.index.is_unique <span class="comment">#不是重复的</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>False
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts2.groupby(level=<span class="number">0</span>).count()  <span class="comment">#level=0为最外层的索引分类</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts2.groupby(level=<span class="number">0</span>).count()  <span class="comment">#level=0为最外层的索引分类</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2020-01-01    1
 2020-01-02    3
 2020-01-03    1
 dtype: int64
-</code></pre>
-<h2 id="日期范围-频率-移动"><a href="#日期范围-频率-移动" class="headerlink" title="日期范围 频率 移动"></a>日期范围 频率 移动</h2><h3 id="生成日期范围"><a href="#生成日期范围" class="headerlink" title="生成日期范围"></a>生成日期范围</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range?</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><h2 id="日期范围-频率-移动"><a href="#日期范围-频率-移动" class="headerlink" title="日期范围 频率 移动"></a>日期范围 频率 移动</h2><h3 id="生成日期范围"><a href="#生成日期范围" class="headerlink" title="生成日期范围"></a>生成日期范围</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range?</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index = pd.date_range(<span class="string">&#x27;2020-01-01&#x27;</span>,<span class="string">&#x27;2020-03-01&#x27;</span>)  <span class="comment">#起止日期</span></span><br><span class="line">index</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-01-01&#39;, &#39;2020-01-02&#39;, &#39;2020-01-03&#39;, &#39;2020-01-04&#39;,
                &#39;2020-01-05&#39;, &#39;2020-01-06&#39;, &#39;2020-01-07&#39;, &#39;2020-01-08&#39;,
@@ -934,9 +815,7 @@ dtype: int64
                &#39;2020-02-26&#39;, &#39;2020-02-27&#39;, &#39;2020-02-28&#39;, &#39;2020-02-29&#39;,
                &#39;2020-03-01&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往后100天</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往后100天</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2020-01-01&#39;, &#39;2020-01-02&#39;, &#39;2020-01-03&#39;, &#39;2020-01-04&#39;,
                &#39;2020-01-05&#39;, &#39;2020-01-06&#39;, &#39;2020-01-07&#39;, &#39;2020-01-08&#39;,
@@ -964,9 +843,7 @@ dtype: int64
                &#39;2020-04-02&#39;, &#39;2020-04-03&#39;, &#39;2020-04-04&#39;, &#39;2020-04-05&#39;,
                &#39;2020-04-06&#39;, &#39;2020-04-07&#39;, &#39;2020-04-08&#39;, &#39;2020-04-09&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(end=<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往前100天</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(end=<span class="string">&#x27;2020-01-01&#x27;</span>,periods=<span class="number">100</span>) <span class="comment">#往前100天</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2019-09-24&#39;, &#39;2019-09-25&#39;, &#39;2019-09-26&#39;, &#39;2019-09-27&#39;,
                &#39;2019-09-28&#39;, &#39;2019-09-29&#39;, &#39;2019-09-30&#39;, &#39;2019-10-01&#39;,
@@ -994,9 +871,7 @@ dtype: int64
                &#39;2019-12-25&#39;, &#39;2019-12-26&#39;, &#39;2019-12-27&#39;, &#39;2019-12-28&#39;,
                &#39;2019-12-29&#39;, &#39;2019-12-30&#39;, &#39;2019-12-31&#39;, &#39;2020-01-01&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
-</code></pre>
-<h4 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2021-02-1&#x27;</span>,<span class="string">&#x27;2021-07-18&#x27;</span>,freq= <span class="string">&#x27;3D&#x27;</span>) <span class="comment">#freq=3h：生成的间隔为3小时  3D: 间隔3天  B：工作日，周六周日  T/min：代表分组 M:月底</span></span><br><span class="line"><span class="comment">#BM 月底  MS月初 BMS工作日月底</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><h4 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.date_range(<span class="string">&#x27;2021-02-1&#x27;</span>,<span class="string">&#x27;2021-07-18&#x27;</span>,freq= <span class="string">&#x27;3D&#x27;</span>) <span class="comment">#freq=3h：生成的间隔为3小时  3D: 间隔3天  B：工作日，周六周日  T/min：代表分组 M:月底</span></span><br><span class="line"><span class="comment">#BM 月底  MS月初 BMS工作日月底</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>DatetimeIndex([&#39;2021-02-01&#39;, &#39;2021-02-04&#39;, &#39;2021-02-07&#39;, &#39;2021-02-10&#39;,
                &#39;2021-02-13&#39;, &#39;2021-02-16&#39;, &#39;2021-02-19&#39;, &#39;2021-02-22&#39;,
@@ -1013,50 +888,40 @@ dtype: int64
                &#39;2021-06-25&#39;, &#39;2021-06-28&#39;, &#39;2021-07-01&#39;, &#39;2021-07-04&#39;,
                &#39;2021-07-07&#39;, &#39;2021-07-10&#39;, &#39;2021-07-13&#39;, &#39;2021-07-16&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;3D&#39;)
-</code></pre>
-<h4 id="移动数据"><a href="#移动数据" class="headerlink" title="移动数据"></a>移动数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">4</span>),</span><br><span class="line">                index=pd.date_range(<span class="string">&#x27;1/1/2000&#x27;</span>, periods=<span class="number">4</span>, freq=<span class="string">&#x27;M&#x27;</span>))</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
-
+</code></pre><h4 id="移动数据"><a href="#移动数据" class="headerlink" title="移动数据"></a>移动数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ts = pd.Series(np.random.randn(<span class="number">4</span>),</span><br><span class="line">                index=pd.date_range(<span class="string">&#x27;1/1/2000&#x27;</span>, periods=<span class="number">4</span>, freq=<span class="string">&#x27;M&#x27;</span>))</span><br><span class="line">ts</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2000-01-31    0.742958
 2000-02-29    0.396846
 2000-03-31   -0.555748
 2000-04-30   -0.912331
 Freq: M, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>)  <span class="comment">#数据整体往下移动两格</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>)  <span class="comment">#数据整体往下移动两格</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2000-01-31         NaN
 2000-02-29         NaN
 2000-03-31    0.742958
 2000-04-30    0.396846
 Freq: M, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(-<span class="number">2</span>)  <span class="comment">#数据整体往上移动两格</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(-<span class="number">2</span>)  <span class="comment">#数据整体往上移动两格</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2000-01-31   -0.555748
 2000-02-29   -0.912331
 2000-03-31         NaN
 2000-04-30         NaN
 Freq: M, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>,freq=<span class="string">&#x27;M&#x27;</span>) <span class="comment">#只是没索引了，当间隔改为月的话，会增加两条索引重新给它设置新的索引，并且你看到的窗口往下移动</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ts.shift(<span class="number">2</span>,freq=<span class="string">&#x27;M&#x27;</span>) <span class="comment">#只是没索引了，当间隔改为月的话，会增加两条索引重新给它设置新的索引，并且你看到的窗口往下移动</span></span><br></pre></td></tr></table></figure>
 <p>结果：</p>
 <pre><code>2000-03-31    0.742958
 2000-04-30    0.396846
 2000-05-31   -0.555748
 2000-06-30   -0.912331
 Freq: M, dtype: float64
-</code></pre>
-<h1 id="重采样"><a href="#重采样" class="headerlink" title="重采样"></a>重采样</h1><p>重采样：指得是时间序列从一个频率转换为另一个频率进行处理的过程</p>
+</code></pre><h1 id="重采样"><a href="#重采样" class="headerlink" title="重采样"></a>重采样</h1><p>重采样：指得是时间序列从一个频率转换为另一个频率进行处理的过程</p>
 <ul>
-<li>从高频转换到低频  –&gt;  降采样</li>
-<li>从低频转换到高频  –&gt;  升采样</li>
+<li>从高频转换到低频  —&gt;  降采样</li>
+<li>从低频转换到高频  —&gt;  升采样</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = pd.DataFrame(np.random.uniform(<span class="number">10</span>,<span class="number">50</span>,(<span class="number">100</span>,<span class="number">1</span>)),index=pd.date_range(<span class="string">&#x27;20170101&#x27;</span>,periods=<span class="number">100</span>))</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1064,15 +929,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1334,7 +1198,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.resample(<span class="string">&#x27;M&#x27;</span>).<span class="built_in">sum</span>()  <span class="comment">#从高频到低频，重新采样 ，作用：可以想象求一个月赚了多少</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1342,15 +1205,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1383,7 +1245,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.resample(<span class="string">&#x27;10D&#x27;</span>).<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1391,15 +1252,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1456,7 +1316,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升采样</span></span><br><span class="line">frame = pd.DataFrame(np.random.randn(<span class="number">2</span>, <span class="number">4</span>),</span><br><span class="line">                    index=pd.date_range(<span class="string">&#x27;1/1/2000&#x27;</span>, periods=<span class="number">2</span>,freq=<span class="string">&#x27;W-WED&#x27;</span>),</span><br><span class="line">                    columns=[<span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;北京&#x27;</span>, <span class="string">&#x27;深圳&#x27;</span>, <span class="string">&#x27;广州&#x27;</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1464,15 +1323,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1506,7 +1364,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).asfreq()  <span class="comment">#展开显示</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1514,15 +1371,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1598,7 +1454,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).ffill()   <span class="comment">#往下填充</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1606,15 +1461,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1690,7 +1544,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.resample(<span class="string">&#x27;D&#x27;</span>).bfill() <span class="comment">#网上填充</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1698,15 +1551,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1781,7 +1633,6 @@ Freq: M, dtype: float64
 
 
 <h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;数据/FremontBridge.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>,index_col=<span class="string">&#x27;Date&#x27;</span>,parse_dates=<span class="literal">True</span>)  <span class="comment">#index_col=把这一列作为index</span></span><br><span class="line">data  <span class="comment">#parse_dates告诉是时间索引数据</span></span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -1789,15 +1640,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2189,7 +2039,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.columns = [<span class="string">&#x27;Total&#x27;</span>,<span class="string">&#x27;East&#x27;</span>,<span class="string">&#x27;West&#x27;</span>]</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -2197,15 +2046,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2260,7 +2108,6 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.dropna().describe()</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -2268,15 +2115,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2343,13 +2189,10 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.plot()</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x19e397a2a20&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_86_1.png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_86_1.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">weekly = data.resample(<span class="string">&#x27;M&#x27;</span>).<span class="built_in">sum</span>()</span><br><span class="line">weekly</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <div>
 <style scoped>
@@ -2357,15 +2200,14 @@ Freq: M, dtype: float64
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2757,11 +2599,9 @@ Freq: M, dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weekly.plot(style=[<span class="string">&#x27;:&#x27;</span>,<span class="string">&quot;--&quot;</span>,<span class="string">&quot;-&quot;</span>])</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x19e38b30668&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_88_1.png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_88_1.png" alt=""></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -3489,5 +3329,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

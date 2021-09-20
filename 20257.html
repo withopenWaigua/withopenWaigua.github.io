@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="C++基础语法结构体、权限修饰符、类简介、类的组织 结构体结构体是自定义的数据类型     名称 值 类型    ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } **studnet ***       名称 值 类型    ◢ &amp;tmpstu 0x00cff920 {number&#x3D;10001 nam">
+<meta name="description" content="C++基础语法结构体、权限修饰符、类简介、类的组织&lt;&#x2F;span&gt; 结构体结构体是自定义的数据类型      名称 值 类型     ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } studnet *          名称 值 类型     ◢ &amp;tmpstu 0x00cff920 {n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的结构、权限修饰、类简介">
 <meta property="og:url" content="http://alogomachine.com/20257.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="C++基础语法结构体、权限修饰符、类简介、类的组织 结构体结构体是自定义的数据类型     名称 值 类型    ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } **studnet ***       名称 值 类型    ◢ &amp;tmpstu 0x00cff920 {number&#x3D;10001 nam">
+<meta property="og:description" content="C++基础语法结构体、权限修饰符、类简介、类的组织&lt;&#x2F;span&gt; 结构体结构体是自定义的数据类型      名称 值 类型     ◢ &amp;student1 0x0100faf0 {number&#x3D;10001 name&#x3D;0x0100faf4 “zhangsan” } studnet *          名称 值 类型     ◢ &amp;tmpstu 0x00cff920 {n">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png">
 <meta property="article:published_time" content="2021-06-20T18:00:00.000Z">
@@ -138,11 +138,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -403,8 +399,9 @@
       
 
       
-        <p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span></span></strong></p>
+        <p><strong><span id="gray-block"><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">结构体、权限修饰符、类简介、类的组织</span>&lt;/span&gt;</strong></p>
 <h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p><strong>结构体是自定义的数据类型</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -414,13 +411,17 @@
 <th><strong>类型</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>◢</strong></td>
 <td><strong>&amp;student1</strong></td>
 <td><strong>0x0100faf0 {number=10001 name=0x0100faf4 “zhangsan” }</strong></td>
-<td>**studnet ***</td>
+<td><strong>studnet *</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -430,24 +431,22 @@
 <th><strong>类型</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>◢</strong></td>
 <td><strong>&amp;tmpstu</strong></td>
 <td><strong>0x00cff920 {number=10001 name=0x00cff924 “zhangsan” }</strong></td>
-<td>**studnet ***</td>
+<td><strong>studnet *</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <span id="more"></span>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(studnet tmpstu)</span></span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(studnet &amp;tmpstu)</span> </span>&#123;</span><br><span class="line">    tmpstu.number = <span class="number">3000</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(tmpstu.name, <span class="built_in"><span class="keyword">sizeof</span></span>(tmpstu.name), <span class="string">&quot;who&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func3</span><span class="params">(studnet* ptmpstu)</span> </span>&#123;</span><br><span class="line">    ptmpstu-&gt;number = <span class="number">6000</span>; <span class="comment">//不能用.了，指针改变成员变量需要用-&gt;指向成员变量</span></span><br><span class="line">    <span class="built_in">strcpy_s</span>(ptmpstu-&gt;name, <span class="built_in"><span class="keyword">sizeof</span></span>(ptmpstu-&gt;name), <span class="string">&quot;you&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">    studnet student1; <span class="comment">//定义结构变量</span></span><br><span class="line">    student1.number = <span class="number">10001</span>;</span><br><span class="line">    <span class="built_in">strcpy_s</span>(student1.name, <span class="built_in"><span class="keyword">sizeof</span></span>(student1.name), <span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">func</span>(student1);<span class="comment">//值没有被函数改变 ，效率低，实参传递给形参的时候发生了一个内存内容的拷贝，内存地址结构体和外面的实参不同</span></span><br><span class="line">    <span class="built_in">func2</span>(student1);<span class="comment">//值改变了，效率高，因为使用了引用，结构体内的形参的内存地址和外面的实参地址一样</span></span><br><span class="line">    <span class="built_in">func3</span>(&amp;student1);<span class="comment">//值改变了， -&gt;指向运算符</span></span><br><span class="line">    cout &lt;&lt; student1.name &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; student1.number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>C++与C中的结构区别：</strong></p>
 <ul>
 <li><p><strong>C++中的结构除了具备C中结构的所有功能外。还增加许多扩展功能，最突出的功能之一是：不仅仅有成员变量，还可以在其中定义成员函数(方法) 调用：student.func1()</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;  <span class="comment">//扩充的功能</span></span><br><span class="line">        number++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>C++里面叫做类</strong></li>
 </ul>
@@ -458,28 +457,10 @@
 <li><strong>public:公有的意思，用这个修饰结构/类中的成员变量/成员函数，就可以被外部访问。一般需要被外界访问的东西我们就定义为public。好像该类的外部接口</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="comment">//结构体默认都为public，所以加不加都行</span></span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
 <ul>
 <li><strong>private：私有的意思，用这个修饰符 修饰结构/类中的成员变量/成员函数/只有被内部定义的成员函数才能使用。</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">studnet</span>&#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> number;  <span class="comment">// 外部不可以访问，离什么近就是什么类型</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        number++;  <span class="comment">//里面的才可以访问</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
 <h2 id="类简介"><a href="#类简介" class="headerlink" title="类简介"></a><strong>类简介</strong></h2><p><strong>类也是用户自定义的数据类型</strong></p>
 <ul>
 <li><strong>不管C还是C++，结构都用struct定义</strong></li>
@@ -513,12 +494,7 @@
 <li><strong>在主函数中要使用这个类就得include头文件</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//放于student.h里</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">studnet</span> &#123;</span></span><br><span class="line">    <span class="comment">//成员变量</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>; <span class="comment">//函数的声明</span></span><br><span class="line">&#125;;  <span class="comment">//写在头文件中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//放于student.cppl里</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">studnet::func</span><span class="params">()</span> </span>&#123;<span class="comment">//函数的实现</span></span><br><span class="line">    number++;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png"></strong></p>
+<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619094115422.png" alt=""></strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1242,5 +1218,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

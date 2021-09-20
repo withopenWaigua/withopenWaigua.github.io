@@ -138,11 +138,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -411,7 +407,6 @@
 <li><strong>但因为过好，所以容易过拟合</strong></li>
 </ul>
 <span id="more"></span>
-
 <p><strong>Boosting：</strong></p>
 <ul>
 <li><strong>竞赛第一的模型</strong></li>
@@ -439,16 +434,8 @@
 </ol>
 <p><strong>多棵树相加在一起</strong></p>
 <h1 id="还款能力预测"><a href="#还款能力预测" class="headerlink" title="还款能力预测"></a><strong>还款能力预测</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;LoanStats3a_2.csv&#x27;</span>,low_memory=<span class="literal">False</span>,skiprows=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().<span class="built_in">any</span>()  <span class="comment"># 检查 null</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>id                                            True
 member_id                                     True
 loan_amnt                                     True
@@ -511,27 +498,21 @@ settlement_amount                             True
 settlement_percentage                         True
 settlement_term                               True
 Length: 144, dtype: bool
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -689,42 +670,25 @@ Length: 144, dtype: bool
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>(42538, 144)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = df.iloc[:,<span class="number">2</span>:<span class="number">111</span>]  <span class="comment"># 删掉很多空的列</span></span><br><span class="line">empty_cols = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">45</span>,<span class="number">72</span>)]   <span class="comment"># 删除更多的列</span></span><br><span class="line">df = df.drop(df.columns[empty_cols],axis=<span class="number">1</span>)</span><br><span class="line">df.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = df.iloc[:,<span class="number">2</span>:<span class="number">111</span>]  <span class="comment"># 删掉很多空的列</span></span><br><span class="line">empty_cols = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">45</span>,<span class="number">72</span>)]   <span class="comment"># 删除更多的列</span></span><br><span class="line">df = df.drop(df.columns[empty_cols],axis=<span class="number">1</span>)</span><br><span class="line">df.shape</span><br></pre></td></tr></table></figure>
 <pre><code>(42538, 82)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df[(df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Fully Paid&quot;</span>) | (df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Charged Off&quot;</span>)]</span><br><span class="line">df[<span class="string">&#x27;loan_status&#x27;</span>] = df[<span class="string">&#x27;loan_status&#x27;</span>].<span class="built_in">map</span>(&#123;<span class="string">&#x27;Fully Paid&#x27;</span>:<span class="number">0</span>, <span class="string">&#x27;Charged Off&#x27;</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df[(df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Fully Paid&quot;</span>) | (df[<span class="string">&#x27;loan_status&#x27;</span>]==<span class="string">&quot;Charged Off&quot;</span>)]</span><br><span class="line">df[<span class="string">&#x27;loan_status&#x27;</span>] = df[<span class="string">&#x27;loan_status&#x27;</span>].<span class="built_in">map</span>(&#123;<span class="string">&#x27;Fully Paid&#x27;</span>:<span class="number">0</span>, <span class="string">&#x27;Charged Off&#x27;</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df=df.dropna(axis=<span class="number">1</span>) <span class="comment">#340000有效数据</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -882,28 +846,21 @@ Length: 144, dtype: bool
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df_grade = df[<span class="string">&#x27;grade&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;grade: &#x27;</span>)</span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_subgrad = df[<span class="string">&#x27;sub_grade&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;sub_grade: &#x27;</span>)</span><br><span class="line">df_home = df[<span class="string">&#x27;home_ownership&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;home_ownership: &#x27;</span>)</span><br><span class="line">df_addr = df[<span class="string">&#x27;addr_state&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;addr_state: &#x27;</span>)</span><br><span class="line">df_term = df[<span class="string">&#x27;term&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;term: &#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_grade, df_subgrad, df_home, df_addr, df_term], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;grade&#x27;</span>, <span class="string">&#x27;sub_grade&#x27;</span>, <span class="string">&#x27;home_ownership&#x27;</span>, <span class="string">&#x27;addr_state&#x27;</span>, <span class="string">&#x27;int_rate&#x27;</span>, <span class="string">&#x27;term&#x27;</span>, <span class="string">&#x27;zip_code&#x27;</span>,<span class="string">&#x27;purpose&#x27;</span>,<span class="string">&#x27;initial_list_status&#x27;</span>,<span class="string">&#x27;initial_list_status&#x27;</span>,<span class="string">&#x27;pymnt_plan&#x27;</span>,<span class="string">&#x27;issue_d&#x27;</span>,<span class="string">&#x27;earliest_cr_line&#x27;</span>,<span class="string">&#x27;verification_status&#x27;</span>], axis=<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
 
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre>
-<p></style></p>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1061,10 +1018,6 @@ Length: 144, dtype: bool
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.dtypes</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>loan_amnt                  float64
 funded_amnt                float64
 funded_amnt_inv            float64
@@ -1127,28 +1080,15 @@ addr_state: WY               int64
 term:  36 months             int64
 term:  60 months             int64
 Length: 123, dtype: object
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 准备数据</span></span><br><span class="line">X = df.drop(<span class="string">&#x27;loan_status&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = df[<span class="string">&#x27;loan_status&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span> (X.shape, y.shape)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 准备数据</span></span><br><span class="line">X = df.drop(<span class="string">&#x27;loan_status&#x27;</span>, axis=<span class="number">1</span>)</span><br><span class="line">y = df[<span class="string">&#x27;loan_status&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span> (X.shape, y.shape)</span><br></pre></td></tr></table></figure>
 <pre><code>(39786, 122) (39786,)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</span><br><span class="line">xg_classifier = xgb.XGBClassifier(objective =<span class="string">&#x27;binary:logistic&#x27;</span>, colsample_bytree = <span class="number">0.3</span>, learning_rate = <span class="number">0.1</span>,</span><br><span class="line">                max_depth = <span class="number">5</span>, alpha = <span class="number">10</span>, n_estimators = <span class="number">10</span>)</span><br><span class="line">xg_classifier.fit(X_train,y_train)</span><br><span class="line">xg_classifier.score(X_test, y_test)</span><br></pre></td></tr></table></figure>
-
-
-
 <pre><code>0.9982407640110581
-</code></pre>
-<p>二、</p>
+</code></pre><p>二、</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xgboost</span><br><span class="line">xgb = xgboost.XGBClassifier(eval_metric=[<span class="string">&#x27;logloss&#x27;</span>,<span class="string">&#x27;auc&#x27;</span>,<span class="string">&#x27;error&#x27;</span>])</span><br><span class="line">xgb.fit(X_train,y_train)</span><br><span class="line">xgb.score(X_test, y_test)</span><br></pre></td></tr></table></figure>
-
-
-
 <pre><code>0.9994973611460166
-</code></pre>
-<p><strong>正确率高达99.95% 模型很优秀</strong></p>
+</code></pre><p><strong>正确率高达99.95% 模型很优秀</strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1876,5 +1816,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

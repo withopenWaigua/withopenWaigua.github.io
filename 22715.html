@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,算法,逻辑回归,SMOTE过采样,ROC评估指标," />
+  <meta name="keywords" content="机器学习,算法,ROC评估指标,逻辑回归,SMOTE过采样," />
 
 
 
@@ -101,9 +101,9 @@
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="算法">
+<meta property="article:tag" content="ROC评估指标">
 <meta property="article:tag" content="逻辑回归">
 <meta property="article:tag" content="SMOTE过采样">
-<meta property="article:tag" content="ROC评估指标">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211118.png">
 
@@ -151,11 +151,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -423,7 +419,6 @@
 <li><strong>但其实可以扩展为多元分类</strong></li>
 </ul>
 <span id="more"></span>
-
 <p><strong>损失函数是判断模型好不好：</strong></p>
 <ol>
 <li><strong>有一个凸函数</strong></li>
@@ -438,19 +433,10 @@
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727211238.png" alt="image-20210727211238821"></p>
 <h1 id="逻辑回归预测银行客户是否会开设定期存款账户"><a href="#逻辑回归预测银行客户是否会开设定期存款账户" class="headerlink" title="逻辑回归预测银行客户是否会开设定期存款账户"></a>逻辑回归预测银行客户是否会开设定期存款账户</h1><p><strong>逻辑回归要求预测值为 0 或者 1, 自变量特征值应该彼此独立。</strong> </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line">plt.rc(<span class="string">&quot;font&quot;</span>, size=<span class="number">14</span>)</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.<span class="built_in">set</span>(style=<span class="string">&quot;white&quot;</span>)</span><br><span class="line">sns.<span class="built_in">set</span>(style=<span class="string">&quot;whitegrid&quot;</span>, color_codes=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>该数据集来自UCI机器学习库(<a target="_blank" rel="noopener" href="http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)%EF%BC%8C%E8%91%A1%E8%90%84%E7%89%99%E9%93%B6%E8%A1%8C%E7%9A%84%E7%94%B5%E8%AF%9D%E8%90%A5%E9%94%80%E3%80%82">http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)，葡萄牙银行的电话营销。</a> 分类目标是预测客户是否会开设到定期存款账户（预测值y）。</strong></p>
+<p><strong>该数据集来自UCI机器学习库(<a target="_blank" rel="noopener" href="http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)，葡萄牙银行的电话营销。">http://archive.ics.uci.edu/ml/datasets/Bank+Marketing)，葡萄牙银行的电话营销。</a> 分类目标是预测客户是否会开设到定期存款账户（预测值y）。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;banking.csv&#x27;</span>) </span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -458,9 +444,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -609,15 +594,9 @@
       <td>1</td>
     </tr>
   </tbody>
-</table>
-<p>5 rows × 21 columns</p>
-**</div>**
-
-
-
-
+</table></p>
+<p><p>5 rows × 21 columns</p><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.info()</span><br><span class="line"><span class="built_in">print</span>(data.shape)</span><br></pre></td></tr></table></figure>
-
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 41188 entries, 0 to 41187
 Data columns (total 21 columns):
@@ -645,16 +624,13 @@ y                 41188 non-null int64
 dtypes: float64(5), int64(6), object(10)
 memory usage: 6.6+ MB
 (41188, 21)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(data.columns)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(inplace=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(data.columns)</span><br></pre></td></tr></table></figure>
 <pre><code>Index([&#39;age&#39;, &#39;job&#39;, &#39;marital&#39;, &#39;education&#39;, &#39;default&#39;, &#39;housing&#39;, &#39;loan&#39;,
        &#39;contact&#39;, &#39;month&#39;, &#39;day_of_week&#39;, &#39;duration&#39;, &#39;campaign&#39;, &#39;pdays&#39;,
        &#39;previous&#39;, &#39;poutcome&#39;, &#39;emp_var_rate&#39;, &#39;cons_price_idx&#39;,
        &#39;cons_conf_idx&#39;, &#39;euribor3m&#39;, &#39;nr_employed&#39;, &#39;y&#39;],
       dtype=&#39;object&#39;)
-</code></pre>
-<p><strong>特征的意义:</strong> </p>
+</code></pre><p><strong>特征的意义:</strong> </p>
 <p><strong>bank client data:</strong></p>
 <ul>
 <li><strong>1 - age (numeric)</strong></li>
@@ -693,51 +669,24 @@ memory usage: 6.6+ MB
 </ul>
 <p><strong>其中的y列，0代表推销不成功，1代表推销成功</strong></p>
 <h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a><strong>特征工程</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;education&#x27;</span>].unique()</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>array([&#39;basic.4y&#39;, &#39;unknown&#39;, &#39;university.degree&#39;, &#39;high.school&#39;,
        &#39;basic.9y&#39;, &#39;professional.course&#39;, &#39;basic.6y&#39;, &#39;illiterate&#39;],
       dtype=object)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 觉得基础教育4-9年没区别，所以放在一组</span></span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.4y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.6y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.9y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>].unique()</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 觉得基础教育4-9年没区别，所以放在一组</span></span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.4y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.6y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>] = np.where(data[<span class="string">&#x27;education&#x27;</span>]==<span class="string">&#x27;basic.9y&#x27;</span>,<span class="string">&#x27;Basic&#x27;</span>,data[<span class="string">&#x27;education&#x27;</span>])</span><br><span class="line">data[<span class="string">&#x27;education&#x27;</span>].unique()</span><br></pre></td></tr></table></figure>
 <pre><code>array([&#39;Basic&#39;, &#39;unknown&#39;, &#39;university.degree&#39;, &#39;high.school&#39;,
        &#39;professional.course&#39;, &#39;illiterate&#39;], dtype=object)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;y&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;y&#x27;</span>].value_counts()</span><br></pre></td></tr></table></figure>
 <pre><code>0    36548
 1     4640
 Name: y, dtype: int64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.countplot(x=<span class="string">&#x27;y&#x27;</span>,data=data,palette=<span class="string">&#x27;hls&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment">#数据特别不平衡，差别太大比例是7：1</span></span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.countplot(x=<span class="string">&#x27;y&#x27;</span>,data=data,palette=<span class="string">&#x27;hls&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment">#数据特别不平衡，差别太大比例是7：1</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210209.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#尽量0和1把比例控制在1：1</span></span><br><span class="line">count_no_sub = <span class="built_in">len</span>(data[data[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>])</span><br><span class="line">count_sub = <span class="built_in">len</span>(data[data[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>])</span><br><span class="line">pct_of_no_sub = count_no_sub / (count_no_sub+count_sub)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的百分比: %.2f%%&quot;</span>%(pct_of_no_sub*<span class="number">100</span>))</span><br><span class="line">pct_of_sub = count_sub /(count_no_sub+count_sub)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的百分比：%.2f%%&quot;</span>%(pct_of_sub*<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
-
 <pre><code>未开户的百分比: 88.73%
 开户的百分比：11.27%
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;y&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;y&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -745,9 +694,8 @@ Name: y, dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -804,26 +752,14 @@ Name: y, dtype: int64
       <td>5095.115991</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h2 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a><strong>数据可视化分析</strong></h2><p><strong>购买定期存款的客户的平均年龄高于未购买定期存款的客户的平均年龄。</strong></p>
 <p><strong>购买定期存款的客户的 pdays（自上次联系客户以来的日子）较低。 pdays越低，最后一次通话的记忆越好，因此销售的机会就越大。</strong></p>
 <p><strong>令人惊讶的是，购买定期存款的客户的销售通话次数较低。</strong></p>
 <p><strong>我们可以计算其他特征值（如教育和婚姻状况）的分布，以更详细地了解我们的数据。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;job&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -831,9 +767,8 @@ Name: y, dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1034,23 +969,10 @@ Name: y, dtype: int64
       <td>0.112121</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;marital&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1058,9 +980,8 @@ Name: y, dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1149,23 +1070,10 @@ Name: y, dtype: int64
       <td>0.150000</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;education&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1173,9 +1081,8 @@ Name: y, dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1292,40 +1199,21 @@ Name: y, dtype: int64
       <td>0.145003</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">table=pd.crosstab(data.job,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Job title vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Job&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Purchase&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;purchase_vs_job&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210217.png" alt="png"></p>
 <p><strong>具有不同职位的人购买存款的频率不一样。 因此，职称可以是良好的预测因素。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.marital,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Marital Status vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Marital Status&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Customers&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;mariral_vs_pur_stack&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210221.png" alt="png"></p>
 <p><strong>婚姻状况似乎不是好的预测因素。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.education,data.y)</span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Education vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Education&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Customers&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;edu_vs_pur_stack&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210227.png" alt="png"></p>
 <p><strong>教育似乎是结果变量的良好预测指标。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">table=pd.crosstab(data.day_of_week,data.y)<span class="comment">#.plot(kind=&#x27;bar&#x27;)</span></span><br><span class="line">table.div(table.<span class="built_in">sum</span>(<span class="number">1</span>).astype(<span class="built_in">float</span>), axis=<span class="number">0</span>).plot(kind=<span class="string">&#x27;bar&#x27;</span>, stacked=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Stacked Bar Chart of Day of Week vs Purchase&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Day of Week&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Proportion of Purchase&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;dow_vs_purchase&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210231.png" alt="png"></p>
 <p><strong>一周工作时间不是预测结果的良好预测因素。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat_vars=[<span class="string">&#x27;job&#x27;</span>,<span class="string">&#x27;marital&#x27;</span>,<span class="string">&#x27;education&#x27;</span>,<span class="string">&#x27;default&#x27;</span>,<span class="string">&#x27;housing&#x27;</span>,<span class="string">&#x27;loan&#x27;</span>,<span class="string">&#x27;contact&#x27;</span>,<span class="string">&#x27;month&#x27;</span>,<span class="string">&#x27;day_of_week&#x27;</span>,<span class="string">&#x27;poutcome&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> cat_vars:</span><br><span class="line">    cat_list = pd.get_dummies(data[var], prefix=var)</span><br><span class="line">    data=data.join(cat_list)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data_final=data.drop(cat_vars, axis=<span class="number">1</span>)</span><br><span class="line">data_final.columns.values</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>array([&#39;age&#39;, &#39;duration&#39;, &#39;campaign&#39;, &#39;pdays&#39;, &#39;previous&#39;, &#39;emp_var_rate&#39;,
        &#39;cons_price_idx&#39;, &#39;cons_conf_idx&#39;, &#39;euribor3m&#39;, &#39;nr_employed&#39;, &#39;y&#39;,
        &#39;job_admin.&#39;, &#39;job_blue-collar&#39;, &#39;job_entrepreneur&#39;,
@@ -1344,8 +1232,7 @@ Name: y, dtype: int64
        &#39;day_of_week_mon&#39;, &#39;day_of_week_thu&#39;, &#39;day_of_week_tue&#39;,
        &#39;day_of_week_wed&#39;, &#39;poutcome_failure&#39;, &#39;poutcome_nonexistent&#39;,
        &#39;poutcome_success&#39;], dtype=object)
-</code></pre>
-<p><strong>……</strong><br><strong>了解数据的特征和关系</strong></p>
+</code></pre><p><strong>……</strong><br><strong>了解数据的特征和关系</strong></p>
 <p><strong>当训练数据不平衡的时候，我们可以采取的措施:</strong></p>
 <ul>
 <li><strong>把数据量小的扩充成与大的1:1的比例(SMOTE采样，推荐)</strong></li>
@@ -1354,29 +1241,19 @@ Name: y, dtype: int64
 <h2 id="使用SMOTE进行过采样"><a href="#使用SMOTE进行过采样" class="headerlink" title="使用SMOTE进行过采样"></a><strong>使用SMOTE进行过采样</strong></h2><p><strong>创建我们的训练数据后，我将使用SMOTE算法（合成少数过采样技术）对已经开户的用户进行上采样。 在高层次上，SMOTE：</strong></p>
 <pre><code>通过从次要类（已经开户的用户）创建合成样本而不是创建副本来工作。
 随机选择一个k-最近邻居并使用它来创建一个类似但随机调整的新观察结果。
-</code></pre>
-<p><strong>使用如下命令安装:</strong><br><strong>conda install -c conda-forge imbalanced-learn</strong></p>
+</code></pre><p><strong>使用如下命令安装:</strong><br><strong>conda install -c conda-forge imbalanced-learn</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">X = data_final.loc[:, data_final.columns != <span class="string">&#x27;y&#x27;</span>] <span class="comment">#把不为y的这几列拿出来 （y为判断列）</span></span><br><span class="line">y = data_final.loc[:, data_final.columns == <span class="string">&#x27;y&#x27;</span>].values.ravel()  <span class="comment">#把为y的这几列拿出来</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行过采样</span></span><br><span class="line"><span class="keyword">from</span> imblearn.over_sampling <span class="keyword">import</span> SMOTE</span><br><span class="line">os = SMOTE(random_state=<span class="number">0</span>) <span class="comment"># 给一个随机数的种子</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.3</span>, random_state=<span class="number">0</span>)</span><br><span class="line">columns = X_train.columns</span><br><span class="line">os_data_X,os_data_y=os.fit_resample(X_train, y_train)</span><br><span class="line">os_data_X = pd.DataFrame(data=os_data_X,columns=columns )</span><br><span class="line">os_data_y= pd.DataFrame(data=os_data_y,columns=[<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line"><span class="comment"># we can Check the numbers of our data</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;过采样以后的数据量: &quot;</span>,<span class="built_in">len</span>(os_data_X))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的用户数量: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的用户数量: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;未开户的用户数量的百分比: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">0</span>])/<span class="built_in">len</span>(os_data_X))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;开户的用户数量的百分比: &quot;</span>,<span class="built_in">len</span>(os_data_y[os_data_y[<span class="string">&#x27;y&#x27;</span>]==<span class="number">1</span>])/<span class="built_in">len</span>(os_data_X))</span><br></pre></td></tr></table></figure>
-
 <pre><code>过采样以后的数据量:  51134
 未开户的用户数量:  25567
 开户的用户数量:  25567
 未开户的用户数量的百分比:  0.5
 开户的用户数量的百分比:  0.5
-</code></pre>
-<p><strong>现在我们拥有完美平衡的数据！ 您可能已经注意到我仅对训练数据进行了过采样</strong></p>
+</code></pre><p><strong>现在我们拥有完美平衡的数据！ 您可能已经注意到我仅对训练数据进行了过采样</strong></p>
 <p><strong>就算实际的数据就不是1:1，那么我们也需要用过采样保证数据1:1</strong><br>        <strong>（本来开户的就是小部分，但我们仍然需要弄成1:1）</strong></p>
 <h2 id="逻辑回归训练"><a href="#逻辑回归训练" class="headerlink" title="逻辑回归训练"></a><strong>逻辑回归训练</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="comment">#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)</span></span><br><span class="line">logreg = LogisticRegression()</span><br><span class="line">logreg.fit(os_data_X, os_data_y.values.reshape(-<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = logreg.predict(X_test) <span class="comment">#测试数据</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;训练出来的准确率为:&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(logreg.score(X_test,y_test)))</span><br></pre></td></tr></table></figure>
-
 <pre><code>训练出来的准确率为:0.89
-</code></pre>
-<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a><strong>模型评估</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># metrics可以得到一个报告：准确度 召回率  值越大越好  support:测试数据里面有多少这个类别的</span></span><br><span class="line"><span class="comment">#评价分类模型效果</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test,y_pred)) <span class="comment"># 测试数据不需要进行过采样，</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a><strong>模型评估</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># metrics可以得到一个报告：准确度 召回率  值越大越好  support:测试数据里面有多少这个类别的</span></span><br><span class="line"><span class="comment">#评价分类模型效果</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test,y_pred)) <span class="comment"># 测试数据不需要进行过采样，</span></span><br></pre></td></tr></table></figure>
 <pre><code>              precision    recall  f1-score   support
 
            0       0.96      0.92      0.94     10981
@@ -1385,13 +1262,11 @@ Name: y, dtype: int64
     accuracy                           0.89     12357
    macro avg       0.73      0.80      0.76     12357
 weighted avg       0.91      0.89      0.90     12357
-</code></pre>
-<hr>
+</code></pre><hr>
 <p><strong>对0类别的判断有96%的准确率</strong></p>
 <p><strong>对1类别的判断只有50%的准确率</strong></p>
 <p><strong>但由于数据量不平衡，权重测试后的准确率为91%</strong></p>
 <h3 id="补充看分类模型的效果方法-roc-auc-score"><a href="#补充看分类模型的效果方法-roc-auc-score" class="headerlink" title="补充看分类模型的效果方法-roc_auc_score"></a><strong>补充看分类模型的效果方法-roc_auc_score</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line">logit_roc_auc = roc_auc_score(y_test, logreg.predict(X_test))</span><br><span class="line">fpr, tpr, thresholds = roc_curve(y_test, logreg.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(fpr, tpr, label=<span class="string">&#x27;Logistic Regression (area = %0.2f)&#x27;</span> % logit_roc_auc)</span><br><span class="line">plt.plot([<span class="number">0</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">1</span>],<span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;False Positive Rate&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;True Positive Rate&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Receiver operating characteristic&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;Log_ROC&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727210244.png" alt="png"></strong></p>
 <p><strong>算蓝色曲线与X轴的面积，越大越好,越大效果越好</strong></p>
 <p><strong>这个面积占1*1正方形的比例为0.8，所以准确率也可以当作80%</strong></p>
@@ -1438,11 +1313,11 @@ wpac_init.push({widget: 'Rating', id: 31073});
           
             <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
           
+            <a href="/tags/ROC%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" rel="tag"># ROC评估指标</a>
+          
             <a href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/" rel="tag"># 逻辑回归</a>
           
             <a href="/tags/SMOTE%E8%BF%87%E9%87%87%E6%A0%B7/" rel="tag"># SMOTE过采样</a>
-          
-            <a href="/tags/ROC%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" rel="tag"># ROC评估指标</a>
           
         </div>
       
@@ -1599,7 +1474,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">相关知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%93%B6%E8%A1%8C%E5%AE%A2%E6%88%B7%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BC%80%E8%AE%BE%E5%AE%9A%E6%9C%9F%E5%AD%98%E6%AC%BE%E8%B4%A6%E6%88%B7"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归预测银行客户是否会开设定期存款账户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">特征工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">数据可视化分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SMOTE%E8%BF%9B%E8%A1%8C%E8%BF%87%E9%87%87%E6%A0%B7"><span class="nav-number">2.3.</span> <span class="nav-text">使用SMOTE进行过采样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.</span> <span class="nav-text">逻辑回归训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">2.5.</span> <span class="nav-text">模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E7%9C%8B%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%95%88%E6%9E%9C%E6%96%B9%E6%B3%95-roc-auc-score"><span class="nav-number">2.5.1.</span> <span class="nav-text">补充看分类模型的效果方法-roc_auc_score</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%92%8C%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">逻辑回归和线性回归的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">相关知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E9%93%B6%E8%A1%8C%E5%AE%A2%E6%88%B7%E6%98%AF%E5%90%A6%E4%BC%9A%E5%BC%80%E8%AE%BE%E5%AE%9A%E6%9C%9F%E5%AD%98%E6%AC%BE%E8%B4%A6%E6%88%B7"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归预测银行客户是否会开设定期存款账户</span></a></li></ol></div>
             
 
           </div>
@@ -2131,5 +2006,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

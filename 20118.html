@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,算法,决策树,ROC评估指标,随机森林," />
+  <meta name="keywords" content="机器学习,算法,决策树,随机森林,ROC评估指标," />
 
 
 
@@ -99,8 +99,8 @@
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="决策树">
-<meta property="article:tag" content="ROC评估指标">
 <meta property="article:tag" content="随机森林">
+<meta property="article:tag" content="ROC评估指标">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801211138.png">
 
@@ -148,11 +148,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -424,7 +420,6 @@
 <li><strong>同时训练多个决策树，综合考虑多个结果做预测。(回归的情况下用均值，分类的情况下用众数)</strong></li>
 </ul>
 <span id="more"></span>
-
 <h2 id="随机的体现"><a href="#随机的体现" class="headerlink" title="随机的体现"></a><strong>随机的体现</strong></h2><ul>
 <li><strong>从原来的训练数据集随机(带放回bootstrap,可多次取到)取一个子集作为森林中某一个决策树的训练数据集</strong></li>
 <li><strong>每一次选择分叉的特征的时候(随机挑选某个特征子集&lt;n)</strong></li>
@@ -433,22 +428,10 @@
 <h2 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a><strong>实例演示</strong></h2><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801211138.png" alt="image-20210801211138692"></p>
 <h1 id="使用决策树和随机森林预测员工离职率"><a href="#使用决策树和随机森林预测员工离职率" class="headerlink" title="使用决策树和随机森林预测员工离职率"></a><strong>使用决策树和随机森林预测员工离职率</strong></h1><p><strong>我们的任务是帮助人事部门理解员工为何离职, 预测一个员工离职的可能性.</strong><br><strong>数据来源: <a target="_blank" rel="noopener" href="https://www.kaggle.com/ludobenistant/hr-analytics">https://www.kaggle.com/ludobenistant/hr-analytics</a></strong></p>
 <h2 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a><strong>获取数据</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引入工具包</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> matplot</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读入数据到Pandas Dataframe &quot;df&quot;</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;HR_comma_sep.csv&#x27;</span>, index_col=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -456,9 +439,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -541,13 +523,8 @@
       <td>low</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a><strong>数据预处理</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
-
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 14999 entries, 0 to 14998
 Data columns (total 10 columns):
@@ -563,12 +540,7 @@ Data columns (total 10 columns):
 薪资水平        14999 non-null object
 dtypes: float64(2), int64(6), object(2)
 memory usage: 1.1+ MB
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().<span class="built_in">any</span>() <span class="comment"># 看数据是否有缺失值</span></span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().<span class="built_in">any</span>() <span class="comment"># 看数据是否有缺失值</span></span><br></pre></td></tr></table></figure>
 <pre><code>满意度         False
 绩效评估        False
 项目个数        False
@@ -580,18 +552,9 @@ memory usage: 1.1+ MB
 部门          False
 薪资水平        False
 dtype: bool
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">df = df.rename(columns=&#123;<span class="string">&#x27;satisfaction_level&#x27;</span>: <span class="string">&#x27;满意度&#x27;</span>, </span><br><span class="line">                        <span class="string">&#x27;last_evaluation&#x27;</span>: <span class="string">&#x27;绩效评估&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;number_project&#x27;</span>: <span class="string">&#x27;项目个数&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;average_montly_hours&#x27;</span>: <span class="string">&#x27;平均每月工作时长&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;time_spend_company&#x27;</span>: <span class="string">&#x27;工作年限&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;Work_accident&#x27;</span>: <span class="string">&#x27;是否发生工作事故&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;promotion_last_5years&#x27;</span>: <span class="string">&#x27;5年内是否升职&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;salary&#x27;</span> : <span class="string">&#x27;薪资水平&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;left&#x27;</span> : <span class="string">&#x27;是否离职&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;sales&#x27;</span>: <span class="string">&#x27;部门&#x27;</span></span><br><span class="line">                        &#125;)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">df = df.rename(columns=&#123;<span class="string">&#x27;satisfaction_level&#x27;</span>: <span class="string">&#x27;满意度&#x27;</span>, </span><br><span class="line">                        <span class="string">&#x27;last_evaluation&#x27;</span>: <span class="string">&#x27;绩效评估&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;number_project&#x27;</span>: <span class="string">&#x27;项目个数&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;average_montly_hours&#x27;</span>: <span class="string">&#x27;平均每月工作时长&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;time_spend_company&#x27;</span>: <span class="string">&#x27;工作年限&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;Work_accident&#x27;</span>: <span class="string">&#x27;是否发生工作事故&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;promotion_last_5years&#x27;</span>: <span class="string">&#x27;5年内是否升职&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;salary&#x27;</span> : <span class="string">&#x27;薪资水平&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;left&#x27;</span> : <span class="string">&#x27;是否离职&#x27;</span>,</span><br><span class="line">                        <span class="string">&#x27;sales&#x27;</span>: <span class="string">&#x27;部门&#x27;</span></span><br><span class="line">                        &#125;)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -599,9 +562,8 @@ dtype: bool
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -684,23 +646,10 @@ dtype: bool
       <td>low</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将预测标签是否离职放在第一列</span></span><br><span class="line">front = df[<span class="string">&#x27;是否离职&#x27;</span>]</span><br><span class="line">df.drop(labels=[<span class="string">&#x27;是否离职&#x27;</span>],axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">df.insert(<span class="number">0</span>,<span class="string">&#x27;是否离职&#x27;</span>,front) <span class="comment">#插入位置 名称 内容</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -708,9 +657,8 @@ dtype: bool
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -793,25 +741,15 @@ dtype: bool
       <td>low</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h2 id="分析数据"><a href="#分析数据" class="headerlink" title="分析数据"></a><strong>分析数据</strong></h2><ul>
 <li><strong>14999 条数据, 每一条数据包含 10 个特征</strong> </li>
 <li><strong>总的离职率 24%</strong></li>
 <li><strong>平均满意度 0.61</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>(14999, 10)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 14999 entries, 0 to 14998
 Data columns (total 10 columns):
@@ -827,27 +765,13 @@ Data columns (total 10 columns):
 薪资水平        14999 non-null object
 dtypes: float64(2), int64(6), object(2)
 memory usage: 1.1+ MB
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">turnover_rate = df.是否离职.value_counts() / <span class="built_in">len</span>(df)</span><br><span class="line">turnover_rate</span><br><span class="line"><span class="comment"># 离职率占到23.8%</span></span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">turnover_rate = df.是否离职.value_counts() / <span class="built_in">len</span>(df)</span><br><span class="line">turnover_rate</span><br><span class="line"><span class="comment"># 离职率占到23.8%</span></span><br></pre></td></tr></table></figure>
 <pre><code>0    0.761917
 1    0.238083
 Name: 是否离职, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -855,9 +779,8 @@ Name: 是否离职, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -961,23 +884,10 @@ Name: 是否离职, dtype: float64
       <td>1.000000</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分组查看</span></span><br><span class="line">df.groupby(<span class="string">&#x27;是否离职&#x27;</span>).mean()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -985,9 +895,8 @@ Name: 是否离职, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1032,22 +941,10 @@ Name: 是否离职, dtype: float64
       <td>0.005321</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h2 id="相关性分析"><a href="#相关性分析" class="headerlink" title="相关性分析"></a><strong>相关性分析</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment">#下面两行代码必先加载</span></span><br><span class="line"><span class="comment">## 加载字体</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>] <span class="comment"># 指定默认字体| #不然就画图显示不了中文说明</span></span><br><span class="line"><span class="comment"># 显示负号</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span>    <span class="comment">#默认不显示负号，所以我们得加</span></span><br><span class="line">corr = df.corr()</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">9</span>,<span class="number">7</span>))</span><br><span class="line">sns.heatmap(corr,cmap=sns.color_palette(<span class="string">&quot;RdBu&quot;</span>, n_colors=<span class="number">128</span>),vmin=-<span class="number">0.5</span>, vmax=<span class="number">0.5</span>,)</span><br><span class="line">corr</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1055,9 +952,8 @@ Name: 是否离职, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1161,63 +1057,32 @@ Name: 是否离职, dtype: float64
       <td>1.000000</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205106.png" alt="output_17_1"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比较离职和未离职员工的满意度</span></span><br><span class="line">emp_population = df[<span class="string">&#x27;满意度&#x27;</span>][df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">0</span>].mean()</span><br><span class="line">emp_turnover_satisfaction = df[df[<span class="string">&#x27;是否离职&#x27;</span>]==<span class="number">1</span>][<span class="string">&#x27;满意度&#x27;</span>].mean()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( <span class="string">&#x27;未离职员工满意度: &#x27;</span> + <span class="built_in">str</span>(emp_population))</span><br><span class="line"><span class="built_in">print</span>( <span class="string">&#x27;离职员工满意度: &#x27;</span> + <span class="built_in">str</span>(emp_turnover_satisfaction) )</span><br></pre></td></tr></table></figure>
-
 <pre><code>未离职员工满意度: 0.666809590479516
 离职员工满意度: 0.44009801176140917
-</code></pre>
-<h2 id="进行-T-Test"><a href="#进行-T-Test" class="headerlink" title="进行 T-Test"></a><strong>进行 T-Test</strong></h2><hr>
+</code></pre><h2 id="进行-T-Test"><a href="#进行-T-Test" class="headerlink" title="进行 T-Test"></a><strong>进行 T-Test</strong></h2><hr>
 <p><strong>进行一个 t-test, 看离职员工的满意度是不是和未离职员工的满意度明显不同</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> stats</span><br><span class="line">stats.ttest_1samp(a = df[df[<span class="string">&#x27;是否离职&#x27;</span>]==<span class="number">1</span>][<span class="string">&#x27;满意度&#x27;</span>], <span class="comment"># 离职员工的满意度样本</span></span><br><span class="line">                  popmean = emp_population)  <span class="comment"># 未离职员工的满意度均值</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>Ttest_1sampResult(statistic=-51.3303486754725, pvalue=0.0)
-</code></pre>
-<p><strong>T-Test 显示pvalue (0) 非常小, 所以他们之间是显著不同的</strong></p>
+</code></pre><p><strong>T-Test 显示pvalue (0) 非常小, 所以他们之间是显著不同的</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">degree_freedom = <span class="built_in">len</span>(df[df[<span class="string">&#x27;是否离职&#x27;</span>]==<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">LQ = stats.t.ppf(<span class="number">0.025</span>,degree_freedom)  <span class="comment"># 95%致信区间的左边界</span></span><br><span class="line"></span><br><span class="line">RQ = stats.t.ppf(<span class="number">0.975</span>,degree_freedom)  <span class="comment"># 95%致信区间的右边界</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;The t-分布 左边界: &#x27;</span> + <span class="built_in">str</span>(LQ))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;The t-分布 右边界: &#x27;</span> + <span class="built_in">str</span>(RQ))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <pre><code>The t-分布 左边界: -1.9606285215955626
 The t-分布 右边界: 1.9606285215955621
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概率密度函数估计</span></span><br><span class="line"><span class="comment"># 看是不是绩效评估的原因</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">15</span>,<span class="number">4</span>),)</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">0</span>),<span class="string">&#x27;绩效评估&#x27;</span>] , color=<span class="string">&#x27;b&#x27;</span>,shade=<span class="literal">True</span>,label=<span class="string">&#x27;未离职&#x27;</span>)</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">1</span>),<span class="string">&#x27;绩效评估&#x27;</span>] , color=<span class="string">&#x27;r&#x27;</span>,shade=<span class="literal">True</span>, label=<span class="string">&#x27;离职的&#x27;</span>)</span><br><span class="line">ax.<span class="built_in">set</span>(xlabel=<span class="string">&#x27;雇佣的绩效&#x27;</span>, ylabel=<span class="string">&#x27;发生的概率&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;员工绩效评估的影响 - 离职 V.S. 未离职&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概率密度函数估计</span></span><br><span class="line"><span class="comment"># 看是不是绩效评估的原因</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">15</span>,<span class="number">4</span>),)</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">0</span>),<span class="string">&#x27;绩效评估&#x27;</span>] , color=<span class="string">&#x27;b&#x27;</span>,shade=<span class="literal">True</span>,label=<span class="string">&#x27;未离职&#x27;</span>)</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">1</span>),<span class="string">&#x27;绩效评估&#x27;</span>] , color=<span class="string">&#x27;r&#x27;</span>,shade=<span class="literal">True</span>, label=<span class="string">&#x27;离职的&#x27;</span>)</span><br><span class="line">ax.<span class="built_in">set</span>(xlabel=<span class="string">&#x27;雇佣的绩效&#x27;</span>, ylabel=<span class="string">&#x27;发生的概率&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;员工绩效评估的影响 - 离职 V.S. 未离职&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>Text(0.5,1,&#39;员工绩效评估的影响 - 离职 V.S. 未离职&#39;)
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205120.png" alt="output_23_1"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205120.png" alt="output_23_1"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 概率密度函数估计</span></span><br><span class="line"><span class="comment"># 看是不是太累的原因</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">15</span>,<span class="number">4</span>))</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">0</span>),<span class="string">&#x27;平均每月工作时长&#x27;</span>] , color=<span class="string">&#x27;b&#x27;</span>,shade=<span class="literal">True</span>, label=<span class="string">&#x27;未离职&#x27;</span>)</span><br><span class="line">ax=sns.kdeplot(df.loc[(df[<span class="string">&#x27;是否离职&#x27;</span>] == <span class="number">1</span>),<span class="string">&#x27;平均每月工作时长&#x27;</span>] , color=<span class="string">&#x27;r&#x27;</span>,shade=<span class="literal">True</span>, label=<span class="string">&#x27;离职的&#x27;</span>)</span><br><span class="line">ax.<span class="built_in">set</span>(xlabel=<span class="string">&#x27;平均每月工作时长&#x27;</span>, ylabel=<span class="string">&#x27;概率&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;平均每月工作时长的影响 - 离职的 V.S. 未离职&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>Text(0.5,1,&#39;平均每月工作时长的影响 - 离职的 V.S. 未离职&#39;)
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205125.png" alt="output_24_1"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205125.png" alt="output_24_1"></p>
 <h2 id="决策树-随机森林建模"><a href="#决策树-随机森林建模" class="headerlink" title="决策树/随机森林建模"></a><strong>决策树/随机森林建模</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, classification_report, precision_score, recall_score, confusion_matrix, precision_recall_curve</span><br></pre></td></tr></table></figure>
-
 <h3 id="数据预处理-1"><a href="#数据预处理-1" class="headerlink" title="数据预处理"></a><strong>数据预处理</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将字符串转换为整数</span></span><br><span class="line">df[<span class="string">&#x27;部门&#x27;</span>] = df[<span class="string">&#x27;部门&#x27;</span>].astype(<span class="string">&#x27;category&#x27;</span>).cat.codes</span><br><span class="line">df[<span class="string">&#x27;薪资水平&#x27;</span>] = df[<span class="string">&#x27;薪资水平&#x27;</span>].astype(<span class="string">&#x27;category&#x27;</span>).cat.codes <span class="comment"># 在目录自己找到合适的数进行转换</span></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">targe_name = <span class="string">&#x27;是否离职&#x27;</span></span><br><span class="line">X = df.drop(<span class="string">&#x27;是否离职&#x27;</span>,axis=<span class="number">1</span>)</span><br><span class="line">y = df[targe_name] <span class="comment">#把数据标签提取出来</span></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=<span class="number">0.15</span>,random_state=<span class="number">2021</span>,stratify=y) </span><br><span class="line"><span class="comment">#stratify 意味着产生训练和测试数据的时候，离职员工的百分比等于原来总数据中离职员工的百分比</span></span><br><span class="line"><span class="comment"># 训练和测试数据中都包含离职和没有离职的，训练数据如果有20%离职的人，测试数据也有20%离职的人</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a><strong>决策树</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 决策树</span></span><br><span class="line">dtree = tree.DecisionTreeClassifier(</span><br><span class="line">    criterion=<span class="string">&#x27;entropy&#x27;</span>, <span class="comment">#决策树的一种方法</span></span><br><span class="line">    <span class="comment">#max_depth=3, # 定义树的深度, 可以用来防止过拟合</span></span><br><span class="line">    min_weight_fraction_leaf=<span class="number">0.01</span> <span class="comment"># 定义叶子节点最少需要包含多少个样本(使用百分比表达), 防止过拟合</span></span><br><span class="line">    )</span><br><span class="line">dtree = dtree.fit(X_train,y_train)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;\n\n ---决策树---&quot;</span>)</span><br><span class="line">dt_roc_auc = roc_auc_score(y_test, dtree.predict(X_test))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;决策树 AUC = %2.2f&quot;</span> % dt_roc_auc)</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test, dtree.predict(X_test)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机森林</span></span><br><span class="line">rf = RandomForestClassifier(</span><br><span class="line">    criterion=<span class="string">&#x27;entropy&#x27;</span>,</span><br><span class="line">    n_estimators=<span class="number">1000</span>, </span><br><span class="line">    max_depth=<span class="literal">None</span>, <span class="comment"># 定义树的深度, 可以用来防止过拟合</span></span><br><span class="line">    min_samples_split=<span class="number">10</span>, <span class="comment"># 定义至少多少个样本的情况下才继续分叉</span></span><br><span class="line">    <span class="comment">#min_weight_fraction_leaf=0.02 # 定义叶子节点最少需要包含多少个样本(使用百分比表达), 防止过拟合</span></span><br><span class="line">    )</span><br><span class="line">rf.fit(X_train, y_train)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;\n\n ---随机森林---&quot;</span>)</span><br><span class="line">rf_roc_auc = roc_auc_score(y_test, rf.predict(X_test))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;随机森林 AUC = %2.2f&quot;</span> % rf_roc_auc)</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test, rf.predict(X_test)))</span><br></pre></td></tr></table></figure>
-
-
-<p>​     <strong>—决策树—</strong><br>​    <strong>决策树 AUC = 0.95</strong></p>
+<p>​     <strong>—-决策树—-</strong><br>​    <strong>决策树 AUC = 0.95</strong></p>
 <hr>
 <pre><code>                 precision  recall   f1-score   support
            0       0.97      0.98      0.98      1714
@@ -1226,8 +1091,7 @@ The t-分布 右边界: 1.9606285215955621
     accuracy                           0.97      2250
    macro avg       0.96      0.95      0.95      2250
 weighted avg       0.97      0.97      0.97      2250
-</code></pre>
-<p>​<br><strong>​<br>​     —随机森林—</strong><br>​    <strong>随机森林 AUC = 0.98</strong></p>
+</code></pre><p>​<br><strong>​<br>​     —-随机森林—-</strong><br>​    <strong>随机森林 AUC = 0.98</strong></p>
 <hr>
 <pre><code>                 precision  recall   f1-score   support
            0       0.99      1.00      0.99      1714
@@ -1236,20 +1100,12 @@ weighted avg       0.97      0.97      0.97      2250
     accuracy                           0.99      2250
    macro avg       0.99      0.98      0.98      2250
 weighted avg       0.99      0.99      0.99      2250
-</code></pre>
-<hr>
-<h3 id="ROC图–评价模型"><a href="#ROC图–评价模型" class="headerlink" title="ROC图–评价模型"></a><strong>ROC图–评价模型</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ROC 图</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line">rf_fpr, rf_tpr, rf_thresholds = roc_curve(y_test, rf.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line">dt_fpr, dt_tpr, dt_thresholds = roc_curve(y_test, dtree.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机森林 ROC</span></span><br><span class="line">plt.plot(rf_fpr, rf_tpr, label=<span class="string">&#x27;随机森林 (面积比例 = %0.2f)&#x27;</span> % rf_roc_auc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 决策树 ROC</span></span><br><span class="line">plt.plot(dt_fpr, dt_tpr, label=<span class="string">&#x27;决策树 (面积比例 = %0.2f)&#x27;</span> % dt_roc_auc)</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;假阳性(False Positive Rate)&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;真阳性(True Positive Rate)&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;ROC Graph&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><hr>
+<h3 id="ROC图—评价模型"><a href="#ROC图—评价模型" class="headerlink" title="ROC图—评价模型"></a><strong>ROC图—评价模型</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ROC 图</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line">rf_fpr, rf_tpr, rf_thresholds = roc_curve(y_test, rf.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line">dt_fpr, dt_tpr, dt_thresholds = roc_curve(y_test, dtree.predict_proba(X_test)[:,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机森林 ROC</span></span><br><span class="line">plt.plot(rf_fpr, rf_tpr, label=<span class="string">&#x27;随机森林 (面积比例 = %0.2f)&#x27;</span> % rf_roc_auc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 决策树 ROC</span></span><br><span class="line">plt.plot(dt_fpr, dt_tpr, label=<span class="string">&#x27;决策树 (面积比例 = %0.2f)&#x27;</span> % dt_roc_auc)</span><br><span class="line"></span><br><span class="line">plt.xlim([<span class="number">0.0</span>, <span class="number">1.0</span>])</span><br><span class="line">plt.ylim([<span class="number">0.0</span>, <span class="number">1.05</span>])</span><br><span class="line">plt.xlabel(<span class="string">&#x27;假阳性(False Positive Rate)&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;真阳性(True Positive Rate)&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;ROC Graph&#x27;</span>)</span><br><span class="line">plt.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205141.png" alt="png"></p>
 <h2 id="通过决策树来分析不同的特征的重要性"><a href="#通过决策树来分析不同的特征的重要性" class="headerlink" title="通过决策树来分析不同的特征的重要性"></a><strong>通过决策树来分析不同的特征的重要性</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 画出决策树特征的重要性 ##</span></span><br><span class="line">importances = rf.feature_importances_</span><br><span class="line">feat_names = df.drop([<span class="string">&#x27;是否离职&#x27;</span>],axis=<span class="number">1</span>).columns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">indices = np.argsort(importances)[::-<span class="number">1</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line">plt.title(<span class="string">&quot;通过随机森林来探讨不同特征的重要性&quot;</span>)</span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), importances[indices], color=<span class="string">&#x27;lightblue&#x27;</span>,  align=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">plt.step(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), np.cumsum(importances[indices]), where=<span class="string">&#x27;mid&#x27;</span>, label=<span class="string">&#x27;Cumulative&#x27;</span>) <span class="comment">#累加</span></span><br><span class="line">plt.xticks(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), feat_names[indices], rotation=<span class="string">&#x27;vertical&#x27;</span>,fontsize=<span class="number">14</span>)</span><br><span class="line">plt.xlim([-<span class="number">1</span>, <span class="built_in">len</span>(indices)])</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 正反向影响看不出来，要使用Corr来看</span></span><br><span class="line"><span class="comment"># 柱子越高越重要</span></span><br><span class="line"><span class="comment"># 折线代表考虑前n个特征对离职与否的决定程度</span></span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205158.png" alt="output_37_0"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 画出决策树的特征的重要性 ##</span></span><br><span class="line">importances = dtree.feature_importances_</span><br><span class="line">feat_names = df.drop([<span class="string">&#x27;是否离职&#x27;</span>],axis=<span class="number">1</span>).columns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">indices = np.argsort(importances)[::-<span class="number">1</span>]</span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</span><br><span class="line">plt.title(<span class="string">&quot;通过决策树来探讨不同特征的重要性&quot;</span>)</span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), importances[indices], color=<span class="string">&#x27;lightblue&#x27;</span>,  align=<span class="string">&quot;center&quot;</span>)</span><br><span class="line">plt.step(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), np.cumsum(importances[indices]), where=<span class="string">&#x27;mid&#x27;</span>, label=<span class="string">&#x27;Cumulative&#x27;</span>)</span><br><span class="line">plt.xticks(<span class="built_in">range</span>(<span class="built_in">len</span>(indices)), feat_names[indices], rotation=<span class="string">&#x27;vertical&#x27;</span>,fontsize=<span class="number">14</span>)</span><br><span class="line">plt.xlim([-<span class="number">1</span>, <span class="built_in">len</span>(indices)])</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 结果有所区别</span></span><br><span class="line"><span class="comment"># 一般使用随机森林</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210801205206.png" alt="output_38_0"></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
@@ -1291,9 +1147,9 @@ wpac_init.push({widget: 'Rating', id: 31073});
           
             <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag"># 决策树</a>
           
-            <a href="/tags/ROC%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" rel="tag"># ROC评估指标</a>
-          
             <a href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/" rel="tag"># 随机森林</a>
+          
+            <a href="/tags/ROC%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87/" rel="tag"># ROC评估指标</a>
           
         </div>
       
@@ -1450,7 +1306,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="nav-number">1.</span> <span class="nav-text">随机森林</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">随机森林介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">随机的体现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">实例演示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E9%A2%84%E6%B5%8B%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">使用决策树和随机森林预测员工离职率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">获取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.</span> <span class="nav-text">分析数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">2.4.</span> <span class="nav-text">相关性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C-T-Test"><span class="nav-number">2.5.</span> <span class="nav-text">进行 T-Test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.6.</span> <span class="nav-text">决策树&#x2F;随机森林建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86-1"><span class="nav-number">2.6.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">2.6.2.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC%E5%9B%BE%E2%80%93%E8%AF%84%E4%BB%B7%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.6.3.</span> <span class="nav-text">ROC图–评价模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%86%B3%E7%AD%96%E6%A0%91%E6%9D%A5%E5%88%86%E6%9E%90%E4%B8%8D%E5%90%8C%E7%9A%84%E7%89%B9%E5%BE%81%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">2.7.</span> <span class="nav-text">通过决策树来分析不同的特征的重要性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="nav-number">1.</span> <span class="nav-text">随机森林</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">随机森林介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">随机的体现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">实例演示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E9%A2%84%E6%B5%8B%E5%91%98%E5%B7%A5%E7%A6%BB%E8%81%8C%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">使用决策树和随机森林预测员工离职率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">获取数据</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1982,5 +1838,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

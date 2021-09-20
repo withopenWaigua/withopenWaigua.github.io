@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数 基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象">
+<meta name="description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数  基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的基类指针、虚和纯虚函数、多态性、虚析构函数">
 <meta property="og:url" content="http://alogomachine.com/22625.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数 基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象">
+<meta property="og:description" content="C++基础语法基类指针、虚和纯虚函数、多态性、虚析构函数  基类、派生类指针派生类指针123Human* phuman &#x3D; new Human;  &#x2F;&#x2F;基类指针Men* pmen &#x3D; new  Men; &#x2F;&#x2F;派生类指针&#x2F;&#x2F;新玩法：父类指针可以new一个子类对象">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-24T17:26:00.000Z">
 <meta property="article:modified_time" content="2021-09-15T13:25:56.167Z">
@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -401,24 +397,17 @@
       
 
       
-        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">基类指针、虚和纯虚函数、多态性、虚析构函数<br></span></strong></p>
+        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">基类指针、虚和纯虚函数、多态性、虚析构函数
+</span></strong></p>
 <h2 id="基类、派生类指针"><a href="#基类、派生类指针" class="headerlink" title="基类、派生类指针"></a>基类、派生类指针</h2><h3 id="派生类指针"><a href="#派生类指针" class="headerlink" title="派生类指针"></a>派生类指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Human;  <span class="comment">//基类指针</span></span><br><span class="line">Men* pmen = <span class="keyword">new</span>  Men; <span class="comment">//派生类指针</span></span><br><span class="line"><span class="comment">//新玩法：父类指针可以new一个子类对象</span></span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <h3 id="基类指针"><a href="#基类指针" class="headerlink" title="基类指针"></a>基类指针</h3><ul>
 <li>父类指针不能调动子类函数</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">funchuman</span>();  <span class="comment">//可以</span></span><br><span class="line"><span class="comment">//phuman-&gt;funmen(); </span></span><br><span class="line"><span class="comment">//虽然你new的是子类对象，但你是父类指针，无法调用子类函数</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>(); <span class="comment">//调用的是父类的eat函数，而不是men的eat函数</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>需要一个解决方法使我们只定义一个对象指针，就能调用父类以及各个子类的同名函数</p>
 <p>解决办法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line">phuman-&gt;eat;<span class="comment">//调用的是父类的eat函数，无法使用子类的eat函数</span></span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>如果我们想通过一个父类指针调用父类、子类中的同名同参数的函数的话，对这个函数也是有要求:<ul>
 <li>在父类中，eat函数声明之前必须要加virtual声明eat()函数成虚函数</li>
@@ -427,23 +416,14 @@
 </ul>
 <p>父类中操作：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;人类吃各种粮食&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>一旦某个函数(在基类)声明成虚函数，那么子类的同名函数都是属于virtual</li>
 </ul>
 <p>改造后：</p>
 <p>h中：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>CPP使用中：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men; <span class="comment">//父类指针可以生成一个子类指针</span></span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是men子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Women;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的是women子类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br><span class="line">phuman = <span class="keyword">new</span> Human;</span><br><span class="line">phuman-&gt;<span class="built_in">eat</span>();<span class="comment">//调用的Human类的指针</span></span><br><span class="line"><span class="keyword">delete</span> phuman;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>父类的同名函数不是虚函数的时候，new出来的指针不管是那个子类，都是只能调用父类的函数</li>
 <li>当父类的同名函数是虚函数的时候，new子类出来的指针，虽然是父类指针，但调动的可以是子类函数，主要是看它new谁</li>
@@ -490,12 +470,8 @@
 </ul>
 <p>humanh中:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span> </span>= <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
 <p>cpp使用：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human human;  <span class="comment">//报错</span></span><br><span class="line">Human* phuman = <span class="keyword">new</span> Men;  <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>一旦一个类中有纯虚函数，那么你就不能生成这个类的对象了(父类指针也不行);</li>
 <li>那么这个类就成为了抽象类了</li>
@@ -517,23 +493,14 @@
 </ol>
 <p>纯虚函数不实现该基类的虚函数是不能给你生成的</p>
 <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> <span class="type">Men</span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>想让这个实现的办法：</p>
 <ul>
 <li>子类实现该虚函数</li>
 </ul>
 <p>h中：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p>或cpp定义里实现：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">eat2</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>纯虚函数不能new自己这个父类</li>
 </ul>
@@ -546,15 +513,9 @@
 <li>没调用子类的析构函数</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Human* phuman = <span class="keyword">new</span> Men;</span><br><span class="line"><span class="keyword">delete</span> phuman;  <span class="comment">//没有执行子类的析构函数</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>结论：用基类指针new子类对象的时候，在delete的时候系统不会调用派生类的析构函数，这就会发生问题</p>
 <p>解决方法:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">virtual</span> ~<span class="built_in">Human</span>();</span><br></pre></td></tr></table></figure>
-
-
-
 <p>在public继承中，基类对派生类及其对象的操作，只能影响到那些从基类继承下来的成员</p>
 <ul>
 <li>如果想要用基类对非继承成员进行操作，则要把这个基类的函数定义为虚函数，析构函数也如此</li>
@@ -1291,5 +1252,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

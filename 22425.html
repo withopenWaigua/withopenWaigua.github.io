@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -407,36 +403,20 @@
 <li><strong>这种直接在类的定义中实现的成员的函数，会被当作inline内联函数处理</strong></li>
 </ul>
 <span id="more"></span>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addhour</span><span class="params">(<span class="keyword">int</span> tmphour)</span> </span>&#123;</span><br><span class="line">        Hour += tmphour;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="成员函数末尾加const"><a href="#成员函数末尾加const" class="headerlink" title="成员函数末尾加const"></a><strong>成员函数末尾加const</strong></h2><p><strong>const:常量，在成员函数后面加入一个cosnt。不但要在成员函数声明中增加const，也要在成员函数定义中加入const。</strong></p>
 <p><strong>作用：告诉系统，这个成员函数不会修改该对象里任何成员变量的值等等。也就是说，这个成员函数不会修改Time的任何状态；</strong></p>
 <ul>
 <li><strong>屁股后面加入一个const后缀，也称“常量成员函数”</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">sdsfg.<span class="built_in">initMillTime</span>(); <span class="comment">//错误，initMillTime()不是const成员函数，initMillTime()只能被非const对象调用。</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>写常量成员函数的方法：</strong></p>
 <p><strong>h中声明:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addhour</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>cpp中实现：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::addhour</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    Minute = <span class="number">2</span>; <span class="comment">//错误，不能修改</span></span><br><span class="line">    .......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>cpp中使用</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">Time fdf;</span><br><span class="line">fdf.<span class="built_in">addhour</span>(); <span class="comment">//可以</span></span><br><span class="line">sdsf.<span class="built_in">addhour</span>(); <span class="comment">//可以</span></span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li><p><strong>const成员函数，不管是不是const对象，都可以调用const成员函数。</strong></p>
 </li>
@@ -459,17 +439,13 @@
 </ul>
 <h2 id="返回自身对象的引用this"><a href="#返回自身对象的引用this" class="headerlink" title="返回自身对象的引用this"></a><strong>返回自身对象的引用this</strong></h2><p><strong>h中声明:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Time&amp; <span class="title">add_hour</span><span class="params">(<span class="keyword">int</span> tmp)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p><strong>cpp实现：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Time&amp; <span class="title">Time::add_hour</span><span class="params">(<span class="keyword">int</span> tmp)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">    Hour += tmp;  <span class="comment">//和下面一个意思</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;Hour = <span class="number">3</span>; <span class="comment">//this其实就是这个对象的指针</span></span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>; <span class="comment">//把对象自己引用返回了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>cpp使用:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> Time sdsf; <span class="comment">//代表不能改</span></span><br><span class="line">	Time mytime;</span><br><span class="line">	mytime.<span class="built_in">add_hour</span>(<span class="number">3</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>把对象自己返回回去了</strong></p>
 <p><strong>mytime地址：</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -479,13 +455,17 @@
 <th><strong>类型</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>◢</strong></td>
 <td><strong>&amp;mytime</strong></td>
 <td><strong>0x00bbf74c {Hour=12 Minute=13 Second=59 …}</strong></td>
-<td>**Time ***</td>
+<td><strong>Time *</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -495,15 +475,18 @@
 <th><strong>类型</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>◢</strong></td>
 <td><strong>this</strong></td>
 <td><strong>0x00bbf74c {Hour=12 Minute=13 Second=59 …}</strong></td>
-<td>**Time ***</td>
+<td><strong>Time *</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>表示this就是指向该对象的指针</strong></p>
-<p>*<strong>this就代表 mytime；</strong></p>
+<p><strong>*this就代表 mytime；</strong></p>
 <p><strong>调用成员函数的时候，编译器负责把这个对象的地址(&amp;mytime)传递给这个成员函数中一个隐藏的this形参</strong></p>
 <p><strong>在系统看来，任何对类成员的直接访问都是被看作通过this来做隐式调用的</strong></p>
 <ul>
@@ -515,13 +498,10 @@
 <p><strong>如果形参和成员变量名重合，可以用this-&gt;成员变量名 来与形参名区别开来</strong></p>
 <p><strong>但一般我们不在函数中写this</strong></p>
 <ul>
-<li>*<em>除了定义Time&amp; sss；Time&amp; sss函数return <em>this ，这种情况</em></em></li>
+<li><strong>除了定义Time&amp; sss；Time&amp; sss函数return *this ，这种情况</strong></li>
 </ul>
 <h2 id="statci成员"><a href="#statci成员" class="headerlink" title="statci成员"></a><strong>statci成员</strong></h2><p><strong>普通函数使用：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">6</span>; <span class="comment">//局部静态，可以多次使用，下面的修改，下次再使用不会重新刷新</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> b =<span class="number">5</span>；   <span class="comment">//全局也是在静态存储区</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>全局的static只能在这个cpp文件整个使用，但是其他的cpp文件不能够调用(而单纯的全局变量是可以的)</strong></p>
 <p><strong>注意static：</strong></p>
 <ol>
@@ -535,28 +515,17 @@
 <p><strong>定义静态成员变量的方法：</strong></p>
 <p><strong>我们一般会在某一个cpp源文件中的开头来定义这个静态成员变量。这样能够保证在调用任何函数之前，这个静态成员变量就已经被初始了</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Time::mystatic = <span class="number">15</span>;  <span class="comment">//不给初值的话默认给0，定义的时候不需要使用static，</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>只能在一个cpp里面定义初始化</strong></li>
 </ul>
 <p><strong>mystatic不属于任何对象，这个成员变量影响全部的对象，是独立但跟关联的成员变量</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Time mytime;</span><br><span class="line">Time mystime2;</span><br><span class="line">cout &lt;&lt; Time::mystatic &lt;&lt; endl;   <span class="comment">//15</span></span><br><span class="line">mytime.mystatic = <span class="number">13</span>;</span><br><span class="line">cout &lt;&lt; mytime.mystatic &lt;&lt; endl; <span class="comment">//13</span></span><br><span class="line">cout &lt;&lt; Time::mystatic &lt;&lt; endl;  <span class="comment">//13</span></span><br><span class="line">mytime2.mystatic = <span class="number">80</span>;</span><br><span class="line">cout &lt;&lt; mytime.mystatic &lt;&lt; endl;  <span class="comment">//80</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>写静态成员函数，它也是跨对象的</strong></p>
 <p><strong>静态必须使用类名::定义，不管是变量/函数</strong></p>
 <p><strong>使用的时候三种都表示一个意思：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">mstastatic</span>(<span class="number">14</span>);</span><br><span class="line">mytime.<span class="built_in">mstastatic</span>(<span class="number">13</span>);</span><br><span class="line">mytime2.<span class="built_in">mstastatic</span>(<span class="number">15</span>);</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>但静态函数不能改非静态变量</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Time::mstastatic</span><span class="params">(<span class="keyword">int</span> tevalue)</span> </span>&#123;</span><br><span class="line">	Minute = <span class="number">134</span>; <span class="comment">//不可以，它必须跟某个对象绑定</span></span><br><span class="line">	mystatic=<span class="number">233</span>; <span class="comment">//可以，它只跟类绑定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1280,5 +1249,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

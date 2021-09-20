@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="C++基础语法拷贝构造函数 拷贝构造函数 默认情况下，类对象拷贝是每个成员变量逐个拷贝  1234Time mytime; &#x2F;&#x2F;无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象Time mytime3(mytime); &#x2F;&#x2F;都是拷贝Time mytime4 &#x3D; &amp;#123; mytime &amp;#125;;Time mytime6 &#x3D; mytime;  346都是拷贝出来的，myti">
+<meta name="description" content="C++基础语法拷贝构造函数 拷贝构造函数 默认情况下，类对象拷贝是每个成员变量逐个拷贝  1234Time mytime; &#x2F;&#x2F;无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象Time mytime3(mytime); &#x2F;&#x2F;都是拷贝Time mytime4 &#x3D; &amp;#123; mytime &amp;#125;;Time mytime6 &#x3D; mytime; 346都是拷贝出来的，mytim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的拷贝构造函数">
 <meta property="og:url" content="http://alogomachine.com/22025.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="C++基础语法拷贝构造函数 拷贝构造函数 默认情况下，类对象拷贝是每个成员变量逐个拷贝  1234Time mytime; &#x2F;&#x2F;无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象Time mytime3(mytime); &#x2F;&#x2F;都是拷贝Time mytime4 &#x3D; &amp;#123; mytime &amp;#125;;Time mytime6 &#x3D; mytime;  346都是拷贝出来的，myti">
+<meta property="og:description" content="C++基础语法拷贝构造函数 拷贝构造函数 默认情况下，类对象拷贝是每个成员变量逐个拷贝  1234Time mytime; &#x2F;&#x2F;无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象Time mytime3(mytime); &#x2F;&#x2F;都是拷贝Time mytime4 &#x3D; &amp;#123; mytime &amp;#125;;Time mytime6 &#x3D; mytime; 346都是拷贝出来的，mytim">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-24T17:20:00.000Z">
 <meta property="article:modified_time" content="2021-09-15T13:23:57.188Z">
@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -406,10 +402,8 @@
 <li>默认情况下，类对象拷贝是每个成员变量逐个拷贝</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Time mytime; <span class="comment">//无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象</span></span><br><span class="line"><span class="function">Time <span class="title">mytime3</span><span class="params">(mytime)</span></span>; <span class="comment">//都是拷贝</span></span><br><span class="line">Time mytime4 = &#123; mytime &#125;;</span><br><span class="line">Time mytime6 = mytime;</span><br></pre></td></tr></table></figure>
-
 <p>346都是拷贝出来的，mytime每个值都被拷贝一份给346</p>
 <span id="more"></span>
-
 <ul>
 <li>如果一个类的构造函数的第一个参数是所属的类类型的引用。如果还有其他的额外参数，那么这些额外的参数都有默认的值，这个构造函数就叫做拷贝构造函数</li>
 <li>函数默认参数必须放在函数声明中，除非该函数没有函数声明</li>
@@ -421,18 +415,9 @@
 <p>写法：</p>
 <p>h中：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">const</span> Time&amp; tmptime,<span class="keyword">int</span> b =<span class="number">4</span>); <span class="comment">//第一个参数是所属类的引用，如果给其他参数必须给初始值</span></span><br><span class="line"><span class="comment">//Time(Time&amp; tmptime, int a = 4,int b =3); //错误，只能有一个拷贝构造函数</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>cpp中写法：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">const</span> Time&amp; tmpvel, <span class="keyword">int</span> b)&#123; <span class="comment">//一般拷贝构造函数都用const Time&amp; vel</span></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了拷贝构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Time mytime; <span class="comment">//无参的构造函数不能带()，带()无参就是代表方法了，而不是生成对象</span></span><br><span class="line"><span class="function">Time <span class="title">mytime3</span><span class="params">(mytime)</span></span>; <span class="comment">//都是拷贝   &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime4 = &#123; mytime &#125;;<span class="comment">//都是拷贝  &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime6 = mytime;<span class="comment">//都是拷贝  &quot;调用了拷贝构造函数&quot;</span></span><br><span class="line">Time mytime7;</span><br><span class="line">mytime7 = mytime <span class="comment">//不是采用拷贝构造函数了</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p>注意：</p>
 <ol>
 <li>建议拷贝构造函数第一个参数总是带着const</li>
@@ -1171,5 +1156,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

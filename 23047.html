@@ -143,11 +143,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -411,7 +407,6 @@
         <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">支持向量机SVM</span></strong></p>
 <h1 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a><strong>SVM</strong></h1><h2 id="公式与优势"><a href="#公式与优势" class="headerlink" title="公式与优势"></a><strong>公式与优势</strong></h2><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210730224149.png" alt="image-20210730224149091"></strong></p>
 <span id="more"></span>
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210730224119.png" alt="image-20210730224119817"></strong></p>
 <p><strong>优势：</strong></p>
 <ul>
@@ -434,19 +429,9 @@
 <li><strong>一对一法</strong></li>
 </ul>
 <h1 id="肿瘤预测"><a href="#肿瘤预测" class="headerlink" title="肿瘤预测"></a><strong>肿瘤预测</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pd.set_option(<span class="string">&#x27;display.max_columns&#x27;</span>,<span class="literal">None</span>)</span><br><span class="line">data.columns</span><br><span class="line">data.describe()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -454,9 +439,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -767,29 +751,12 @@
       <td>0.207500</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">features_mean = <span class="built_in">list</span>(data.columns[<span class="number">2</span>:<span class="number">12</span>]) <span class="comment"># 平均值数据</span></span><br><span class="line">features_se = <span class="built_in">list</span>(data.columns[<span class="number">12</span>:<span class="number">22</span>])  <span class="comment"># 标准差数据</span></span><br><span class="line">features_worst = <span class="built_in">list</span>(data.columns[<span class="number">22</span>:<span class="number">32</span>])  <span class="comment"># 最大值数据</span></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.drop(<span class="string">&#x27;id&#x27;</span>,axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改内容</span></span><br><span class="line">data.diagnosis = data.diagnosis.<span class="built_in">map</span>(&#123;<span class="string">&#x27;M&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;B&#x27;</span>:<span class="number">0</span>&#125;) <span class="comment"># map映射</span></span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -797,9 +764,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1008,41 +974,19 @@
       <td>0.07678</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt =sns.countplot(data.diagnosis,label=<span class="string">&#x27;Count&#x27;</span>)<span class="comment">#条形图</span></span><br></pre></td></tr></table></figure>
-
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210730221339.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 研究相关性</span></span><br><span class="line">corr = data[features_mean].corr()</span><br><span class="line"></span><br><span class="line">sns.heatmap(corr,annot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x27be75f2278&gt;
-</code></pre>
-<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210730221334.png" alt="png"></p>
+</code></pre><p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210730221334.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">features_remain = [<span class="string">&#x27;radius_mean&#x27;</span>,<span class="string">&#x27;texture_mean&#x27;</span>, <span class="string">&#x27;smoothness_mean&#x27;</span>,<span class="string">&#x27;compactness_mean&#x27;</span>,<span class="string">&#x27;symmetry_mean&#x27;</span>, <span class="string">&#x27;fractal_dimension_mean&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train,test = train_test_split(data,test_size=<span class="number">0.3</span>)</span><br><span class="line">train_X = train[features_remain]</span><br><span class="line">train_y = train[<span class="string">&#x27;diagnosis&#x27;</span>]</span><br><span class="line">test_X = test[features_remain]</span><br><span class="line">test_y = test[<span class="string">&#x27;diagnosis&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ss = StandardScaler()</span><br><span class="line">train_X = ss.fit_transform(train_X)</span><br><span class="line">test_X = ss.fit_transform(test_X)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = svm.SVC()</span><br><span class="line"><span class="comment"># 训练数据</span></span><br><span class="line">model.fit(train_X,train_y)</span><br><span class="line"><span class="comment"># 6.模型评估      # 分类阶段</span></span><br><span class="line">prediction = model.predict(test_X)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;准确率：&#x27;</span>,metrics.accuracy_score(prediction,test_y))</span><br></pre></td></tr></table></figure>
-
 <pre><code>准确率： 0.935672514619883
-</code></pre>
-<center>
+</code></pre><center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
 <script type="text/javascript">
@@ -1769,5 +1713,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

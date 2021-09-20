@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd  Series12s1 &#x3D; pd.Series(np.arange(4),index &#x3D; [&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,&amp;#x27;d&amp;#x27;])s2 &#x3D; pd.Series(np.arange(5),index &#x3D; [&amp;#x27">
+<meta name="description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd Series12s1 &#x3D; pd.Series(np.arange(4),index &#x3D; [&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,&amp;#x27;d&amp;#x27;])s2 &#x3D; pd.Series(np.arange(5),index &#x3D; [&amp;#x27;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pandas对齐运算">
 <meta property="og:url" content="http://alogomachine.com/21549.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd  Series12s1 &#x3D; pd.Series(np.arange(4),index &#x3D; [&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,&amp;#x27;d&amp;#x27;])s2 &#x3D; pd.Series(np.arange(5),index &#x3D; [&amp;#x27">
+<meta property="og:description" content="数据分析pandas基础内容 12import numpy as npimport pandas as pd Series12s1 &#x3D; pd.Series(np.arange(4),index &#x3D; [&amp;#x27;a&amp;#x27;,&amp;#x27;b&amp;#x27;,&amp;#x27;c&amp;#x27;,&amp;#x27;d&amp;#x27;])s2 &#x3D; pd.Series(np.arange(5),index &#x3D; [&amp;#x27;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-15T15:49:00.000Z">
 <meta property="article:modified_time" content="2021-09-15T13:27:29.506Z">
@@ -137,11 +137,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -404,23 +400,16 @@
       
         <p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">基础内容</span></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
 <h1 id="Series"><a href="#Series" class="headerlink" title="Series"></a><strong>Series</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = pd.Series(np.arange(<span class="number">4</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">s2 = pd.Series(np.arange(<span class="number">5</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1</span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <p><strong>结果:</strong></p>
 <pre><code>a    0
 b    1
 c    2
 d    3
 dtype: int32
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2</span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <pre><code>a    0
 c    1
@@ -428,9 +417,7 @@ e    2
 f    3
 g    4
 dtype: int32
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1 + s2 <span class="comment">#任何数据加上nan都变成nan</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1 + s2 <span class="comment">#任何数据加上nan都变成nan</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <pre><code>a    0.0
 b    NaN
@@ -440,9 +427,7 @@ e    NaN
 f    NaN
 g    NaN
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.add(s2)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.add(s2)</span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <pre><code>a    0.0
 b    NaN
@@ -452,9 +437,7 @@ e    NaN
 f    NaN
 g    NaN
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.add(s2,fill_value=<span class="number">0</span>)  <span class="comment">#把默认的nan改为0</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1.add(s2,fill_value=<span class="number">0</span>)  <span class="comment">#把默认的nan改为0</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <pre><code>a    0.0
 b    1.0
@@ -464,12 +447,8 @@ e    2.0
 f    3.0
 g    4.0
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.DataFrame</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABC&#x27;</span>))</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;f&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABD&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.DataFrame</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABC&#x27;</span>))</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>),index = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;f&#x27;</span>],columns= <span class="built_in">list</span>(<span class="string">&#x27;ABD&#x27;</span>))</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -513,7 +492,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -551,7 +529,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1 + df2</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -607,7 +584,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.add(df2,fill_value=<span class="number">0</span>) <span class="comment">#把nan改为0，但如果两个表都为nan那么结果就只能为nan</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -663,7 +639,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>/df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -707,7 +682,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.rdiv(<span class="number">1</span>)  <span class="comment">#1是分子 df1是分母  r表示反方向</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -751,7 +725,6 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.div(<span class="number">1</span>)  <span class="comment">#表示df1除以1</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -794,7 +767,6 @@ dtype: float64
 
 
 <h1 id="混合运算符"><a href="#混合运算符" class="headerlink" title="混合运算符"></a><strong>混合运算符</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -838,24 +810,19 @@ dtype: float64
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s3 = df1.iloc[<span class="number">0</span>]</span><br><span class="line">s3</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <pre><code>A    0
 B    1
 C    2
 Name: a, dtype: int32
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s4 = df1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">s4</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s4 = df1[<span class="string">&#x27;A&#x27;</span>]</span><br><span class="line">s4</span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <pre><code>a    0
 b    3
 c    6
 d    9
 Name: A, dtype: int32
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1 - s3  <span class="comment">#数组的广播，表示DataFrame的每一行都减去Series</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1 - s3  <span class="comment">#数组的广播，表示DataFrame的每一行都减去Series</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -899,7 +866,6 @@ Name: A, dtype: int32
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.sub(s4,axis=<span class="number">0</span>)  <span class="comment">#改为从左往右减</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果:</strong></p>
 <table border="1" class="dataframe">
   <thead>
@@ -1664,5 +1630,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

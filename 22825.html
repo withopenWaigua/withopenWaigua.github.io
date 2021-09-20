@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="C++基础语法友元函数、友元类、友元成员函数  友元函数一、友元函数,这是个函数  public，protected，private只允许本类的访问">
+<meta name="description" content="C++基础语法友元函数、友元类、友元成员函数   友元函数一、友元函数,这是个函数  public，protected，private只允许本类的访问">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++的友元函数、友元类、友元成员函数">
 <meta property="og:url" content="http://alogomachine.com/22825.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="C++基础语法友元函数、友元类、友元成员函数  友元函数一、友元函数,这是个函数  public，protected，private只允许本类的访问">
+<meta property="og:description" content="C++基础语法友元函数、友元类、友元成员函数   友元函数一、友元函数,这是个函数  public，protected，private只允许本类的访问">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-24T17:28:00.000Z">
 <meta property="article:modified_time" content="2021-09-15T13:29:30.912Z">
@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -401,48 +397,38 @@
       
 
       
-        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">友元函数、友元类、友元成员函数<br></span></strong></p>
+        <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">友元函数、友元类、友元成员函数
+</span></strong></p>
 <ol>
 <li><h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><p>一、友元函数,这是个函数</p>
 <ul>
 <li>public，protected，private只允许本类的访问</li>
 </ul>
 <span id="more"></span>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> Men&amp; tep)</span> </span>&#123;</span><br><span class="line">    tep.<span class="built_in">funcmy</span>();  <span class="comment">//funcmy()是men类的私有函数，所以调用失败了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+</li>
+</ol>
 <ul>
 <li>但只要让函数func成为类Men的友元函数，那么func这个函数就能访问Men类中的所有成员</li>
 </ul>
-<p>写法:</p>
-<p>在类内声明里面不管什么地方写：</p>
-<p>friend+函数声明</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> Men&amp; tep)</span></span>;</span><br></pre></td></tr></table></figure>
-
+<p>   写法:</p>
+<p>   在类内声明里面不管什么地方写：</p>
+<p>   friend+函数声明</p>
+   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> Men&amp; tep)</span></span>;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>友元函数必须不能在类里面，比如说可以在main函数外定义。</p>
 </li>
 <li><p>友元函数不属于类的成员，所以友元函数声明不受限制</p>
 </li>
 </ul>
-<p>总结：友元函数func是个函数，通过在别的类里面用friend+函数声明，成为这个类的友元函数，拥有这个类全部的访问权</p>
+<p>   总结：友元函数func是个函数，通过在别的类里面用friend+函数声明，成为这个类的友元函数，拥有这个类全部的访问权</p>
 <h2 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h2><ul>
 <li>友元类是个类</li>
 <li>可以把其他的类定义成友元类。如果你是我的友元类，那么你就可以在你的成员函数中访问我的私有成员，包括public、private、protected</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callss</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>当我们修改A，让类B成为A的友元类：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span> <span class="comment">//虽然先定义的是A，但并没有报错</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callCAF</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">    b.<span class="built_in">ccallCAF</span>(<span class="number">3</span>, a); <span class="comment">//行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
+   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callss</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>   当我们修改A，让类B成为A的友元类：</p>
+   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span> <span class="comment">//虽然先定义的是A，但并没有报错</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callCAF</span><span class="params">(<span class="keyword">int</span> x, A&amp; a)</span> </span>&#123;</span><br><span class="line">        a.data = x; <span class="comment">//肯定不行，不能访问A类的私有成员</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">    b.<span class="built_in">ccallCAF</span>(<span class="number">3</span>, a); <span class="comment">//行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>每个类都负责控制自己的友元函数或者友元类：</p>
 </li>
@@ -455,12 +441,9 @@
 <li><p>写友元成员函数，必须注意代码组织结构，因为里面有声明以及定义</p>
 </li>
 </ul>
-<p>写法:</p>
-<p>在A类声明中：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>;</span> <span class="comment">//类声明，要用到这里面的成员函数就不行;错误。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;C.h&quot;</span> <span class="comment">//确保编译器确定类C里面有callCAF的函数</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">C::callCAF</span><span class="params">(<span class="keyword">int</span> x; A&amp; A)</span></span>; <span class="comment">//该函数时友元成员函数的声明</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>   写法:</p>
+<p>   在A类声明中：</p>
+   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>;</span> <span class="comment">//类声明，要用到这里面的成员函数就不行;错误。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;C.h&quot;</span> <span class="comment">//确保编译器确定类C里面有callCAF的函数</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></span><br><span class="line"><span class="function"><span class="keyword">friend</span> <span class="keyword">void</span> <span class="title">C::callCAF</span><span class="params">(<span class="keyword">int</span> x; A&amp; A)</span></span>; <span class="comment">//该函数时友元成员函数的声明</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>在类里面构造别人类的友元函数这个函数必须是public属性，私有的不行</li>
 </ul>
@@ -470,8 +453,6 @@
 <li><p>缺点：破坏了类的封装性质，降低了类的可靠性以及维护性；</p>
 </li>
 </ul>
-</li>
-</ol>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1195,5 +1176,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

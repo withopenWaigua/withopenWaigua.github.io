@@ -138,11 +138,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -410,121 +406,79 @@
 <p><strong>vector能把其他对象装进来，也被称为容器</strong></p>
 <p><strong>要include进来</strong></p>
 <span id="more"></span>
-
 <p><strong>使用：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe; <span class="comment">//表示vjihe的vector类型保存的数据是int型</span></span><br></pre></td></tr></table></figure>
-
 <p><strong><int>： 模板，vector本身就是类模板，<int>实际上就是类模板的实例化； 实例化int类型的vector模板</strong></p>
 <p><strong>可以把vector<XXX> 当成一种类型  在&lt;&gt;内部放上类型信息</strong></p>
 <p><strong>类似vector<int> 才是一个完整的类型</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vjihe;</span><br><span class="line">vector&lt;student&gt; studlist;</span><br><span class="line">vector&lt;vector&lt;string&gt;&gt; strchuang;  <span class="comment">//可以该集合里面的每个元素都是vector&lt;string&gt;对象；集合套集合</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>*&gt; vjihe2;</span><br><span class="line"><span class="comment">//vector&lt;int&amp;&gt; vjihe3; 不行，引用不是对象，而是个引用</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <h2 id="定义和初始化vector"><a href="#定义和初始化vector" class="headerlink" title="定义和初始化vector"></a><strong>定义和初始化vector</strong></h2><ol>
 <li><strong>空的vector对象，定义一个string类型的空的vector对象（容器），目前这个mystr里面不包含任何元素</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; mystr;</span><br></pre></td></tr></table></figure>
-
 <p><strong>插入内容：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasd&quot;</span>);</span><br><span class="line">mystr.<span class="built_in">push_back</span>(<span class="string">&quot;sdaasdsd&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
+<ol>
 <li><strong>用元素拷贝的初始化方式</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;string&gt; <span class="title">mystr2</span><span class="params">(mystr)</span></span>;  <span class="comment">//元素的值拷贝出来了一份，互不影响</span></span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">vector&lt;string&gt; mystr2 = mystr;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="3">
+<ol>
 <li><strong>通过列表初始化给值</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; mystr3 = &#123; <span class="string">&quot;aaa&quot;</span>,<span class="string">&quot;bbb&quot;</span>,<span class="string">&quot;ccc&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="4">
+<ol>
 <li><strong>创建指定数量的元素。有元素数量概念的时候一般用圆括号</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt;  <span class="title">jihe23</span><span class="params">(<span class="number">15</span>, <span class="number">999</span>)</span></span>;  <span class="comment">//创建15个int元素，每个元素都是999</span></span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">jihe4</span><span class="params">(<span class="number">4</span>, <span class="string">&quot;hello&quot;</span>)</span></span>; <span class="comment">//创建4个string类型的元素，每个元素的值都是hello</span></span><br><span class="line"><span class="comment">//int不给值就会每个元素都是0</span></span><br><span class="line"><span class="comment">//string不给值每个值都是“”</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="5">
+<ol>
 <li><p><strong>多种初始化方式</strong>  </p>
 <p><strong>（）一般表示元素数量，{}一般表示元素内容的概念，但不绝对。</strong></p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">jihe77</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//创建10个为0的vector数组</span></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; jihe88&#123;<span class="number">20</span>&#125;;<span class="comment">//表示一个元素，该元素为10</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>特殊（但不建议这么使用）：</strong></p>
 <ul>
 <li><strong>类型与{}内的内容吻合就会正常初始化列表</strong></li>
 <li><strong>不吻合就会把{}内的数字当作创建几个元素</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; ju&#123; <span class="number">10</span> &#125;;</span><br><span class="line"><span class="comment">// 系统发现10和类型不匹配，所以把10当成元素数量，每个元素都是&quot;&quot;vector&lt;string&gt; ff&#123; 10,&quot;hello&quot; &#125;; //10个元素，每个元素都是hello、</span></span><br><span class="line"><span class="comment">//vector&lt;int&gt; ju&#123; &quot;hello&quot; &#125;; </span></span><br><span class="line"><span class="comment">//但这种无法解释，直接就会报错</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="vector对象上的操作"><a href="#vector对象上的操作" class="headerlink" title="vector对象上的操作"></a><strong>vector对象上的操作</strong></h2><p><strong>最常用的是不知道vector对象里面需要放多少元素，需要动态增加和减少。</strong></p>
 <ol>
-<li><p><strong>判断是否为空：.empty()</strong></p>
-</li>
-<li><p><strong>用于向vector增加一个元素：.push_back()</strong></p>
-</li>
+<li><strong>判断是否为空：.empty()</strong></li>
+</ol>
+<ol>
+<li><strong>用于向vector增加一个元素：.push_back()</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; ivec;ivec.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="3">
+<ol>
 <li><strong>用于查询元素个数：.size()</strong></li>
 </ol>
-<ol start="4">
+<ol>
 <li><strong>clear：用于清空全部元素</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ivec.<span class="built_in">clear</span>();</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="5">
+<ol>
 <li><strong>v[n]：访问第n个元素，范围是0-v.size()-1</strong></li>
 </ol>
-<ol start="6">
+<ol>
 <li><strong>=：赋值运算符，会把原来的清空</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; sss;</span><br><span class="line">sss.<span class="built_in">push_back</span>(<span class="number">2</span>);sss = ivec; <span class="comment">//原来的2没了</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="7">
+<ol>
 <li><strong>==以及!=用与判断相等或者不相等，完全相等：元素个数相同,且对应位置的元素值必须也要相等</strong></li>
 </ol>
-<ol start="8">
+<ol>
 <li><strong>范围for的应用</strong></li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">    vecitem *= <span class="number">2</span>;	</span><br><span class="line">    cout &lt;&lt; vecitem &lt;&lt; endl;C</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>问题：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; vecvalue&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span> &#125;;<span class="keyword">for</span> (<span class="keyword">auto</span> vecitem : vecvalue) &#123;	</span><br><span class="line">	cout &lt;&lt; vecitem &lt;&lt; endl;	</span><br><span class="line">	vecvalue.<span class="built_in">push_back</span>(<span class="number">33</span>); </span><br><span class="line"> &#125;<span class="comment">//导致输出彻底乱套，范围for是用来遍历这个vector的,第一次遍历会记录这个容器的末尾值，当你插入或删除容器内的元素，会导致末位置发生改变，从而使编译器输出发生问题	vecitem *= 2;	cout &lt;&lt; vecitem &lt;&lt; endl;	</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>打印结果乱套了:</strong></p>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210619231446200.png" alt="image-20210619231446200"></strong></p>
 <p><strong>牢记:在for语句遍历（遍历一个容器等等类似的操作中），千万不要改动vector容器的容量，增加或者删除都不可以；</strong></p>
-<center>
-<a href="" class="wpac-cr">顺便评个分吧！👇</a>
-<div id="wpac-rating"></div>
-<script type="text/javascript">
+<p><center><br><a href="" class="wpac-cr">顺便评个分吧！👇</a></p>
+<p><div id="wpac-rating"></div></p>
+<p><script type="text/javascript">
 wpac_init = window.wpac_init || [];
 wpac_init.push({widget: 'Rating', id: 31073});
 (function() {
@@ -536,8 +490,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
     mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
 })();
-</script>
-</center>;
+</script><br>&lt;/center&gt;;</p>
 
       
     </div>
@@ -1244,5 +1197,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

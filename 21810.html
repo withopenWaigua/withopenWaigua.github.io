@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="数据分析pandas数据规整和分组聚合 12import pandas as pdimport numpy as np  1. 数据合并1.1 合并数据12x &#x3D; np.array([[1,2],[3,4]])x">
+<meta name="description" content="数据分析pandas数据规整和分组聚合 12import pandas as pdimport numpy as np 1. 数据合并1.1 合并数据12x &#x3D; np.array([[1,2],[3,4]])x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pandas数据规整和分组聚合">
 <meta property="og:url" content="http://alogomachine.com/21810.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="数据分析pandas数据规整和分组聚合 12import pandas as pdimport numpy as np  1. 数据合并1.1 合并数据12x &#x3D; np.array([[1,2],[3,4]])x">
+<meta property="og:description" content="数据分析pandas数据规整和分组聚合 12import pandas as pdimport numpy as np 1. 数据合并1.1 合并数据12x &#x3D; np.array([[1,2],[3,4]])x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-17T17:10:00.000Z">
 <meta property="article:modified_time" content="2021-09-15T13:28:28.123Z">
@@ -137,11 +137,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -404,48 +400,30 @@
       
         <p><strong><span id="yellow-block">数据分析</span><span id="green-block">pandas</span><span id="gray-block">数据规整和分组聚合</span></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-
 <h1 id="1-数据合并"><a href="#1-数据合并" class="headerlink" title="1. 数据合并"></a><strong>1. 数据合并</strong></h1><h2 id="1-1-合并数据"><a href="#1-1-合并数据" class="headerlink" title="1.1 合并数据"></a><strong>1.1 合并数据</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <p><strong>结果：</strong></p>
 <pre><code>array([[1, 2],
        [3, 4]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([[<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>]])</span><br><span class="line">y</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([[<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>]])</span><br><span class="line">y</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>array([[5, 6],
        [7, 8]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate([x,y])</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate([x,y])</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>array([[1, 2],
        [3, 4],
        [5, 6],
        [7, 8]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate([x,y],axis =<span class="number">1</span>)  <span class="comment">#axis换轴合并</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate([x,y],axis =<span class="number">1</span>)  <span class="comment">#axis换轴合并</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>array([[1, 2, 5, 6],
        [3, 4, 7, 8]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Pandas合并</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>),index=<span class="built_in">list</span>(<span class="string">&#x27;abc&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)+<span class="number">5</span>,index=<span class="built_in">list</span>(<span class="string">&#x27;ac&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Pandas合并</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>),index=<span class="built_in">list</span>(<span class="string">&#x27;abc&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)+<span class="number">5</span>,index=<span class="built_in">list</span>(<span class="string">&#x27;ac&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -453,9 +431,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -480,21 +457,11 @@
       <td>5</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -502,9 +469,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -524,30 +490,18 @@
       <td>8</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.实现方式</span></span><br><span class="line">np.concatenate([df1,df2])  <span class="comment">#np将内容合并忽略行列索引</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>array([[0, 1],
        [2, 3],
        [4, 5],
        [5, 6],
        [7, 8]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.append(df2)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.append(df2)</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -555,9 +509,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -592,21 +545,11 @@
       <td>8</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.实现方式2</span></span><br><span class="line">pd.concat([df1,df2])  <span class="comment">#进行上下合并</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -614,9 +557,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -651,21 +593,11 @@
       <td>8</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df1,df2],axis=<span class="number">1</span>,sort=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -673,9 +605,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -708,27 +639,16 @@
       <td>8.0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h2 id="1-2数据的连接"><a href="#1-2数据的连接" class="headerlink" title="1.2数据的连接"></a><strong>1.2数据的连接</strong></h2><ul>
 <li><strong>pd.merge</strong></li>
 <li><strong>join</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">&#x27;key&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>, <span class="string">&#x27;K3&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;A&#x27;</span>: [<span class="string">&#x27;A0&#x27;</span>, <span class="string">&#x27;A1&#x27;</span>, <span class="string">&#x27;A2&#x27;</span>, <span class="string">&#x27;A3&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;B&#x27;</span>: [<span class="string">&#x27;B0&#x27;</span>, <span class="string">&#x27;B1&#x27;</span>, <span class="string">&#x27;B2&#x27;</span>, <span class="string">&#x27;B3&#x27;</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">&#x27;key&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>, <span class="string">&#x27;K3&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;C&#x27;</span>: [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;D&#x27;</span>: [<span class="string">&#x27;D0&#x27;</span>, <span class="string">&#x27;D1&#x27;</span>, <span class="string">&#x27;D2&#x27;</span>, <span class="string">&#x27;D3&#x27;</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -736,9 +656,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -773,21 +692,11 @@
       <td>B3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">right</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -795,9 +704,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -832,21 +740,11 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left,right)  <span class="comment">#如果一个有k4一个没有k4，那么merge就不会有k4，就是取交集，默认只能左右连接</span></span><br><span class="line"><span class="comment">#表放的位置不一样，结果就会不一样</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -854,9 +752,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -901,24 +798,12 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">left = pd.DataFrame(&#123;<span class="string">&#x27;key1&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;key2&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;A&#x27;</span>: [<span class="string">&#x27;A0&#x27;</span>, <span class="string">&#x27;A1&#x27;</span>, <span class="string">&#x27;A2&#x27;</span>, <span class="string">&#x27;A3&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;B&#x27;</span>: [<span class="string">&#x27;B0&#x27;</span>, <span class="string">&#x27;B1&#x27;</span>, <span class="string">&#x27;B2&#x27;</span>, <span class="string">&#x27;B3&#x27;</span>]&#125;)</span><br><span class="line">right = pd.DataFrame(&#123;<span class="string">&#x27;key1&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K1&#x27;</span>, <span class="string">&#x27;K2&#x27;</span>],</span><br><span class="line">                      <span class="string">&#x27;key2&#x27;</span>: [<span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>, <span class="string">&#x27;K0&#x27;</span>],</span><br><span class="line">                      <span class="string">&#x27;C&#x27;</span>: [<span class="string">&#x27;C0&#x27;</span>, <span class="string">&#x27;C1&#x27;</span>, <span class="string">&#x27;C2&#x27;</span>, <span class="string">&#x27;C3&#x27;</span>],</span><br><span class="line">                      <span class="string">&#x27;D&#x27;</span>: [<span class="string">&#x27;D0&#x27;</span>, <span class="string">&#x27;D1&#x27;</span>, <span class="string">&#x27;D2&#x27;</span>, <span class="string">&#x27;D3&#x27;</span>]&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -926,9 +811,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -968,21 +852,11 @@
       <td>B3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">right</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -990,9 +864,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1032,21 +905,11 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left,right,on=<span class="string">&#x27;key1&#x27;</span>) <span class="comment">#on指定将key作为桥梁，一般默认为全部相同的列名称作为桥梁</span></span><br><span class="line"><span class="comment">#默认inner内连接 交集</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1054,9 +917,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1121,21 +983,11 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left,right,how=<span class="string">&#x27;outer&#x27;</span>) <span class="comment">#outer就是外连接，相当于并集</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1143,9 +995,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1213,21 +1064,11 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left,right,how=<span class="string">&#x27;left&#x27;</span>) <span class="comment">#left表示左连接，缺少的以nan填充，以左边为标准</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1235,9 +1076,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1296,21 +1136,11 @@
       <td>NaN</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left,right,left_on=<span class="string">&#x27;key1&#x27;</span>,right_on=<span class="string">&#x27;key2&#x27;</span>) <span class="comment">#将左边的key1和右边的key2作为桥梁连接，与on起冲突</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1318,9 +1148,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1424,24 +1253,12 @@
       <td>D3</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;<span class="string">&#x27;name&#x27;</span>:[<span class="string">&#x27;mark&#x27;</span>,<span class="string">&#x27;Bob&#x27;</span>,<span class="string">&#x27;Sam&#x27;</span>,<span class="string">&#x27;Jake&#x27;</span>],</span><br><span class="line">                   <span class="string">&#x27;group&#x27;</span>:[<span class="string">&#x27;IT部&#x27;</span>,<span class="string">&#x27;HR部&#x27;</span>,<span class="string">&#x27;运营部&#x27;</span>,<span class="string">&#x27;设计部&#x27;</span>]&#125;)</span><br><span class="line">df2 = pd.DataFrame(&#123;<span class="string">&#x27;name&#x27;</span>:[<span class="string">&#x27;Sam&#x27;</span>,<span class="string">&#x27;Bob&#x27;</span>,<span class="string">&#x27;mark&#x27;</span>,<span class="string">&#x27;Jake&#x27;</span>],</span><br><span class="line">                   <span class="string">&#x27;date&#x27;</span>:[<span class="number">2004</span>,<span class="number">2008</span>,<span class="number">2012</span>,<span class="number">2014</span>]&#125;)</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1449,9 +1266,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1481,21 +1297,11 @@
       <td>设计部</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1503,9 +1309,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1535,21 +1340,11 @@
       <td>2014</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df1,df2) <span class="comment">#而是把对应的name名字作为桥梁合并，不是像contcat把序号相同的合并</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1557,9 +1352,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1594,24 +1388,12 @@
       <td>2014</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df_obj1 = pd.DataFrame(&#123;<span class="string">&#x27;key&#x27;</span>: [<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>],</span><br><span class="line">                        <span class="string">&#x27;data1&#x27;</span> : np.random.randint(<span class="number">0</span>,<span class="number">10</span>,<span class="number">7</span>)&#125;)</span><br><span class="line">df_obj2 = pd.DataFrame(&#123;<span class="string">&#x27;data1&#x27;</span> : np.random.randint(<span class="number">0</span>,<span class="number">10</span>,<span class="number">3</span>)&#125;, index=[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;d&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_obj1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1619,9 +1401,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1666,21 +1447,11 @@
       <td>4</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_obj2</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1688,9 +1459,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1711,21 +1481,11 @@
       <td>0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df_obj1,df_obj2,left_on=<span class="string">&#x27;key&#x27;</span>,right_index=<span class="literal">True</span>)  <span class="comment">#左边的key和右边的index行索引进行连接</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1733,9 +1493,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1782,21 +1541,11 @@
       <td>4</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df_obj2,df_obj1,right_on=<span class="string">&#x27;key&#x27;</span>,left_index=<span class="literal">True</span>)  <span class="comment">#左右很重要，双重改变即不变</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1804,9 +1553,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1853,21 +1601,11 @@
       <td>4</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df_obj2,df_obj1,right_on=<span class="string">&#x27;key&#x27;</span>,left_index=<span class="literal">True</span>,suffixes=(<span class="string">&#x27;_left&#x27;</span>,<span class="string">&#x27;_right&#x27;</span>)) <span class="comment">#把xy改成left和right</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1875,9 +1613,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1924,24 +1661,12 @@
       <td>4</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">left2 = pd.DataFrame([[<span class="number">1.</span>, <span class="number">2.</span>], [<span class="number">3.</span>, <span class="number">4.</span>], [<span class="number">5.</span>, <span class="number">6.</span>]],</span><br><span class="line">                     index=[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;e&#x27;</span>],</span><br><span class="line">                     columns=[<span class="string">&#x27;语文&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>])</span><br><span class="line"></span><br><span class="line">right2 = pd.DataFrame([[<span class="number">7.</span>, <span class="number">8.</span>], [<span class="number">9.</span>, <span class="number">10.</span>], [<span class="number">11.</span>, <span class="number">12.</span>], [<span class="number">13</span>, <span class="number">14</span>]],</span><br><span class="line">                      index=[<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>],</span><br><span class="line">                      columns=[<span class="string">&#x27;英语&#x27;</span>, <span class="string">&#x27;综合&#x27;</span>])</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(left2,right2,how=<span class="string">&#x27;outer&#x27;</span>,left_index=<span class="literal">True</span>,right_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1949,9 +1674,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1998,21 +1722,11 @@
       <td>14.0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left2.join(right2,how=<span class="string">&#x27;outer&#x27;</span>) <span class="comment">#有使用条件:不能有重复的列名，默认使用行索引来连接</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2020,9 +1734,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2069,24 +1782,15 @@
       <td>14.0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h1 id="2-数据重塑和轴向旋转"><a href="#2-数据重塑和轴向旋转" class="headerlink" title="2. 数据重塑和轴向旋转"></a><strong>2. 数据重塑和轴向旋转</strong></h1><ul>
 <li><strong>stack()</strong></li>
 <li><strong>unstack()</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df3 = pd.DataFrame(&#123;<span class="string">&#x27;date&#x27;</span>:[<span class="string">&#x27;2018-11-22&#x27;</span>,<span class="string">&#x27;2018-11-22&#x27;</span>,<span class="string">&#x27;2018-11-23&#x27;</span>,<span class="string">&#x27;2018-11-23&#x27;</span>,<span class="string">&#x27;2018-11-24&#x27;</span>],</span><br><span class="line">                  <span class="string">&#x27;class&#x27;</span>:[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">                  <span class="string">&#x27;values&#x27;</span>:[<span class="number">5</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">1</span>],</span><br><span class="line">                   <span class="string">&#x27;values1&#x27;</span>:[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>]&#125;,columns=[<span class="string">&#x27;date&#x27;</span>,<span class="string">&#x27;class&#x27;</span>,<span class="string">&#x27;values&#x27;</span>,<span class="string">&#x27;values1&#x27;</span>])</span><br><span class="line">df3</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2094,9 +1798,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2143,21 +1846,11 @@
       <td>9</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把date作为行索引，class作为列索引，来重塑</span></span><br><span class="line">df4 = df3.pivot(<span class="string">&#x27;date&#x27;</span>,<span class="string">&#x27;class&#x27;</span>)<span class="comment">#,&#x27;values&#x27;)  </span></span><br><span class="line"><span class="comment">#第三个为指定的列作为数据内容,不设置就剩下的为数据内容</span></span><br><span class="line">df4</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2169,9 +1862,8 @@
 .dataframe thead tr:last-of-type th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr>
       <th></th>
@@ -2226,30 +1918,18 @@
       <td>9.0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df4[<span class="string">&#x27;values&#x27;</span>][<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>date
 2018-11-22    5.0
 2018-11-23    NaN
 2018-11-24    NaN
 Name: a, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df3</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df3</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2257,9 +1937,8 @@ Name: a, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2306,21 +1985,11 @@ Name: a, dtype: float64
       <td>9</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df3.set_index([<span class="string">&#x27;date&#x27;</span>,<span class="string">&#x27;class&#x27;</span>]).unstack() <span class="comment">#设置好行列索引后，用unstack()展开层级索引                                                                                                   </span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2332,9 +2001,8 @@ Name: a, dtype: float64
 .dataframe thead tr:last-of-type th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr>
       <th></th>
@@ -2389,20 +2057,11 @@ Name: a, dtype: float64
       <td>9.0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <h1 id="3-数据分组和聚合"><a href="#3-数据分组和聚合" class="headerlink" title="3. 数据分组和聚合"></a><strong>3. 数据分组和聚合</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;<span class="string">&#x27;fruit&#x27;</span>:[<span class="string">&#x27;apple&#x27;</span>,<span class="string">&#x27;banana&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;apple&#x27;</span>,<span class="string">&#x27;banana&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;color&#x27;</span>:[<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;cyan&#x27;</span>,<span class="string">&#x27;cyan&#x27;</span>],</span><br><span class="line">                    <span class="string">&#x27;price&#x27;</span>:[<span class="number">8.5</span>,<span class="number">6.8</span>,<span class="number">5.6</span>,<span class="number">7.8</span>,<span class="number">6.4</span>]&#125;)</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2410,9 +2069,8 @@ Name: a, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2453,29 +2111,20 @@ Name: a, dtype: float64
       <td>6.4</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <ul>
 <li><strong>求苹果的平均价格</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1[df1[<span class="string">&#x27;fruit&#x27;</span>]==<span class="string">&#x27;apple&#x27;</span>][<span class="string">&#x27;price&#x27;</span>].mean()</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>8.15
-</code></pre>
-<ul>
+</code></pre><ul>
 <li><strong>求每一种水果的平均价格</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g = df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>) <span class="comment">#通过fruit名称来进行分组</span></span><br><span class="line">g</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>&lt;pandas.core.groupby.groupby.DataFrameGroupBy object at 0x0000029D51FE4630&gt;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> g:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(i))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;*********************************************************************&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> g:</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(i))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;*********************************************************************&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>(&#39;apple&#39;,    fruit color  price
 0  apple   red    8.5
@@ -2491,9 +2140,7 @@ Name: a, dtype: float64
 2  orange  yellow    5.6)
 &lt;class &#39;tuple&#39;&gt;
 *********************************************************************
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> g:</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;*&#x27;</span>*<span class="number">30</span>)</span><br><span class="line">    <span class="built_in">print</span>(group)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(group))</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name,group <span class="keyword">in</span> g:</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;*&#x27;</span>*<span class="number">30</span>)</span><br><span class="line">    <span class="built_in">print</span>(group)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(group))</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>apple
 ******************************
@@ -2512,22 +2159,14 @@ orange
     fruit   color  price
 2  orange  yellow    5.6
 &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求苹果的平均价格</span></span><br><span class="line"><span class="built_in">list</span>(df1.groupby(<span class="string">&#x27;fruit&#x27;</span>)) <span class="comment">#是个元组组合起来的列表</span></span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">list</span>(df1.groupby(<span class="string">&#x27;fruit&#x27;</span>)))[<span class="string">&#x27;apple&#x27;</span>].mean()  <span class="comment">#必须先转列表，再转成字典</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求苹果的平均价格</span></span><br><span class="line"><span class="built_in">list</span>(df1.groupby(<span class="string">&#x27;fruit&#x27;</span>)) <span class="comment">#是个元组组合起来的列表</span></span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">list</span>(df1.groupby(<span class="string">&#x27;fruit&#x27;</span>)))[<span class="string">&#x27;apple&#x27;</span>].mean()  <span class="comment">#必须先转列表，再转成字典</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>price    8.15
 dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语法糖</span></span><br><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].mean() <span class="comment">#先分好组后设置价格为对象进行平均值计算</span></span><br><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[[<span class="string">&#x27;price&#x27;</span>]].mean() <span class="comment">#在price再加上一个中括号，变成语法糖，让他变成DataFrame对象</span></span><br><span class="line"><span class="comment">#可以理解为用中括号将一维变成二维</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语法糖</span></span><br><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].mean() <span class="comment">#先分好组后设置价格为对象进行平均值计算</span></span><br><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[[<span class="string">&#x27;price&#x27;</span>]].mean() <span class="comment">#在price再加上一个中括号，变成语法糖，让他变成DataFrame对象</span></span><br><span class="line"><span class="comment">#可以理解为用中括号将一维变成二维</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2535,9 +2174,8 @@ dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2562,21 +2200,11 @@ dtype: float64
       <td>5.60</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.groupby(by=[<span class="string">&#x27;fruit&#x27;</span>,<span class="string">&#x27;color&#x27;</span>])[[<span class="string">&#x27;price&#x27;</span>]].mean()  <span class="comment">#增加两种标准，分为两类来求，比如青红苹果分开来算</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2584,9 +2212,8 @@ dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2624,21 +2251,11 @@ dtype: float64
       <td>5.6</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1[[<span class="string">&#x27;price&#x27;</span>]].groupby(by=[df1[<span class="string">&#x27;fruit&#x27;</span>],df1[<span class="string">&#x27;color&#x27;</span>]]).mean().unstack()  <span class="comment">#不推荐，这个是把列单独拿出来了，上面是把每个样本拿出来</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2650,9 +2267,8 @@ dtype: float64
 .dataframe thead tr:last-of-type th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr>
       <th></th>
@@ -2691,41 +2307,28 @@ dtype: float64
       <td>5.6</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <ul>
 <li><strong>每种水果差价</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">a</span>):</span></span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">max</span>()-a.<span class="built_in">min</span>()</span><br><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].apply(func) <span class="comment">#使用这个函数</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>fruit
 apple     0.7
 banana    0.4
 orange    0.0
 Name: price, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].agg(func) <span class="comment">#agg与apply都是应用的意思</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.groupby(by=<span class="string">&#x27;fruit&#x27;</span>)[<span class="string">&#x27;price&#x27;</span>].agg(func) <span class="comment">#agg与apply都是应用的意思</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <pre><code>fruit
 apple     0.7
 banana    0.4
 orange    0.0
 Name: price, dtype: float64
-</code></pre>
-<h2 id="数据透视表"><a href="#数据透视表" class="headerlink" title="数据透视表"></a><strong>数据透视表</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;数据/train.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
-
+</code></pre><h2 id="数据透视表"><a href="#数据透视表" class="headerlink" title="数据透视表"></a><strong>数据透视表</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;数据/train.csv&#x27;</span>,engine=<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">data.head()</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2733,9 +2336,8 @@ Name: price, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2830,29 +2432,17 @@ Name: price, dtype: float64
       <td>S</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(<span class="string">&#x27;Sex&#x27;</span>)[<span class="string">&#x27;Survived&#x27;</span>].mean()</span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
 <pre><code>Sex
 female    0.742038
 male      0.188908
 Name: Survived, dtype: float64
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(by=[<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Pclass&#x27;</span>])[<span class="string">&#x27;Survived&#x27;</span>].mean().unstack()</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.groupby(by=[<span class="string">&#x27;Sex&#x27;</span>,<span class="string">&#x27;Pclass&#x27;</span>])[<span class="string">&#x27;Survived&#x27;</span>].mean().unstack()</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2860,9 +2450,8 @@ Name: Survived, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>Pclass</th>
@@ -2891,21 +2480,11 @@ Name: Survived, dtype: float64
       <td>0.135447</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.pivot_table(<span class="string">&#x27;Survived&#x27;</span>,index=<span class="string">&#x27;Sex&#x27;</span>,columns=<span class="string">&#x27;Pclass&#x27;</span>)  <span class="comment">#第一个为内容，第二个为行索引，第三个为列索引，默认aggfunc = mean</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2913,9 +2492,8 @@ Name: Survived, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>Pclass</th>
@@ -2944,21 +2522,11 @@ Name: Survived, dtype: float64
       <td>0.135447</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.pivot_table(<span class="string">&#x27;Survived&#x27;</span>,index=<span class="string">&#x27;Sex&#x27;</span>,columns=<span class="string">&#x27;Pclass&#x27;</span>,aggfunc=<span class="string">&#x27;std&#x27;</span>) <span class="comment">#默认aggfunc = mean，写函数名称就行</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>结果：</strong></p>
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -2966,9 +2534,8 @@ Name: Survived, dtype: float64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>Pclass</th>
@@ -2997,9 +2564,7 @@ Name: Survived, dtype: float64
       <td>0.342694</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -3193,7 +2758,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6"><span class="nav-number">1.</span> <span class="nav-text">1. 数据合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 合并数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">1.2数据的连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E9%87%8D%E5%A1%91%E5%92%8C%E8%BD%B4%E5%90%91%E6%97%8B%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">2. 数据重塑和轴向旋转</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%E5%92%8C%E8%81%9A%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">3. 数据分组和聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8"><span class="nav-number">3.1.</span> <span class="nav-text">数据透视表</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6"><span class="nav-number">1.</span> <span class="nav-text">1. 数据合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 合并数据</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -3725,5 +3290,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

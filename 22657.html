@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns   1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head(">
+<meta name="description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns 1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KNN算法实战-预测二手汽车价格">
 <meta property="og:url" content="http://alogomachine.com/22657.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns   1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head(">
+<meta property="og:description" content="机器学习算法KNN 因为是预测价格，所以不需要使用到验证k， 12345import pandas as pdimport matplotlibimport matplotlib.pyplot as pltimport numpy as npimport seaborn as sns 1234#读取数据df &#x3D; pd.read_csv(&amp;#x27;data.csv&amp;#x27;)df.head()">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png">
@@ -142,11 +142,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -410,19 +406,10 @@
         <p><strong><span id="yellow-block">机器学习</span><span id="green-block">算法</span><span id="gray-block">KNN</span></strong></p>
 <p><strong>因为是预测价格，所以不需要使用到验证k，</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br><span class="line">df.head()  <span class="comment"># data frame</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -430,9 +417,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -591,14 +577,8 @@
       <td>60</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
-
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 13 entries, 0 to 12
 Data columns (total 8 columns):
@@ -612,18 +592,9 @@ Days Until MOT       13 non-null int64
 HP                   13 non-null int64
 dtypes: float64(1), int64(5), object(2)
 memory usage: 912.0+ bytes
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清洗数据</span></span><br><span class="line"><span class="comment"># 把颜色独热编码</span></span><br><span class="line">df_colors = df[<span class="string">&#x27;Color&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Color: &#x27;</span>) <span class="comment">#构造独热编码</span></span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_type = df[<span class="string">&#x27;Type&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Type: &#x27;</span>) <span class="comment">#把它当成分类</span></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_colors, df_type], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;Brand&#x27;</span>, <span class="string">&#x27;Type&#x27;</span>, <span class="string">&#x27;Color&#x27;</span>], axis=<span class="number">1</span>) </span><br><span class="line">df.head()</span><br><span class="line"><span class="comment"># brand 都一样，不需要</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清洗数据</span></span><br><span class="line"><span class="comment"># 把颜色独热编码</span></span><br><span class="line">df_colors = df[<span class="string">&#x27;Color&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Color: &#x27;</span>) <span class="comment">#构造独热编码</span></span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_type = df[<span class="string">&#x27;Type&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Type: &#x27;</span>) <span class="comment">#把它当成分类</span></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_colors, df_type], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;Brand&#x27;</span>, <span class="string">&#x27;Type&#x27;</span>, <span class="string">&#x27;Color&#x27;</span>], axis=<span class="number">1</span>) </span><br><span class="line">df.head()</span><br><span class="line"><span class="comment"># brand 都一样，不需要</span></span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -631,9 +602,8 @@ memory usage: 912.0+ bytes
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -740,14 +710,8 @@ memory usage: 912.0+ bytes
       <td>0</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
-
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 13 entries, 0 to 12
 Data columns (total 14 columns):
@@ -767,30 +731,14 @@ Type: 1.1            13 non-null int64
 Type: 1.4            13 non-null int64
 dtypes: int64(14)
 memory usage: 1.5 KB
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据转换</span></span><br><span class="line">matrix = df.corr()</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">sns.heatmap(matrix, square=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Car Price Variables&#x27;</span>)</span><br><span class="line"> <span class="comment"># 观察特征关联性</span></span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据转换</span></span><br><span class="line">matrix = df.corr()</span><br><span class="line">f, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">sns.heatmap(matrix, square=<span class="literal">True</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Car Price Variables&#x27;</span>)</span><br><span class="line"> <span class="comment"># 观察特征关联性</span></span><br></pre></td></tr></table></figure>
 <pre><code>Text(0.5,1,&#39;Car Price Variables&#39;)
-</code></pre>
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png" alt="png"></strong></p>
+</code></pre><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210726235950.png" alt="png"></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>, <span class="string">&#x27;Ask Price&#x27;</span>]], size=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png" alt="png"></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA <span class="comment">#降维</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D <span class="comment">#绘制3D图</span></span><br><span class="line"><span class="comment"># 主成分分析  将n维压缩成三维</span></span><br><span class="line">pca_3 = PCA(n_components=<span class="number">3</span>) <span class="comment">#保留三组特征</span></span><br><span class="line"><span class="comment"># X = pca_3.fit_transform(df[[&#x27;Construction Year&#x27;,&#x27;Odometer&#x27;,&#x27;Ask Price&#x27;,&#x27;Days Until MOT&#x27;,&#x27;HP&#x27;,&#x27;Color: black&#x27;,&#x27;Color: blue&#x27;,&#x27;Color: green&#x27;,&#x27;Color: grey&#x27;,&#x27;Color: red&#x27;,&#x27;Color: white&#x27;,&#x27;Type: 1.0&#x27;,&#x27;Type: 1.1&#x27;,&#x27;Type: 1.4&#x27;]])</span></span><br><span class="line"><span class="comment">#PCA降维，看着使用，对比一下</span></span><br><span class="line">X = df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>]] <span class="comment">#只选3个特征。根据特征图选择</span></span><br><span class="line">X</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -798,9 +746,8 @@ memory usage: 1.5 KB
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -889,77 +836,33 @@ memory usage: 1.5 KB
       <td>255134</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter <span class="comment">#计数器，投票器</span></span><br><span class="line"><span class="comment">#他是一个数，所以使用回归，不是分类</span></span><br><span class="line">y = df[<span class="string">&#x27;Ask Price&#x27;</span>].values.reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">1</span>/<span class="number">3</span>, random_state=<span class="number">41</span>)</span><br><span class="line"></span><br><span class="line">X_normalizer = StandardScaler() <span class="comment"># N(0,1)  标准化</span></span><br><span class="line">X_train = X_normalizer.fit_transform(X_train)  <span class="comment">#依赖fit后的数据再-&gt;transform   </span></span><br><span class="line">X_test = X_normalizer.transform(X_test)  </span><br><span class="line"></span><br><span class="line">y_normalizer = StandardScaler()</span><br><span class="line">y_train = y_normalizer.fit_transform(y_train) <span class="comment"># 训练数据需要fit 再transform</span></span><br><span class="line">y_test = y_normalizer.transform(y_test)</span><br><span class="line"></span><br><span class="line">knn = KNeighborsRegressor(n_neighbors=<span class="number">2</span>)  <span class="comment">#回归，不是分类，所以可以是2</span></span><br><span class="line">knn.fit(X_train, y_train.ravel())</span><br><span class="line"></span><br><span class="line"><span class="comment">#Now we can predict prices:</span></span><br><span class="line">y_pred = knn.predict(X_test)</span><br><span class="line">y_pred_inv = y_normalizer.inverse_transform(y_pred)   <span class="comment">#转换回正常的数据</span></span><br><span class="line">y_test_inv = y_normalizer.inverse_transform(y_test) <span class="comment">#转换回正常的数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Build a plot</span></span><br><span class="line">plt.scatter(y_pred_inv, y_test_inv)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Prediction&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Real value&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now add the perfect prediction line</span></span><br><span class="line">diagonal = np.linspace(<span class="number">500</span>, <span class="number">1500</span>, <span class="number">100</span>) <span class="comment"># 500-1500 划分100个</span></span><br><span class="line">plt.plot(diagonal, diagonal, <span class="string">&#x27;-r&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Predicted ask price&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Ask price&#x27;</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 调整画大致的预测线 </span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000008.png" alt="png"></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">knn</span><br><span class="line">X_test</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>array([[-0.97085465, -0.99146682, -3.07178611],
        [ 0.66426897,  1.71581745, -2.36134577],
        [-1.37963555,  0.01996242,  1.1666491 ],
        [-0.56207374,  0.32415166,  2.55487998],
        [-0.97085465, -0.36787887,  0.30313947]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred = knn.predict(X_test)</span><br></pre></td></tr></table></figure>
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred = knn.predict(X_test)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pred</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>array([ 1.24495111,  1.24495111, -1.14519542,  0.04788274, -1.14519542])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"></span><br><span class="line">mean_absolute_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"></span><br><span class="line">mean_absolute_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
 <pre><code>160.4
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">mean_squared_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">mean_squared_error(y_pred_inv, y_test_inv)</span><br></pre></td></tr></table></figure>
 <pre><code>47220.4
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_pred_inv</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_pred_inv</span><br></pre></td></tr></table></figure>
 <pre><code>array([1199., 1199.,  600.,  899.,  600.])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test_inv</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_test_inv</span><br></pre></td></tr></table></figure>
 <pre><code>array([[1300.],
        [1650.],
        [ 650.],
        [ 799.],
        [ 700.]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span></span><br><span class="line">u  = (y_test_inv - y_pred_inv).diagonal() </span><br><span class="line">u</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">4</span>):</span><br><span class="line">        x += <span class="built_in">abs</span>(u[i]/y_test_inv[i][<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;偏差率为：&#123;:.4&#125;&quot;</span>.<span class="built_in">format</span>(x/<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span></span><br><span class="line">u  = (y_test_inv - y_pred_inv).diagonal() </span><br><span class="line">u</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">4</span>):</span><br><span class="line">        x += <span class="built_in">abs</span>(u[i]/y_test_inv[i][<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;偏差率为：&#123;:.4&#125;&quot;</span>.<span class="built_in">format</span>(x/<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
 <pre><code>偏差率为：0.1383
-</code></pre>
-<h1 id="验证K"><a href="#验证K" class="headerlink" title="验证K"></a><strong>验证K</strong></h1><p><strong>因为是算预测价格的回归分析，因此不用验证k，如果是分类的话需要验证K</strong></p>
+</code></pre><h1 id="验证K"><a href="#验证K" class="headerlink" title="验证K"></a><strong>验证K</strong></h1><p><strong>因为是算预测价格的回归分析，因此不用验证k，如果是分类的话需要验证K</strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1075,17 +978,8 @@ wpac_init.push({widget: 'Rating', id: 31073});
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1145,22 +1039,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81K"><span class="nav-number">1.</span> <span class="nav-text">验证K</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1687,5 +1565,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

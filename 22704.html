@@ -150,11 +150,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -422,7 +418,6 @@
 </ul>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185758.png" alt="image-20210727185758930"></strong></p>
 <span id="more"></span>
-
 <h2 id="线性回归的应用"><a href="#线性回归的应用" class="headerlink" title="线性回归的应用"></a><strong>线性回归的应用</strong></h2><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185826.png" alt="image-20210727185826111"></strong></p>
 <h2 id="线性回归的数学定义"><a href="#线性回归的数学定义" class="headerlink" title="线性回归的数学定义"></a><strong>线性回归的数学定义</strong></h2><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185904.png" alt="image-20210727185904264"></strong></p>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185926.png" alt="image-20210727185926594"></strong></p>
@@ -433,22 +428,11 @@
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727190222.png" alt="image-20210727190222068"></strong></p>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727190234.png" alt="image-20210727190234286"></strong></p>
 <h1 id="实战案例-股票回归预测-时间序列操作"><a href="#实战案例-股票回归预测-时间序列操作" class="headerlink" title="实战案例-股票回归预测(时间序列操作)"></a><strong>实战案例-股票回归预测(时间序列操作)</strong></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 你可以使用如下的方法下载某一个公司的股票交易历史</span></span><br><span class="line"><span class="comment"># 000001 为平安银行</span></span><br><span class="line"><span class="comment"># 如果你还没有安装, 可以使用 pip install tushare 安装tushare python包</span></span><br><span class="line"><span class="keyword">import</span> tushare <span class="keyword">as</span> ts</span><br><span class="line">df = ts.get_hist_data(<span class="string">&#x27;000001&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line">df.to_csv(<span class="string">&#x27;000001.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测股票</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np <span class="comment"># 数学计算</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd <span class="comment"># 数据处理, 读取 CSV 文件 (e.g. pd.read_csv)</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime <span class="keyword">as</span> dt  <span class="comment">#做时间处理</span></span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;000008.csv&#x27;</span>) <span class="comment">#平安银行股票信息</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -456,9 +440,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -571,21 +554,10 @@
       <td>0.40</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>(606, 15)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 606 entries, 0 to 605
 Data columns (total 15 columns):
@@ -606,8 +578,7 @@ v_ma20          606 non-null float64
 turnover        606 non-null float64
 dtypes: float64(14), object(1)
 memory usage: 71.1+ KB
-</code></pre>
-<p><strong>股票数据的特征</strong></p>
+</code></pre><p><strong>股票数据的特征</strong></p>
 <ul>
 <li><strong>date：日期</strong></li>
 <li><strong>open：开盘价</strong></li>
@@ -625,40 +596,22 @@ memory usage: 71.1+ KB
 <li><strong>v_ma20:20日均量</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>].head()</span><br><span class="line"><span class="comment"># 发现日期是字符串的类型，要把它转换成时间序列</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>0    2021-07-27
 1    2021-07-26
 2    2021-07-23
 3    2021-07-22
 4    2021-07-21
 Name: date, dtype: object
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(df[<span class="string">&#x27;date&#x27;</span>])</span><br><span class="line">df[<span class="string">&#x27;date&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(df[<span class="string">&#x27;date&#x27;</span>])</span><br><span class="line">df[<span class="string">&#x27;date&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
 <pre><code>0   2021-07-27
 1   2021-07-26
 2   2021-07-23
 3   2021-07-22
 4   2021-07-21
 Name: date, dtype: datetime64[ns]
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.set_index(<span class="string">&#x27;date&#x27;</span>) <span class="comment">#s设置时间序列为索引，不能成为预测值</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.set_index(<span class="string">&#x27;date&#x27;</span>) <span class="comment">#s设置时间序列为索引，不能成为预测值</span></span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -666,9 +619,8 @@ Name: date, dtype: datetime64[ns]
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -792,23 +744,10 @@ Name: date, dtype: datetime64[ns]
       <td>0.40</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=<span class="string">&#x27;date&#x27;</span>,inplace=<span class="literal">True</span>,ascending=<span class="literal">True</span>)  <span class="comment">#ascending时间升序排序</span></span><br><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -816,9 +755,8 @@ Name: date, dtype: datetime64[ns]
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -942,17 +880,8 @@ Name: date, dtype: datetime64[ns]
       <td>0.51</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测是否有缺失值,并处理缺失值</span></span><br><span class="line">df.dropna(axis=<span class="number">0</span>,inplace=<span class="literal">True</span>)</span><br><span class="line">df.isna().<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>open            0
 high            0
 close           0
@@ -968,37 +897,18 @@ v_ma10          0
 v_ma20          0
 turnover        0
 dtype: int64
-</code></pre>
-<h2 id="K线图"><a href="#K线图" class="headerlink" title="K线图"></a><strong>K线图</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Min_date = df.index.<span class="built_in">min</span>()</span><br><span class="line">Max_date = df.index.<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;起始日期为&quot;</span>,Min_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;终止日期为&quot;</span>,Max_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;总共间隔时间为:&quot;</span>,Max_date-Min_date) <span class="comment">#包括了休息日和工作日</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><h2 id="K线图"><a href="#K线图" class="headerlink" title="K线图"></a><strong>K线图</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Min_date = df.index.<span class="built_in">min</span>()</span><br><span class="line">Max_date = df.index.<span class="built_in">max</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;起始日期为&quot;</span>,Min_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;终止日期为&quot;</span>,Max_date)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;总共间隔时间为:&quot;</span>,Max_date-Min_date) <span class="comment">#包括了休息日和工作日</span></span><br></pre></td></tr></table></figure>
 <pre><code>起始日期为 2019-01-28 00:00:00
 终止日期为 2021-07-27 00:00:00
 总共间隔时间为: 911 days 00:00:00
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> plotly <span class="keyword">import</span> tools</span><br><span class="line"><span class="keyword">from</span> plotly.graph_objs <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> plotly.offline <span class="keyword">import</span> init_notebook_mode, iplot, iplot_mpl</span><br><span class="line">init_notebook_mode()</span><br><span class="line"><span class="keyword">import</span> chart_studio.plotly <span class="keyword">as</span> py</span><br><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line"></span><br><span class="line">trace = go.Ohlc(x=df.index, <span class="built_in">open</span>=df[<span class="string">&#x27;open&#x27;</span>], high=df[<span class="string">&#x27;high&#x27;</span>], low=df[<span class="string">&#x27;low&#x27;</span>], close=df[<span class="string">&#x27;close&#x27;</span>])</span><br><span class="line">data = [trace]</span><br><span class="line">iplot(data, filename=<span class="string">&#x27;simple_ohlc&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> plotly <span class="keyword">import</span> tools</span><br><span class="line"><span class="keyword">from</span> plotly.graph_objs <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> plotly.offline <span class="keyword">import</span> init_notebook_mode, iplot, iplot_mpl</span><br><span class="line">init_notebook_mode()</span><br><span class="line"><span class="keyword">import</span> chart_studio.plotly <span class="keyword">as</span> py</span><br><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line"></span><br><span class="line">trace = go.Ohlc(x=df.index, <span class="built_in">open</span>=df[<span class="string">&#x27;open&#x27;</span>], high=df[<span class="string">&#x27;high&#x27;</span>], low=df[<span class="string">&#x27;low&#x27;</span>], close=df[<span class="string">&#x27;close&#x27;</span>])</span><br><span class="line">data = [trace]</span><br><span class="line">iplot(data, filename=<span class="string">&#x27;simple_ohlc&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185408.png" alt="image-20210727185408672"></strong></p>
 <h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a><strong>线性回归</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建新的列，填入预测值，根据当前的数据预测5天以后的收盘价</span></span><br><span class="line">num = <span class="number">5</span> <span class="comment">#预测5天以后的情况</span></span><br><span class="line">df[<span class="string">&#x27;label&#x27;</span>] = df[<span class="string">&#x27;close&#x27;</span>].shift(-num) <span class="comment">#数据整体往上移动num格 也就是你这一天预测num天后的实际值</span></span><br><span class="line">df.shape</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>(607, 15)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1006,9 +916,8 @@ dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1139,23 +1048,10 @@ dtype: int64
       <td>NaN</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除‘label&#x27; &#x27;price_change&#x27;,&#x27;p_change&#x27; 因为不需要他们进行预测</span></span><br><span class="line">data = df.drop([<span class="string">&#x27;label&#x27;</span>,<span class="string">&#x27;price_change&#x27;</span>,<span class="string">&#x27;p_change&#x27;</span>],axis=<span class="number">1</span>) <span class="comment">#删除这三列</span></span><br><span class="line">data.tail()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1163,9 +1059,8 @@ dtype: int64
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1275,14 +1170,8 @@ dtype: int64
       <td>0.70</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理特征值</span></span><br><span class="line">X = data.values</span><br><span class="line">X = preprocessing.scale(X) <span class="comment">#标准化</span></span><br><span class="line"><span class="comment"># 对每个属性/每列来说所有数据都聚集在0附近，方差值为1。</span></span><br><span class="line">X =X[:-num] <span class="comment">#去掉后5天的值，因为要当作无后面5天值，要去预测</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理标签</span></span><br><span class="line">df.dropna(inplace= <span class="literal">True</span>)</span><br><span class="line">Target = df.label</span><br><span class="line">y = Target.values</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(np.shape(X),np.shape(y))</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
-
 <pre><code>(602, 12) (602,)
 
 
@@ -1302,23 +1191,14 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
         -0.98416008, -1.0211716 ],
        [ 1.27614212,  1.20660219,  1.13566831, ..., -0.70723675,
         -0.97687653, -0.52678795]])
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##### 将数据分为训练数据和测试数据</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=<span class="number">2021</span>,test_size=<span class="number">0.2</span>) <span class="comment">#设置随机数种子 设置测试集0.2</span></span><br><span class="line"><span class="comment"># #自己设置比例</span></span><br><span class="line"><span class="comment"># X_train,y_train = X[0:550,:],y[0:550]</span></span><br><span class="line"><span class="comment"># X_test,y_test = X[550:,:],y[550:602]</span></span><br><span class="line"><span class="built_in">print</span>(X_train.shape)</span><br><span class="line"><span class="built_in">print</span>(y_train.shape)</span><br><span class="line"><span class="built_in">print</span>(X_test.shape)</span><br><span class="line"><span class="built_in">print</span>(y_test.shape)</span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##### 将数据分为训练数据和测试数据</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(X,y,random_state=<span class="number">2021</span>,test_size=<span class="number">0.2</span>) <span class="comment">#设置随机数种子 设置测试集0.2</span></span><br><span class="line"><span class="comment"># #自己设置比例</span></span><br><span class="line"><span class="comment"># X_train,y_train = X[0:550,:],y[0:550]</span></span><br><span class="line"><span class="comment"># X_test,y_test = X[550:,:],y[550:602]</span></span><br><span class="line"><span class="built_in">print</span>(X_train.shape)</span><br><span class="line"><span class="built_in">print</span>(y_train.shape)</span><br><span class="line"><span class="built_in">print</span>(X_test.shape)</span><br><span class="line"><span class="built_in">print</span>(y_test.shape)</span><br></pre></td></tr></table></figure>
 <pre><code>(481, 12)
 (481,)
 (121, 12)
 (121,)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lr = LinearRegression() <span class="comment">#逻辑回归模型</span></span><br><span class="line">lr.fit(X_train,y_train)</span><br><span class="line">lr.score(X_test,y_test) <span class="comment">#使用绝对系数 R^2 评估模型</span></span><br><span class="line"><span class="comment"># 绝对系数越大越拟合</span></span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lr = LinearRegression() <span class="comment">#逻辑回归模型</span></span><br><span class="line">lr.fit(X_train,y_train)</span><br><span class="line">lr.score(X_test,y_test) <span class="comment">#使用绝对系数 R^2 评估模型</span></span><br><span class="line"><span class="comment"># 绝对系数越大越拟合</span></span><br></pre></td></tr></table></figure>
 <pre><code>0.9537276319885583
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 做预测 </span></span><br><span class="line">X_Predict = X[-num:]</span><br><span class="line">Forecast = lr.predict(X_Predict)</span><br><span class="line"><span class="built_in">print</span>(Forecast) <span class="comment">#预测最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(y[-num:]) <span class="comment">#实际最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(X_Predict)  <span class="comment">#最后5天的特征</span></span><br></pre></td></tr></table></figure>
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 做预测 </span></span><br><span class="line">X_Predict = X[-num:]</span><br><span class="line">Forecast = lr.predict(X_Predict)</span><br><span class="line"><span class="built_in">print</span>(Forecast) <span class="comment">#预测最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(y[-num:]) <span class="comment">#实际最后5天的结果</span></span><br><span class="line"><span class="built_in">print</span>(X_Predict)  <span class="comment">#最后5天的特征</span></span><br></pre></td></tr></table></figure>
 <pre><code>[20.58546463 21.30633579 21.06762328 20.90177206 20.47861039]
 [20.45 20.38 20.1  18.8  17.76]
 [[ 1.24896263  1.15338361  1.17916938  1.18973775 -0.38166387  1.29792419
@@ -1331,27 +1211,13 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
    1.41192866  1.61007175 -0.83218332 -0.71057098 -0.98416008 -1.0211716 ]
  [ 1.27614212  1.20660219  1.13566831  1.2065172  -0.4648397   1.28213206
    1.35243241  1.57763929 -0.75992703 -0.70723675 -0.97687653 -0.52678795]]
-</code></pre>
-<h2 id="画预测结果"><a href="#画预测结果" class="headerlink" title="画预测结果"></a><strong>画预测结果</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测2021-07-21 到 2021-07-27 ,一共5天的收盘价</span></span><br><span class="line">trange = pd.date_range(<span class="string">&#x27;2021-07-19&#x27;</span>,periods=num,freq=<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">trange</span><br></pre></td></tr></table></figure>
-
-
-
-
+</code></pre><h2 id="画预测结果"><a href="#画预测结果" class="headerlink" title="画预测结果"></a><strong>画预测结果</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测2021-07-21 到 2021-07-27 ,一共5天的收盘价</span></span><br><span class="line">trange = pd.date_range(<span class="string">&#x27;2021-07-19&#x27;</span>,periods=num,freq=<span class="string">&#x27;d&#x27;</span>)</span><br><span class="line">trange</span><br></pre></td></tr></table></figure>
 <pre><code>DatetimeIndex([&#39;2021-07-19&#39;, &#39;2021-07-20&#39;, &#39;2021-07-21&#39;, &#39;2021-07-22&#39;,
                &#39;2021-07-23&#39;],
               dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)
-</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生预测值dataframe</span></span><br><span class="line">Predict_df = pd.DataFrame(Forecast, index=trange)</span><br><span class="line">Predict_df.columns = [<span class="string">&#x27;forecast&#x27;</span>]</span><br><span class="line">Predict_df</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生预测值dataframe</span></span><br><span class="line">Predict_df = pd.DataFrame(Forecast, index=trange)</span><br><span class="line">Predict_df.columns = [<span class="string">&#x27;forecast&#x27;</span>]</span><br><span class="line">Predict_df</span><br></pre></td></tr></table></figure>
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1359,9 +1225,8 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1390,23 +1255,10 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
       <td>20.478610</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将预测值添加到原始dataframe</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;./000001.csv&#x27;</span>) </span><br><span class="line">df[<span class="string">&#x27;date&#x27;</span>] = pd.to_datetime(df[<span class="string">&#x27;date&#x27;</span>])</span><br><span class="line">df = df.set_index(<span class="string">&#x27;date&#x27;</span>)</span><br><span class="line"><span class="comment"># 按照时间升序排列</span></span><br><span class="line">df.sort_values(by=[<span class="string">&#x27;date&#x27;</span>], inplace=<span class="literal">True</span>, ascending=<span class="literal">True</span>)</span><br><span class="line">df_concat = pd.concat([df, Predict_df], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df_concat = df_concat[df_concat.index.isin(Predict_df.index)]</span><br><span class="line">df_concat.tail(num)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1414,9 +1266,8 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1529,18 +1380,10 @@ array([[-1.45811487, -1.47029285, -1.49070911, ..., -0.03578925,
       <td>20.478610</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Axes：坐标系 </span></span><br><span class="line"><span class="comment">#Subplot</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">16</span>,<span class="number">9</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">221</span>)  <span class="comment">#221代表子图的位置  221：几行几列 第几个  2行2列第一个</span></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">222</span>)  <span class="comment">#</span></span><br><span class="line">ax3 = fig.add_subplot(<span class="number">212</span>)</span><br><span class="line"><span class="comment"># ax4 = fig.add_subplot(224)</span></span><br><span class="line">ax1.plot(df_concat[<span class="string">&#x27;forecast&#x27;</span>],linewidth=<span class="number">1</span>,label=<span class="string">&#x27;实际值&#x27;</span>,color=<span class="string">&quot;orange&quot;</span>)</span><br><span class="line">ax2.plot(df_concat[<span class="string">&#x27;close&#x27;</span>],linewidth=<span class="number">1</span>,label=<span class="string">&#x27;实际值&#x27;</span>,color=<span class="string">&quot;green&quot;</span>)</span><br><span class="line">ax1.<span class="built_in">set</span>(title=<span class="string">&#x27;预测结果&#x27;</span>,ylabel=<span class="string">&#x27;预测值&#x27;</span>,xlabel=<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line">ax2.<span class="built_in">set</span>(title=<span class="string">&#x27;实际结果&#x27;</span>,ylabel=<span class="string">&#x27;预测值&#x27;</span>,xlabel=<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line"><span class="comment"># 画预测值和实际值</span></span><br><span class="line"></span><br><span class="line">ax3 = df_concat[<span class="string">&#x27;close&#x27;</span>].plot(color=<span class="string">&#x27;green&#x27;</span>, linewidth=<span class="number">1</span>)</span><br><span class="line">ax3 =df_concat[<span class="string">&#x27;forecast&#x27;</span>].plot(color=<span class="string">&#x27;orange&#x27;</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;时间&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;价格&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727185307.png" alt="png"></strong></p>
 <h2 id="权重特征"><a href="#权重特征" class="headerlink" title="权重特征"></a><strong>权重特征</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 理解模型</span></span><br><span class="line"><span class="keyword">for</span> idx, col_name <span class="keyword">in</span> <span class="built_in">enumerate</span>([<span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;high&#x27;</span>, <span class="string">&#x27;close&#x27;</span>, <span class="string">&#x27;low&#x27;</span>, <span class="string">&#x27;volume&#x27;</span>, <span class="string">&#x27;ma5&#x27;</span>, <span class="string">&#x27;ma10&#x27;</span>, <span class="string">&#x27;ma20&#x27;</span>, <span class="string">&#x27;v_ma5&#x27;</span>, <span class="string">&#x27;v_ma10&#x27;</span>, <span class="string">&#x27;v_ma20&#x27;</span>]):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;The coefficient for &#123;&#125; is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(col_name, lr.coef_[idx]))</span><br><span class="line"><span class="comment"># 权重特征</span></span><br></pre></td></tr></table></figure>
-
 <pre><code>The coefficient for open is -0.6740136248471393
 The coefficient for high is -0.3406015889420868
 The coefficient for close is 2.806477446216583
@@ -1552,8 +1395,7 @@ The coefficient for ma20 is -0.19140806216593198
 The coefficient for v_ma5 is 0.050144303955445196
 The coefficient for v_ma10 is -0.21247175374027985
 The coefficient for v_ma20 is 0.04820620468948662
-</code></pre>
-<p><strong>看课外阅读</strong></p>
+</code></pre><p><strong>看课外阅读</strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1751,7 +1593,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">回归分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.</span> <span class="nav-text">线性回归的数学定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E8%A7%A3%E6%9E%90%E8%A7%A3%E4%B8%8E%E6%8E%A8%E5%AF%BC%E8%A7%A3%E9%87%8A"><span class="nav-number">1.3.</span> <span class="nav-text">线性回归的解析解与推导解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B-%E8%82%A1%E7%A5%A8%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">实战案例-股票回归预测(时间序列操作)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#K%E7%BA%BF%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">K线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">2.2.</span> <span class="nav-text">线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%BB%E9%A2%84%E6%B5%8B%E7%BB%93%E6%9E%9C"><span class="nav-number">2.3.</span> <span class="nav-text">画预测结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E7%89%B9%E5%BE%81"><span class="nav-number">2.4.</span> <span class="nav-text">权重特征</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">回归分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">线性回归的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.</span> <span class="nav-text">线性回归的数学定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E8%A7%A3%E6%9E%90%E8%A7%A3%E4%B8%8E%E6%8E%A8%E5%AF%BC%E8%A7%A3%E9%87%8A"><span class="nav-number">1.3.</span> <span class="nav-text">线性回归的解析解与推导解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B-%E8%82%A1%E7%A5%A8%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">实战案例-股票回归预测(时间序列操作)</span></a></li></ol></div>
             
 
           </div>
@@ -2283,5 +2125,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

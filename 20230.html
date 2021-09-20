@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -404,14 +400,9 @@
         <p><strong><span id="yellow-block">C++</span><span id="green-block">基础语法</span><span id="gray-block">auto、头文件防卫式声明、引用、常量</span></strong></p>
 <p><strong>局部变量及初始化</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//i的作用域仅仅在for语句内    </span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以写作</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i&#123; <span class="number">0</span> &#125;; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//i=0  == i&#123;0&#125; == i=&#123;0&#125; 数组同理</span></span><br></pre></td></tr></table></figure>
-
 <span id="more"></span>
-
 <p><strong>注意：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//int abcde &#123;3.5f&#125;; //失败， 从“float”转换到“int”需要收缩转换，系统执行了一个从浮点到整数的转换</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a><strong>auto</strong></h2><p><strong>auto变量的自动类型推断</strong></p>
 <p><strong>auto可以在声明变量的时候根据变量的初始值类型自动为此变量选择匹配的类型；（声明的时候要赋初值）</strong></p>
 <p><strong>auto自动类型推断发生在编译期间，所以使用auto不会造成程序执行效率降低</strong></p>
@@ -421,11 +412,6 @@
 <p>​    <strong>//程序段</strong></p>
 <p><strong>#endif</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HEAD1__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HEAD1__   <span class="comment">//没有定义head1就定义head1</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//写头文件程序代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !__HEAD1__</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a><strong>引用</strong></h2><p><strong>引用理解成，为变量起了另外一个名字，一般用符合&amp;表示，起完别名后和变量本身看成同一个变量；</strong></p>
 <ul>
 <li><strong>定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</strong></li>
@@ -433,42 +419,22 @@
 <li><strong>引用，&amp;的符号在=的左边</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> value = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = value; <span class="comment">//value的别名,不是求地址运算符，只是起标识作用</span></span><br><span class="line"><span class="comment">//定义引用并不额外占用内存，或理解为引用和原变量，占用的是同一块内存</span></span><br><span class="line"><span class="comment">//定义引用的时候必须初始化</span></span><br><span class="line">cout &lt;&lt; refval &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"><span class="comment">//int&amp; refval13 = 10; 错误，引用必须绑定到变量上去，不能绑定到常量上去</span></span><br><span class="line"><span class="comment">//float &amp;refval23 = value; 错误，引用类型必须要相同</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>要和取地址区别开来。</strong></p>
 <ul>
 <li><strong>&amp;在=的右边</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;a; <span class="comment">//取地址</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <p><strong>实例：</strong></p>
 <p><strong>可以改变函数值</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>&amp; ta, <span class="keyword">int</span>&amp; tb)</span> <span class="comment">//注意形参是引用类型</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ta = <span class="number">4</span>;</span><br><span class="line">    tb = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">13</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">14</span>;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印13</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印14</span></span><br><span class="line">    <span class="built_in">func</span>(a, b);</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;  <span class="comment">//打印4</span></span><br><span class="line">    cout &lt;&lt; b &lt;&lt; endl;  <span class="comment">//打印5</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a><strong>常量</strong></h2><p><strong>常量就是不变的量</strong></p>
 <h3 id="const-常量关键字，表示不变的意思"><a href="#const-常量关键字，表示不变的意思" class="headerlink" title="const 常量关键字，表示不变的意思"></a><strong>const 常量关键字，表示不变的意思</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> var = <span class="number">7</span>;  <span class="comment">//一种承诺，表示这个变量的值我不会去改变（命名常量）</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>实际上const可以改，但一般不要去改</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;var2 = (<span class="keyword">int</span> &amp;)var;  <span class="comment">//强原来的const变量转成引用</span></span><br><span class="line">var2 = <span class="number">18</span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>vs查地址  shift + F9</strong> </p>
 <p><strong>搜索的名字求地址要加&amp;  ，求值就直接写变量名</strong></p>
 <h3 id="constexpr-关键字"><a href="#constexpr-关键字" class="headerlink" title="constexpr 关键字"></a><strong>constexpr 关键字</strong></h3><p><strong>C++11才引入的，它也是个常量的概念，在编译的时候求值，可以提升性能</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> abc)</span> </span>&#123;  <span class="comment">//这个函数里面必须要有初值，参数，或者在函数体内写 int ab=10;这种</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">11</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> var2 = <span class="built_in">func2</span>(<span class="number">11</span>); <span class="comment">//不报错，因为系统认为这是常量函数，返回一个常量</span></span><br><span class="line"><span class="comment">//int b=11；</span></span><br><span class="line"><span class="comment">//constexpr int var2 = b;  //报错，因为系统不认为b是常量，它可以改，是变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>常量const/constexpr 必须包含参量</strong></p>
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
@@ -1189,5 +1155,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

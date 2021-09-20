@@ -136,11 +136,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -405,38 +401,20 @@
 <h2 id="类相关非成员函数"><a href="#类相关非成员函数" class="headerlink" title="类相关非成员函数"></a><strong>类相关非成员函数</strong></h2><p><strong>有点关系，但关系不大，可以放在类外作为普通函数</strong></p>
 <p><strong>实现：</strong></p>
 <span id="more"></span>
-
 <p><strong>h内填：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span>&#123;</span></span><br><span class="line">......</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类外</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time&amp; mytime)</span></span>;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>cpp实现内填:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WriteTime</span><span class="params">(Time &amp;mytime)</span> </span>&#123;  <span class="comment">//用了类的引用，注意不能填Time::</span></span><br><span class="line">    cout &lt;&lt; mytime.Hour &lt;&lt; endl;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>cpp使用:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Time <span class="title">mytime</span><span class="params">(<span class="number">13</span>, <span class="number">14</span>, <span class="number">145</span>)</span></span>;</span><br><span class="line">    <span class="built_in">WriteTime</span>(mytime); <span class="comment">//普通函数直接写，不需要使用调用符号.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <h3 id="类内初始化"><a href="#类内初始化" class="headerlink" title="类内初始化"></a><strong>类内初始化</strong></h3><ul>
 <li><strong>在C++11内我们可以为类内的成员变量提供一个初始值，那么我们在创建对象的时候，这个初始化值就用来初始化该成员变量。</strong></li>
 </ul>
 <p><strong>类内初始化就是直接在h声明的时候直接给值：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> Second = <span class="number">4</span>; <span class="comment">//秒</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>构造函数也可以初始化，它会把类内初始化给覆盖。</strong></p>
 <p><strong>但我们一般也使用构造函数进行初始化。</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">Hour</span>(<span class="number">12</span>),<span class="built_in">Minute</span>(<span class="number">13</span>)....&#123;</span><br><span class="line">  .....  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="const成员变量的初始化"><a href="#const成员变量的初始化" class="headerlink" title="const成员变量的初始化"></a><strong>const成员变量的初始化</strong></h3><p><strong>const必须给初值</strong></p>
 <ol>
 <li><p><strong>方法1：</strong></p>
@@ -444,22 +422,17 @@
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel =<span class="number">80</span> ; <span class="comment">//可以</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><p><strong>方法2：</strong></p>
 <p><strong>h内不给初值：</strong></p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> testcvel;</span><br></pre></td></tr></table></figure>
-
 <p><strong>cpp实现内：</strong></p>
 <ul>
 <li><strong>每个构造函数都得赋初值，可以用:vale() 赋值</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() :<span class="built_in">testcvel</span>(<span class="number">34</span>)&#123;  <span class="comment">//给值后才真正具有const作用，之前只是声明并未实现const</span></span><br><span class="line">    Hour = <span class="number">12</span>;</span><br><span class="line">    Minute = <span class="number">13</span>;</span><br><span class="line">    Second = <span class="number">59</span>;</span><br><span class="line">    <span class="built_in">initMillTime</span>(<span class="number">0</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;调用了2的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Time::<span class="built_in">Time</span>(<span class="keyword">int</span> tmphour, <span class="keyword">int</span> tmpmin, <span class="keyword">int</span> tmpsec) :<span class="built_in">testcvel</span>(<span class="number">23</span>)&#123; </span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpmin;</span><br><span class="line">    Second = tmpsec;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;调用了1的构造函数&quot;</span> &lt;&lt; endl;</span><br><span class="line">     <span class="comment">//私有函数的调用，OK的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li><strong>const成员变量的初始化，在构造函数的初始化列表中进行，不可以通过赋值语句进行初始化</strong></li>
 </ul>
@@ -473,24 +446,19 @@
 <li><strong>如果你自己定义了构造函数（不管带几个参数），系统就不会构造合成的默认构造函数了，你初始化使用的时候不带参数就会报错（除非你定义的就是无参数的构造函数）</strong></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() &#123;&#125;; <span class="comment">//在h加入&#123;&#125;可以让编译器自动生成函数体，就不需要在cpp实现里面再写函数实现了Time(int)&#123;&#125;;</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h2 id="default，-delete；"><a href="#default，-delete；" class="headerlink" title="=default，=delete；"></a><strong>=default，=delete；</strong></h2><ul>
 <li><p><strong>C++11标准引用的</strong></p>
 <p><strong>在h头文件中我们直接写：</strong></p>
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">default</span>; <span class="comment">//编译器为这种=default的函数自动生成函数体</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><strong>编译器自动帮我们生成函数体</strong></li>
 </ul>
 <p><strong>错误:</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>(<span class="keyword">int</span>) =<span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li> <strong>带了参数就不是可默认的特殊函数。</strong></li>
+<li><strong>带了参数就不是可默认的特殊函数。</strong></li>
 </ul>
 <ul>
 <li><p><strong>普通函数不能写=default</strong></p>
@@ -503,14 +471,8 @@
 <p><strong>当然也可以</strong></p>
 <p><strong>在h中：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>();</span><br></pre></td></tr></table></figure>
-
 <p><strong>在cpp中：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time::<span class="built_in">Time</span>() = <span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <p><strong>在h内：</strong></p>
 <ul>
 <li><strong>=default  可以等价于{}</strong></li>
@@ -521,17 +483,8 @@
 </ul>
 <p><strong>h：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Time</span>() = <span class="keyword">delete</span>; <span class="comment">//禁止系统给你生成不带参数的默认构造函数</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>若cpp：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time mytime; <span class="comment">//就会报错，因为你不让系统给你生成不带参数的默认构造函数，你不带参数，无对应的构造函数就不能生成对象</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
 <center>
 <a href="" class="wpac-cr">顺便评个分吧！👇</a>
 <div id="wpac-rating"></div>
@@ -1255,5 +1208,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

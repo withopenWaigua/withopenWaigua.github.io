@@ -154,11 +154,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -431,7 +427,6 @@
 </li>
 </ul>
 <span id="more"></span>
-
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808222234.png" alt="image-20210808222234729"></p>
 <p><strong>插值算法一般分为：</strong></p>
 <ul>
@@ -479,9 +474,6 @@
 <p><strong>分段三次埃尔米特插值法</strong></p>
 <p><strong>使用内置的pchip(点x,点y,要插值区间)</strong></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% plot函数用法:</span></span><br><span class="line"><span class="comment">% plot(x1,y1,x2,y2)  # 把两个图像画在一起</span></span><br><span class="line"><span class="comment">% 线方式： - 实线 :点线 -. 虚点线 - - 波折线 </span></span><br><span class="line"><span class="comment">% 点方式： . 圆点  +加号  * 星号  x x形  o 小圆</span></span><br><span class="line"><span class="comment">% 颜色： y黄； r红； g绿； b蓝； w白； k黑； m紫； c青</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本点&#x27;</span>,<span class="string">&#x27;三次埃尔米特插值&#x27;</span>,<span class="string">&#x27;三次样条插值&#x27;</span>,<span class="string">&#x27;Location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)   <span class="comment">%标注显示在东南方向</span></span><br><span class="line"><span class="comment">% 说明：</span></span><br><span class="line"><span class="comment">% LEGEND(string1,string2,string3, …)</span></span><br><span class="line"><span class="comment">% 分别将字符串1、字符串2、字符串3……标注到图中，每个字符串对应的图标为画图时的图标。</span></span><br><span class="line"><span class="comment">% ‘Location’用来指定标注显示的位置</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>); <span class="comment">% 在同一个脚本文件里面，要想画多个图，需要给每个图编号，否则只会显示最后一个图哦~</span></span><br><span class="line"><span class="comment">%不命名就会覆盖前面的</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>三次样条插值法：</strong></p>
 <ul>
 <li><strong>更难满足(条件多)</strong><ul>
@@ -503,9 +495,6 @@
 <li><strong>一般优先使用三次样条插值</strong></li>
 </ul>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% n维数据的插值</span></span><br><span class="line">x = -<span class="built_in">pi</span>:<span class="built_in">pi</span>; y = <span class="built_in">sin</span>(x); </span><br><span class="line">new_x = -<span class="built_in">pi</span>:<span class="number">0.1</span>:<span class="built_in">pi</span>;</span><br><span class="line">p = interpn (x, y, new_x, <span class="string">&#x27;spline&#x27;</span>);</span><br><span class="line"><span class="comment">% 等价于 p = spline(x, y, new_x);</span></span><br><span class="line"><span class="built_in">figure</span>(<span class="number">3</span>);</span><br><span class="line"><span class="built_in">plot</span>(x, y, <span class="string">&#x27;o&#x27;</span>, new_x, p, <span class="string">&#x27;r-&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>使用插值算法：</strong></p>
 <p><strong>插值算法较于灰色预测更有数学解释的背景</strong></p>
 <ul>
@@ -531,11 +520,6 @@
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221010.png" alt="image-20210808221010433"></p>
 <p><strong>因为第一种定义有绝对值，因此我们往往使用第二种定义</strong></p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% % 画出y=kx+b的函数图像 plot(x,y)</span></span><br><span class="line"><span class="comment">% % 传统的画法：模拟生成x和y的序列，比如要画出[0,5]上的图形</span></span><br><span class="line"><span class="comment">% xx = 2.5: 0.1 :7  % 间隔设置的越小画出来的图形越准确</span></span><br><span class="line"><span class="comment">% yy = k * xx + b  % k和b都是已知值</span></span><br><span class="line"><span class="comment">% plot(xx,yy,&#x27;-&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%匿名函数</span></span><br><span class="line"><span class="comment">% 匿名函数的基本用法。</span></span><br><span class="line"><span class="comment">% handle = @(arglist) anonymous_function</span></span><br><span class="line"><span class="comment">% 其中handle为调用匿名函数时使用的名字。</span></span><br><span class="line"><span class="comment">% arglist为匿名函数的输入参数，可以是一个，也可以是多个，用逗号分隔。</span></span><br><span class="line"><span class="comment">% anonymous_function为匿名函数的表达式。</span></span><br><span class="line"><span class="comment">% 举个小例子</span></span><br><span class="line"><span class="comment">%  z=@(x,y) x^2+y^2; </span></span><br><span class="line"><span class="comment">%  z(1,2) </span></span><br><span class="line"><span class="comment">% % ans =  5</span></span><br><span class="line"><span class="comment">% fplot函数可用于画出匿名一元函数的图形。</span></span><br><span class="line"><span class="comment">% fplot(f,xinterval) 将匿名函数f在指定区间xinterval绘图。xinterval =  [xmin xmax] 表示定义域的范围</span></span><br><span class="line"></span><br><span class="line">f=@(x) k*x+b; <span class="comment">% @声明x是未知数 后面接上函数式子</span></span><br><span class="line">fplot(f,[<span class="number">2.5</span>,<span class="number">7</span>]); <span class="comment">%后面跟上x的范围</span></span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;样本数据&#x27;</span>,<span class="string">&#x27;拟合函数&#x27;</span>,<span class="string">&#x27;location&#x27;</span>,<span class="string">&#x27;SouthEast&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
 <p><strong>拟合优度来评价拟合的好坏</strong></p>
 <p><strong>SST总体平方和：</strong></p>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210808221030.png" alt="image-20210808221030411"></p>
@@ -1298,5 +1282,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>

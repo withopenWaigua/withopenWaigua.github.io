@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="数据分析数据可视化Seaborn 数据分析三大类型:探索型数据分析   —-&gt;   图表可视化 验证型数据分析   —-&gt;   假设检验 预测型数据分析   —-&gt;   机器学习">
+<meta name="description" content="数据分析数据可视化Seaborn 数据分析三大类型:探索型数据分析   ——&gt;   图表可视化 验证型数据分析   ——&gt;   假设检验 预测型数据分析   ——&gt;   机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seaborn补充总结">
 <meta property="og:url" content="http://alogomachine.com/21912.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="数据分析数据可视化Seaborn 数据分析三大类型:探索型数据分析   —-&gt;   图表可视化 验证型数据分析   —-&gt;   假设检验 预测型数据分析   —-&gt;   机器学习">
+<meta property="og:description" content="数据分析数据可视化Seaborn 数据分析三大类型:探索型数据分析   ——&gt;   图表可视化 验证型数据分析   ——&gt;   假设检验 预测型数据分析   ——&gt;   机器学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_2.png">
@@ -143,11 +143,7 @@
 
 
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -409,11 +405,10 @@
 
       
         <p><strong><span id="yellow-block">数据分析</span><span id="green-block">数据可视化</span><span id="gray-block">Seaborn</span></strong></p>
-<h1 id="数据分析三大类型"><a href="#数据分析三大类型" class="headerlink" title="数据分析三大类型:"></a><strong>数据分析三大类型:</strong></h1><p><strong>探索型数据分析   —-&gt;   图表可视化</strong></p>
-<p><strong>验证型数据分析   —-&gt;   假设检验</strong></p>
-<p><strong>预测型数据分析   —-&gt;   机器学习</strong></p>
+<h1 id="数据分析三大类型"><a href="#数据分析三大类型" class="headerlink" title="数据分析三大类型:"></a><strong>数据分析三大类型:</strong></h1><p><strong>探索型数据分析   ——&gt;   图表可视化</strong></p>
+<p><strong>验证型数据分析   ——&gt;   假设检验</strong></p>
+<p><strong>预测型数据分析   ——&gt;   机器学习</strong></p>
 <span id="more"></span>
-
 <h2 id="探索性数据分析的作用"><a href="#探索性数据分析的作用" class="headerlink" title="探索性数据分析的作用"></a><strong>探索性数据分析的作用</strong></h2><ol>
 <li><strong>与数据清理相辅相成</strong></li>
 <li><strong>支持验证型数据分析和预测型数据分析</strong><ul>
@@ -429,19 +424,9 @@
 <li><strong>箱线图</strong></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&#x27;./seaborn-data&#x27;</span>)</span><br><span class="line">tips</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -449,8 +434,7 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<table border="1" class="dataframe">
+</code></pre><p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1075,34 +1059,15 @@
       <td>2</td>
     </tr>
   </tbody>
-</table>
-<p>244 rows × 7 columns</p>
-**</div>**
-
-
-
-
+</table></p>
+<p><p>244 rows × 7 columns</p><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.barplot(x=<span class="string">&#x27;day&#x27;</span>,y=<span class="string">&#x27;total_bill&#x27;</span>,data=tips)</span><br></pre></td></tr></table></figure>
-
-
-
-
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd4d4470&gt;
-</code></pre>
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png" alt="output_5_1"></strong></p>
+</code></pre><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_5_1.png" alt="output_5_1"></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#黑色柱子是 Error bar 误差 越长误差越大  指的是波动</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a><strong>直方图</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">penguins = sns.load_dataset(<span class="string">&quot;penguins&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">penguins.head()</span><br></pre></td></tr></table></figure>
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+<p><div></p>
+<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
 <pre><code>.dataframe tbody tr th &#123;
     vertical-align: top;
 &#125;
@@ -1110,9 +1075,8 @@
 .dataframe thead th &#123;
     text-align: right;
 &#125;
-</code></pre>
-<p><strong></style></strong></p>
-<table border="1" class="dataframe">
+</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1177,46 +1141,24 @@
       <td>FEMALE</td>
     </tr>
   </tbody>
-</table>
-**</div>**
-
-
-
-
+</table><br><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">penguins = penguins.dropna()</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(penguins[<span class="string">&quot;flipper_length_mm&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
 <pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a8dd8332b0&gt;
-</code></pre>
-<p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_2.png" alt="png"></strong></p>
+</code></pre><p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_10_2.png" alt="png"></strong></p>
 <h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a><strong>饼图</strong></h3><p><strong>不支持</strong></p>
 <h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a><strong>折线图</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">ax = sns.pointplot(x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, data=tips,ci=<span class="number">68</span>)    <span class="comment">#  ci 68%确信周日给的小费数额在这个范围内</span></span><br></pre></td></tr></table></figure>
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_14_0.png" alt="png"></strong></p>
 <h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a><strong>散点图</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tips = sns.load_dataset(<span class="string">&quot;tips&quot;</span>,cache=<span class="literal">True</span>,data_home=<span class="string">&quot;./seaborn-data&quot;</span>)</span><br><span class="line">ax = sns.regplot(x=<span class="string">&quot;total_bill&quot;</span>, y=<span class="string">&quot;tip&quot;</span>, data=tips)     <span class="comment">#推荐使用，回归的散点图  ，成正比</span></span><br></pre></td></tr></table></figure>
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_16_0.png" alt="png"></strong></p>
 <p><strong>两个属性之间的相关关系<br>这条线显示的数据大概数据符合怎样的趋势</strong></p>
 <h3 id="箱型图"><a href="#箱型图" class="headerlink" title="箱型图"></a><strong>箱型图</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax = sns.boxplot(x=<span class="string">&quot;day&quot;</span>, y=<span class="string">&quot;total_bill&quot;</span>, data=tips)   </span><br></pre></td></tr></table></figure>
-
-
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/output_19_0.png" alt="png"></strong></p>
 <p><strong>官方文档：<a target="_blank" rel="noopener" href="https://seaborn.apachecn.org/#/README">https://seaborn.apachecn.org/#/README</a></strong></p>
 <p><strong>不懂的看课件</strong></p>
-<center>
-<a href="" class="wpac-cr">顺便评个分吧！👇</a>
-<div id="wpac-rating"></div>
-<script type="text/javascript">
+<p><center><br><a href="" class="wpac-cr">顺便评个分吧！👇</a></p>
+<p><div id="wpac-rating"></div></p>
+<p><script type="text/javascript">
 wpac_init = window.wpac_init || [];
 wpac_init.push({widget: 'Rating', id: 31073});
 (function() {
@@ -1228,12 +1170,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
     mc.src = 'https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/wb/pingjia.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
 })();
-</script>
-</center>
-**######** 
-
-
-
+</script><br>&lt;/center&gt;<br><strong>######</strong> </p>
 
       
     </div>
@@ -1410,7 +1347,7 @@ wpac_init.push({widget: 'Rating', id: 31073});
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%A4%A7%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">数据分析三大类型:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E6%80%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">探索性数据分析的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E5%B8%B8%E7%94%A8%E5%9B%BE%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">探索型数据分析的常用图表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">1.2.1.</span> <span class="nav-text">饼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">折线图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-number">1.2.3.</span> <span class="nav-text">散点图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%B1%E5%9E%8B%E5%9B%BE"><span class="nav-number">1.2.4.</span> <span class="nav-text">箱型图</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%89%E5%A4%A7%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">数据分析三大类型:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E6%80%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">探索性数据分析的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E5%B8%B8%E7%94%A8%E5%9B%BE%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">探索型数据分析的常用图表</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1942,5 +1879,26 @@ wpac_init.push({widget: 'Rating', id: 31073});
   
 
   <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
-</body>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
 </html>
