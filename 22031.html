@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%B3%BB%E6%95%B0.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20210920160630932.png">
 <meta property="article:published_time" content="2021-09-20T08:31:00.000Z">
-<meta property="article:modified_time" content="2021-09-20T08:50:34.696Z">
+<meta property="article:modified_time" content="2021-09-22T09:13:53.263Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="算法">
@@ -517,9 +517,9 @@ mjx-container[display="true"] + br {
         <h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><p>求线性回归系数的方法总结 ：</p>
 <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%B3%BB%E6%95%B0.png" alt="线性回归系数"></p>
 <span id="more"></span>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>LS求的是在损失函数值最小情况下的向量WS</p>
+<h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>LS求的是在损失函数值最小情况下的向量WS</p>
 <script type="math/tex; mode=display">
-argMinJ(\Theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}</script><h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><script type="math/tex; mode=display">
+argMinJ(\Theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\Theta_{0}+\Theta_{1} x_{i}-y_{i}\right)^{2}</script><h1 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h1><script type="math/tex; mode=display">
 \Theta_{1}=\Theta_{0}-\alpha * J^{\prime}(\Theta)</script><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>现在我们有一个单变量的损失函数：</p>
 <script type="math/tex; mode=display">
 J(\Theta)=\Theta^{2}</script><p>对函数求微分：</p>
@@ -544,20 +544,20 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
 <li>令所有θ迭代到不变</li>
 <li>而α为步长，需要自己调整</li>
 </ol>
-<h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><h3 id="普通最小二乘法"><a href="#普通最小二乘法" class="headerlink" title="普通最小二乘法"></a>普通最小二乘法</h3><ul>
+<h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><h2 id="普通最小二乘法"><a href="#普通最小二乘法" class="headerlink" title="普通最小二乘法"></a>普通最小二乘法</h2><ul>
 <li>需要求X.T*X的逆</li>
 <li>不需要标准化</li>
 <li>需要在最前面加上一列1的来求常数项</li>
 </ul>
-<h4 id="不可求逆的情况"><a href="#不可求逆的情况" class="headerlink" title="不可求逆的情况"></a>不可求逆的情况</h4><ol>
+<h3 id="不可求逆的情况"><a href="#不可求逆的情况" class="headerlink" title="不可求逆的情况"></a>不可求逆的情况</h3><ol>
 <li>特征量大于训练数据个数m —岭回归</li>
 <li>有特征相似度极高</li>
 </ol>
-<h4 id="拟合效果判断"><a href="#拟合效果判断" class="headerlink" title="拟合效果判断"></a>拟合效果判断</h4><ul>
+<h3 id="拟合效果判断"><a href="#拟合效果判断" class="headerlink" title="拟合效果判断"></a>拟合效果判断</h3><ul>
 <li>协方差系数coffe</li>
 <li>RSSE</li>
 </ul>
-<h3 id="局部线性加权"><a href="#局部线性加权" class="headerlink" title="局部线性加权"></a>局部线性加权</h3><ul>
+<h2 id="局部线性加权"><a href="#局部线性加权" class="headerlink" title="局部线性加权"></a>局部线性加权</h2><ul>
 <li>计算慢，很少用，过拟合造成预测效果差</li>
 <li>通过调整权重可以使拟合的线为曲线，增大拟合程度</li>
 <li>适用于OLS拟合效果很差的情况，需要人为干预</li>
@@ -571,9 +571,10 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
 <li>k=1的时候与OLS类似，K极小的时候容易过拟合</li>
 <li>需要标准化，不加常数项1</li>
 </ul>
-<h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><ul>
+<h2 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h2><ul>
 <li><strong>需要标准化，不加常数项系数</strong></li>
-<li>就是在矩阵X.T*X上加了λI，（I为对角矩阵，其大小为特征数）</li>
+<li>可以通过增大lambda减轻过拟合的情况</li>
+<li>就是在矩阵X.T*X上加了λI，（I为对角矩阵，其大小为特征数。左上角为0，其他主对角元素为1）</li>
 <li>加上一个λI从而使得矩阵非奇异，进而能对矩阵求逆。</li>
 <li>岭回归最先用来处理特征数多于样本数的情况，现在也用于在估计中加入偏差，从而得到更好的估计。这里通过引入λ来限制了所有w之和，通过引入该惩罚项，能够减少不重要的参数，这个技术在统计学中也可以叫做缩减（shrinkage）。</li>
 <li>一般用交叉验证求得适合的lambda以及系数</li>
@@ -640,6 +641,10 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/22411.html" rel="prev" title="Kaggle&天池备赛-Step1数据理论知识与处理">
+                Kaggle&天池备赛-Step1数据理论知识与处理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -716,7 +721,7 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -727,7 +732,7 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -738,7 +743,7 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -771,7 +776,7 @@ J^{\prime}(\Theta)=2 \Theta</script><script type="math/tex; mode=display">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">普通最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E6%B1%82%E9%80%86%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">不可求逆的情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%9F%E5%90%88%E6%95%88%E6%9E%9C%E5%88%A4%E6%96%AD"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">拟合效果判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E7%BA%BF%E6%80%A7%E5%8A%A0%E6%9D%83"><span class="nav-number">1.3.2.</span> <span class="nav-text">局部线性加权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92"><span class="nav-number">1.3.3.</span> <span class="nav-text">岭回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">优点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E9%80%90%E6%AD%A5%E5%9B%9E%E5%BD%92"><span class="nav-number">1.4.</span> <span class="nav-text">前向逐步回归</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">3.0.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">普通最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E6%B1%82%E9%80%86%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">4.1.1.</span> <span class="nav-text">不可求逆的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%9F%E5%90%88%E6%95%88%E6%9E%9C%E5%88%A4%E6%96%AD"><span class="nav-number">4.1.2.</span> <span class="nav-text">拟合效果判断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E7%BA%BF%E6%80%A7%E5%8A%A0%E6%9D%83"><span class="nav-number">4.2.</span> <span class="nav-text">局部线性加权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B2%AD%E5%9B%9E%E5%BD%92"><span class="nav-number">4.3.</span> <span class="nav-text">岭回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">4.3.0.1.</span> <span class="nav-text">优点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E9%80%90%E6%AD%A5%E5%9B%9E%E5%BD%92"><span class="nav-number">4.4.</span> <span class="nav-text">前向逐步回归</span></a></li></ol></li></ol></div>
             
 
           </div>
