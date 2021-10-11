@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Kaggle,天池," />
 
 
 
@@ -79,15 +79,19 @@
 
 
 
-<meta name="description" content="不定时记录学习进度">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alogomachine&#39;s BLOG">
-<meta property="og:url" content="http://alogomachine.com/tags/%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle&amp;天池备赛-Step5特征选择">
+<meta property="og:url" content="http://alogomachine.com/21011.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="不定时记录学习进度">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211011001406138.png">
+<meta property="article:published_time" content="2021-10-11T13:11:00.000Z">
+<meta property="article:modified_time" content="2021-10-11T13:11:38.255Z">
 <meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="Kaggle">
+<meta property="article:tag" content="天池">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211011001406138.png">
 
 
 
@@ -117,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://alogomachine.com/tags/决策树/"/>
+  <link rel="canonical" href="http://alogomachine.com/21011.html"/>
 
 
 
 
 
-  <title>Tag: 决策树 | Alogomachine's BLOG</title>
+  <title>Kaggle&天池备赛-Step5特征选择 | Alogomachine's BLOG</title>
   
 
 
@@ -133,7 +137,119 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -142,7 +258,7 @@
     
   
   
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,83 +396,245 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>决策树<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/21011.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/20118.html" itemprop="url">
-              
-                <span itemprop="name">随机森林算法分析与员工离职预测&特征分析案例</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Kaggle&天池备赛-Step5特征选择</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-08-01T21:18:00+08:00"
-              content="2021-08-01" >
-          08-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-10-11T21:11:00+08:00">
+                2021-10-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kaggle-%E5%A4%A9%E6%B1%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">Kaggle/天池</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kaggle-%E5%A4%A9%E6%B1%A0/%E5%A4%87%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">备赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211011001406138.png" alt="image-20211011001406138"></p>
+<span id="more"></span>
+<h1 id="特征降维"><a href="#特征降维" class="headerlink" title="特征降维"></a>特征降维</h1><h1 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h1><ul>
+<li>常用的特征降维手段，把不重要的特征删除</li>
+<li>特征选择的目标：<ul>
+<li>是否发散，如果一个特征不发散，方差接近0，那么这些样本在这个特征上基本没有差异，对于样本的区分没有作用</li>
+<li>与目标相关性高的特征应该优先选择</li>
+</ul>
+</li>
+</ul>
+<h1 id="特征选择的方法"><a href="#特征选择的方法" class="headerlink" title="特征选择的方法"></a>特征选择的方法</h1><ul>
+<li>过滤法：按照发散性或者相关性对各个特征进行评分，通过设定的阈值或者待选择阈值的个数来选择特征</li>
+<li>包装法：根据目标函数（通常是预测效果评分）每次选择若干特征，或者排除若干个特征</li>
+<li>嵌入法：使用机器学习的某些算法和模型进行训练，得到各个特征的权值系数，并根据系数从大到小选择特征。这一方法类似于过滤法，区别在于它通过训练来确定特征的优劣</li>
+</ul>
+<h1 id="特征选择的实现"><a href="#特征选择的实现" class="headerlink" title="特征选择的实现"></a>特征选择的实现</h1><ul>
+<li><p>方差选择法</p>
+<ul>
+<li><p>先要计算各个特征的方差，然后根据阈值选择方差大于阈值的特征</p>
+</li>
+<li><p>```python<br>from sklearn.feature_selection import VarianceThreshold<br>VarianceThreshold(threshold=3).fit_transform(data_mat)</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 相关系数选择法</span><br><span class="line"></span><br><span class="line">  - 先要计算各个特征对目标值的相关系数以及相关系数的P值，然后根据阈值筛选特征</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    import numpy as np</span><br><span class="line">    from<span class="built_in"> array </span>import<span class="built_in"> array</span></span><br><span class="line"><span class="built_in"></span>    from sklearn.feature_selection import SelectKBest</span><br><span class="line">    from scipy.stats import pearsonr</span><br><span class="line">    SelectKBest(</span><br><span class="line">    lambda X,Y:np.array(list(map(lambda x: pearsonr(x,Y),X.T))).T[0],</span><br><span class="line">    k=2).fit_transform(data_mat,target_mat)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>卡方检验</p>
+<ul>
+<li><p>经典的卡方检验是检验定性自变量于定性因变量的相关性</p>
+</li>
+<li><p>```python<br>from sklearn.feature_selection import SelectKBest<br>from sklearn.feature_selection import chi2<br>chivalues = chi2(X,y)<br>X_new = SelectKBest(chi2,k=2).fit_transform(X,y)</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最大信息系数法</span><br><span class="line"></span><br><span class="line">  - 经典的互信息也是评价定性自变量和定性因变量相关性的方法</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    import numpy as np</span><br><span class="line">    from<span class="built_in"> array </span>import<span class="built_in"> array</span></span><br><span class="line"><span class="built_in"></span>    from sklearn.feature_selection import SelectKBest</span><br><span class="line">    from minepy import MINE</span><br><span class="line">    def mic(x,y):</span><br><span class="line">        m=MINE()</span><br><span class="line">        m.compute_score(x,y)</span><br><span class="line">       <span class="built_in"> return </span>(m.mic(),0.5)</span><br><span class="line">    SelectKBest(</span><br><span class="line">    lambda X,Y:np.array(list(map(lambda x: mic(x,Y),X.T))).T[0],</span><br><span class="line">    k=2).fit_transform(data_mat,target_mat)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>PRE（递归消除特征法）</p>
+<ul>
+<li><p>使用一个基模型来进行多轮训练，每轮训练后 ，消除若干权值系数的特征，再基于新的特征集进行下轮训练</p>
+</li>
+<li><p>```python<br>from sklearn.feature_selection import RFE<br>from sklearn.linear_model import LogisticRegression</p>
+<p>RFE(estimator=LogisticRegression(multi_class=’auto’,</p>
+<pre><code>                            solver='lbfgs',
+                            max_iter=500),
+</code></pre><p>   n_features_to_select=2).fit_transform(data_mat,target_mat)</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- SelectFromModel</span><br><span class="line"></span><br><span class="line">  - 主要采用基于模型的特征选择法，常见的有基于惩罚项的特征选择法和基于树模型的特征选择法</span><br><span class="line"></span><br><span class="line">  - 基于惩罚项的特征选择法使用带惩罚项的基模型</span><br><span class="line"></span><br><span class="line">    - 除了能筛选出特征，也进行了降维</span><br><span class="line"></span><br><span class="line">    - ```python</span><br><span class="line">      # 带L2惩罚项的逻辑回归模型</span><br><span class="line">      <span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">      <span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">      </span><br><span class="line">      SelectFromModel(</span><br><span class="line">          LogisticRegression(penalty=<span class="string">'l2'</span>,C=<span class="number">0.1</span>,solver=<span class="string">'lbfgs'</span>,multi_class=<span class="string">'auto'</span>)</span><br><span class="line">      ).fit_transform(data_mat,target_mat)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于树模型的特征选择法</p>
+<ul>
+<li><p>结合GBDT模型选择特征</p>
+</li>
+<li><pre><code class="lang-python">from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import GradientBoostingClassifier
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/20116.html" itemprop="url">
-              
-                <span itemprop="name">决策树算法分析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-08-01T21:16:00+08:00"
-              content="2021-08-01" >
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+SelectFromModel(GradientBoostingClassifier()).fit_transform(data_mat,target_mat)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kaggle/" rel="tag"># Kaggle</a>
+          
+            <a href="/tags/%E5%A4%A9%E6%B1%A0/" rel="tag"># 天池</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/21028.html" rel="next" title="Kaggle&天池备赛-Step4数据均衡处理与验证集选择">
+                <i class="fa fa-chevron-left"></i> Kaggle&天池备赛-Step4数据均衡处理与验证集选择
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/21015.html" rel="prev" title="Kaggle&天池备赛-Step6特征降维">
+                Kaggle&天池备赛-Step6特征降维 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +642,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -384,8 +666,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -445,6 +736,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4"><span class="nav-number">1.</span> <span class="nav-text">特征降维</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">2.</span> <span class="nav-text">特征选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">特征选择的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">特征选择的实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -585,6 +892,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
