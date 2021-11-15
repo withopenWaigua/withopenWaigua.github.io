@@ -87,7 +87,7 @@
 <meta property="og:description" content="12import pandas as pdimport numpy as np 1. 数据合并1.1 合并数据12x &#x3D; np.array([[1,2],[3,4]])x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-15T16:10:00.000Z">
-<meta property="article:modified_time" content="2021-11-15T16:13:29.718Z">
+<meta property="article:modified_time" content="2021-11-15T16:20:41.710Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="数据分析">
 <meta property="article:tag" content="Pandas">
@@ -421,16 +421,7 @@
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Pandas合并</span></span><br><span class="line">df1 = pd.DataFrame(np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>),index=<span class="built_in">list</span>(<span class="string">&#x27;abc&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br><span class="line">df2 = pd.DataFrame(np.arange(<span class="number">4</span>).reshape(<span class="number">2</span>,<span class="number">2</span>)+<span class="number">5</span>,index=<span class="built_in">list</span>(<span class="string">&#x27;ac&#x27;</span>),columns=[<span class="string">&#x27;one&#x27;</span>,<span class="string">&#x27;two&#x27;</span>])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -461,16 +452,7 @@
 <p><strong>&lt;/div&gt;</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -503,16 +485,7 @@
        [7, 8]])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.append(df2)</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
