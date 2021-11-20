@@ -77,16 +77,16 @@
 
 
 
-<meta name="description" content="线性回归的系数W解析解为：  W&#x3D;\left( X^{T}X\right) ^{-1}X^{T}Y基础优化算法 梯度下降法  计算梯度的反方向   w_{t}&#x3D;w_{t-1}-\eta\dfrac{\partial l \left( x_{i},y_{i},w\right) }{w_{t-1}} 不断更新梯度，对L2损失函数进行计算（其中η为学习率，太大会不停跳跃，太小计算成本太大）   l_{2">
+<meta name="description" content="线性回归的系数W解析解为：  W&#x3D;\left( X^{T}X\right) ^{-1}X^{T}Y">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于深度学习框架的线性回归算法实现">
 <meta property="og:url" content="http://alogomachine.com/21125.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="线性回归的系数W解析解为：  W&#x3D;\left( X^{T}X\right) ^{-1}X^{T}Y基础优化算法 梯度下降法  计算梯度的反方向   w_{t}&#x3D;w_{t-1}-\eta\dfrac{\partial l \left( x_{i},y_{i},w\right) }{w_{t-1}} 不断更新梯度，对L2损失函数进行计算（其中η为学习率，太大会不停跳跃，太小计算成本太大）   l_{2">
+<meta property="og:description" content="线性回归的系数W解析解为：  W&#x3D;\left( X^{T}X\right) ^{-1}X^{T}Y">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211120232210868.png">
 <meta property="article:published_time" content="2021-11-20T15:25:00.000Z">
-<meta property="article:modified_time" content="2021-11-20T15:25:52.710Z">
+<meta property="article:modified_time" content="2021-11-20T15:28:52.830Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="线性回归">
@@ -401,7 +401,8 @@
       
         <p>线性回归的系数W解析解为：</p>
 <script type="math/tex; mode=display">
-W=\left( X^{T}X\right) ^{-1}X^{T}Y</script><h1 id="基础优化算法"><a href="#基础优化算法" class="headerlink" title="基础优化算法"></a>基础优化算法</h1><ul>
+W=\left( X^{T}X\right) ^{-1}X^{T}Y</script><span id="more"></span>
+<h1 id="基础优化算法"><a href="#基础优化算法" class="headerlink" title="基础优化算法"></a>基础优化算法</h1><ul>
 <li><p>梯度下降法</p>
 <ol>
 <li><p>计算梯度的反方向</p>
@@ -505,8 +506,7 @@ b的误差为：0.019360%
  tensor([[ 2.0001, -3.4004]], requires_grad=True),
  Parameter containing:
  tensor([4.2003], requires_grad=True))
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
+</code></pre>
       
     </div>
     
