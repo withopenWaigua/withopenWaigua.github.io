@@ -88,7 +88,7 @@
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000008.png">
 <meta property="article:published_time" content="2021-07-26T15:57:00.000Z">
-<meta property="article:modified_time" content="2021-09-15T13:26:33.534Z">
+<meta property="article:modified_time" content="2021-11-23T12:08:54.704Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="算法">
@@ -406,16 +406,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#读取数据</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br><span class="line">df.head()  <span class="comment"># data frame</span></span><br><span class="line">df</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -591,16 +582,7 @@ HP                   13 non-null int64
 dtypes: float64(1), int64(5), object(2)
 memory usage: 912.0+ bytes
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清洗数据</span></span><br><span class="line"><span class="comment"># 把颜色独热编码</span></span><br><span class="line">df_colors = df[<span class="string">&#x27;Color&#x27;</span>].<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Color: &#x27;</span>) <span class="comment">#构造独热编码</span></span><br><span class="line"><span class="comment"># 把类型独热编码</span></span><br><span class="line">df_type = df[<span class="string">&#x27;Type&#x27;</span>].apply(<span class="built_in">str</span>).<span class="built_in">str</span>.get_dummies().add_prefix(<span class="string">&#x27;Type: &#x27;</span>) <span class="comment">#把它当成分类</span></span><br><span class="line"><span class="comment"># 添加独热编码数据列</span></span><br><span class="line">df = pd.concat([df, df_colors, df_type], axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 去除独热编码对应的原始列</span></span><br><span class="line">df = df.drop([<span class="string">&#x27;Brand&#x27;</span>, <span class="string">&#x27;Type&#x27;</span>, <span class="string">&#x27;Color&#x27;</span>], axis=<span class="number">1</span>) </span><br><span class="line">df.head()</span><br><span class="line"><span class="comment"># brand 都一样，不需要</span></span><br></pre></td></tr></table></figure>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -735,16 +717,7 @@ memory usage: 1.5 KB
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>, <span class="string">&#x27;Ask Price&#x27;</span>]], size=<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p><strong><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/20210727000002.png" alt="png"></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA <span class="comment">#降维</span></span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D <span class="comment">#绘制3D图</span></span><br><span class="line"><span class="comment"># 主成分分析  将n维压缩成三维</span></span><br><span class="line">pca_3 = PCA(n_components=<span class="number">3</span>) <span class="comment">#保留三组特征</span></span><br><span class="line"><span class="comment"># X = pca_3.fit_transform(df[[&#x27;Construction Year&#x27;,&#x27;Odometer&#x27;,&#x27;Ask Price&#x27;,&#x27;Days Until MOT&#x27;,&#x27;HP&#x27;,&#x27;Color: black&#x27;,&#x27;Color: blue&#x27;,&#x27;Color: green&#x27;,&#x27;Color: grey&#x27;,&#x27;Color: red&#x27;,&#x27;Color: white&#x27;,&#x27;Type: 1.0&#x27;,&#x27;Type: 1.1&#x27;,&#x27;Type: 1.4&#x27;]])</span></span><br><span class="line"><span class="comment">#PCA降维，看着使用，对比一下</span></span><br><span class="line">X = df[[<span class="string">&#x27;Construction Year&#x27;</span>, <span class="string">&#x27;Days Until MOT&#x27;</span>, <span class="string">&#x27;Odometer&#x27;</span>]] <span class="comment">#只选3个特征。根据特征图选择</span></span><br><span class="line">X</span><br></pre></td></tr></table></figure>
-<p><div></p>
-<p><style scoped><br>    .dataframe tbody tr th:only-of-type {<br>        vertical-align: middle;<br>    }</p>
-<pre><code>.dataframe tbody tr th &#123;
-    vertical-align: top;
-&#125;
-
-.dataframe thead th &#123;
-    text-align: right;
-&#125;
-</code></pre><p><strong>&lt;/style&gt;</strong></p>
+<p><strong>&lt;/style&gt;</strong></p>
 <p><table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -976,8 +949,17 @@ wpac_init.push({widget: 'Rating', id: 31073});
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1037,6 +1019,22 @@ wpac_init.push({widget: 'Rating', id: 31073});
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81K"><span class="nav-number">1.</span> <span class="nav-text">验证K</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
