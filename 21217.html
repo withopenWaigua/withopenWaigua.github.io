@@ -85,7 +85,7 @@
 <meta property="og:description" content="初始化块 用{}包含初始化内容的块 初始化块先执行，再执行构造器 类中成员变量的定义并初始化代码和初始化代码块里面的执行是平级的，也就是再类定义中，谁排前面就先执行谁。谁排后面就后执行谁。后面可以换前面的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-06T09:17:00.000Z">
-<meta property="article:modified_time" content="2021-12-06T08:44:03.593Z">
+<meta property="article:modified_time" content="2021-12-06T15:34:42.753Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -436,24 +436,20 @@
 <li>不要在父类构造器引用被子类覆盖的方法</li>
 </ul>
 <h1 id="抽象类和抽象方法"><a href="#抽象类和抽象方法" class="headerlink" title="抽象类和抽象方法"></a>抽象类和抽象方法</h1><ul>
-<li><p>抽象类—类</p>
-</li>
-<li><p>抽搐概括出他们共同的方面、本质属性与关系</p>
-</li>
-<li><p>把一些共通的东西抽取出来</p>
-</li>
-<li><p>抽象类一般用来作为父类，把一些公共的东西抽象出来</p>
-</li>
-<li><p>只需要在类定义前面加入abstract</p>
-</li>
-<li><p>```java<br>public abstract class Human {</p>
-<p>}</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># 抽象方法</span></span><br><span class="line"></span><br><span class="line">- 把函数返回前面加入<span class="keyword">abstract</span></span><br><span class="line"></span><br><span class="line">- ```<span class="function">java</span></span><br><span class="line"><span class="function">  <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">myfunc</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不能有方法体，并且方法后面加’；’</p>
-</li>
-<li><p>可以理解为抽象方法是一种不完整的方法，只有声明没有方法体</p>
-</li>
+<li>抽象类—类</li>
+<li>抽出概括出他们共同的方面、本质属性与关系</li>
+<li>把一些共通的东西抽取出来</li>
+<li>抽象类一般用来作为父类，把一些公共的东西抽象出来</li>
+<li>只需要在类定义前面加入abstract</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Human</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h1><ul>
+<li>把函数返回前面加入abstract</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">myfunc</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不能有方法体，并且方法后面加’；’</li>
+<li>可以理解为抽象方法是一种不完整的方法，只有声明没有方法体</li>
 </ul>
 <h1 id="抽象类和抽象方法的特性"><a href="#抽象类和抽象方法的特性" class="headerlink" title="抽象类和抽象方法的特性"></a>抽象类和抽象方法的特性</h1><ul>
 <li><p>都用abstract修饰，同时抽象方法不能有方法体</p>
@@ -664,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">初始化块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">静态初始化块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">抽象类和抽象方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">抽象类和抽象方法的特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">抽象类的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%BC%95%E5%85%A5%E7%9B%AE%E7%9A%84%E6%8E%A2%E8%AE%A8"><span class="nav-number">7.</span> <span class="nav-text">抽象类引入目的探讨</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">初始化块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">静态初始化块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">抽象类和抽象方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">抽象方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">抽象类和抽象方法的特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">抽象类的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%BC%95%E5%85%A5%E7%9B%AE%E7%9A%84%E6%8E%A2%E8%AE%A8"><span class="nav-number">8.</span> <span class="nav-text">抽象类引入目的探讨</span></a></li></ol></div>
             
 
           </div>
