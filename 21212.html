@@ -77,15 +77,15 @@
 
 
 
-<meta name="description" content="构造器细说 构造器其实就是一个方法【成员函数】，构造器有一些特殊之处 名字特殊：必须与类名相同 构造器不要写返回类型不能写返回值return，以及加入void，加入void就是变成了成员函数而不是构造器了 构造器的能力就是当你输出一个对象的时候，构造器会被自动调用  默认构造器：不带参数的构造器 一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行 报错 如果一个类中没有我们">
+<meta name="description" content="构造器细说 构造器其实就是一个方法【成员函数】，构造器有一些特殊之处 名字特殊：必须与类名相同 构造器不要写返回类型不能写返回值return，以及加入void，加入void就是变成了成员函数而不是构造器了 构造器的能力就是当你输出一个对象的时候，构造器会被自动调用  默认构造器：不带参数的构造器 一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java构造器、this以及static关键字细说">
 <meta property="og:url" content="http://alogomachine.com/21212.html">
 <meta property="og:site_name" content="Alogomachine&#39;s BLOG">
-<meta property="og:description" content="构造器细说 构造器其实就是一个方法【成员函数】，构造器有一些特殊之处 名字特殊：必须与类名相同 构造器不要写返回类型不能写返回值return，以及加入void，加入void就是变成了成员函数而不是构造器了 构造器的能力就是当你输出一个对象的时候，构造器会被自动调用  默认构造器：不带参数的构造器 一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行 报错 如果一个类中没有我们">
+<meta property="og:description" content="构造器细说 构造器其实就是一个方法【成员函数】，构造器有一些特殊之处 名字特殊：必须与类名相同 构造器不要写返回类型不能写返回值return，以及加入void，加入void就是变成了成员函数而不是构造器了 构造器的能力就是当你输出一个对象的时候，构造器会被自动调用  默认构造器：不带参数的构造器 一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-06T04:12:00.000Z">
-<meta property="article:modified_time" content="2021-12-06T08:36:43.477Z">
+<meta property="article:modified_time" content="2021-12-06T08:45:09.752Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -134,119 +134,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -515,6 +403,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p>默认构造器：不带参数的构造器</p>
 <p><strong>一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行</strong></p>
+<span id="more"></span>
 <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><ul>
 <li>如果一个类中没有我们自己书写的构造器，那么系统会为该类提供一个默认的构造器<ul>
 <li>如果有了任意一个构造器，就不能调用默认的构造器，不使用自自定义的构造器，使用默认构造器就会报错</li>
@@ -533,12 +422,12 @@ mjx-container[display="true"] + br {
 <li>表示调用方法的那个对象的引用</li>
 <li>指向该方法的对象</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitTime</span><span class="params">(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpminute,<span class="keyword">int</span> tmpsecond)</span></span>{</span><br><span class="line">    <span class="comment">//mytime指向什么，this就指向什么</span></span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpminute;</span><br><span class="line">    Second = tmpsecond; <span class="comment">//使用了形参，形参才变白色</span></span><br><span class="line">    <span class="keyword">int</span> tmpvalue = <span class="keyword">this</span>.GetHour(); <span class="comment">//this指向与mytime一样的首地址，但一般不需要使用，有点画蛇添足的意思</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitTime</span><span class="params">(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpminute,<span class="keyword">int</span> tmpsecond)</span></span>&#123;</span><br><span class="line">    <span class="comment">//mytime指向什么，this就指向什么</span></span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpminute;</span><br><span class="line">    Second = tmpsecond; <span class="comment">//使用了形参，形参才变白色</span></span><br><span class="line">    <span class="keyword">int</span> tmpvalue = <span class="keyword">this</span>.GetHour(); <span class="comment">//this指向与mytime一样的首地址，但一般不需要使用，有点画蛇添足的意思</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>方法也跟着对象走</p>
 <p>false：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>){</span><br><span class="line">        <span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//与形参相混淆</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>)&#123;</span><br><span class="line">        <span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//与形参相混淆</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>true：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>){</span><br><span class="line">        this.<span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//把形参赋值给成员变量</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>)&#123;</span><br><span class="line">        this.<span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//把形参赋值给成员变量</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="static-关键字详解"><a href="#static-关键字详解" class="headerlink" title="static 关键字详解"></a>static 关键字详解</h1><ul>
 <li>静态的意思</li>
 <li>一旦使用static这个修饰，就变成了静态成员变量就属于该类的成员变量，而不是该对象的成员变量</li>
@@ -1260,26 +1149,6 @@ mjx-container[display="true"] + br {
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

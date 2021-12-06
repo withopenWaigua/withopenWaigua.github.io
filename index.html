@@ -508,108 +508,17 @@ mjx-container[display="true"] + br {
 
       
         
-          
-            <h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><ul>
+          <h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><ul>
 <li>内部类（嵌套类）</li>
 <li>外部类（相当于其里面的类）</li>
 </ul>
-<h1 id="内部类的基本使用"><a href="#内部类的基本使用" class="headerlink" title="内部类的基本使用"></a>内部类的基本使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>  <span class="class"><span class="keyword">class</span> <span class="title">Human</span> </span>{</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">HumanFood</span></span>{</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> m_hfmem=<span class="number">61</span>;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">disEMemvar</span><span class="params">()</span></span>{</span><br><span class="line">            System.out.println(<span class="string">"HuamFOOd::disememvar"</span>);</span><br><span class="line">        }</span><br><span class="line">}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">myfunc</span><span class="params">()</span></span>{</span><br><span class="line">        HumanFood hf = <span class="keyword">new</span> HumanFood();</span><br><span class="line">        hf.disEMemvar();</span><br><span class="line">        System.out.println(<span class="string">"hf.mhfmem"</span>+hf.m_hfmem); <span class="comment">//可以访问内部类的私有成员变量</span></span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>类：</p>
-<ul>
-<li>方法</li>
-<li>构造器</li>
-<li>成员变量</li>
-<li>初始化块</li>
-<li>内部类</li>
-</ul>
-<ol>
-<li>外部类能访问内部类的私有成员变量</li>
-<li>内部类也可以访问外部类的私有方法、私有成员变量</li>
-</ol>
-<p>变量的访问顺序</p>
-<ol>
-<li>局部变量优先（成员变量名）</li>
-<li>本类中的成员变量（this+成员变量名）</li>
-<li>外部类的成员变量(外部类.this.成员变量名)</li>
-</ol>
-<ul>
-<li>内部类的方法能直接访问外部类的成员变量（直接成员变量名）</li>
-<li>外部类需要用 对象名.变量名  来访问内部类成员变量</li>
-</ul>
-<p>为什么内部类能直接访问外部成员变量而外部类不行</p>
-<ul>
-<li>成员变量跟着对象走,有对象才有成员变量.</li>
-<li>有内部类对象存在，一定有外部类对象存在</li>
-<li>能调用内部类的存在，一定有一个内部类存在</li>
-<li>如果有一个内部类存在，那么一定有一个外部类存在</li>
-<li>所以内部类方法中，能直接访问外部类对象成员变量</li>
-<li>相反，有外部类存在，不一定有内部类存在，所以得先创建一个内部类对象去调用它</li>
-</ul>
-<h1 id="静态规则"><a href="#静态规则" class="headerlink" title="静态规则"></a>静态规则</h1><ul>
-<li>不允许在外部类的静态方法中使用内部类</li>
-<li>一般的内部类不要沾染上和“静态（static）”有关的内容，不然会报错</li>
-</ul>
-<h1 id="内部类种类"><a href="#内部类种类" class="headerlink" title="内部类种类"></a>内部类种类</h1><ol>
-<li>普通内部类<ul>
-<li>类内定义另外一个类，外部类访问内部类和访问一个普通类区别不大</li>
-</ul>
-</li>
-<li>局部内部类<ul>
-<li>作用域局限在定义它的方法中，无法在外部类其他方法中使用</li>
-</ul>
-</li>
-<li>静态内部类<ul>
-<li>用static修饰的内部类</li>
-<li>一旦定义一个静态内部类，那么该类就属于外部类的组成部分了(跟外部类对象没有什么关系)</li>
-<li>什么成员都可以往 静态内部类里面放（但静态类中的静态方法不能访问非静态成员变量）</li>
-<li>静态内部类中的普通方法也不要去访问外部类的普通方法，只能访问外部类的静态成员</li>
-<li>把静态类当作外部类的静态成员就行（静态方法，静态成员变量，静态初始化块）</li>
-</ul>
-</li>
-<li>接口中的内部类<ul>
-<li>接口中是可以在内部类中定义一个静态成员变量，为什么？<ul>
-<li>因为在接口中，自动会为内部类使用static修饰，也就是说接口中出现的内部类都是静态内部类</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>匿名类<ul>
-<li>匿名内部类必须有个爹，这个爹可以是个类，也可以是个接口</li>
-<li>new 接口名(){……} 或者new 类名(参数){……}</li>
-<li>匿名类属于一种一次使用的类，创建这个类的时候就自动创建了一个该类的实例，该类不能复用</li>
-<li>匿名类没用名字，所以没有自己的构造器，但可以有自己的初始化块</li>
-<li>定义匿名类不需要class关键字；这种new的写法类似有 </li>
-</ul>
-</li>
-</ol>
-<h1 id="内部类的使用"><a href="#内部类的使用" class="headerlink" title="内部类的使用"></a>内部类的使用</h1><ul>
-<li><p>和使用一个普通类没什么太大区别，一般是new一个内部类对象，然后调用内部类的方法</p>
-</li>
-<li><p>在外部使用普通外部类</p>
-<ul>
-<li><p>格式：外部类名.内部类名 变量名；</p>
-</li>
-<li><pre><code class="lang-java">Human myhuman = new Human();
-myfood = new myhuman.new HumanFood();
-myfood.XXX
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="内部类的访问权限"><a href="#内部类的访问权限" class="headerlink" title="内部类的访问权限"></a>内部类的访问权限</h1><ul>
-<li>外部类修饰：public或什么都不写</li>
-<li>内部类：public 啥也不写，protected，private<ul>
-<li>public：公共的，任意访问</li>
-<li>protected：保护的，不可以挎包使用，但可以通过继承来实现挎包使用</li>
-<li>啥也不写：跟protected几乎一样，不能挎包，可以被与外部类同一个包中的其他类以及外部类的子类访问（前提是在同一个包下，不能挎包的子类）</li>
-<li>private：只能外部类的内部使用.</li>
-<li>外部类名 $ 内部类名.class                                                 </li>
-</ul>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21219.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -759,8 +668,7 @@ myfood.XXX
 
       
         
-          
-            <h1 id="final"><a href="#final" class="headerlink" title="final"></a>final</h1><ul>
+          <h1 id="final"><a href="#final" class="headerlink" title="final"></a>final</h1><ul>
 <li>修饰符/关键字，可以修饰<ul>
 <li>成员变量（普通成员变量、静态成员变量） 局部变量(形参)</li>
 <li>方法</li>
@@ -769,163 +677,13 @@ myfood.XXX
 </li>
 <li>最终的，不能改变</li>
 </ul>
-<h1 id="final修饰变量"><a href="#final修饰变量" class="headerlink" title="final修饰变量"></a>final修饰变量</h1><ul>
-<li>特性是一旦有了初值之后，值就不能改变</li>
-<li>成员变量<ul>
-<li>普通成员变量定义的时候给初值，或者初始化块给，构造器给</li>
-<li>如果创建了对象，可以在外部给，不给初始值也有缺省值</li>
-<li>整型：0，Boolean=false，Human =null;</li>
-</ul>
-</li>
-<li>final必须要给初始值-成员变量<ul>
-<li>定义的时候给初始值 </li>
-<li>初始化块给初值</li>
-<li>构造器给初值</li>
-<li>但上面就只能在一个地方定值</li>
-</ul>
-</li>
-<li>静态成员变量<ul>
-<li>在定义的时候给初始值</li>
-<li>在静态初始化块给初值</li>
-<li>但上面就只能在一个地方定值</li>
-</ul>
-</li>
-<li>局部变量<ul>
-<li>final修饰的普通局部变量<ul>
-<li>可以在定义的时候给初值，也可以在定义的时候不给初值，后续赋值语句给值，但一旦给了值就不可以赋给其他值了</li>
-</ul>
-</li>
-<li>final修饰的形参<ul>
-<li>形参的值是通过方法传递的实参值来给的</li>
-</ul>
-</li>
-<li>final修饰的引用类型<ul>
-<li>final修饰的引用类型局部变量，一旦指向了某块堆内存，就不允许在指向其他堆内存了，指向位置不能改变，但指向的值可以改变</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211205152856729.png" alt="image-20211205152856729"></li>
-</ul>
-<h1 id="final宏替换能力"><a href="#final宏替换能力" class="headerlink" title="final宏替换能力"></a>final宏替换能力</h1><ul>
-<li>为什么两个字符串String内容相同，比较结果不相同</li>
-<li>有的字符串的内容/值在编译的时候就能确定<ul>
-<li>而result编译的时候确定不了其值，而需要在运行的时候才能确定result3的值</li>
-</ul>
-</li>
-<li>Java针对字符串，比如编译期间就能确定字符串内容的，这些内容会被缓存到一个专门的地方去</li>
-<li>sr = result = result2</li>
-<li>如果用final那么：sr = result = result2 = result3 = result4</li>
-<li><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211205153729826.png" alt="image-20211205153729826"></li>
-<li>宏替换在编译就能缓存值</li>
-</ul>
-<h1 id="final修饰方法"><a href="#final修饰方法" class="headerlink" title="final修饰方法"></a>final修饰方法</h1><ul>
-<li>一旦一个方法被final修饰，那么这个方法就不可以被子类覆盖了</li>
-<li>private 不要和final 联合修饰，因为private不会被继承</li>
-</ul>
-<h1 id="final修饰类"><a href="#final修饰类" class="headerlink" title="final修饰类"></a>final修饰类</h1><ul>
-<li>就不能继承这个类了</li>
-</ul>
-<h1 id="接口的基本概念"><a href="#接口的基本概念" class="headerlink" title="接口的基本概念"></a>接口的基本概念</h1><ul>
-<li>接口：比抽象类还抽象</li>
-<li>这里把接口理解为抽象类 —接口理解为类</li>
-<li>格式：<ul>
-<li>【修饰符】 interface 接口名{</li>
-<li>}</li>
-</ul>
-</li>
-<li>修饰符一般是public，不加就是缺省访问权限</li>
-</ul>
-<h1 id="接口的使用"><a href="#接口的使用" class="headerlink" title="接口的使用"></a>接口的使用</h1><ul>
-<li><p>接口也不能实例化</p>
-</li>
-<li><p>接口内部一般定义一些规范的东西</p>
-</li>
-<li><p>规定继承者必须要实现的东西</p>
-</li>
-<li><p>一般是用具体的类去实现这个接口（当父类）。实现这个接口的类，叫做实现类</p>
-</li>
-<li><p>```java<br>public class impint implements kxinterface{ //实现类</p>
-<p>}<br>//继承两个类<br>public class extends Human impint implements kxinterface{ //实现类</p>
-<p>}<br>//继承多个接口<br>public class impint implements kxinterface,kxinterface2{ //实现类</p>
-<p>}</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 继承用<span class="keyword">extends</span>关键字，实现一个接口用<span class="keyword">implements</span></span><br><span class="line"></span><br><span class="line">  - 一个类只能继承一个父类</span><br><span class="line">  - 但是一个实现类可以继承多个接口</span><br><span class="line">  - 一个类可以实现多个接口，这也算是弥补了一个类只能继承一个父类的遗憾，称为模拟多几次</span><br><span class="line">  - <span class="keyword">extends</span> 和 <span class="keyword">implements</span> 都是继承意思差不多 -- 成员变量、方法</span><br><span class="line">  - <span class="keyword">extends</span> 和<span class="keyword">implements</span> 同时出现的时候，<span class="keyword">extends</span> 要放在前面，<span class="keyword">implements</span>放在后面</span><br><span class="line">  - 实现一个接口跟继承一个父类差不多。接口很多内容在实现类中都有了</span><br><span class="line">  - 一个源文件能有多个接口，但只能有一个<span class="keyword">public</span>接口</span><br><span class="line"></span><br><span class="line">- 实现一个接口跟继承一个父类差不多。接口中很多内容在实现类中就有了</span><br><span class="line"></span><br><span class="line">- 虽然子类不可以继承多个父类，但可以继承多个接口</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  impint mhi2 = <span class="keyword">new</span> impint(); <span class="comment">//实现类</span></span><br><span class="line">  kxinterface mhi3 = <span class="keyword">new</span> impint(); <span class="comment">//接口=实现类, 接口是实现类的父类  父类 = 子类 可以</span></span><br><span class="line">  <span class="comment">//kxinterface mhi4 = new kxinterface(); 报错,接口不能实例化,实现类才可以</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口不能实例化，和抽象类一样</p>
-</li>
-<li><p>接口可被用于声明[定义] 引用类型变量;多态</p>
-</li>
-</ul>
-<h1 id="接口核心思想和可放入内容"><a href="#接口核心思想和可放入内容" class="headerlink" title="接口核心思想和可放入内容"></a>接口核心思想和可放入内容</h1><ul>
-<li>接口一般定义和规范性的东西，但不提供具体的实现。规范和实现分类的设计原则<ul>
-<li>规范：接口中</li>
-<li>实现：在具体的实现类中</li>
-</ul>
-</li>
-</ul>
-<h1 id="接口中不允许出现的内容"><a href="#接口中不允许出现的内容" class="headerlink" title="接口中不允许出现的内容"></a>接口中不允许出现的内容</h1><ul>
-<li>构造器</li>
-<li>初始化块</li>
-<li>接口可以继承多个接口但不可以继承类</li>
-<li>接口中不能出现普通成员变量（只有静态成员变量），没有普通方法(有方法体的方法)，只有抽象方法（没用方法体）</li>
-</ul>
-<h1 id="共性问题"><a href="#共性问题" class="headerlink" title="共性问题"></a>共性问题</h1><ul>
-<li>接口里面大部分都是public权限。所以接口定义的内容可以不写public，但是要写就必须要写成public，写成其他修饰符会报语法错误</li>
-</ul>
-<h1 id="接口允许的内容"><a href="#接口允许的内容" class="headerlink" title="接口允许的内容"></a>接口允许的内容</h1><ul>
-<li>成员变量（自动变成了静态成员变量）<ul>
-<li>自动默认加上static 和final</li>
-<li>static：跟着类走</li>
-<li>final：必须给这个成员变量指定初始值，而且一旦有初始值就不能修改</li>
-</ul>
-</li>
-<li>普通成员方法（自动变成抽象方法）<ul>
-<li>不写任何前面的修饰词</li>
-<li>自动加上了 abstract，不可以有方法体</li>
-<li>必须要实现接口里面的方法</li>
-<li>不是静态方法，不能用接口调用，只能用对象（多态（父=子）或（子=子））</li>
-</ul>
-</li>
-<li>静态方法（变成类方法）<ul>
-<li>跟着类走，用static修饰。</li>
-<li>必须要有方法体</li>
-<li>直接用接口调用（不能用对象调用）</li>
-</ul>
-</li>
-<li>默认方法（实例方法）<ul>
-<li>用default修饰，public可以省略，必须要有方法体，否则报错</li>
-<li>跟着对象走的，所以不可以和static连用</li>
-<li>能写方法体</li>
-</ul>
-</li>
-<li>私有方法<ul>
-<li>用private修饰</li>
-<li>必须要有方法体</li>
-<li>跟着对象走（普通私有方法）</li>
-<li>跟着类走（加上static）</li>
-<li>无法被main调用，作用是仅供接口内部调用</li>
-<li>不能被普通方法调用</li>
-</ul>
-</li>
-</ul>
-<h1 id="接口的继承"><a href="#接口的继承" class="headerlink" title="接口的继承"></a>接口的继承</h1><ul>
-<li>一个接口多个父类，但接口只能继承接口，不能继承类</li>
-</ul>
-<h1 id="接口与抽象类的概括"><a href="#接口与抽象类的概括" class="headerlink" title="接口与抽象类的概括"></a>接口与抽象类的概括</h1><ul>
-<li>抽象类是从多个类中抽取出来的模板，接口。接口好像是100%纯抽象类。</li>
-<li>接口是一种设计规范，具体的实现是通过继承这个接口的实现类来实现的，私有接口体现的是一种规范和实现分离的逻辑</li>
-<li>接口，可以看作一个类，只不过这个类比较特殊</li>
-<li>接口的主要途径是作为实现类的父类。并在具体实现类中实现需要的东西，比如接口中的普通方法（抽象方法）</li>
-</ul>
-<h1 id="接口和抽象类的一同"><a href="#接口和抽象类的一同" class="headerlink" title="接口和抽象类的一同"></a>接口和抽象类的一同</h1><ul>
-<li>两者都不能通过实例化，不如new一个接口，new一个抽象类都不行</li>
-<li>抽象类一般通过子类的继承extends来使用</li>
-<li>接口通过一个类的实现implements来实现。所以抽象类和接口都是等着别人来几次</li>
-<li>有些接口里可以有，抽象类不可以有，反之亦然</li>
-<li>接口中出现的很多东西，都是自带的public和static修饰</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21218.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1075,104 +833,18 @@ myfood.XXX
 
       
         
-          
-            <h1 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h1><ul>
+          <h1 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h1><ul>
 <li>用{}包含初始化内容的块</li>
 <li>初始化块先执行，再执行构造器</li>
 <li>类中成员变量的定义并初始化代码和初始化代码块里面的执行是平级的，也就是再类定义中，谁排前面就先执行谁。谁排后面就后执行谁。后面可以换前面的</li>
-<li></li>
 </ul>
-<p>new类对象：</p>
-<ol>
-<li>父类初始化块</li>
-<li>父类构造器</li>
-<li>子类初始化块</li>
-<li>子类构造器</li>
-</ol>
-<h1 id="静态初始化块"><a href="#静态初始化块" class="headerlink" title="静态初始化块"></a>静态初始化块</h1><p>多了static</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span></span><br><span class="line">{</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<ul>
-<li>静态初始化块先执行</li>
-<li>先定义的先执行</li>
-<li>普通初始化块</li>
-</ul>
-<p>new类对象：</p>
-<ol>
-<li>父类的静态初始化块</li>
-<li>子类的静态初始化块</li>
-<li>父类初始化块</li>
-<li>父类构造器</li>
-<li>子类初始化块</li>
-<li>子类构造器</li>
-</ol>
-<ul>
-<li>类初始化块只能初始化一次</li>
-<li>普通初始化块，对象初始化多少次，普通就执行几次</li>
-</ul>
-<ul>
-<li>类初始化块只能引用静态成员变量和静态方法</li>
-</ul>
-<h1 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h1><ul>
-<li>当生成子类时候父类构造器中执行有子类和父类同名一方法，那么父类构造器执行的是子类里面的方法</li>
-<li>不要在父类构造器引用被子类覆盖的方法</li>
-</ul>
-<h1 id="抽象类和抽象方法"><a href="#抽象类和抽象方法" class="headerlink" title="抽象类和抽象方法"></a>抽象类和抽象方法</h1><ul>
-<li><p>抽象类—类</p>
-</li>
-<li><p>抽搐概括出他们共同的方面、本质属性与关系</p>
-</li>
-<li><p>把一些共通的东西抽取出来</p>
-</li>
-<li><p>抽象类一般用来作为父类，把一些公共的东西抽象出来</p>
-</li>
-<li><p>只需要在类定义前面加入abstract</p>
-</li>
-<li><p>```java<br>public abstract class Human {</p>
-<p>}</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># 抽象方法</span></span><br><span class="line"></span><br><span class="line">- 把函数返回前面加入<span class="keyword">abstract</span></span><br><span class="line"></span><br><span class="line">- ```<span class="function">java</span></span><br><span class="line"><span class="function">  <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">myfunc</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不能有方法体，并且方法后面加’；’</p>
-</li>
-<li><p>可以理解为抽象方法是一种不完整的方法，只有声明没有方法体</p>
-</li>
-</ul>
-<h1 id="抽象类和抽象方法的特性"><a href="#抽象类和抽象方法的特性" class="headerlink" title="抽象类和抽象方法的特性"></a>抽象类和抽象方法的特性</h1><ul>
-<li><p>都用abstract修饰，同时抽象方法不能有方法体</p>
-</li>
-<li><p>抽象类不能用new来实例化；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Human myhuman = <span class="keyword">new</span> Human(); <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>抽象类里面不一定要有抽象方法，只要增加了abstract就变成抽象类</p>
-</li>
-<li><p>抽象类也可以有普通成员变量，普通方法，初始化块，也能有静态成员变量，静态方法，静态初始化块以及自己的构造器</p>
-</li>
-<li><p>抽象类无法实例化，所以构造器主要是提供给子类使用</p>
-</li>
-<li><p>如果一个方法是抽象方法，那么这个类必须是抽象类</p>
-</li>
-<li><p>普通方法不能包含抽象方法</p>
-</li>
-</ul>
-<h1 id="抽象类的使用"><a href="#抽象类的使用" class="headerlink" title="抽象类的使用"></a>抽象类的使用</h1><ul>
-<li>抽象类被用于父类继承</li>
-<li>子类继承父类之后必须把父类中的抽象方法实现掉</li>
-<li>在子类中实现了父类的抽象方法，子类也不再是抽象类</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>抽象类，被用于继承</li>
-<li>必须在子类中重写</li>
-<li>只能在普通方法之前加入abstract，末尾加;</li>
-<li>静态方法，构造器不能加入abstract</li>
-<li>子类要覆盖父类方法，所以父类不能设置private的抽象方法</li>
-</ul>
-<h1 id="抽象类引入目的探讨"><a href="#抽象类引入目的探讨" class="headerlink" title="抽象类引入目的探讨"></a>抽象类引入目的探讨</h1><ul>
-<li>抽象类不能创建实例，但可以当作父类取创建子类，然后把一些公共接口写成抽象方法，弄到抽象类中取，然后所继承的子类重写这些抽象方法。</li>
-<li>抽象类是给子类指定一个书写规范(书写模板)，要求子类必须要重写父类的抽象方法</li>
-<li>为了多态考虑： </li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21217.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1322,109 +994,20 @@ myfood.XXX
 
       
         
-          
-            <h1 id="封装性浅析"><a href="#封装性浅析" class="headerlink" title="封装性浅析"></a>封装性浅析</h1><ul>
+          <h1 id="封装性浅析"><a href="#封装性浅析" class="headerlink" title="封装性浅析"></a>封装性浅析</h1><ul>
 <li>封装、继承、多态</li>
 </ul>
 <p>封装性就是通过设置适当的访问级别来限制对我们的访问</p>
 <ul>
 <li>该隐藏的隐藏，该暴露的暴露</li>
 </ul>
-<h1 id="访问控制权限等级和访问控制符"><a href="#访问控制权限等级和访问控制符" class="headerlink" title="访问控制权限等级和访问控制符"></a>访问控制权限等级和访问控制符</h1><ul>
-<li>四个等级，从最大到最小权限</li>
-<li><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211202171449333.png" alt="image-20211202171449333"></li>
-</ul>
-<ul>
-<li>public 公共访问权限 【公共访问权限】</li>
-<li>proteced 保护的【子类访问权限】</li>
-<li>啥也不屑：缺省的 【包访问权限】</li>
-<li>private:私有的 【类访问权限】</li>
-</ul>
-<p>定义类： 【修饰符】 class 类名{}</p>
-<p>定义变量： 【修饰符】 类型 成员变量名；</p>
-<p>定义方法 【修饰符】返回类型 方法名（）{}</p>
-<h1 id="public"><a href="#public" class="headerlink" title="public"></a>public</h1><ul>
-<li><p>成员变量、方法、类用public修饰，那么就可以被所有类访问</p>
-<ul>
-<li><p>不管访问的类或者被访问的类是否都处于一个包中，是否有父子关系，都无所谓</p>
-</li>
-<li><p>```java<br>public int Hour = 0;<br>// main<br>mpgt.Time mytime = new mpgt.Time();<br>mytime.Hour=12;//不报错</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 一般能够被外界访问的东西我们定义为<span class="keyword">public</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"># protected</span></span><br><span class="line"></span><br><span class="line">- 不能挎包了 全局访问就是挎包</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="comment">//mpgt</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">int</span> Hour = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main</span></span><br><span class="line">mpgt.Time mytime = <span class="keyword">new</span> mpgt.Time();</span><br><span class="line">mytime.Hour=<span class="number">12</span>;<span class="comment">//报错</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//com 里面的human类</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">int</span> m_Age = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//挎包了</span></span><br><span class="line"><span class="comment">//mpgt里面的children类</span></span><br><span class="line"><span class="keyword">package</span> mpgt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.abc.www.Human;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">children</span> <span class="keyword">extends</span> <span class="title">com</span>.<span class="title">abc</span>.<span class="title">www</span>.<span class="title">Human</span> </span>{</span><br><span class="line">    children(){</span><br><span class="line">        m_Age =<span class="number">12</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h1 id="啥也不写-缺省的"><a href="#啥也不写-缺省的" class="headerlink" title="啥也不写 缺省的"></a>啥也不写 缺省的</h1><ul>
-<li>缺省的不能跨包了</li>
-<li>只能同一个包</li>
-<li>挎包后子类也不能调用父类的变量了</li>
-</ul>
-<h1 id="private"><a href="#private" class="headerlink" title="private"></a>private</h1><ul>
-<li>只能类内访问</li>
-</ul>
-<h1 id="类的权限等级"><a href="#类的权限等级" class="headerlink" title="类的权限等级"></a>类的权限等级</h1><ul>
-<li><strong>定义一个类只能用到public和缺省的</strong></li>
-<li>如果该类被用public修饰，那么这个类就能被其他类使用，如果上面都没有，那么这个类只能被同一个包中的其他类使用</li>
-<li>源文件和类名的关系<ul>
-<li>如果一个源文件多个类，前面没用public修饰，那么java源文件名任意取</li>
-<li>如果有一个public类，那么这个源文件必须用public类名命名</li>
-<li>一个java源码中最多定义一个public类</li>
-</ul>
-</li>
-</ul>
-<p>访问控制符：解决类的开发者和使用这之间的关系问题</p>
-<h1 id="类设计的原则"><a href="#类设计的原则" class="headerlink" title="类设计的原则"></a>类设计的原则</h1><ol>
-<li>不需要对外使用的成员变量和方法，全部用private修饰</li>
-<li>对于父类中的方法，需要在子类进行覆盖重写，父类习惯使用protected</li>
-<li>希望暴露给其他类使用的就要public</li>
-<li>我们创建一个类对象一般都要调用类的构造器，所以构造器一般要写成public</li>
-</ol>
-<h1 id="多态详解"><a href="#多态详解" class="headerlink" title="多态详解"></a>多态详解</h1><ul>
-<li>父类指针【引用】指向子类对象，是我们探讨多态性的前提</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Human myhumen2 = <span class="keyword">new</span> Men(); <span class="comment">//new子类给父类对象,父类指针[引用子类对象]</span></span><br><span class="line"><span class="comment">//Men m =new Human()； 报错，子类指针不能指向父类</span></span><br><span class="line">myhumen2.myfunc(); <span class="comment">//结果调用子类的func函数</span></span><br><span class="line">System.out.println(myhumen2.m_Age); <span class="comment">//打印的父类的成员变量值</span></span><br><span class="line"><span class="comment">//myhumen2.funcmen(); //无法调用子类的方法,因为是父类类型</span></span><br><span class="line">myhumen2.funchuman();<span class="comment">//可以调用父类的独特方法</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="编译类型，运行类型"><a href="#编译类型，运行类型" class="headerlink" title="编译类型，运行类型"></a>编译类型，运行类型</h1><ul>
-<li>类对象是一种引用类型变量，像一个指针，指向堆中的一块表示对象的内存</li>
-<li>编译型类型：声明对象时候的类型，在编译时候就能固定下来</li>
-<li>运行时类型：程序运行起来，那么对象实际指向堆内存中的对象类型，就是对象的运行时类型</li>
-<li>myhuman2 编译的时候是Human父类，运行时候是Men类型</li>
-</ul>
-<h1 id="多态性的清晰解释"><a href="#多态性的清晰解释" class="headerlink" title="多态性的清晰解释"></a>多态性的清晰解释</h1><ol>
-<li>对象的编译类型是父类类型，对象的运行类型是子类类型</li>
-<li>父类中有一个方法，但子类覆盖了父类中的该同名方法<ol>
-<li>父类子类方法名字相同</li>
-<li>参数相同</li>
-<li>返回类型相同或者兼容<ul>
-<li>兼容：比如说父类中这个方法返回的是个类类型，那么返回这个个类类型的子类型；</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>方法myfunc不能是静态的，不能是static静态的</li>
-<li>通过对象名.方法名来调用这个方法</li>
-</ol>
-<h1 id="多态性解释"><a href="#多态性解释" class="headerlink" title="多态性解释"></a>多态性解释</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myhumen2.myfunc(); <span class="comment">//结果调用子类的func函数</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>多态性体现在具有继承关系的父类和子类，子类覆盖了父类的方法myfunc（）</li>
-<li>通过父类对象名，只有到程序运行时，找到该父类对象所指向的真正堆内存中类对象实例，然后系统内部根据堆对象实例类型，找到并调用父类或子类的myfunc方法</li>
-<li>调用同一个方法，会执行不同代码段 这种特征就是运行期间的多态性</li>
-</ul>
-<h1 id="对象的强制转换"><a href="#对象的强制转换" class="headerlink" title="对象的强制转换"></a>对象的强制转换</h1><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">((Men)</span>myhume<span class="symbol">n2</span>).XX <span class="comment">//变成子类类型了</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>同子类不能转</li>
-</ul>
-<h1 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h1><ul>
-<li>判断是否指向它的父或本类，因为同子类不能转</li>
-<li>格式：对象名 instanceof 类名</li>
-<li>返回bool true/false</li>
-</ul>
-<ul>
-<li>大类型转小类型总是可以成功</li>
-</ul>
-<p>调用一个多态方法，却决于类类型引用所指向的真实类对象实例，指向那个类对象实例，就执行那个类多态方法                                                                                        </p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21216.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1574,66 +1157,17 @@ myfood.XXX
 
       
         
-          
-            <h1 id="package"><a href="#package" class="headerlink" title="package"></a>package</h1><ul>
+          <h1 id="package"><a href="#package" class="headerlink" title="package"></a>package</h1><ul>
 <li>解决类名重复的问题</li>
 <li>为了区别相同的类名，引入package，提供一个所谓的【名字空间、命名空间】，我们可以把一堆、一组类放到这个包名之下</li>
-<li>我们可以通过package把一组类组织带一起，让这些类归属到一个package下，就是归属再这个包名之下</li>
-<li>格式： package 包名;</li>
-<li>写到java源文件第一行，非注释行位置</li>
-<li>这样该源文件中的所有类都包含在类名上面</li>
-<li>如果使用了package抱住了一个或多个类，目录结构也要和包名层次相同</li>
-<li>一个源文件里面定义的类，只能定义到一个包里</li>
-<li>不指定任何pacakage，就被放到一个默认的package</li>
 </ul>
-<p>命名：</p>
-<ul>
-<li>推荐以自己域名反过来命名 com.baidu.www</li>
-<li>但变成的是 com/baidu/www</li>
-</ul>
-<p>注意：</p>
-<ul>
-<li><p>同一个包里面的类可以自由通过类名来直接访问</p>
-</li>
-<li><p>不同包里的类不能通过类名直接访问</p>
-<ul>
-<li><p>通过包名.类名来引用类</p>
-</li>
-<li><p>```java<br>mpgt.Time mytime = new mpgt.Time();</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"># <span class="keyword">import</span></span><br><span class="line"></span><br><span class="line">- <span class="keyword">import</span>导入后，就不用写包名.类名，直接写类名就行</span><br><span class="line"></span><br><span class="line">- <span class="keyword">import</span>语句出现在package语句之后</span><br><span class="line"></span><br><span class="line">- <span class="keyword">import</span> 包名.类名</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  <span class="keyword">import</span> mpgt.Time;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>导入包类的全部类</p>
-</li>
-<li><pre><code>import mpgt.*;
-</code></pre></li>
-<li><p>import 依旧冲突就必须包名.类名</p>
-</li>
-</ul>
-<h1 id="import-静态导入"><a href="#import-静态导入" class="headerlink" title="import 静态导入"></a>import 静态导入</h1><ul>
-<li>导入某个静态成员变量、方法，甚至导入每个类的全部静态成员变量和方法</li>
-</ul>
-<p>导入某个类中的单个静态成员变量、方法</p>
-<p>格式：</p>
-<ul>
-<li>import static 包名.类名.静态成员变量名|静态方法</li>
-</ul>
-<ul>
-<li>导入全部静态成员变量和方法</li>
-<li>import static 包名.类名.*</li>
-</ul>
-<h1 id="import和import静态导入的区别"><a href="#import和import静态导入的区别" class="headerlink" title="import和import静态导入的区别"></a>import和import静态导入的区别</h1><p>常规的import主要作用是让我们免去写包名之苦，只写类名</p>
-<ul>
-<li>import static更里河，使用之后连类名都不需要写了，直接写静态成员变量名、静态方法名</li>
-</ul>
-<h1 id="System-out-println"><a href="#System-out-println" class="headerlink" title="System.out.println();"></a>System.out.println();</h1><ul>
-<li>java.lang 是个包名，具有多个类，默认调入了全部的类，无需手动导入</li>
-<li>System是个类，是java.lang包下的类，out实际上是System类下的静态成员变量，类类型的静态成员变量</li>
-<li>println是print</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21215.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1783,85 +1317,19 @@ myfood.XXX
 
       
         
-          
-            <h1 id="如何进行类继承"><a href="#如何进行类继承" class="headerlink" title="如何进行类继承"></a>如何进行类继承</h1><p>父亲类、孩子类；</p>
+          <h1 id="如何进行类继承"><a href="#如何进行类继承" class="headerlink" title="如何进行类继承"></a>如何进行类继承</h1><p>父亲类、孩子类；</p>
 <p>父类【基类、超类】派生出孩子类【派生类、子类】</p>
 <ul>
 <li>既有父亲类又有孩子类这种层次关系我们就叫做继承，孩子类能从父亲类哪里继承到许多东西</li>
 <li>我们可以把一些通用的东西放在父类，然后每个孩子可以派生出自己独特的东西，还可以从父亲哪里继承出一些通用的东西，防止子类中出现很多重复的代码</li>
 </ul>
-<p>继承</p>
-<ol>
-<li>先定义一个父类</li>
-<li>父类定义一些公共的成员变量、方法</li>
-<li>通过继承这个父类来构建新的子类</li>
-</ol>
-<ul>
-<li>通常来说，子类会比他的父类有更多的成员变量以及方法，子类一般比父类更庞大【内容更多，占用更多内存】</li>
-</ul>
-<p>子类继承父类的语法格式：</p>
-<p>修饰符 class 子类名 extends 父类名{</p>
-<p>//成员变量</p>
-<p>//成员方法</p>
-<p>}</p>
-<ul>
-<li>extends 扩展</li>
-<li>只能继承一个父类</li>
-<li>继承后，子对象包含了父类的对象</li>
-</ul>
-<h1 id="覆盖父类的方法"><a href="#覆盖父类的方法" class="headerlink" title="覆盖父类的方法"></a>覆盖父类的方法</h1><ul>
-<li>子类重写一个参数相同的方法（必须返回值相同）</li>
-<li>如果参数不同【数量不同，类型不同】， 那么就不会覆盖</li>
-<li>静态方法也一样用静态方法去覆盖</li>
-</ul>
-<h1 id="调用父类同名函数的方法"><a href="#调用父类同名函数的方法" class="headerlink" title="调用父类同名函数的方法"></a>调用父类同名函数的方法</h1><ul>
-<li>super - 》理解成指向当前对象的父亲子对象的箭头或指针，super一般也只出现在类的方法中</li>
-<li>this -》指向堆中的自己</li>
-<li>静态方法中不能出现this，super在静态方法中也不能够使用</li>
-<li>有对象才有this、super</li>
-</ul>
-<h1 id="覆盖父类的成员变量"><a href="#覆盖父类的成员变量" class="headerlink" title="覆盖父类的成员变量"></a>覆盖父类的成员变量</h1><ul>
-<li>在java的类继承中，子类能覆盖父类的同名变量</li>
-</ul>
-<p>如果覆盖后还要使用父类的成员变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(mymen.m_Age); <span class="comment">//子类的成员变量</span></span><br><span class="line">System.out.println(((Human)mymen).m_Age);  <span class="comment">//强转成父类的成员变量</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>强制转换</li>
-<li>可以强转调用父类中的成员变量 /静态成员变量/被覆盖的静态方法/未被覆盖后的普通方法</li>
-<li>但不能强转成覆盖后的父类的普通方法</li>
-</ul>
-<h1 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h1><ul>
-<li><p>定义并初始化一个对象时候</p>
-</li>
-<li><p>父类构造器先执行</p>
-</li>
-<li><p>再执行了子类构造器</p>
-</li>
-<li><pre><code class="lang-java">public class Human {
-    //构造器
-    Human(int i){
-        System.out.println("执行了Human::human()构造器");
-    }
-public class Men extends Human{
-    Men(){
-        super(12); //因为父类构造器有了参数，无法使用默认构造器，因此要子类传参数进去调用父类构造器，还必须写道第一行
-        System.out.println("执行了Men()构造器");
-    }
-
-Men mymen = new Men();
-</code></pre>
-</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>不管是否第一行使用了super（）来调用父类构造器，在初始化一个Men对象的时候，父类和子类构造器都只执行一次</li>
-<li>不写的时候默认调用父类的默认构造器，要调用其他构造器就必须写super（XXXX）</li>
-<li>既然可以通过super（）调用父类构造器，可以推出this可以调用本类的其他构造器</li>
-<li>super和this不能同时出现，因为都必须放在子类构造器第一行</li>
-<li>如果子类构造器没用super和this，先调用父类构造器，再调用子类构造器</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21214.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2011,93 +1479,14 @@ Men mymen = new Men();
 
       
         
-          
-            <p>java中参数的传递方法是值传递，把实参的值传递给形参，即便影响了形参的值，也不影响实参。</p>
-<ul>
-<li><p>引用类型参数传递</p>
-<ul>
-<li>这种类型的变量就好像一个箭头，一个指针一样，指向堆中的首地址</li>
-</ul>
-</li>
-<li><p>可变参数方法</p>
-<ul>
-<li><p>只需要在形参类型名最后加入…，表面该方法的形参可以接受多个参数值</p>
-</li>
-<li><p>一个方法只能有一个可变形参，并且一定要在形参列表最后</p>
-</li>
-<li><p>```java<br>void VarArg(float fval,float favr2,int … ivar3){</p>
-<pre><code>for(int x:ivar3){
-    System.out.println(x);
-}
-</code></pre><p>}<br>mytime.VarArg(12.2f,15.6f,31,52,65);</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  void <span class="constructor">ArrArg(<span class="params">float</span> <span class="params">fval</span>,<span class="params">float</span> <span class="params">favr2</span>,<span class="params">int</span>[] <span class="params">ivar3</span>)</span>{</span><br><span class="line">  	ivar3<span class="literal">[<span class="number">0</span>]</span>=<span class="number">2</span>;</span><br><span class="line">  }</span><br><span class="line">  </span><br><span class="line">  mytime.<span class="constructor">ArrArg(12.2f,15.6f,<span class="params">new</span> <span class="params">int</span>[] {31,52,65})</span>; <span class="comment">// 数组</span></span><br><span class="line">  <span class="comment">//会改变原数组的值，是引用</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h1><ul>
-<li>java允许在一个类里面定义多个同名的方法，只要他们的参数列表不同【参数数量不同，参数类型不同，不与返回值或者名字有关系】</li>
-<li>可变参数最后才会选到，容易困惑</li>
-</ul>
-<h1 id="方法的嵌套使用"><a href="#方法的嵌套使用" class="headerlink" title="方法的嵌套使用"></a>方法的嵌套使用</h1><ul>
-<li>有些语言能在方法内部再定义另外一个方法（<strong>java不可以</strong>）</li>
-<li>但java允许嵌套调用方法的</li>
-<li></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">qtfun1</span><span class="params">()</span></span>{</span><br><span class="line">    System.out.println(<span class="string">"qtfunc1 go"</span>);</span><br><span class="line">    qtfun2();</span><br><span class="line">    System.out.println(<span class="string">"qtfunc1 end"</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">qtfun2</span><span class="params">()</span></span>{</span><br><span class="line">    System.out.println(<span class="string">"qtfunc2 go"</span>);</span><br><span class="line">    qtfun3();</span><br><span class="line">    System.out.println(<span class="string">"qtfunc2 end"</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">qtfun3</span><span class="params">()</span></span>{</span><br><span class="line">    System.out.println(<span class="string">"qtfunc3 go"</span>);</span><br><span class="line">    System.out.println(<span class="string">"qtfunc3 end"</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h1 id="方法的递归调用"><a href="#方法的递归调用" class="headerlink" title="方法的递归调用"></a>方法的递归调用</h1><ul>
-<li>也是一种嵌套调用，但是自己调用自己</li>
-<li>Exception in thread “main” java.lang.StackOverflowError  ：栈溢出 超出预留的内存了</li>
-<li>每次递归调用都会占用栈的内存</li>
-<li>递归调用可能不断调用自己发生死循环。</li>
-<li>递归方法必须要有结束条件</li>
-</ul>
-<h1 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h1><ul>
-<li>普通成员变量<ul>
-<li>跟着对象走</li>
-</ul>
-</li>
-<li>静态成员变量 <ul>
-<li>跟着类走</li>
-<li>一般直接用类名访问</li>
-</ul>
-</li>
-<li>一般上面这些都会初始化值  bool-false</li>
-</ul>
-<h1 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h1><ul>
-<li>形参</li>
-<li>方法的代码块-中括号里面定义的变量</li>
-</ul>
-<h1 id="成员变量生存期"><a href="#成员变量生存期" class="headerlink" title="成员变量生存期"></a>成员变量生存期</h1><ul>
-<li>普通成员生存期：对象被创建，对象成员变量就存在了，出了对象作用域，普通成员变量就结束生存期了</li>
-<li>静态成员变量：当需要装在一个类的时候，这个成员变量就存在了，只有系统销毁这个类的时候，类的内存被收回了，才会被销毁<ul>
-<li>普通和静态成员变量生存期都很长，一般来讲静态成员变量的生存期比普通成员变量的长</li>
-</ul>
-</li>
-<li>局部变量：贯穿整个方法<ul>
-<li>从方法开始到方法结束</li>
-<li>如果{}里面的变量，从定义开始到 } 结束</li>
-</ul>
-</li>
-</ul>
-<h1 id="局部变量-1"><a href="#局部变量-1" class="headerlink" title="局部变量"></a>局部变量</h1><ul>
-<li><p>局部变量必须给初值，不然不能够使用</p>
-</li>
-<li><pre><code class="lang-java">void InitTime(int tmphour,int tmpminute,int tmpsecond){
-    int abc ;
-    System.out.println(abc); //错误
-    int abc = 13 ; //定义的时候给初始化
-    return;
-}
-</code></pre>
-</li>
-<li><p>栈里面的内存一般不需要垃圾回收系统去回收的，垃圾回收系统回收的内存是堆中的内存</p>
-</li>
-<li><p>如果定义一个局部变量没给他初值，那么系统不会为这个变量分配内存空间，当赋值以后才会分配内存（java定义后就会分配内存空间）</p>
-</li>
-</ul>
-
-          
+          <p>java中参数的传递方法是值传递，把实参的值传递给形参，即便影响了形参的值，也不影响实参。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21313.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2247,8 +1636,7 @@ Men mymen = new Men();
 
       
         
-          
-            <h1 id="构造器细说"><a href="#构造器细说" class="headerlink" title="构造器细说"></a>构造器细说</h1><ul>
+          <h1 id="构造器细说"><a href="#构造器细说" class="headerlink" title="构造器细说"></a>构造器细说</h1><ul>
 <li>构造器其实就是一个方法【成员函数】，构造器有一些特殊之处</li>
 <li>名字特殊：必须与类名相同</li>
 <li>构造器不要写返回类型不能写返回值return，以及加入void，加入void就是变成了成员函数而不是构造器了</li>
@@ -2256,55 +1644,13 @@ Men mymen = new Men();
 </ul>
 <p>默认构造器：不带参数的构造器</p>
 <p><strong>一个类能有多个构造器，只要各个构造器要么是参数数量不同或者参数类型不同就行</strong></p>
-<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><ul>
-<li>如果一个类中没有我们自己书写的构造器，那么系统会为该类提供一个默认的构造器<ul>
-<li>如果有了任意一个构造器，就不能调用默认的构造器，不使用自自定义的构造器，使用默认构造器就会报错</li>
-</ul>
-</li>
-<li>如果程序员为一个类使用了构造器，那么系统不再使用默认构造器</li>
-<li>不要手工调用构造器</li>
-</ul>
-<h1 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h1><p>this一般只能出现在类的方法中，不能出现在main中</p>
-<ul>
-<li>this可以理解为指针、箭头、引用</li>
-<li>this的真实身份是一个隐藏起来的函数参数</li>
-</ul>
-<p>this含义</p>
-<ul>
-<li>表示调用方法的那个对象的引用</li>
-<li>指向该方法的对象</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitTime</span><span class="params">(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpminute,<span class="keyword">int</span> tmpsecond)</span></span>{</span><br><span class="line">    <span class="comment">//mytime指向什么，this就指向什么</span></span><br><span class="line">    Hour = tmphour;</span><br><span class="line">    Minute = tmpminute;</span><br><span class="line">    Second = tmpsecond; <span class="comment">//使用了形参，形参才变白色</span></span><br><span class="line">    <span class="keyword">int</span> tmpvalue = <span class="keyword">this</span>.GetHour(); <span class="comment">//this指向与mytime一样的首地址，但一般不需要使用，有点画蛇添足的意思</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>方法也跟着对象走</p>
-<p>false：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>){</span><br><span class="line">        <span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//与形参相混淆</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>true：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">int <span class="built_in">Hour</span> = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> SetHour(int <span class="built_in">Hour</span>){</span><br><span class="line">        this.<span class="built_in">Hour</span> = <span class="built_in">Hour</span>;   <span class="comment">//把形参赋值给成员变量</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h1 id="static-关键字详解"><a href="#static-关键字详解" class="headerlink" title="static 关键字详解"></a>static 关键字详解</h1><ul>
-<li>静态的意思</li>
-<li>一旦使用static这个修饰，就变成了静态成员变量就属于该类的成员变量，而不是该对象的成员变量</li>
-<li>静态成员变量可以使用任意的类名和对象名进行引用；</li>
-</ul>
-<h1 id="静态成员函数"><a href="#静态成员函数" class="headerlink" title="静态成员函数"></a>静态成员函数</h1><ul>
-<li>用stastic修饰的成员函数</li>
-<li>不能调用和对象有关的成员变量，它只属于类而不是对象，打印都不行</li>
-<li>但可以操作静态成员变量</li>
-<li>静态成员函数不能使用this，没有this，this只有对象里面有</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Time.setMyStaticfunc();</span><br><span class="line">mytime.setMyStaticfunc();</span><br><span class="line">mytime3.setMyStaticfunc();</span><br></pre></td></tr></table></figure>
-<ul>
-<li>普通方法可以调用静态方法</li>
-<li>静态方法不能调用普通方法</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>有static修饰的属于类本身，没有static修饰的，属于类对象</li>
-<li>static修饰的成员变量和方法，都可以使用类调用，也可以使用对象调用，没有static的变量和方法，只能使用对象实例来调用</li>
-<li>静态成员不能访问非静态成员，因为静态成员不支持this关键字，而非静态成员需要this才能访问</li>
-<li>尽量使用类名而不是对象名来访问和使用</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21212.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2454,8 +1800,7 @@ Men mymen = new Men();
 
       
         
-          
-            <h1 id="类定义与类基础"><a href="#类定义与类基础" class="headerlink" title="类定义与类基础"></a>类定义与类基础</h1><ul>
+          <h1 id="类定义与类基础"><a href="#类定义与类基础" class="headerlink" title="类定义与类基础"></a>类定义与类基础</h1><ul>
 <li><p>面向对象的程序设计</p>
 </li>
 <li><p>类（学号，名字，性别，成绩，这些属性把他搞成一堆数据）</p>
@@ -2468,102 +1813,13 @@ Men mymen = new Men();
 <li><p>封装（那些只能本类，那些能被外界调用）继承和多态</p>
 </li>
 </ul>
-<p>优点：</p>
-<ol>
-<li>易维护；</li>
-<li>易扩展：基础性、多态性，可以少写很多代码，实现很多变化；</li>
-<li>模块化【封装性】；</li>
-</ol>
-<p>面向对象程序涉及就是一种程序设计理念；</p>
-<p>给我们程序设计带来便利，大大提高工作效率</p>
-<ol>
-<li><strong>java源码文件的扩展名必须是.java</strong></li>
-<li><strong>建议一个.java只定义一个类</strong></li>
-<li><strong>java源文件可以有多个 a.java,b.java</strong></li>
-</ol>
-<p>java：</p>
-<ol>
-<li>面向对象的程序设计语言</li>
-<li>三大特性：封装继承和多态</li>
-<li>文件包着类，类包着方法，方法包着语言</li>
-</ol>
-<h1 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h1><ul>
-<li>类是一种我们自己定义的数据类型</li>
-</ul>
-<p>设计一个类的思考角度：</p>
-<ol>
-<li>站在设计和实现者的角度来考虑</li>
-<li>站在使用者角度取考虑</li>
-<li>父类：抽取特殊的功能特性</li>
-</ol>
-<h1 id="类基础"><a href="#类基础" class="headerlink" title="类基础"></a>类基础</h1><ol>
-<li>定义一个类【创建一个类】<ul>
-<li>一个类就是一个用户自己定义的数据类型，可以把类想象成一个名字空间，包着一推东西</li>
-<li>一个类的构成：成员变量、成员方法【成员函数】</li>
-</ul>
-</li>
-<li>创建一个类的格式<ul>
-<li>【修饰符】 class 类名：</li>
-<li>{</li>
-<li>//成员变量….若干个【0….N】</li>
-<li>//成员方法….若干个【0…..N】</li>
-<li>}</li>
-</ul>
-</li>
-<li>创建一个Time的类、</li>
-<li>创建成员变量和方法<ul>
-<li>成员变量 格式：<ul>
-<li>【修饰符】 类型名 成员变量名 【=默认值】；</li>
-<li>成员变量名需要是个合法的标识符</li>
-</ul>
-</li>
-<li>成员方法：在程序中我们经常将一些常用的功能模块编写成方法，目的是减少重复编写的工作量。</li>
-<li>成员方法 格式：<ul>
-<li>【修饰符】 方法的返回值类型 方法名(形式参数列表){</li>
-<li>//0带多条语句构成的方法体</li>
-<li>}</li>
-<li>方法名：合法的标识符</li>
-<li>形参列表：0-多个，多个用，分隔</li>
-<li>方法返回值类型，如果没有返回值，那么就不需要return，我们要写上void，代表这个方法没有返回值</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Time</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> Hour = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> Minute;</span><br><span class="line">    <span class="keyword">int</span> Second;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义成员函数、方法</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitTime</span><span class="params">(<span class="keyword">int</span> tmphour,<span class="keyword">int</span> tmpminute,<span class="keyword">int</span> tmpsecond)</span></span>{</span><br><span class="line">        </span><br><span class="line">        Hour = tmphour;</span><br><span class="line">        Minute = tmpminute;</span><br><span class="line">        Second = tmpsecond; <span class="comment">//使用了形参，形参才变白色</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetHour</span><span class="params">()</span></span>{ <span class="comment">//获取小时的方法</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> Hour;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<h1 id="类对象的创建和存储结构"><a href="#类对象的创建和存储结构" class="headerlink" title="类对象的创建和存储结构"></a>类对象的创建和存储结构</h1><p>类：</p>
-<ul>
-<li>一个集合，对象理解成一个具体存在的实体【实例】</li>
-<li>要使用类中的各种方法，必须通过类的对象来调用</li>
-</ul>
-<p>定义类对象：</p>
-<p>格式： 类名 对象名；</p>
-<ul>
-<li>光定义类对象还不行，必须要初始化这个类对象，这个类对象才能被使用</li>
-</ul>
-<p>初始化类对象：</p>
-<ul>
-<li>对象名 = new 类名();</li>
-</ul>
-<p>访问类中的成员变量：</p>
-<ul>
-<li>访问方法： 对象名.成员变量名</li>
-<li>是隶属于某个对象的成员变量，成员变量跟着对象走</li>
-</ul>
-<p>调用类中的方法</p>
-<ul>
-<li>访问对象：对象名.方法名(实际参数类别)；</li>
-<li>实参数量和类型要与形参数量和类型相同</li>
-<li>实际变量对形参变量的数据传递是’值传递’，相当于把实参的值传递给了形参</li>
-</ul>
-<p>总结：类中的成员变量和成员函数方法的调用都非常简单，定义并初始化一个类对象，然后用这个类对象就可以直接操作成员变量和成员函数</p>
-<h1 id="对象的存储结构"><a href="#对象的存储结构" class="headerlink" title="对象的存储结构"></a>对象的存储结构</h1><ul>
-<li>不同的对象有不同的堆和栈的首地址。</li>
-<li></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KXclas</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span>  <span class="title">main</span><span class="params">(String args[])</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"hello world"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        Time mytime;</span></span><br><span class="line"><span class="comment">//        //初始化类对象</span></span><br><span class="line"><span class="comment">//        mytime = new Time(); //初始化类对象</span></span><br><span class="line">        Time mytime = <span class="keyword">new</span> Time();</span><br><span class="line"><span class="comment">//        mytime.Hour =12;</span></span><br><span class="line">        mytime.InitTime(<span class="number">22</span>,<span class="number">25</span>,<span class="number">27</span>);</span><br><span class="line">        System.out.println(mytime.GetHour());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Time mytime2 = <span class="keyword">new</span> Time();</span><br><span class="line">        mytime2.InitTime(<span class="number">32</span>,<span class="number">35</span>,<span class="number">37</span>);</span><br><span class="line"><span class="comment">//        mytime2.Hour =32;</span></span><br><span class="line"><span class="comment">//        System.out.println(mytime2.Hour);</span></span><br><span class="line">        System.out.println(mytime2.GetHour());</span><br><span class="line">        Time mytime3 = mytime;</span><br><span class="line">        mytime3.Hour =<span class="number">10</span>;</span><br><span class="line">        mytime = <span class="keyword">null</span>; <span class="comment">//切断联系后就不能使用了</span></span><br><span class="line">        mytime3=<span class="keyword">null</span>; <span class="comment">//切断指向地址</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/21211.html#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
