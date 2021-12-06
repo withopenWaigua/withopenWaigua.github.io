@@ -87,7 +87,7 @@
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211205152856729.png">
 <meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20211205153729826.png">
 <meta property="article:published_time" content="2021-12-06T10:18:00.000Z">
-<meta property="article:modified_time" content="2021-12-06T08:43:49.006Z">
+<meta property="article:modified_time" content="2021-12-06T15:58:48.086Z">
 <meta property="article:author" content="Alogomachine">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -476,24 +476,31 @@
 <li>修饰符一般是public，不加就是缺省访问权限</li>
 </ul>
 <h1 id="接口的使用"><a href="#接口的使用" class="headerlink" title="接口的使用"></a>接口的使用</h1><ul>
-<li><p>接口也不能实例化</p>
+<li>接口也不能实例化</li>
+<li>接口内部一般定义一些规范的东西</li>
+<li>规定继承者必须要实现的东西</li>
+<li>一般是用具体的类去实现这个接口（当父类）。实现这个接口的类，叫做实现类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">impint</span> <span class="keyword">implements</span> <span class="title">kxinterface</span></span>&#123; <span class="comment">//实现类</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//继承两个类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Human</span> <span class="title">impint</span> <span class="keyword">implements</span> <span class="title">kxinterface</span></span>&#123; <span class="comment">//实现类</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//继承多个接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">impint</span> <span class="keyword">implements</span> <span class="title">kxinterface</span>,<span class="title">kxinterface2</span></span>&#123; <span class="comment">//实现类</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>继承用extends关键字，实现一个接口用implements</p>
+<ul>
+<li>一个类只能继承一个父类</li>
+<li>但是一个实现类可以继承多个接口</li>
+<li>一个类可以实现多个接口，这也算是弥补了一个类只能继承一个父类的遗憾，称为模拟多几次</li>
+<li>extends 和 implements 都是继承意思差不多 — 成员变量、方法</li>
+<li>extends 和implements 同时出现的时候，extends 要放在前面，implements放在后面</li>
+<li>实现一个接口跟继承一个父类差不多。接口很多内容在实现类中都有了</li>
+<li>一个源文件能有多个接口，但只能有一个public接口</li>
+</ul>
 </li>
-<li><p>接口内部一般定义一些规范的东西</p>
-</li>
-<li><p>规定继承者必须要实现的东西</p>
-</li>
-<li><p>一般是用具体的类去实现这个接口（当父类）。实现这个接口的类，叫做实现类</p>
-</li>
-<li><p>```java<br>public class impint implements kxinterface{ //实现类</p>
-<p>}<br>//继承两个类<br>public class extends Human impint implements kxinterface{ //实现类</p>
-<p>}<br>//继承多个接口<br>public class impint implements kxinterface,kxinterface2{ //实现类</p>
-<p>}</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 继承用<span class="keyword">extends</span>关键字，实现一个接口用<span class="keyword">implements</span></span><br><span class="line"></span><br><span class="line">  - 一个类只能继承一个父类</span><br><span class="line">  - 但是一个实现类可以继承多个接口</span><br><span class="line">  - 一个类可以实现多个接口，这也算是弥补了一个类只能继承一个父类的遗憾，称为模拟多几次</span><br><span class="line">  - <span class="keyword">extends</span> 和 <span class="keyword">implements</span> 都是继承意思差不多 -- 成员变量、方法</span><br><span class="line">  - <span class="keyword">extends</span> 和<span class="keyword">implements</span> 同时出现的时候，<span class="keyword">extends</span> 要放在前面，<span class="keyword">implements</span>放在后面</span><br><span class="line">  - 实现一个接口跟继承一个父类差不多。接口很多内容在实现类中都有了</span><br><span class="line">  - 一个源文件能有多个接口，但只能有一个<span class="keyword">public</span>接口</span><br><span class="line"></span><br><span class="line">- 实现一个接口跟继承一个父类差不多。接口中很多内容在实现类中就有了</span><br><span class="line"></span><br><span class="line">- 虽然子类不可以继承多个父类，但可以继承多个接口</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  impint mhi2 = <span class="keyword">new</span> impint(); <span class="comment">//实现类</span></span><br><span class="line">  kxinterface mhi3 = <span class="keyword">new</span> impint(); <span class="comment">//接口=实现类, 接口是实现类的父类  父类 = 子类 可以</span></span><br><span class="line">  <span class="comment">//kxinterface mhi4 = new kxinterface(); 报错,接口不能实例化,实现类才可以</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口不能实例化，和抽象类一样</p>
-</li>
-<li><p>接口可被用于声明[定义] 引用类型变量;多态</p>
-</li>
+<li>实现一个接口跟继承一个父类差不多。接口中很多内容在实现类中就有了</li>
+<li>虽然子类不可以继承多个父类，但可以继承多个接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">impint mhi2 = <span class="keyword">new</span> impint(); <span class="comment">//实现类</span></span><br><span class="line">kxinterface mhi3 = <span class="keyword">new</span> impint(); <span class="comment">//接口=实现类, 接口是实现类的父类  父类 = 子类 可以</span></span><br><span class="line"><span class="comment">//kxinterface mhi4 = new kxinterface(); 报错,接口不能实例化,实现类才可以</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>接口不能实例化，和抽象类一样</li>
+<li>接口可被用于声明[定义] 引用类型变量;多态</li>
 </ul>
 <h1 id="接口核心思想和可放入内容"><a href="#接口核心思想和可放入内容" class="headerlink" title="接口核心思想和可放入内容"></a>接口核心思想和可放入内容</h1><ul>
 <li>接口一般定义和规范性的东西，但不提供具体的实现。规范和实现分类的设计原则<ul>
