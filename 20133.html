@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,算法,决策树," />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sklearn决策树参数详解、模型保存、交叉验证、网格搜索">
+<meta property="og:url" content="http://alogomachine.com/20133.html">
+<meta property="og:site_name" content="Alogomachine&#39;s BLOG">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121214347395.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121160320910.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121162033109.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121165211103.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121170735858.png">
+<meta property="og:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121155204989.png">
+<meta property="article:published_time" content="2022-01-21T13:33:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T13:44:54.075Z">
+<meta property="article:author" content="Alogomachine">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="决策树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121214347395.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alogomachine.com/20133.html"/>
+
+
+
+
+
+  <title>Sklearn决策树参数详解、模型保存、交叉验证、网格搜索 | Alogomachine's BLOG</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alogomachine's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+	
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alogomachine.com/20133.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alogomachine's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Sklearn决策树参数详解、模型保存、交叉验证、网格搜索</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-01-21T21:33:00+08:00">
+                2022-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121214347395.png" alt="image-20220121214347395"></p>
+<span id="more"></span>
+<h1 id="Sklearn决策树分类参数"><a href="#Sklearn决策树分类参数" class="headerlink" title="Sklearn决策树分类参数"></a>Sklearn决策树分类参数</h1><p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier">Sklearn官网决策树分类参数说明</a></p>
+<ul>
+<li>根据混乱度来选择要分的特征。</li>
+</ul>
+<p><strong>Gini系数（越低越好）：</strong></p>
+<script type="math/tex; mode=display">
+Gini(T)=1-\sum q^{2}
+\\
+(q为支点中各样本的频率)
+\\2个变量计算Gini系数：
+\\
+gini\left( i\right) = \dfrac{S_{1}}{S_{1}+S_{2}}gini(T_{1})  + \dfrac{S_{2}}{S_{1}+S_{2}}gini(T_{2}) 
+\\(S_{1}为左支点个数，S_{2}为右支点个数，T_{1}为左支点gini系数，T_{2}为右支点gini系数)</script><p>信息熵：</p>
+<script type="math/tex; mode=display">
+H\left( x\right) =-\sum p_{i}logp_{i}
+\\
+p为支点中各样本的频率\\
+两个特征时候:\\
+H_{A}\left( x\right) = \dfrac{S_{1}}{S_{1}+S_{2}}H(T_{1})  + \dfrac{S_{2}}{S_{1}+S_{2}}H(T_{2})\\(S_{1}为左支点个数，S_{2}为右支点个数，T_{1}为左支点信息熵系数，T_{2}为右支点信息熵系数)</script><p><strong>信息增益（选择的标准，越高越好）：</strong></p>
+<p>​     </p>
+<script type="math/tex; mode=display">
+Gain \left( x\right) =H\left( x\right) -H_{A}\left( x\right)\\(父辈信息熵-子代信息熵)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sklern 决策树的主要的三个步骤</span></span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line">clf = DecisionTreeClassifier(random_state=<span class="number">2022</span>) <span class="comment">#生成模型对象，并在这一步设置参数</span></span><br><span class="line">clf.fit(Xtrain,Ytrain)    <span class="comment"># 训练数据</span></span><br><span class="line">clf.score(Xtest,Ytest) <span class="comment"># 查看训练效果</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121160320910.png" alt="image-20220121160320910"></p>
+<ul>
+<li><p><strong>阅读了官网参数的说明，以下是自己对于官网参数说明的理解：</strong></p>
+<ul>
+<li><strong>criterion</strong>：默认选择的是基尼系数来评估混乱程度，但同时也可以选择使用信息熵来获得信息增益（即父类信息熵-子类信息熵）。</li>
+<li><strong>splitter</strong>：默认选择的是best来作为每个节点拆分的策略，支持用’best’参数去选择最好的分割或者使用’random’去选择最好的随机分割。</li>
+<li><strong>max_depth</strong>: 树的最大深度，输入是整数类型的，默认没有最大深度，即无限生长，直到混乱程度为0（全部叶子变纯）或者叶子包含的样本数小于设置的最小样本分割数（min_samples_split samples），不限制容易造成过拟合。</li>
+<li><strong>min_samples_split</strong>：一个节点要生成字节点必须满足这个参数设置的最小切割样本数，输入整数或者浮点数，默认为2。如果输入整数，那么就是每个节点的样本数大于这个参数才能生成子节点。如果输入浮点数就是根据总样本的比例，就是每个节点的样本数大于这个(这个参数*总样本数)的样本数才能生成子节点。（不够数左右都不分）</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121162033109.png" alt="image-20220121162033109"></p>
+</li>
+<li><p><strong>min_samples_leaf</strong> : 最小样本叶节点，默认为1，可以输入整数或者浮点数。只有分过去的叶子节点的样本数大于这个值才能被分（对比于min_samples_split，它可以生成左支不生成右支这样，不至于两边都不分），在回归中特别影响光滑程度。（整数就是具体数，小数就要乘以总数（即总数的百分比））</p>
+</li>
+<li><p><strong>min_weight_fraction_leaf</strong>：最小叶子权重分数和，默认为0。不设置的时候所有叶子样本权重均相等，如果小于该值，叶子节点会和兄弟节点一起被剪枝。一般用于正负样本数量差距过大的情况或者大量缺失值的情况。</p>
+</li>
+<li><p><strong>max_features</strong>: 寻找最佳分割时要考虑的特征数量，默认为不输入。输入整数那么就是每次分割要多考虑有这个最多特征分割的限制；输入分数就是特征数量的百分比作为每次分割要考虑的最多特征限制；</p>
+<p>输入auto或者sqrt，都是限制最大特征使用数为总特征数的开平方。默认是None，就是没有限制，最多可以把特征全部用完。</p>
+</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121165211103.png" alt="image-20220121165211103"></p>
+<ul>
+<li><strong>random_state</strong>:默认不输入，必须输入整数。尽管选择了’best’策略，但每次决策树运行都会随机选择多个max_features的特征来生成多个决策树，再从里面选择最好的一个，但可能会发现最好的可能有多棵树，此时决策树会随机再从这多棵树进行筛选，所以决策树的生成仍具有不确定性，要设定这个随机状态来确定这唯一的划分方法。</li>
+<li><strong>max_leaf_nodes</strong>：最大叶子节点，默认不输入，无限制。限制拟合的参数。</li>
+<li><strong>min_impurity_decrease</strong>：最小混乱程度减少值，浮点数，默认没有。设置了这个数后才能够限制分裂为大于起码减少了min_impurity_decrease的混乱度才分裂，不然不会分裂。</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121170735858.png" alt="image-20220121170735858"></p>
+<ul>
+<li><strong>class_weight</strong>:传入字典、列表，或者“balanced”，默认没有。可以使用这个参数来限制当某个样本的数量多，决策树偏向于这些类别的情况，balanced自动设置样本少的权重更高。</li>
+<li><strong>ccp_alpha</strong>: 输入非负浮点数，默认为0，即选择混乱度最低(最纯)的树。设置了这个参数后会限制选择混乱度减少太多的树，减少的混乱度需要小于ccp_alpha这个值，这个参数会使得树的节点不会那么纯。</li>
+</ul>
+<p><strong>重要属性</strong>：</p>
+<ul>
+<li>feature_importances_ 提取特征重要性</li>
+</ul>
+<h1 id="Sklearn决策树回归参数"><a href="#Sklearn决策树回归参数" class="headerlink" title="Sklearn决策树回归参数"></a>Sklearn决策树回归参数</h1><p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/tree.html#regression">Sklearn官网决策树回归参数说明</a></p>
+<ul>
+<li>参数与上文分类树类似。</li>
+</ul>
+<h1 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h1><h2 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;clf.pickle&quot;</span>,<span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	pickle.dump(clf,f)   <span class="comment">#二进制写入保存模型到clf.pickle的文件内</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">#加载模型</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;clf.pickle&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>)  <span class="keyword">as</span> f:   <span class="comment"># 二进制读取pickle文件</span></span><br><span class="line">	clf2=pickle.load(f)</span><br><span class="line">	<span class="built_in">print</span>(clf2.predict(X[<span class="number">0</span>:<span class="number">100</span>]))</span><br></pre></td></tr></table></figure>
+<h1 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line">boston = load_boston()</span><br><span class="line">regressor = DecisionTreeRegressor(random_state=<span class="number">0</span>)</span><br><span class="line">cross_val_score(regressor, boston.data, boston.target, cv=<span class="number">10</span>,</span><br><span class="line">				scoring = <span class="string">&#x27;neg_mean_squared_error&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line">gini_thresholds = np.linspace(<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">20</span>)</span><br><span class="line">parameters = &#123;<span class="string">&#x27;splitter&#x27;</span>:(<span class="string">&#x27;best&#x27;</span>,<span class="string">&#x27;random&#x27;</span>)</span><br><span class="line">              ,<span class="string">&#x27;criterion&#x27;</span>:(<span class="string">&quot;gini&quot;</span>,<span class="string">&quot;entropy&quot;</span>)</span><br><span class="line">              ,<span class="string">&quot;max_depth&quot;</span>:[*<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>)]</span><br><span class="line">              ,<span class="string">&#x27;min_samples_leaf&#x27;</span>:[*<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">50</span>,<span class="number">5</span>)]</span><br><span class="line">              ,<span class="string">&#x27;min_impurity_decrease&#x27;</span>:[*np.linspace(<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">20</span>)]&#125;</span><br><span class="line"> clf = DecisionTreeClassifer(random_state=<span class="number">2022</span>)</span><br><span class="line"> GS = GridSearchCV(clf,parameters,cv=<span class="number">10</span>)</span><br><span class="line"> GS.fit(Xtrain,Ytrain)</span><br><span class="line"> </span><br><span class="line"> GS.best_params_</span><br><span class="line"> GS.best_score_</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+<h1 id="Sklearn参加Kaggle上的比赛"><a href="#Sklearn参加Kaggle上的比赛" class="headerlink" title="Sklearn参加Kaggle上的比赛"></a>Sklearn参加Kaggle上的比赛</h1><ul>
+<li><p>已经学会了Kaggle平台基本操作。</p>
+</li>
+<li><p>运用了Sklearn决策树和网格搜索调参的方法完成了在Kaggle上的泰坦尼克号幸存者预测的比赛。</p>
+</li>
+</ul>
+<p><img src="https://alogomachine-md-pic.oss-cn-guangzhou.aliyuncs.com/image-20220121155204989.png" alt="image-20220121155204989"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/" rel="tag"># 决策树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/21234.html" rel="next" title="Excel基础内容1">
+                <i class="fa fa-chevron-left"></i> Excel基础内容1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">Sklearn决策树分类参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%86%B3%E7%AD%96%E6%A0%91%E5%9B%9E%E5%BD%92%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Sklearn决策树回归参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pickle"><span class="nav-number">3.1.</span> <span class="nav-text">pickle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2"><span class="nav-number">5.</span> <span class="nav-text">网格搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%8F%82%E5%8A%A0Kaggle%E4%B8%8A%E7%9A%84%E6%AF%94%E8%B5%9B"><span class="nav-number">6.</span> <span class="nav-text">Sklearn参加Kaggle上的比赛</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alogomachine</span>
+
+  
+</div>
+
+
+
+
+
+<div class="BbeiAn-info">
+   	粤ICP备
+    <a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784"  rel="nofollow">2021089270号</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->| 
+	<a target="_blank" href="https://beian.miit.gov.cn/" style="color:#f0d784;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">粤公网安备 2021089270号</a>	  <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  <script src="https://myhkw.cn/api/player/162426161349" id="myhk" key="162426161349" m="1"></script>
+<!-- hexo injector body_end start -->
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.16/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?withopenWaigua";
+            var git_color =['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f'];
+            var git_user ="withopenWaigua";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style>undefined</style><!-- hexo injector body_end end --></body>
+</html>
