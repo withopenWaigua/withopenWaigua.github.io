@@ -105,7 +105,7 @@
     root: '',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -683,17 +683,8 @@ Gain \left( x\right) =H\left( x\right) -H_{A}\left( x\right)\\(父辈信息熵-�
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -754,22 +745,6 @@ Gain \left( x\right) =H\left( x\right) -H_{A}\left( x\right)\\(父辈信息熵-�
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">Sklearn决策树分类参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%86%B3%E7%AD%96%E6%A0%91%E5%9B%9E%E5%BD%92%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Sklearn决策树回归参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BF%9D%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pickle"><span class="nav-number">3.1.</span> <span class="nav-text">pickle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2"><span class="nav-number">5.</span> <span class="nav-text">网格搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn%E5%8F%82%E5%8A%A0Kaggle%E4%B8%8A%E7%9A%84%E6%AF%94%E8%B5%9B"><span class="nav-number">6.</span> <span class="nav-text">Sklearn参加Kaggle上的比赛</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -821,6 +796,8 @@ Gain \left( x\right) =H\left( x\right) -H_{A}\left( x\right)\\(父辈信息熵-�
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

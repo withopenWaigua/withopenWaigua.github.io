@@ -98,7 +98,7 @@
     root: '',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -635,17 +635,8 @@ wpac_init.push({widget: 'Rating', id: 31073});
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -706,22 +697,6 @@ wpac_init.push({widget: 'Rating', id: 31073});
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">1.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E6%9C%AB%E5%B0%BE%E5%8A%A0const"><span class="nav-number">2.</span> <span class="nav-text">成员函数末尾加const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mutable"><span class="nav-number">3.</span> <span class="nav-text">mutable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8this"><span class="nav-number">4.</span> <span class="nav-text">返回自身对象的引用this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statci%E6%88%90%E5%91%98"><span class="nav-number">5.</span> <span class="nav-text">statci成员</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -773,6 +748,8 @@ wpac_init.push({widget: 'Rating', id: 31073});
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
